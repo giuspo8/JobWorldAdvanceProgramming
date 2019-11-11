@@ -9,7 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
+/**
+ * Classe rappresentante una Offerta di Lavoro ed i suoi attributi/metodi.
+ */
 @Entity
 public class JobOffer {
 	private long id;

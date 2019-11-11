@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * Classe rappresentante un Utente ed i suoi attributi/metodi.
+ */
 @Entity
 public class User {
 	private long id;

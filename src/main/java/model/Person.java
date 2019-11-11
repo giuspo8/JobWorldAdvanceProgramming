@@ -4,6 +4,9 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 
+/**
+ * Classe rappresentante una Persona ed i suoi attributi/metodi.
+ */
 @Entity
 public class Person extends User {
 	private String firstName;
