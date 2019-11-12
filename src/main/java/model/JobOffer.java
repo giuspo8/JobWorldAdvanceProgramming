@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,11 +26,11 @@ public class JobOffer {
 	private String minEducationLevel;
 	private String minExperience;
 	private int interested=0;
-	private ArrayList<Person> candidancies= new ArrayList<Person>();
+	private Set<Person> candidancies= new HashSet<Person>();
 	private Company company;
 	
 	public JobOffer(String region, String province, String town, String position, String description,
-			String contractType, String minEducationLevel, String minExperience, int interested,ArrayList<Person> candidancies,
+			String contractType, String minEducationLevel, String minExperience, int interested, Set<Person> candidancies,
 			Company company) {
 		super();
 		this.region = region;
@@ -130,11 +132,11 @@ public class JobOffer {
 		this.interested = interested;
 	}
 
-	public ArrayList<Person> getCandidancies() {
+	public Set<Person> getCandidancies() {
 		return candidancies;
 	}
 
-	public void setCandidancies(ArrayList<Person> candidancies) {
+	public void setCandidancies(Set<Person> candidancies) {
 		this.candidancies = candidancies;
 	}
 
