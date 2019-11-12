@@ -11,7 +11,7 @@
 		<property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<property name="show_sql">true</property>
-		<mapping class="model.User" />
+		<mapping class="model.User"/>
 		<mapping class="model.JobOffer"/>
 		<mapping class="model.Company"/>
 		<mapping class="model.Person"/>
