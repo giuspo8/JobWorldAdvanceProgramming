@@ -21,7 +21,6 @@ public class User {
 		this.password = password;
 		this.description = description;
 	}
-	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long getId() {
