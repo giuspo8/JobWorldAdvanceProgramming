@@ -1,18 +1,28 @@
-package model;
+package model.entities;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
 /**
- * Classe rappresentante una Offerta di Lavoro ed i suoi attributi/metodi.
+ * Classe entità rappresentante una Offerta di Lavoro ed i suoi
+ * attributi/metodi.
+ * 
+ * @author Giuseppe Costantini
+ * @author Simone di Saverio
+ * @author Lorenzo Giuliani
+ * @author Savio Feng
+ * @version 1.0
  */
 @Entity
 public class JobOffer {
@@ -25,13 +35,12 @@ public class JobOffer {
 	private String contractType;
 	private String minEducationLevel;
 	private String minExperience;
-	private int interested=0;
-	private Set<Person> candidancies= new HashSet<Person>();
+	private int interested = 0;
+	private Set<Person> candidancies = new HashSet<Person>();
 	private Company company;
-	
+
 	public JobOffer(String region, String province, String town, String position, String description,
-			String contractType, String minEducationLevel, String minExperience, int interested, Set<Person> candidancies,
-			Company company) {
+			String contractType, String minEducationLevel, String minExperience, Company company) {
 		super();
 		this.region = region;
 		this.province = province;
@@ -41,24 +50,19 @@ public class JobOffer {
 		this.contractType = contractType;
 		this.minEducationLevel = minEducationLevel;
 		this.minExperience = minExperience;
-		this.interested = interested;
-		this.candidancies=candidancies;
-		this.company=company;
+		this.company = company;
 	}
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "JOB_OFFER_ID")
 	public long getId() {
 		return id;
 	}
 
-
-
 	public void setId(long id) {
 		this.id = id;
 	}
-
-
 
 	public String getRegion() {
 		return region;
@@ -132,6 +136,8 @@ public class JobOffer {
 		this.interested = interested;
 	}
 
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "candidacies", joinColumns = @JoinColumn(name = "JOB_OFFER_ID"), inverseJoinColumns = @JoinColumn(name = "USER_ID"))
 	public Set<Person> getCandidancies() {
 		return candidancies;
 	}
@@ -140,8 +146,8 @@ public class JobOffer {
 		this.candidancies = candidancies;
 	}
 
-	@ManyToOne (fetch=FetchType.LAZY)
-	@JoinColumn(nullable=false)		
+	@ManyToOne
+	@JoinColumn(nullable = false)
 	public Company getCompany() {
 		return company;
 	}
@@ -150,6 +156,4 @@ public class JobOffer {
 		this.company = company;
 	}
 
-	
-	
 }
