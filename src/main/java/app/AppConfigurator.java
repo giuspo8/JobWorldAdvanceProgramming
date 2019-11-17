@@ -17,16 +17,6 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import model.dao.CompanyDao;
-import model.dao.DefaultCompanyDao;
-import model.dao.DefaultDao;
-import model.dao.DefaultJobOfferDao;
-import model.dao.JobOfferDao;
-import model.entities.Company;
-import model.entities.JobOffer;
-import model.entities.Person;
-import model.entities.User;
-
 @Configuration
 @ComponentScan(basePackages = { "app", "model.dao", "model.entities", "utils" })
 @EnableTransactionManagement
@@ -70,7 +60,6 @@ public class AppConfigurator {
 	@Bean
 	public SessionFactory sessionFactory() throws IOException {
 		LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
-		sessionFactoryBean = new LocalSessionFactoryBean();
 		sessionFactoryBean.setDataSource(dataSource());
 		sessionFactoryBean.setPackagesToScan("app", "model.dao", "model.entities", "utils");
 		sessionFactoryBean.setHibernateProperties(hibernateProperties());

@@ -1,5 +1,6 @@
 package model.entities;
 
+
 import java.util.ArrayList;
 
 import javax.persistence.CascadeType;

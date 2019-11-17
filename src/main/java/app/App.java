@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import model.dao.CompanyDao;
+import model.dao.DefaultCompanyDao;
+import model.dao.DefaultJobOfferDao;
 import model.dao.JobOfferDao;
 import model.entities.Company;
 import model.entities.JobOffer;
@@ -15,11 +17,11 @@ public class App {
 
 	public static void main(String[] args) {
 		logger.info("Entrato ...");
-
+	
 		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfigurator.class)) {
 
 			JobOfferDao jobOfferDao = ctx.getBean(JobOfferDao.class);
-			// PersonDao personDao= ctx.getBean(PersonDao.class);
+			//PersonDao personDao= ctx.getBean(PersonDao.class);
 			CompanyDao companyDao = ctx.getBean(CompanyDao.class);
 
 			// phase 1 : add data to database

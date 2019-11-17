@@ -1,5 +1,6 @@
 package model.entities;
 
+
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -23,7 +24,7 @@ import utils.LocalDateAttributeConverter;
  * @version 1.0
  */
 @Entity
-public class Person extends User {
+public class Person extends User  {
 	private String firstName;
 	private String secondName;
 	private LocalDate birthDate;
