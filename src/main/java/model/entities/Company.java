@@ -1,9 +1,12 @@
 package model.entities;
 
-
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -17,9 +20,14 @@ import javax.persistence.OneToMany;
  * @version 1.0
  */
 @Entity
+@AttributeOverride(name = "id", column = @Column(name = "COMPANY_ID"))
 public class Company extends User {
 
-	private ArrayList<JobOffer> jobOffers;
+	private Set<JobOffer> jobOffers = new HashSet<JobOffer>();
+
+	public Company() {
+		super();
+	}
 
 	public Company(String email, String password, String description) {
 		super(email, password, description);
@@ -29,13 +37,19 @@ public class Company extends User {
 	 * Se rimuoviamo una compagnia rimuoviamo tutte le sue offerte di lavoro con un
 	 * meccanismo a cascata
 	 */
+
 	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
-	public ArrayList<JobOffer> getJobOffers() {
+	public Set<JobOffer> getJobOffers() {
 		return jobOffers;
 	}
 
-	public void setJobOffers(ArrayList<JobOffer> jobOffers) {
+	public void setJobOffers(Set<JobOffer> jobOffers) {
 		this.jobOffers = jobOffers;
+	}
+
+	@Override
+	public String toString() {
+		return "Company [jobOffers=" + jobOffers + "]";
 	}
 
 }

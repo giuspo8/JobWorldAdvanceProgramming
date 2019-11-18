@@ -1,15 +1,18 @@
 package app;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import model.dao.CompanyDao;
-import model.dao.DefaultCompanyDao;
-import model.dao.DefaultJobOfferDao;
 import model.dao.JobOfferDao;
+import model.dao.PersonDao;
 import model.entities.Company;
 import model.entities.JobOffer;
+import model.entities.Person;
 
 public class App {
 
@@ -17,12 +20,12 @@ public class App {
 
 	public static void main(String[] args) {
 		logger.info("Entrato ...");
-	
+
 		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfigurator.class)) {
 
-			JobOfferDao jobOfferDao = ctx.getBean(JobOfferDao.class);
-			//PersonDao personDao= ctx.getBean(PersonDao.class);
 			CompanyDao companyDao = ctx.getBean(CompanyDao.class);
+			JobOfferDao jobOfferDao = ctx.getBean(JobOfferDao.class);
+			PersonDao personDao = ctx.getBean(PersonDao.class);
 
 			// phase 1 : add data to database
 
@@ -36,6 +39,36 @@ public class App {
 							+ "Il tirocinante, inserito in un contesto di front/back office, dovrà dimostrare di avere ottime capacità comunicative e di problem - solving, di sapere come si organizza il personale in strutture Leisure e Business, nonché fornire supporto al cliente. Attraverso questo percorso formativo, il tirocinante dovrà rispondere direttamente alla Direzione e operare secondo gli obiettivi aziendali sempre nel "
 							+ "rispetto delle scadenze prestabilite, con massima riservatezza.",
 					"Stage", "Laurea breve (3 anni)", "Non richiesta", c1);
+
+			Person p1 = personDao.create("giangis@hotmail.it", "passw",
+					"• Diploma di Laurea in economia e gestione aziendale conseguito il 10 febbraio 2004 presso l’Università di Bologna\r\n"
+							+ "• Argomento tesi: “...........”. Relatore: prof. ……….., docente di ..................\r\n"
+							+ "• Voto di laurea: .…..\r\n"
+							+ "• Diploma di maturità scientifica conseguito il 26 giugno 2000 presso il Liceo scientifico Leonardo da Vinci di Pescara con il punteggio di 90/100",
+					"Marco", "Abbate", LocalDate.of(1990, 11, 25), "320000255", "curriculumURL",
+					"Informatica, Ristorazione");
+			JobOffer j2 = jobOfferDao.create("Marche", "Ancona", "Ancona",
+					"Assistente alla Direzione settore hotellerie",
+					"Lindbergh hotels è una catena alberghiera che conta 8 strutture, di 4 e 5 stelle, dislocate sul territorio italiano, con un organico di 400 dipendenti. La società in questione si occupa della gestione e dello sviluppo delle stesse e del personale in forza, con particolare attenzione verso la propria clientela. In collaborazione con Sida Group ricerca per un "
+							+ "tirocinio formativo previa formazione un Assistente alla Direzione."
+							+ "Il tirocinante, inserito in un contesto di front/back office, dovrà dimostrare di avere ottime capacità comunicative e di problem - solving, di sapere come si organizza il personale in strutture Leisure e Business, nonché fornire supporto al cliente. Attraverso questo percorso formativo, il tirocinante dovrà rispondere direttamente alla Direzione e operare secondo gli obiettivi aziendali sempre nel "
+							+ "rispetto delle scadenze prestabilite, con massima riservatezza.",
+					"Stage", "Laurea breve (3 anni)", "Non richiesta", c1);
+			p1.apply(j1);
+			p1.apply(j2);
+			jobOfferDao.update(j1);
+			jobOfferDao.update(j2);
+
+			List<JobOffer> jobOffers = jobOfferDao.findAll();
+			for (JobOffer j : jobOffers) {
+				System.out.println(j);
+			}
+
+			List<JobOffer> jobOffers2 = jobOfferDao.findbyRegion("Abruzzo");
+			for (JobOffer j : jobOffers2) {
+				System.out.println(j);
+			}
+
 		} catch (Exception e) {
 			logger.error("Eccezione: " + e.getMessage());
 			e.printStackTrace(System.err);

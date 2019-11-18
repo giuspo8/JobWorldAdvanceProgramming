@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 /**
  * Classe entità rappresentante un Utente ed i suoi attributi/metodi.
@@ -15,8 +16,8 @@ import javax.persistence.Id;
  * @author Savio Feng
  * @version 1.0
  */
-@Entity
-public class User {
+@MappedSuperclass
+public abstract class User {
 	private long id;
 	private String email;
 	private String password;
@@ -30,6 +31,9 @@ public class User {
 	 * @param description descrizione dell'utente (che sia descrizione dell'azienda
 	 *                    o della persona)
 	 */
+	public User() {
+	}
+
 	public User(String email, String password, String description) {
 		super();
 		this.email = email;
@@ -39,7 +43,6 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "USER_ID")
 	public long getId() {
 		return id;
 	}
@@ -64,6 +67,7 @@ public class User {
 		this.password = password;
 	}
 
+	@Column(length = 1000)
 	public String getDescription() {
 		return description;
 	}

@@ -1,5 +1,6 @@
 package model.dao;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.stereotype.Repository;
@@ -46,8 +47,15 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Set<JobOffer> findbyRegion(String region) {
-		return null;
+	public List<JobOffer> findbyRegion(String region) {
+		return getSession().createQuery("from JobOffer j where j.region='" + region + "'", JobOffer.class)
+				.getResultList();
+	}
+
+	// ci restituisce la lista di tutte le offerte di lavoro presenti sul sito
+	@Transactional(readOnly = true)
+	public List<JobOffer> findAll() {
+		return getSession().createQuery("from JobOffer j", JobOffer.class).getResultList();
 	}
 
 }

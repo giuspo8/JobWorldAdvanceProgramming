@@ -1,5 +1,6 @@
 package model.dao;
 
+import java.util.List;
 import java.util.Set;
 
 import model.entities.Company;
@@ -23,6 +24,8 @@ public interface JobOfferDao {
 
 	void delete(JobOffer jobOffer);
 
-	Set<JobOffer> findbyRegion(String region);
+	List<JobOffer> findbyRegion(String region);
+
+	List<JobOffer> findAll();
 
 }

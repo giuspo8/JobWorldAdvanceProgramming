@@ -1,9 +1,10 @@
 package model.entities;
 
-
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -24,14 +25,19 @@ import utils.LocalDateAttributeConverter;
  * @version 1.0
  */
 @Entity
-public class Person extends User  {
+@AttributeOverride(name = "id", column = @Column(name = "PERSON_ID"))
+public class Person extends User {
 	private String firstName;
 	private String secondName;
 	private LocalDate birthDate;
 	private String number;
 	private String curriculum;
 	private String interests;
-	private Set<JobOffer> candidacies;
+	private Set<JobOffer> candidacies = new HashSet<JobOffer>();
+
+	public Person() {
+		super();
+	}
 
 	public Person(String email, String password, String description, String firstName, String secondName,
 			LocalDate birthDate, String number, String curriculum, String interests) {
@@ -78,6 +84,7 @@ public class Person extends User  {
 		this.number = number;
 	}
 
+	@Column(length = 1000)
 	public String getCurriculum() {
 		return curriculum;
 	}
@@ -102,6 +109,12 @@ public class Person extends User  {
 
 	public void setCandidacies(Set<JobOffer> candidacies) {
 		this.candidacies = candidacies;
+	}
+
+	// aggiunge quell'offerta di lavoro alla lista delle candidature
+	public void apply(JobOffer jobOffer) {
+		candidacies.add(jobOffer);
+		jobOffer.applying(this);
 	}
 
 }

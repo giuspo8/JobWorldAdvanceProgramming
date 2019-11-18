@@ -1,6 +1,5 @@
 package model.entities;
 
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,6 +38,10 @@ public class JobOffer {
 	private int interested = 0;
 	private Set<Person> candidancies = new HashSet<Person>();
 	private Company company;
+
+	public JobOffer() {
+		super();
+	}
 
 	public JobOffer(String region, String province, String town, String position, String description,
 			String contractType, String minEducationLevel, String minExperience, Company company) {
@@ -97,6 +100,7 @@ public class JobOffer {
 		this.position = position;
 	}
 
+	@Column(length = 1000)
 	public String getDescription() {
 		return description;
 	}
@@ -148,13 +152,28 @@ public class JobOffer {
 	}
 
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(name = "COMPANY_ID", nullable = false)
 	public Company getCompany() {
 		return company;
 	}
 
 	public void setCompany(Company company) {
 		this.company = company;
+	}
+
+	// aggiorna la lista delle persone candidate per quel lavoro e il numero degli
+	// interessati ovviamente
+	public void applying(Person p1) {
+		candidancies.add(p1);
+		interested++;
+	}
+
+	@Override
+	public String toString() {
+		return "JobOffer [id=" + id + ", region=" + region + ", province=" + province + ", town=" + town + ", position="
+				+ position + ", description=" + description + ", contractType=" + contractType + ", minEducationLevel="
+				+ minEducationLevel + ", minExperience=" + minExperience + ", interested=" + interested
+				+ ", candidancies=" + candidancies.size() + ", company id=" + company.getId() + "]";
 	}
 
 }

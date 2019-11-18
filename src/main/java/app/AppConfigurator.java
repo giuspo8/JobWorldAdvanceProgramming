@@ -18,7 +18,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan(basePackages = { "app", "model.dao", "model.entities", "utils" })
+@ComponentScan(basePackages = { "model.entities", "app", "model.dao", "utils" })
 @EnableTransactionManagement
 public class AppConfigurator {
 	private static Logger logger = LoggerFactory.getLogger(AppConfigurator.class);
@@ -44,7 +44,7 @@ public class AppConfigurator {
 		hibernateProp.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 		hibernateProp.put("hibernate.format_sql", true);
 		hibernateProp.put("hibernate.use_sql_comments", true);
-		hibernateProp.put("hibernate.show_sql", true);
+		hibernateProp.put("hibernate.show_sql", false);
 		hibernateProp.put("hibernate.max_fetch_depth", 3);
 		hibernateProp.put("hibernate.jdbc.batch_size", 10);
 		hibernateProp.put("hibernate.jdbc.fetch_size", 50);
