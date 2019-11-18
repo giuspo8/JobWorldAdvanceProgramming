@@ -53,6 +53,7 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 	}
 
 	// ci restituisce la lista di tutte le offerte di lavoro presenti sul sito
+	@Override
 	@Transactional(readOnly = true)
 	public List<JobOffer> findAll() {
 		return getSession().createQuery("from JobOffer j", JobOffer.class).getResultList();
