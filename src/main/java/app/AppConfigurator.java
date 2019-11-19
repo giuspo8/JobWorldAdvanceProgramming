@@ -29,8 +29,8 @@ public class AppConfigurator {
 			DriverManagerDataSource ds = new DriverManagerDataSource();
 			ds.setDriverClassName(com.mysql.jdbc.Driver.class.getName());
 			ds.setUrl("jdbc:mysql://localhost:3306/JobWorldDB?createDatabaseIfNotExist=true");
-			ds.setUsername("root");
-			ds.setPassword("");
+			ds.setUsername("user");
+			ds.setPassword("user");
 			return ds;
 
 		} catch (Exception e) {
