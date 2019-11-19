@@ -26,15 +26,15 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource("classpath:dbconfig.properties")
 public class AppConfigurator {
 	
-	@Value("${dbhost}")
+	@Value("${db.host}")
 	private String db_host;
-	@Value("${dbport}")
+	@Value("${db.port}")
 	private String db_port;
-	@Value("${dbname}")
+	@Value("${db.name}")
 	private String db_name;
-	@Value("${dbusername}")
+	@Value("${db.username}")
 	private String db_usn;
-	@Value("${dbpassword}")
+	@Value("${db.password}")
 	private String db_pw;
 	private static Logger logger = LoggerFactory.getLogger(AppConfigurator.class);
 	
