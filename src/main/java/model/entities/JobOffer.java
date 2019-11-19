@@ -1,9 +1,11 @@
 package model.entities;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import utils.LocalDateAttributeConverter;
 
 /**
  * Classe entità rappresentante una Offerta di Lavoro ed i suoi
@@ -35,9 +39,10 @@ public class JobOffer {
 	private String contractType;
 	private String minEducationLevel;
 	private String minExperience;
-	private int interested = 0;
+	private int interested;
 	private Set<Person> candidancies = new HashSet<Person>();
 	private Company company;
+	private LocalDate publicationDate;
 
 	public JobOffer() {
 		super();
@@ -55,6 +60,8 @@ public class JobOffer {
 		this.minEducationLevel = minEducationLevel;
 		this.minExperience = minExperience;
 		this.company = company;
+		this.publicationDate=LocalDate.now();
+		this.interested=0;
 	}
 
 	@Id
@@ -173,7 +180,21 @@ public class JobOffer {
 		return "JobOffer [id=" + id + ", region=" + region + ", province=" + province + ", town=" + town + ", position="
 				+ position + ", description=" + description + ", contractType=" + contractType + ", minEducationLevel="
 				+ minEducationLevel + ", minExperience=" + minExperience + ", interested=" + interested
-				+ ", candidancies=" + candidancies.size() + ", company id=" + company.getId() + "]";
+				+ ", number of candidancies=" + candidancies.size() + ", company=" + company.getId() + ", publicationDate=" + publicationDate
+				+ "]";
 	}
+	
+	
+
+	@Convert(converter = LocalDateAttributeConverter.class)
+	public LocalDate getPublicationDate() {
+		return publicationDate;
+	}
+
+	public void setPublicationDate(LocalDate publicationDate) {
+		this.publicationDate = publicationDate;
+	}
+	
+	
 
 }

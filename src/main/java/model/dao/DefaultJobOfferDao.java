@@ -45,6 +45,7 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 		this.delete(jobOffer);
 	}
 
+	//ci restituisce tutte le offerte di lavoro filtrate per regione
 	@Override
 	@Transactional(readOnly = true)
 	public List<JobOffer> findbyRegion(String region) {
@@ -57,6 +58,30 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 	@Transactional(readOnly = true)
 	public List<JobOffer> findAll() {
 		return getSession().createQuery("from JobOffer j", JobOffer.class).getResultList();
+	}
+
+	
+	//ci restituisce la lista delle offerte di lavoro filtrate in base alla posizione (si può applicare a tutto)
+	@Override
+	@Transactional(readOnly = true)
+	public List<JobOffer> filterByPosition(String keywords) {
+		return getSession().createQuery("from JobOffer j where j.position like '%"+keywords+"%'", JobOffer.class).getResultList();
+	}
+
+	//ci restituisce la lista delle offerte di lavoro ordinata per data di pubblicazione (dalla più recente)
+	@Override
+	@Transactional(readOnly = true)
+	public List<JobOffer> orderedByPublicationDate() {
+		return getSession().createQuery("from JobOffer j order by j.publicationDate desc", JobOffer.class).getResultList();
+	}
+
+	//ci restituisce la lista delle offerte di lavoro filtrata per posizione e provincia
+	@Override
+	@Transactional(readOnly = true)
+	public List<JobOffer> filterBypositionAndprovince(String position, String province) {
+		return getSession()
+				.createQuery("from JobOffer j where j.position like '%"+position+"%' and j.province='" + province + "'", JobOffer.class)
+				.getResultList();
 	}
 
 }

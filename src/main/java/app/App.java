@@ -55,10 +55,11 @@ public class App {
 							+ "rispetto delle scadenze prestabilite, con massima riservatezza.",
 					"Stage", "Laurea breve (3 anni)", "Non richiesta", c1);
 			p1.apply(j1);
+			j2.setPublicationDate(LocalDate.of(2018, 10, 22));
 			p1.apply(j2);
 			jobOfferDao.update(j1);
 			jobOfferDao.update(j2);
-
+/*
 			List<JobOffer> jobOffers = jobOfferDao.findAll();
 			for (JobOffer j : jobOffers) {
 				System.out.println(j);
@@ -66,6 +67,23 @@ public class App {
 
 			List<JobOffer> jobOffers2 = jobOfferDao.findbyRegion("Abruzzo");
 			for (JobOffer j : jobOffers2) {
+				System.out.println(j);
+			}
+			
+			List<JobOffer> jobOffers3 = jobOfferDao.filterByPosition("adlla");
+			for (JobOffer j : jobOffers3) {
+				System.out.println(j);
+			}
+			
+				*/
+			List<JobOffer> jobOffers4 = jobOfferDao.orderedByPublicationDate();
+			for (JobOffer j : jobOffers4) {
+				System.out.println(j);
+			}
+			
+			
+			List<JobOffer> jobOffers5 = jobOfferDao.filterBypositionAndprovince("assistente", "Ancona");
+			for (JobOffer j : jobOffers5) {
 				System.out.println(j);
 			}
 
