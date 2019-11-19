@@ -8,9 +8,12 @@ import javax.sql.DataSource;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -20,17 +23,36 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @ComponentScan(basePackages = { "model.entities", "app", "model.dao", "utils" })
 @EnableTransactionManagement
+@PropertySource("classpath:dbconfig.properties")
 public class AppConfigurator {
+	
+	@Value("${dbhost}")
+	private String db_host;
+	@Value("${dbport}")
+	private String db_port;
+	@Value("${dbname}")
+	private String db_name;
+	@Value("${dbusername}")
+	private String db_usn;
+	@Value("${dbpassword}")
+	private String db_pw;
 	private static Logger logger = LoggerFactory.getLogger(AppConfigurator.class);
-
+	
+	// metodo utilizzato per inizializzare le proprietà usando l'annotazione @Value, contenute nel file src/main/resources/dbconfig.properties
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
+	    return new PropertySourcesPlaceholderConfigurer();
+	}
+	
 	@Bean
 	public DataSource dataSource() {
 		try {
+			System.out.println("jdbc:mysql://" + db_host + ":" + db_port + "/" + db_name + "?createDatabaseIfNotExist=true");
 			DriverManagerDataSource ds = new DriverManagerDataSource();
 			ds.setDriverClassName(com.mysql.jdbc.Driver.class.getName());
-			ds.setUrl("jdbc:mysql://localhost:3306/JobWorldDB?createDatabaseIfNotExist=true");
-			ds.setUsername("user");
-			ds.setPassword("user");
+			ds.setUrl("jdbc:mysql://" + db_host + ":" + db_port + "/" + db_name + "?createDatabaseIfNotExist=true");
+			ds.setUsername(db_usn);
+			ds.setPassword(db_pw);
 			return ds;
 
 		} catch (Exception e) {
