@@ -16,7 +16,7 @@ import model.entities.Person;
 public interface PersonDao {
 
 	Person create(String email, String password, String description, String firstName, String secondName,
-			LocalDate birthDate, String number, String curriculum, String interests);
+			LocalDate birthDate, String number, String interests);
 
 	Person update(Person person);
 

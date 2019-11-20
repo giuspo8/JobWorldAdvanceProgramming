@@ -8,9 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import model.dao.CompanyDao;
+import model.dao.CurriculumDao;
 import model.dao.JobOfferDao;
 import model.dao.PersonDao;
 import model.entities.Company;
+import model.entities.Curriculum;
 import model.entities.JobOffer;
 import model.entities.Person;
 
@@ -25,6 +27,7 @@ public class App {
 
 			CompanyDao companyDao = ctx.getBean(CompanyDao.class);
 			JobOfferDao jobOfferDao = ctx.getBean(JobOfferDao.class);
+			CurriculumDao curriculumDao = ctx.getBean(CurriculumDao.class);
 			PersonDao personDao = ctx.getBean(PersonDao.class);
 
 			// phase 1 : add data to database
@@ -41,12 +44,19 @@ public class App {
 					"Stage", "Laurea breve (3 anni)", "Non richiesta", c1);
 
 			Person p1 = personDao.create("giangis@hotmail.it", "passw",
-					"• Diploma di Laurea in economia e gestione aziendale conseguito il 10 febbraio 2004 presso l’Università di Bologna\r\n"
-							+ "• Argomento tesi: “...........”. Relatore: prof. ……….., docente di ..................\r\n"
-							+ "• Voto di laurea: .…..\r\n"
-							+ "• Diploma di maturità scientifica conseguito il 26 giugno 2000 presso il Liceo scientifico Leonardo da Vinci di Pescara con il punteggio di 90/100",
-					"Marco", "Abbate", LocalDate.of(1990, 11, 25), "320000255", "curriculumURL",
-					"Informatica, Ristorazione");
+					"Laurea in economia e gestione aziendale conseguito il 10 febbraio 2004 presso l’Università di Bologna",
+					"Marco", "Abbate", LocalDate.of(1990, 11, 25), "320000255", "Informatica, Ristorazione");
+			Person p2 = personDao.create("giangis@hotmail.it", "passw",
+					"Diploma di Laurea in economia e gestione aziendale conseguito il 10 febbraio 2004 presso l’Università di Bologna",
+					"Marco", "Abbate", LocalDate.of(1990, 11, 25), "320000255", "Informatica, Ristorazione");
+			Curriculum c12 = curriculumDao.create(p2, "2PROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVA",
+					"educationeducation5educationeducation5educationeducationeducationeducation",
+					"personalSkillspersonalSkillspersonalSkillspersonalSkillspersonalSkillspersonalSkills",
+					"additionalInfoadditionalInfoadditionalInfoadditionalInfoadditionalInfoadditionalInfo");
+			Curriculum c11 = curriculumDao.create(p1, "PROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVA",
+					"educationeducation5educationeducation5educationeducationeducationeducation",
+					"personalSkillspersonalSkillspersonalSkillspersonalSkillspersonalSkillspersonalSkills",
+					"additionalInfoadditionalInfoadditionalInfoadditionalInfoadditionalInfoadditionalInfo");
 			JobOffer j2 = jobOfferDao.create("Marche", "Ancona", "Ancona",
 					"Assistente alla Direzione settore hotellerie",
 					"Lindbergh hotels è una catena alberghiera che conta 8 strutture, di 4 e 5 stelle, dislocate sul territorio italiano, con un organico di 400 dipendenti. La società in questione si occupa della gestione e dello sviluppo delle stesse e del personale in forza, con particolare attenzione verso la propria clientela. In collaborazione con Sida Group ricerca per un "
@@ -57,33 +67,37 @@ public class App {
 			p1.apply(j1);
 			j2.setPublicationDate(LocalDate.of(2018, 10, 22));
 			p1.apply(j2);
+			p2.apply(j1);
 			jobOfferDao.update(j1);
 			jobOfferDao.update(j2);
-/*
-			List<JobOffer> jobOffers = jobOfferDao.findAll();
-			for (JobOffer j : jobOffers) {
+			/*
+			 * List<JobOffer> jobOffers = jobOfferDao.findAll(); for (JobOffer j :
+			 * jobOffers) { System.out.println(j); }
+			 * 
+			 * List<JobOffer> jobOffers2 = jobOfferDao.findbyRegion("Abruzzo"); for
+			 * (JobOffer j : jobOffers2) { System.out.println(j); }
+			 * 
+			 * List<JobOffer> jobOffers3 = jobOfferDao.filterByPosition("adlla"); for
+			 * (JobOffer j : jobOffers3) { System.out.println(j); }
+			 * 
+			 * 
+			 * List<JobOffer> jobOffers4 = jobOfferDao.orderedByPublicationDate(); for
+			 * (JobOffer j : jobOffers4) { System.out.println(j); }
+			 * 
+			 * 
+			 * List<JobOffer> jobOffers5 =
+			 * jobOfferDao.filterBypositionAndprovince("assistente", "Ancona"); for
+			 * (JobOffer j : jobOffers5) { System.out.println(j); }
+			 */
+			List<JobOffer> jobOffers6 = jobOfferDao.filter("Marche", "Ancona", "Ancona", "Ass", null, "Laurea",
+					"non rich");
+			for (JobOffer j : jobOffers6) {
 				System.out.println(j);
 			}
 
-			List<JobOffer> jobOffers2 = jobOfferDao.findbyRegion("Abruzzo");
-			for (JobOffer j : jobOffers2) {
-				System.out.println(j);
-			}
-			
-			List<JobOffer> jobOffers3 = jobOfferDao.filterByPosition("adlla");
-			for (JobOffer j : jobOffers3) {
-				System.out.println(j);
-			}
-			
-				*/
-			List<JobOffer> jobOffers4 = jobOfferDao.orderedByPublicationDate();
-			for (JobOffer j : jobOffers4) {
-				System.out.println(j);
-			}
-			
-			
-			List<JobOffer> jobOffers5 = jobOfferDao.filterBypositionAndprovince("assistente", "Ancona");
-			for (JobOffer j : jobOffers5) {
+			System.out.println(curriculumDao.findByPersonId(p1));
+
+			for (JobOffer j : p1.getCandidacies()) {
 				System.out.println(j);
 			}
 

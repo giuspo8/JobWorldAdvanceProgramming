@@ -60,8 +60,8 @@ public class JobOffer {
 		this.minEducationLevel = minEducationLevel;
 		this.minExperience = minExperience;
 		this.company = company;
-		this.publicationDate=LocalDate.now();
-		this.interested=0;
+		this.publicationDate = LocalDate.now();
+		this.interested = 0;
 	}
 
 	@Id
@@ -149,7 +149,7 @@ public class JobOffer {
 	}
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "candidacies", joinColumns = @JoinColumn(name = "JOB_OFFER_ID"), inverseJoinColumns = @JoinColumn(name = "USER_ID"))
+	@JoinTable(name = "candidacies", joinColumns = @JoinColumn(name = "JOB_OFFER_ID"), inverseJoinColumns = @JoinColumn(name = "PERSON_ID"))
 	public Set<Person> getCandidancies() {
 		return candidancies;
 	}
@@ -180,11 +180,9 @@ public class JobOffer {
 		return "JobOffer [id=" + id + ", region=" + region + ", province=" + province + ", town=" + town + ", position="
 				+ position + ", description=" + description + ", contractType=" + contractType + ", minEducationLevel="
 				+ minEducationLevel + ", minExperience=" + minExperience + ", interested=" + interested
-				+ ", number of candidancies=" + candidancies.size() + ", company=" + company.getId() + ", publicationDate=" + publicationDate
-				+ "]";
+				+ ", number of candidancies=" + candidancies.size() + ", company=" + company.getId()
+				+ ", publicationDate=" + publicationDate + "]";
 	}
-	
-	
 
 	@Convert(converter = LocalDateAttributeConverter.class)
 	public LocalDate getPublicationDate() {
@@ -194,7 +192,5 @@ public class JobOffer {
 	public void setPublicationDate(LocalDate publicationDate) {
 		this.publicationDate = publicationDate;
 	}
-	
-	
 
 }

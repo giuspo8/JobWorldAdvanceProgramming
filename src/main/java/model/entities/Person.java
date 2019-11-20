@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 import utils.LocalDateAttributeConverter;
 
@@ -31,7 +32,7 @@ public class Person extends User {
 	private String secondName;
 	private LocalDate birthDate;
 	private String number;
-	private String curriculum;
+	private Curriculum curriculum;
 	private String interests;
 	private Set<JobOffer> candidacies = new HashSet<JobOffer>();
 
@@ -40,13 +41,12 @@ public class Person extends User {
 	}
 
 	public Person(String email, String password, String description, String firstName, String secondName,
-			LocalDate birthDate, String number, String curriculum, String interests) {
+			LocalDate birthDate, String number, String interests) {
 		super(email, password, description);
 		this.firstName = firstName;
 		this.secondName = secondName;
 		this.birthDate = birthDate;
 		this.number = number;
-		this.curriculum = curriculum;
 		this.interests = interests;
 	}
 
@@ -84,12 +84,12 @@ public class Person extends User {
 		this.number = number;
 	}
 
-	@Column(length = 1000)
-	public String getCurriculum() {
+	@OneToOne(mappedBy = "person")
+	public Curriculum getCurriculum() {
 		return curriculum;
 	}
 
-	public void setCurriculum(String curriculum) {
+	public void setCurriculum(Curriculum curriculum) {
 		this.curriculum = curriculum;
 	}
 
@@ -102,7 +102,7 @@ public class Person extends User {
 	}
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "candidacies", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "JOB_OFFER_ID"))
+	@JoinTable(name = "candidacies", joinColumns = @JoinColumn(name = "PERSON_ID"), inverseJoinColumns = @JoinColumn(name = "JOB_OFFER_ID"))
 	public Set<JobOffer> getCandidacies() {
 		return candidacies;
 	}

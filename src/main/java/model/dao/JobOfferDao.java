@@ -1,7 +1,6 @@
 package model.dao;
 
 import java.util.List;
-import java.util.Set;
 
 import model.entities.Company;
 import model.entities.JobOffer;
@@ -27,12 +26,14 @@ public interface JobOfferDao {
 	List<JobOffer> findbyRegion(String region);
 
 	List<JobOffer> findAll();
-	
+
 	List<JobOffer> filterByPosition(String keywords);
-	
+
 	List<JobOffer> orderedByPublicationDate();
-	
-	List<JobOffer> filterBypositionAndprovince(String position,String province);
-	
+
+	List<JobOffer> filterBypositionAndprovince(String position, String province);
+
+	List<JobOffer> filter(String region, String province, String town, String position, String contractType,
+			String minEducationLevel, String minExperience);
 
 }

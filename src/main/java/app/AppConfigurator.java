@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @PropertySource("classpath:dbconfig.properties")
 public class AppConfigurator {
-	
+
 	@Value("${db.host}")
 	private String db_host;
 	@Value("${db.port}")
@@ -37,17 +37,19 @@ public class AppConfigurator {
 	@Value("${db.password}")
 	private String db_pw;
 	private static Logger logger = LoggerFactory.getLogger(AppConfigurator.class);
-	
-	// metodo utilizzato per inizializzare le proprietà usando l'annotazione @Value, contenute nel file src/main/resources/dbconfig.properties
+
+	// metodo utilizzato per inizializzare le proprietà usando l'annotazione
+	// @Value, contenute nel file src/main/resources/dbconfig.properties
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
-	    return new PropertySourcesPlaceholderConfigurer();
+		return new PropertySourcesPlaceholderConfigurer();
 	}
-	
+
 	@Bean
 	public DataSource dataSource() {
 		try {
-			System.out.println("jdbc:mysql://" + db_host + ":" + db_port + "/" + db_name + "?createDatabaseIfNotExist=true");
+			System.out.println(
+					"jdbc:mysql://" + db_host + ":" + db_port + "/" + db_name + "?createDatabaseIfNotExist=true");
 			DriverManagerDataSource ds = new DriverManagerDataSource();
 			ds.setDriverClassName(com.mysql.jdbc.Driver.class.getName());
 			ds.setUrl("jdbc:mysql://" + db_host + ":" + db_port + "/" + db_name + "?createDatabaseIfNotExist=true");
