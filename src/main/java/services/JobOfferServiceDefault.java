@@ -15,7 +15,7 @@ import model.entities.JobOffer;
 
 @Transactional
 @Service("jobofferService")
-public class JobOfferServiceDefault {
+public class JobOfferServiceDefault implements JobOfferService{
 private JobOfferDao jobofferRepository;
 	
 	@Transactional(readOnly=true)

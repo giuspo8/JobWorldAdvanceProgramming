@@ -14,7 +14,7 @@ import model.entities.Curriculum;
 
 @Transactional
 @Service("curriculumService")
-public class CurriculumServiceDefault {
+public class CurriculumServiceDefault implements CurriculumService {
 private CurriculumDao curriculumRepository;
 	
 	@Transactional(readOnly=true)

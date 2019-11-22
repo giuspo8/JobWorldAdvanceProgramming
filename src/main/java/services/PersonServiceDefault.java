@@ -12,7 +12,7 @@ import model.entities.Person;
 
 @Transactional
 @Service("personService")
-public class PersonServiceDefault {
+public class PersonServiceDefault implements PersonService{
 private PersonDao personRepository;
 	
 
