@@ -1,6 +1,7 @@
 package model.dao;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,6 +47,12 @@ public class DefaultPersonDao extends DefaultDao implements PersonDao {
 	@Transactional
 	public Person findById(long id) {
 		return getSession().find(Person.class, id);
+	}
+
+	@Override
+	public List<Person> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

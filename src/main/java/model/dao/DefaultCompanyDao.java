@@ -1,5 +1,7 @@
 package model.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,6 +45,12 @@ public class DefaultCompanyDao extends DefaultDao implements CompanyDao {
 	@Transactional(readOnly = true)
 	public Company findbyId(long id) {
 		return getSession().find(Company.class, id);
+	}
+
+	@Override
+	public List<Company> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

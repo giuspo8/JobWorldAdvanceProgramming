@@ -1,5 +1,7 @@
 package model.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,6 +49,12 @@ public class DefaultCurriculumDao extends DefaultDao implements CurriculumDao {
 	public Curriculum findByPersonId(Person person) {
 		return getSession().createQuery("from Curriculum c where c.person='" + person.getId() + "'", Curriculum.class)
 				.getSingleResult();
+	}
+
+	@Override
+	public List<Curriculum> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

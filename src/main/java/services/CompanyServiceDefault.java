@@ -1,5 +1,13 @@
+/**
+ * Implementazione CompanyService
+ * 
+ * @author Giuseppe Costantini
+ * @author Simone di Saverio
+ * @author Lorenzo Giuliani
+ * @author Savio Feng
+ * @version 1.0
+ */
 package services;
-
 
 import java.util.List;
 
