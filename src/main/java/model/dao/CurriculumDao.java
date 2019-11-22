@@ -1,5 +1,8 @@
 package model.dao;
 
+import java.util.List;
+
+import model.entities.Company;
 /**
  * Interfaccia del Dao del curriculum.
  * 
@@ -22,5 +25,7 @@ public interface CurriculumDao {
 	void delete(Curriculum curriculum);
 
 	Curriculum findByPersonId(Person person);
+	
+	List<Curriculum> findAll();
 
 }

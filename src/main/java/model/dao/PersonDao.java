@@ -1,6 +1,7 @@
 package model.dao;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import model.entities.Person;
 
@@ -23,5 +24,7 @@ public interface PersonDao {
 	void delete(Person person);
 
 	Person findById(long id);
+	
+	List<Person> findAll();
 
 }

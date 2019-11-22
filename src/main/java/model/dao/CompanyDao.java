@@ -1,5 +1,9 @@
 package model.dao;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
+
 import model.entities.Company;
 
 /**
@@ -19,4 +23,15 @@ public interface CompanyDao {
 	void delete(Company company);
 
 	Company findbyId(long id);
+	
+	
+	
+	List<Company> findAll();
+
+	//List<Company> findAllWithAlbum();
+	
+
+	
+	
+	
 }

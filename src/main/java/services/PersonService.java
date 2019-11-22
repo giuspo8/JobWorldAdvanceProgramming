@@ -9,9 +9,10 @@ List<Person> findAll();
 	
 Person findById(Long id);
 	
-Person create(String string, String string2);
+Person create(String email, String password, String description, String firstName, String secondName,
+		LocalDate birthDate, String number, String interests);
 	
-Person create(String string, String string2, LocalDate birthdate);
+Person create(String string, String string2);
 	
 Person update(Person person);
 	

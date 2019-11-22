@@ -26,6 +26,7 @@ public interface JobOfferDao {
 	List<JobOffer> findbyRegion(String region);
 
 	List<JobOffer> findAll();
+	
 
 	List<JobOffer> filterByPosition(String keywords);
 

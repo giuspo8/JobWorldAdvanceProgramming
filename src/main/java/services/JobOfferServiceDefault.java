@@ -1,13 +1,13 @@
 package services;
 
-import java.time.LocalDate;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import model.dao.CompanyDao;
+
 import model.dao.JobOfferDao;
 import model.entities.Company;
 import model.entities.JobOffer;
@@ -20,8 +20,8 @@ private JobOfferDao jobofferRepository;
 	
 	@Transactional(readOnly=true)
 	@Override
-	public JobOffer findById(Long id) {
-		return this.jobofferRepository.findById(id);
+	public JobOffer findbyRegion(String region) {
+		return (JobOffer) this.jobofferRepository.findbyRegion(region); //ho aggiunto il casting dal type di joboffer a region
 	}
 
 	@Transactional(readOnly=true)
@@ -32,13 +32,14 @@ private JobOfferDao jobofferRepository;
 	@Transactional
 	@Override
 	public JobOffer create(String firstName, String lastName) {
-		return this.create(firstName, lastName, null);
+		return this.create(firstName, lastName);
 	}
 
 	@Transactional
 	@Override
-	public JobOffer create(String firstName, String lastName, LocalDate birthDate) {
-		return this.jobofferRepository.create(firstName, lastName, birthDate);
+	public JobOffer create(String region, String province, String town, String position, String description,
+			String contractType, String minEducationLevel, String minExperience, Company company) {
+		return this.jobofferRepository.create(region,province,town,position,description,contractType,minEducationLevel,minExperience,company);
 
 	}
 	

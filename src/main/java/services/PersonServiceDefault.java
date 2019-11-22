@@ -31,13 +31,14 @@ private PersonDao personRepository;
 	@Transactional
 	@Override
 	public Person create(String firstName, String lastName) {
-		return this.create(firstName, lastName, null);
+		return this.create(firstName, lastName);
 	}
 
 	@Transactional
 	@Override
-	public Person create(String firstName, String lastName, LocalDate birthDate) {
-		return this.personRepository.create(firstName, lastName, birthDate);
+	public Person create(String email, String password, String description, String firstName, String secondName,
+			LocalDate birthDate, String number, String interests) {
+		return this.personRepository.create(email,password,description,firstName,secondName,birthDate,number,interests);
 
 	}
 	
