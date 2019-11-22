@@ -3,18 +3,19 @@ package services;
 import java.time.LocalDate;
 import java.util.List;
 
-import model.entities.Company;
+
+import model.entities.JobOffer;
 
 public interface JobOfferService {
-	List<Company> findAll();
+	List<JobOffer> findAll();
 	
-	Company findById(Long id);
+	JobOffer findById(Long id);
 		
-	Company create(String string, String string2);
+	JobOffer create(String string, String string2);
 		
-	Company create(String string, String string2, LocalDate birthdate);
+	JobOffer create(String string, String string2, LocalDate birthdate);
 		
-	Company update(Company company);
+	JobOffer update(JobOffer joboffer);
 		
-		void delete(Company contact);
+		void delete(JobOffer contact);
 }

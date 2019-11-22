@@ -3,18 +3,18 @@ package services;
 import java.time.LocalDate;
 import java.util.List;
 
-import model.entities.Company;
+import model.entities.Curriculum;
 
 public interface CurriculumService {
-	List<Company> findAll();
+	List<Curriculum> findAll();
 	
-	Company findById(Long id);
+	Curriculum findById(Long id);
 		
-	Company create(String string, String string2);
+	Curriculum create(String string, String string2);
 		
-	Company create(String string, String string2, LocalDate birthdate);
+	Curriculum create(String string, String string2, LocalDate birthdate);
 		
-	Company update(Company company);
+	Curriculum update(Curriculum curriculum);
 		
-		void delete(Company contact);
+		void delete(Curriculum contact);
 }
