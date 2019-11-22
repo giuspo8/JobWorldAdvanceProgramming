@@ -16,7 +16,10 @@ import model.entities.Company;
  * @version 1.0
  */
 public interface CompanyDao {
-	Company create(String email, String password, String description);
+	static Company create(String email, String password, String description) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	Company update(Company company);
 

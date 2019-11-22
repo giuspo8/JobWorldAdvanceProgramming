@@ -25,6 +25,9 @@ public interface PersonDao {
 
 	Person findById(long id);
 	
-	List<Person> findAll();
+	static List<Person> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
