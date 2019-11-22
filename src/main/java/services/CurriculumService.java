@@ -1,18 +1,20 @@
 package services;
 
-import java.time.LocalDate;
+
 import java.util.List;
 
 import model.entities.Curriculum;
+import model.entities.Person;
 
 public interface CurriculumService {
 	List<Curriculum> findAll();
 	
-	Curriculum findById(Long id);
+	Curriculum findByPersonId(Person person);
+		
+	Curriculum create(Person person, String workExperience, String education, String personalSkills,
+			String additionalInfo);
 		
 	Curriculum create(String string, String string2);
-		
-	Curriculum create(String string, String string2, LocalDate birthdate);
 		
 	Curriculum update(Curriculum curriculum);
 		

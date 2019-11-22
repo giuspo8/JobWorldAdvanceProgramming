@@ -1,6 +1,6 @@
 package services;
 
-import java.time.LocalDate;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +18,8 @@ private CompanyDao companyRepository;
 	
 	@Transactional(readOnly=true)
 	@Override
-	public Company findById(Long id) {
-		return this.companyRepository.findById(id);
+	public Company findbyId(Long id) {
+		return this.companyRepository.findbyId(id);
 	}
 
 	@Transactional(readOnly=true)
@@ -30,13 +30,13 @@ private CompanyDao companyRepository;
 	@Transactional
 	@Override
 	public Company create(String firstName, String lastName) {
-		return this.create(firstName, lastName, null);
+		return this.create(firstName, lastName);
 	}
 
 	@Transactional
 	@Override
-	public Company create(String firstName, String lastName, LocalDate birthDate) {
-		return this.companyRepository.create(firstName, lastName, birthDate);
+	public Company create(String email, String password, String description) {
+		return this.companyRepository.create(email,password,description);
 
 	}
 	

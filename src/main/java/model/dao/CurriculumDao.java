@@ -2,7 +2,6 @@ package model.dao;
 
 import java.util.List;
 
-import model.entities.Company;
 /**
  * Interfaccia del Dao del curriculum.
  * 

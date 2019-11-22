@@ -1,8 +1,8 @@
 package model.dao;
 
-import java.time.LocalDate;
+
 import java.util.List;
-import java.util.Set;
+
 
 import model.entities.Company;
 

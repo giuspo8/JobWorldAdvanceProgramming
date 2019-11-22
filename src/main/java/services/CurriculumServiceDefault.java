@@ -1,16 +1,17 @@
 package services;
 
-import java.time.LocalDate;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import model.dao.CompanyDao;
+
 import model.dao.CurriculumDao;
-import model.entities.Company;
+
 import model.entities.Curriculum;
+import model.entities.Person;
 
 @Transactional
 @Service("curriculumService")
@@ -19,8 +20,8 @@ private CurriculumDao curriculumRepository;
 	
 	@Transactional(readOnly=true)
 	@Override
-	public Curriculum findById(Long id) {
-		return this.curriculumRepository.findById(id);
+	public Curriculum findByPersonId(Person person) {
+		return this.curriculumRepository.findByPersonId(person);
 	}
 
 	@Transactional(readOnly=true)
@@ -30,14 +31,15 @@ private CurriculumDao curriculumRepository;
 
 	@Transactional
 	@Override
-	public Curriculum create(String firstName, String lastName) {
-		return this.create(firstName, lastName, null);
+	public Curriculum create(Person person, String workExperience, String education, String personalSkills,
+			String additionalInfo) {
+		return this.curriculumRepository.create(person,workExperience,education,personalSkills,additionalInfo);
 	}
 
 	@Transactional
 	@Override
-	public Curriculum create(String firstName, String lastName, LocalDate birthDate) {
-		return this.curriculumRepository.create(firstName, lastName, birthDate);
+	public Curriculum create(String firstName, String lastName) {
+		return this.create(firstName, lastName);
 
 	}
 	
