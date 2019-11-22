@@ -103,9 +103,9 @@ public class LoadData {
 			 */
 			
 			
-			List<JobOffer> jobOffers6 = jobOfferDao.filter("Marche", "Ancona", "Ancona", "Ass", null, "Laurea",
+			List<JobOffer> joboffers6 = jobOfferDao.filter("Marche", "Ancona", "Ancona", "Ass", null, "Laurea",
 					"non rich");
-			for (JobOffer j : jobOffers6) {
+			for (JobOffer j : joboffers6) {
 				System.out.println(j);
 			}
 
