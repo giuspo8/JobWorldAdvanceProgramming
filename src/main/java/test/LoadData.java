@@ -1,8 +1,9 @@
 package test;
 
 
+import java.time.LocalDate;
 import java.util.List;
-
+import java.util.Set;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -11,77 +12,99 @@ import model.dao.CompanyDao;
 import model.dao.CurriculumDao;
 import model.dao.JobOfferDao;
 import model.dao.PersonDao;
+import model.entities.Company;
+import model.entities.Curriculum;
+import model.entities.JobOffer;
 import model.entities.Person;
 
-//PER FARE QUESTO DOVETE PRIMA FARE IL DATASERVICECONFIG
 
 public class LoadData {
 	
 			
 	public static void main(String ...args) {
-		
-		
-		
 //		logger.info("Entrato ...");
 		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(DataServiceConfig.class)) {
 
 			CompanyDao companyDao = ctx.getBean(CompanyDao.class);
+			JobOfferDao jobOfferDao = ctx.getBean(JobOfferDao.class);
 			CurriculumDao curriculumDao = ctx.getBean(CurriculumDao.class);
-			JobOfferDao jobofferDao = ctx.getBean(JobOfferDao.class);
 			PersonDao personDao = ctx.getBean(PersonDao.class);
+
 			// phase 1 : add data to database
-	
-	
-			CompanyDao.create("email1", "password1", "descrizione1");
-			CompanyDao.create("email2", "password2", "descrizione2");
-			CompanyDao.create("email3", "password3", "descrizione3");
 			
-			/*
-			Singer rw = singerDao.create("Roger", "Waters");
-			Singer mj = singerDao.create("Michael", "Jackson", null);
-			
-			albumDao.create("Wish you where here", rw);
-			
-			albumDao.create("Thriller", mj);
-			
-			Album tdb = albumDao.create("The division bell", rw);
-			tdb.setSinger(rw);
-			albumDao.update(tdb);
-			
-		
-			Instrument i1 = instrumentDao.findByName("Stratocaster");
-			Instrument i2 = instrumentDao.findByName("Moog");
-			Instrument i3 = instrumentDao.findByName("Stradivari");
-			
-			rw.addInstrument(i1);
-			rw.addInstrument(i2);
-			singerDao.update(rw);
-			
-			mj.addInstrument(i2);
-			mj.addInstrument(i3);
-			singerDao.update(mj);
+			Company c1 = CompanyDao.create("sidagroup@email.it", "prova1",
+					"Sida Group nasce ad Ancona nel 1985 con l'obiettivo di offrire ad aziende ed Enti pubblici e privati, servizi integrati di consulenza, sia a livello di direzione aziendale, attraverso l'elaborazione di piani strategici, sia a livello operativo, attraverso supporti per 'implementazione degli stessi, sia a livello organizzativo attraverso la ricerca, selezione e formazione del personale. La mission del Gruppo consiste nell'assistere le aziende nel proprio sviluppo e consolidamento, stimolando processi di cambiamento e contribuendo ad accrescere la cultura d'impresa. Attualmente Sida Group,è tra le prime 10 società di consulenza italiane per dimensione e tipologia di intervento e, proprio in virtù della visione integrata dei processi aziendali e del contributo di oltre 140 professionisti, annovera tra i propri clienti circa 1800 aziende, 40 istituti bancari, 80 enti pubblici e 60 studi professionali. Tra le eccellenze del proprio patrimonio esperienziale figurano prestigiose pubblicazioni su tematiche innovative di gestione d¿impresa e progetti di sviluppo imprenditoriale sui mercati internazionali. CONSULENZA STRATEGICA DIREZIONALE Immaginare il mondo di domani prima degli altri per acquisire nuovi vantaggi competitivi. Sida Group da anni supporta la Direzione Aziendale in tutte le fasi strategiche (di analisi degli scenari e proiezioni precompetitive; decisionali e progettuali di lungo periodo; di riorganizzazione e ristrutturazione; di passaggio generazionale) per raggiungere l¿eccellenza e vincere le sfide di domani. CONSULENZA OPERATIVA I consulenti Sida, organizzati in divisioni operative, affiancano le aziende nella gestione delle loro attività e principali aree funzionali: Strategia e sviluppo organizzativo, Finanza, Amministrazione e Controllo di Gestione, Fiscale, societaria e legale, Operations (logistica, produzione e qualità), Marketing e sviluppo commerciale, Risorse umane (coaching, ricerca e selezione del personale), Cost Saving, Internazionalizzazione, Merger & Acquisition e Family Business Center. FORMAZIONE Crescita, sviluppo ed aggiornamento professionale delle risorse umane sono i fattori di successo per le imprese pubbliche e private. Sida, grazie alla propria Scuola di Formazione, accreditata in diverse regioni italiane, sviluppa progetti formativi rivolti a imprenditori, managers, quadri, giovani laureandi e neo-laureati, quali: Master, Corsi in House, Corsi Interaziendali, Focus Group e Best Practices e Formazione Finanziata. Oltre 3000 gli operatori formati, oltre 500 i percorsi formativi realizzati. www.mastersida.com SIDA NEL MONDO Filiali: USA, ROMANIA, INGHILTERRA, IRLANDA, POLONIA, EMIRATI ARABI, CINA, SVIZZERA. Corrispondenti: BRASILE, INDIA, REPUBBLICA CECA, RUSSIA, TUNISIA, UCRANIA.");
+
+			JobOffer j1 = jobOfferDao.create("Marche", "Ancona", "Ancona",
+					"Assistente alla Direzione settore hotellerie",
+					"Lindbergh hotels è una catena alberghiera che conta 8 strutture, di 4 e 5 stelle, dislocate sul territorio italiano, con un organico di 400 dipendenti. La società in questione si occupa della gestione e dello sviluppo delle stesse e del personale in forza, con particolare attenzione verso la propria clientela. In collaborazione con Sida Group ricerca per un "
+							+ "tirocinio formativo previa formazione un Assistente alla Direzione."
+							+ "Il tirocinante, inserito in un contesto di front/back office, dovrà dimostrare di avere ottime capacità comunicative e di problem - solving, di sapere come si organizza il personale in strutture Leisure e Business, nonché fornire supporto al cliente. Attraverso questo percorso formativo, il tirocinante dovrà rispondere direttamente alla Direzione e operare secondo gli obiettivi aziendali sempre nel "
+							+ "rispetto delle scadenze prestabilite, con massima riservatezza.",
+					"Stage", "Laurea breve (3 anni)", "Non richiesta", c1);
+
+			Person p1 = personDao.create("giangis@hotmail.it", "passw",
+					"Laurea in economia e gestione aziendale conseguito il 10 febbraio 2004 presso l’Università di Bologna",
+					"Marco", "Abbate", LocalDate.of(1990, 11, 25), "320000255", "Informatica, Ristorazione");
+			Person p2 = personDao.create("giangis@hotmail.it", "passw",
+					"Diploma di Laurea in economia e gestione aziendale conseguito il 10 febbraio 2004 presso l’Università di Bologna",
+					"Marco", "Abbate", LocalDate.of(1990, 11, 25), "320000255", "Informatica, Ristorazione");
+			Curriculum c12 = curriculumDao.create(p2, "2PROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVA",
+					"educationeducation5educationeducation5educationeducationeducationeducation",
+					"personalSkillspersonalSkillspersonalSkillspersonalSkillspersonalSkillspersonalSkills",
+					"additionalInfoadditionalInfoadditionalInfoadditionalInfoadditionalInfoadditionalInfo");
+			Curriculum c11 = curriculumDao.create(p1, "PROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVA",
+					"educationeducation5educationeducation5educationeducationeducationeducation",
+					"personalSkillspersonalSkillspersonalSkillspersonalSkillspersonalSkillspersonalSkills",
+					"additionalInfoadditionalInfoadditionalInfoadditionalInfoadditionalInfoadditionalInfo");
+			JobOffer j2 = jobOfferDao.create("Marche", "Ancona", "Ancona",
+					"Assistente alla Direzione settore hotellerie",
+					"Lindbergh hotels è una catena alberghiera che conta 8 strutture, di 4 e 5 stelle, dislocate sul territorio italiano, con un organico di 400 dipendenti. La società in questione si occupa della gestione e dello sviluppo delle stesse e del personale in forza, con particolare attenzione verso la propria clientela. In collaborazione con Sida Group ricerca per un "
+							+ "tirocinio formativo previa formazione un Assistente alla Direzione."
+							+ "Il tirocinante, inserito in un contesto di front/back office, dovrà dimostrare di avere ottime capacità comunicative e di problem - solving, di sapere come si organizza il personale in strutture Leisure e Business, nonché fornire supporto al cliente. Attraverso questo percorso formativo, il tirocinante dovrà rispondere direttamente alla Direzione e operare secondo gli obiettivi aziendali sempre nel "
+							+ "rispetto delle scadenze prestabilite, con massima riservatezza.",
+					"Stage", "Laurea breve (3 anni)", "Non richiesta", c1);
+			p1.apply(j1);
+			j2.setPublicationDate(LocalDate.of(2018, 10, 22));
+			p1.apply(j2);
+			p2.apply(j1);
+			jobOfferDao.update(j1);
+			jobOfferDao.update(j2);
 		
 			// phase 2 : navigate data in the database
-		
-			List<Singer> all = singerDao.findAll();
 			
-			System.out.println("Number of singers: " + all.size());
-			for (Singer s : all) {
-				System.out.println(" - " + s.getFullName() + " : " + s.getBirthDate());
-				
-				Set<Album> albums = singerDao.getAlbums(s);
-				System.out.println("Number of albums: " + albums.size());
-				for (Album a : albums) {
-					System.out.println("  - " + a.getTitle());					
-				}
+			
+			/*
+			 * List<JobOffer> jobOffers = jobOfferDao.findAll(); for (JobOffer j :
+			 * jobOffers) { System.out.println(j); }
+			 * 
+			 * List<JobOffer> jobOffers2 = jobOfferDao.findbyRegion("Abruzzo"); for
+			 * (JobOffer j : jobOffers2) { System.out.println(j); }
+			 * 
+			 * List<JobOffer> jobOffers3 = jobOfferDao.filterByPosition("adlla"); for
+			 * (JobOffer j : jobOffers3) { System.out.println(j); }
+			 * 
+			 * 
+			 * List<JobOffer> jobOffers4 = jobOfferDao.orderedByPublicationDate(); for
+			 * (JobOffer j : jobOffers4) { System.out.println(j); }
+			 * 
+			 * 
+			 * List<JobOffer> jobOffers5 =
+			 * jobOfferDao.filterBypositionAndprovince("assistente", "Ancona"); for
+			 * (JobOffer j : jobOffers5) { System.out.println(j); }
+			 */
+			
+			
+			List<JobOffer> jobOffers6 = jobOfferDao.filter("Marche", "Ancona", "Ancona", "Ass", null, "Laurea",
+					"non rich");
+			for (JobOffer j : jobOffers6) {
+				System.out.println(j);
 			}
-			*/
-			List<Person> allPerson = PersonDao.findAll();
-			System.out.println("Number of Person: " + allPerson.size());
-			for (Person i : allPerson) {
-				System.out.println( " : " + i.getFirstName());
-				
-				
+
+			System.out.println(curriculumDao.findByPersonId(p1));
+
+			for (JobOffer j : p1.getCandidacies()) {
+				System.out.println(j);
 			}
 			
 
@@ -91,7 +114,6 @@ public class LoadData {
 		}
 //		logger.info("Esco ...");
 	}
-	
 	
 	
 }
