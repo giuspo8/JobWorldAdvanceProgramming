@@ -1,9 +1,17 @@
 package test;
-
+/**
+ * Classe LoadData "nuovo main"
+ * 
+ * @author Giuseppe Costantini
+ * @author Simone di Saverio
+ * @author Lorenzo Giuliani
+ * @author Savio Feng
+ * @version 1.0
+ */
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
+
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

@@ -1,5 +1,13 @@
 package app;
-
+/**
+ * Classe DataServiceConfig
+ * 
+ * @author Giuseppe Costantini
+ * @author Simone di Saverio
+ * @author Lorenzo Giuliani
+ * @author Savio Feng
+ * @version 1.0
+ */
 import java.io.IOException;
 import java.util.Properties;
 
@@ -17,7 +25,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @ComponentScan(basePackages =
-     "it.univpm.advprog.singers")
+     "it.univpm.advprog.singers  da cambiare ")
 @EnableTransactionManagement
 
 public class DataServiceConfig {

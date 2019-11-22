@@ -1,6 +1,14 @@
 
 package controller;
-
+/**
+ * Controllore 2
+ * 
+ * @author Giuseppe Costantini
+ * @author Simone di Saverio
+ * @author Lorenzo Giuliani
+ * @author Savio Feng
+ * @version 1.0
+ */
 import java.util.List;
 
 import org.slf4j.Logger;

@@ -1,5 +1,13 @@
 package app;
-
+/**
+ * Classe WebInit
+ * 
+ * @author Giuseppe Costantini
+ * @author Simone di Saverio
+ * @author Lorenzo Giuliani
+ * @author Savio Feng
+ * @version 1.0
+ */
 import javax.servlet.Filter;
 
 import org.springframework.web.filter.CharacterEncodingFilter;

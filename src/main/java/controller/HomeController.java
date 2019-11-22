@@ -15,7 +15,13 @@ import model.dao.User;
 public class HomeController {
 
 	/**
-	 * Seleziona la home view per ritornare il suo nome
+	 * Controllore Home
+	 * 
+	 * @author Giuseppe Costantini
+	 * @author Simone di Saverio
+	 * @author Lorenzo Giuliani
+	 * @author Savio Feng
+	 * @version 1.0
 	 */
 	
 	@RequestMapping(method = RequestMethod.GET)
@@ -29,7 +35,7 @@ public class HomeController {
 
 		model.addAttribute("serverTime", formattedDate);
 		
-		String appName = "SingersApp";
+		String appName = "WebApp";
 		model.addAttribute("appName", appName);
 
 		return "home";
