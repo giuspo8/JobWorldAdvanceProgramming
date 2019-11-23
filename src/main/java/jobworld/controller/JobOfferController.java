@@ -25,7 +25,7 @@ import jobworld.services.JobOfferService;
 
 
 
-@RequestMapping("/JobOffer")
+@RequestMapping("/jobOffers")
 @Controller
 public class JobOfferController {
 	
@@ -38,7 +38,7 @@ private final Logger logger = LoggerFactory.getLogger(JobOfferController.class);
 	public String list(Model uiModel) {
 		logger.info("Listing JobOffers");
 		List<JobOffer> allJobOffers = this.jobOfferService.findAll();
-		uiModel.addAttribute("joboffers", allJobOffers);
+		uiModel.addAttribute("jobOffers", allJobOffers);
 		logger.info("No. of jobOffers: " + allJobOffers.size());
 		
 		return "jobOffers/list";
