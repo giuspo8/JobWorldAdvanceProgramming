@@ -15,7 +15,7 @@
 <%--questo e` un commento di vista (JSTL) ${mySecret} --%>
 <%-- NB questo codice non funziona:
 
-Numero di persone: ${people.size()}. <c:if test="${people.size() ge 0}">Sono pochi!</c:if>
+Numero di offerte di lavoro: ${jobOffers.size()}. <c:if test="${jobOffers.size() ge 0}">Sono pochi!</c:if>
 
 Invocare un metodo e` una di quelle operazioni piu` adatte ad un controller che non ad una vista. Opzioni disponibili:
 
@@ -24,12 +24,12 @@ Invocare un metodo e` una di quelle operazioni piu` adatte ad un controller che 
 - aggirare il limite con <jsp:useBean ...
 
  --%>
-Numero di persome: ${fn:length(people)}. <c:if test="${fn:length(people) lt 10}">Sono pochi!</c:if>
-Numero di persone: ${numCantanti}. <c:if test="${numCantanti lt 10}">Sono pochi!</c:if>
+Numero di offerte di lavoro: ${fn:length(jobOffers)}. <c:if test="${fn:length(jobOffers) lt 10}">Sono pochi!</c:if>
+Numero di offerte di lavoro: ${numOfferteDiLavoro}. <c:if test="${numOfferteDiLavoro lt 10}">Sono pochi!</c:if>
 <table>
-<thead><td>First name</td><td>Last name</td><td>Birth date</td></thead>
-<c:forEach items="${people}" var="p">
-<tr><td>${p.firstName}</td><td>${p.lastName}</td></tr>
+<thead><td>Region</td><td>Position</td><td>Birth date</td></thead>
+<c:forEach items="${jobOffers}" var="j">
+<tr><td>${j.region}</td><td>${j.position}</td></tr>
 </c:forEach>
 </table>
 </body>
