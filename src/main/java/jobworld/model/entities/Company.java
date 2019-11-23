@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 /**
- * Classe entit� rappresentante una Azienda ed i suoi attributi/metodi.
+ * Classe Company rappresentante una Azienda ed i suoi attributi/metodi.
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio

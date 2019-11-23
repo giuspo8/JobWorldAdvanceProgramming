@@ -1,5 +1,13 @@
 package jobworld.model.dao;
-
+/**
+ * Interfaccia di CurriculumDao
+ * 
+ * @author Giuseppe Costantini
+ * @author Simone di Saverio
+ * @author Lorenzo Giuliani
+ * @author Savio Feng
+ * @version 1.0
+ */
 import java.util.List;
 
 /**

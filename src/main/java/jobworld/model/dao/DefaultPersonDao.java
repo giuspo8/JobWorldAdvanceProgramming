@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import jobworld.model.entities.Person;
 
 /**
- * Classe del Dao della persona fisica.
+ * Implementazione dell'interfaccia PersonDao
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio

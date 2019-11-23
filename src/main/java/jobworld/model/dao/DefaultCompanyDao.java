@@ -9,7 +9,7 @@ import jobworld.model.entities.Company;
 import jobworld.model.entities.Curriculum;
 
 /**
- * Classe del Dao dell'azienda.
+ * Implementazione dell'interfaccia CompanyDao
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio

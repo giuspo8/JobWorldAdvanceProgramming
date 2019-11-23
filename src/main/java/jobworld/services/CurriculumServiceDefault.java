@@ -1,5 +1,5 @@
 /**
- * implementazione CurriculumService
+ * implementazione dell'interfaccia CurriculumService
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio

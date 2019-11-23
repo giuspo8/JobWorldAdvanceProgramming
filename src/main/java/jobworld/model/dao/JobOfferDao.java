@@ -6,7 +6,7 @@ import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
 
 /**
- * Interfaccia del Dao dell'offerta di lavoro.
+ * interfaccia JobOfferDao
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio

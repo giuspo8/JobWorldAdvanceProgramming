@@ -17,7 +17,7 @@ import javax.persistence.OneToOne;
 import jobworld.utils.LocalDateAttributeConverter;
 
 /**
- * Classe entit� rappresentante una Persona ed i suoi attributi/metodi.
+ * Classe Person rappresentante una Persona ed i suoi attributi/metodi.
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio

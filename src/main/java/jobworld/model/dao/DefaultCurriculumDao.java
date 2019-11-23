@@ -9,7 +9,7 @@ import jobworld.model.entities.Curriculum;
 import jobworld.model.entities.Person;
 
 /**
- * Classe del Dao del curriculum.
+ * Implementazione dell'interfaccia CurriculumDao
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio

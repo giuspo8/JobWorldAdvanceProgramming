@@ -1,5 +1,5 @@
 /**
- * Implementazione PersonService
+ * Implementazione dell'interfaccia PersonService
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio

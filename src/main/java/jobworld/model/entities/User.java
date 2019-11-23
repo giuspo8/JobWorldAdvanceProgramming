@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 /**
- * Classe entit� rappresentante un Utente ed i suoi attributi/metodi.
+ * Classe User rappresentante un Utente ed i suoi attributi/metodi.
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio

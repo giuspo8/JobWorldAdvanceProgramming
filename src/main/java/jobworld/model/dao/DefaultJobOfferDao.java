@@ -8,7 +8,7 @@ import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
 
 /**
- * Classe del Dao dell'offerta di lavoro.
+ * Implementazione dell'interfaccia JobOfferDao
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio

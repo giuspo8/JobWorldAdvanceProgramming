@@ -1,5 +1,5 @@
 /**
- * Implementazione CompanyService
+ * Implementazione dell'interfaccia CompanyService
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio

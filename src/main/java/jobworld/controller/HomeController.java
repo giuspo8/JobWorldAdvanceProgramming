@@ -15,7 +15,7 @@ import jobworld.model.dao.User;
 public class HomeController {
 
 	/**
-	 * Controllore Home
+	 * Classe Controllore Home
 	 * 
 	 * @author Giuseppe Costantini
 	 * @author Simone di Saverio

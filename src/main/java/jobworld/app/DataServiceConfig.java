@@ -1,5 +1,13 @@
 package jobworld.app;
-
+/**
+ * Classe DataServiceConfig per far partire la Webapp
+ * 
+ * @author Giuseppe Costantini
+ * @author Simone di Saverio
+ * @author Lorenzo Giuliani
+ * @author Savio Feng
+ * @version 1.0
+ */
 import java.io.IOException;
 import java.util.Properties;
 

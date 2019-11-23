@@ -1,5 +1,5 @@
 /**
- * Implementazione JobOfferService
+ * Implementazione dell'interfaccia JobOfferService
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio

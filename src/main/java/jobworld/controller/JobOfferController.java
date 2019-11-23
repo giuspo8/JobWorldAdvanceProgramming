@@ -1,7 +1,7 @@
 
 package jobworld.controller;
 /**
- * Controllore 2
+ * Classe JobOfferController
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio

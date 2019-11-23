@@ -19,7 +19,7 @@ import javax.persistence.ManyToOne;
 import jobworld.utils.LocalDateAttributeConverter;
 
 /**
- * Classe entit� rappresentante una Offerta di Lavoro ed i suoi
+ * Classe JobOffer rappresentante una Offerta di Lavoro ed i suoi
  * attributi/metodi.
  * 
  * @author Giuseppe Costantini

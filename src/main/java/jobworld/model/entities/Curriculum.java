@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 /**
- * Classe entit� rappresentante il curriculum collegato ad una persona.
+ * Classe Curriculum rappresentante il curriculum collegato ad una persona.
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio

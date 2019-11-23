@@ -6,7 +6,7 @@ import java.util.List;
 import jobworld.model.entities.Person;
 
 /**
- * Interfaccia del Dao dell'utente fisico.
+ * Interfaccia PersonDao
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio

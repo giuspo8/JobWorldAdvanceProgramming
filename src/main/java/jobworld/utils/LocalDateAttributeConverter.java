@@ -8,7 +8,7 @@ import javax.persistence.Converter;
 
 /**
  * Classe utility che ci serve per convertire il tipo LocalDate in Date e
- * viceversa in quanto nel db non ï¿½ utilizzabile.
+ * viceversa in quanto nel db non è utilizzabile.
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio
@@ -20,7 +20,7 @@ import javax.persistence.Converter;
 public class LocalDateAttributeConverter implements AttributeConverter<LocalDate, Date> {
 
 	/**
-	 * ritorna un oggetto di tipo null se il parametro passatogli ï¿½ nullo,
+	 * ritorna un oggetto di tipo null se il parametro passatogli è nullo,
 	 * altrimenti lo converte nel tipo @Date e lo ritorna
 	 * 
 	 * @param oggetto di tipo @LocalDate da convertire
@@ -31,7 +31,7 @@ public class LocalDateAttributeConverter implements AttributeConverter<LocalDate
 	}
 
 	/**
-	 * ritorna un oggetto di tipo null se il parametro passatogli ï¿½ nullo,
+	 * ritorna un oggetto di tipo null se il parametro passatogli è nullo,
 	 * altrimenti lo converte nel tipo @LocalDate e lo ritorna
 	 * 
 	 * @param oggetto di tipo @Date da convertire

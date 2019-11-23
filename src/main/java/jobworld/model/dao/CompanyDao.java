@@ -7,7 +7,7 @@ import java.util.List;
 import jobworld.model.entities.Company;
 
 /**
- * Interfaccia del Dao dell'azienda.
+ * Interfaccia di CompanyDao
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio

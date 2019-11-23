@@ -1,4 +1,12 @@
-package jobworld.app;
+/**
+ * Classe WebConfig
+ * 
+ * @author Giuseppe Costantini
+ * @author Simone di Saverio
+ * @author Lorenzo Giuliani
+ * @author Savio Feng
+ * @version 1.0
+ */package jobworld.app;
 
 import java.util.Locale;
 
