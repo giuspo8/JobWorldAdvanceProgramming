@@ -36,6 +36,10 @@ public class Company extends User {
 	 * meccanismo a cascata
 	 */
 
+	
+	/**
+	*Metodi setters/getters e definizione delle tabelle con le relative relazioni
+	 */	
 	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<JobOffer> getJobOffers() {
 		return jobOffers;

@@ -49,7 +49,10 @@ public class Person extends User {
 		this.number = number;
 		this.interests = interests;
 	}
-
+	
+	/**
+	* Metodi setters/getters e definizione delle tabelle con le relative relazioni
+	 */	
 	public String getFirstName() {
 		return firstName;
 	}

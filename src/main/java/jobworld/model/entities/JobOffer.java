@@ -64,6 +64,10 @@ public class JobOffer {
 		this.interested = 0;
 	}
 
+	
+	/**
+	* Metodi setters/getters e definizione delle tabelle con le relative relazioni
+	 */	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "JOB_OFFER_ID")

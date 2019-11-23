@@ -39,6 +39,10 @@ public abstract class User {
 		this.description = description;
 	}
 
+	/**
+	* Metodi setters/getters e definizione delle tabelle con le relative relazioni
+	 */	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long getId() {
