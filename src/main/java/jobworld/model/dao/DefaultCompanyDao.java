@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import jobworld.model.entities.Company;
+import jobworld.model.entities.Curriculum;
 
 /**
  * Classe del Dao dell'azienda.
@@ -48,8 +49,8 @@ public class DefaultCompanyDao extends DefaultDao implements CompanyDao {
 	}
 
 	public List<Company> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return getSession().createQuery("from Company c", Company.class)
+				.getResultList();
 	}
 
 }

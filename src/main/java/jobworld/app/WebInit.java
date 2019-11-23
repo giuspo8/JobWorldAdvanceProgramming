@@ -19,6 +19,7 @@ public class WebInit extends AbstractAnnotationConfigDispatcherServletInitialize
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
 		// NB 2nd level config class
+		// se ne avessimo avute di più le avremmo dovute specificare qui
 		return new Class<?>[]{
 				WebConfig.class
 		};

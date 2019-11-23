@@ -21,7 +21,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan(basePackages = {"jobworld"})
+@ComponentScan(basePackages = {"jobworld.model"})
 @EnableTransactionManagement
 @PropertySource("classpath:dbconfig.properties")
 public class DataServiceConfig {

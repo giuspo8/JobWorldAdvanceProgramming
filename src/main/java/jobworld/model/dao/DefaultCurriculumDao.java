@@ -47,14 +47,15 @@ public class DefaultCurriculumDao extends DefaultDao implements CurriculumDao {
 	@Override
 	@Transactional
 	public Curriculum findByPersonId(Person person) {
-		return getSession().createQuery("from Curriculum c where c.person='" + person.getId() + "'", Curriculum.class)
+		return getSession().createQuery("from Curriculum c where c.person=:persona", Curriculum.class)
+				.setParameter("persona", person)
 				.getSingleResult();
 	}
 
 	@Override
 	public List<Curriculum> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return getSession().createQuery("from Curriculum c", Curriculum.class)
+				.getResultList();
 	}
 
 }

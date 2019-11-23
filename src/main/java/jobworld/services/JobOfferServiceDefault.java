@@ -26,11 +26,7 @@ import jobworld.model.entities.JobOffer;
 public class JobOfferServiceDefault implements JobOfferService{
 private JobOfferDao jobofferRepository;
 	
-	@Transactional(readOnly=true)
-	@Override
-	public JobOffer findbyRegion(String region) {
-		return (JobOffer) this.jobofferRepository.findbyRegion(region); //ho aggiunto il casting dal type di joboffer a region
-	}
+
 
 	@Transactional(readOnly=true)
 	public List<JobOffer> findAll() {

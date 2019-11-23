@@ -42,15 +42,7 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 	public void delete(JobOffer jobOffer) {
 		this.delete(jobOffer);
 	}
-
-	// ci restituisce tutte le offerte di lavoro filtrate per regione
-	@Override
-	@Transactional(readOnly = true)
-	public List<JobOffer> findbyRegion(String region) {
-		return getSession().createQuery("from JobOffer j where j.region='" + region + "'", JobOffer.class)
-				.getResultList();
-	}
-
+	
 	// ci restituisce la lista di tutte le offerte di lavoro presenti sul sito
 	@Override
 	@Transactional(readOnly = true)
@@ -58,17 +50,33 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 		return getSession().createQuery("from JobOffer j", JobOffer.class).getResultList();
 	}
 
+	// ci restituisce tutte le offerte di lavoro filtrate per regione.
+	//caso sottoinsieme del filtro generale
+	/*
+	@Override
+	@Transactional(readOnly = true)
+	public List<JobOffer> findbyRegion(String region) {
+		return getSession().createQuery("from JobOffer j where j.region like concat('%',:regione,'%')", JobOffer.class)
+				.setParameter("regione", region)
+				.getResultList();
+	}
+
 	// ci restituisce la lista delle offerte di lavoro filtrate in base alla
-	// posizione (si puï¿½ applicare a tutto)
+	// posizione (si può applicare a tutto)
+	//caso sottoinsieme del filtro generale
+	
 	@Override
 	@Transactional(readOnly = true)
 	public List<JobOffer> filterByPosition(String keywords) {
-		return getSession().createQuery("from JobOffer j where j.position like '%" + keywords + "%'", JobOffer.class)
+		return getSession().createQuery("from JobOffer j where j.position likeconcat('%',:parola,'%')", JobOffer.class)
+				.setParameter("parola", keywords)
 				.getResultList();
 	}
 
 	// ci restituisce la lista delle offerte di lavoro ordinata per data di
-	// pubblicazione (dalla piï¿½ recente)
+	// pubblicazione (dalla più recente)
+	//caso sottoinsieme del filtro generale
+	/*
 	@Override
 	@Transactional(readOnly = true)
 	public List<JobOffer> orderedByPublicationDate() {
@@ -78,13 +86,17 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 
 	// ci restituisce la lista delle offerte di lavoro filtrata per posizione e
 	// provincia
+	//caso sottoinsieme del filtro generale
+	
 	@Override
 	@Transactional(readOnly = true)
 	public List<JobOffer> filterBypositionAndprovince(String position, String province) {
 		return getSession().createQuery(
-				"from JobOffer j where j.position like '%" + position + "%' and j.province='" + province + "'",
-				JobOffer.class).getResultList();
+				"from JobOffer j where j.position like concat('%',:position,'%') and j.province likeconcat('%',:province,'%') ",
+				JobOffer.class)
+				.setParameter("position",position).setParameter("province",province).getResultList();
 	}
+	*/
 
 	// filtro generale per jobOffer in base a posizione, dati geografici, tipo di
 	// contratto
@@ -110,11 +122,16 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 		if (minExperience == null)
 			minExperience = "";
 		return getSession().createQuery(
-				"from JobOffer j where j.position like '%" + position + "%'and j.region like '%" + region + "%'"
-						+ "and j.province like '%" + province + "%' and j.town like '%" + town + "%' "
-						+ "and j.contractType like '%" + contractType + "%' and j.minEducationLevel like '%"
-						+ minEducationLevel + "%'" + "and j.minExperience like '%" + minExperience + "%'",
-				JobOffer.class).getResultList();
+				"from JobOffer j where j.position like concat('%',:position,'%') and j.region like concat('%',:region,'%') "
+						+ "and j.province like concat('%',:province,'%') and j.town like concat('%',:town,'%') "
+						+ "and j.contractType like concat('%',:contractType,'%') and j.minEducationLevel like "
+						+ "concat('%',:minEducationLevel,'%') and j.minExperience like concat('%',:minExperience,'%')"
+								+ "order by j.publicationDate desc",
+				JobOffer.class)
+				.setParameter("position", position).setParameter("region", region).setParameter("province", province)
+				.setParameter("town", town).setParameter("contractType", contractType)
+				.setParameter("minEducationLevel", minEducationLevel).setParameter("minExperience", minExperience)
+				.getResultList();
 	}
 
 }

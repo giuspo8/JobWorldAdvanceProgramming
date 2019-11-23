@@ -19,7 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import jobworld.controller.SingerController;
+import jobworld.controller.JobOfferController;
 import jobworld.model.entities.Person;
 import jobworld.services.PersonService;
 
@@ -27,9 +27,9 @@ import jobworld.services.PersonService;
 
 @RequestMapping("/JobOffer")
 @Controller
-public class SingerController {
+public class JobOfferController {
 	
-private final Logger logger = LoggerFactory.getLogger(SingerController.class);
+private final Logger logger = LoggerFactory.getLogger(JobOfferController.class);
 	
 	private PersonService personService;
 //	private MessageSource messageSource;
@@ -38,10 +38,10 @@ private final Logger logger = LoggerFactory.getLogger(SingerController.class);
 	public String list(Model uiModel) {
 		logger.info("Listing Person");
 		List<Person> allPerson = this.personService.findAll();
-		uiModel.addAttribute("JobOffer", allPerson);
-		logger.info("No. of JobOffer: " + allPerson.size());
+		uiModel.addAttribute("people", allPerson);
+		logger.info("No. of persons: " + allPerson.size());
 		
-		return "JobOffer/list";
+		return "People/list";
 	}
 	
 	@Autowired
