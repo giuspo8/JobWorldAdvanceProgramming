@@ -52,7 +52,7 @@ public abstract class User {
 	public void setId(long id) {
 		this.id = id;
 	}
-
+	@Column(unique = true)
 	public String getEmail() {
 		return email;
 	}
