@@ -15,6 +15,8 @@
 	href="https://fonts.googleapis.com/css?family=Hepta+Slab&display=swap"
 	rel="stylesheet">
 <title>Home</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/functions.js"/>"></script>
 </head>
 
 <body>
@@ -47,7 +49,7 @@
 				<div class="testo_foto_chi_siamo">
 					<img id="foto_chi_siamo"
 						src="<c:url value="/resources/img/about-us.png" />">
-					<div class="testo_chi_siamo">${j.description}</div>
+					<div class="testo_chi_siamo"><span class="more">${j.description}</span></div>
 				</div>
 			</div>
 		</c:forEach>
@@ -56,7 +58,7 @@
 			<h2>Scopri</h2>
 			<h3>chi siamo:</h3>
 			<div class="testo_foto_chi_siamo">
-				<img id="foto_chi_siamo"
+				<img style="vertical-align:middle" id="foto_chi_siamo"
 					src="<c:url value="/resources/img/about-us.png" />">
 				<div class="testo_chi_siamo">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare

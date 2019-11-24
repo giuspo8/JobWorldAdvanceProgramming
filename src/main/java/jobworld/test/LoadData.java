@@ -65,10 +65,7 @@ public class LoadData {
 					"additionalInfoadditionalInfoadditionalInfoadditionalInfoadditionalInfoadditionalInfo");
 			JobOffer j2 = jobOfferDao.create("Marche", "Ancona", "Ancona",
 					"Assistente alla Direzione settore hotellerie",
-					"Lindbergh hotels � una catena alberghiera che conta 8 strutture, di 4 e 5 stelle, dislocate sul territorio italiano, con un organico di 400 dipendenti. La societ� in questione si occupa della gestione e dello sviluppo delle stesse e del personale in forza, con particolare attenzione verso la propria clientela. In collaborazione con Sida Group ricerca per un "
-							+ "tirocinio formativo previa formazione un Assistente alla Direzione."
-							+ "Il tirocinante, inserito in un contesto di front/back office, dovr� dimostrare di avere ottime capacit� comunicative e di problem - solving, di sapere come si organizza il personale in strutture Leisure e Business, nonch� fornire supporto al cliente. Attraverso questo percorso formativo, il tirocinante dovr� rispondere direttamente alla Direzione e operare secondo gli obiettivi aziendali sempre nel "
-							+ "rispetto delle scadenze prestabilite, con massima riservatezza.",
+					"Lindbergh hotels � una catena alberghiera asodiasdòa asldka sldkj alsdkja lskdj asldj asldkjasdkj",
 					"Stage", "Laurea breve (3 anni)", "Non richiesta", c1);
 			p1.apply(j1);
 			j2.setPublicationDate(LocalDate.of(2018, 10, 22));

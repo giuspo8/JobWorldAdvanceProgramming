@@ -106,6 +106,15 @@ header{
     z-index:-1;
 }
 
+.morelink:hover {
+	font-size: 105%;
+}
+.morecontent span {
+    display: none;
+}
+.morelink {
+    display: inline-block;
+}
 /*Chi siamo*/
 .chi_siamo {
     width:90%;
