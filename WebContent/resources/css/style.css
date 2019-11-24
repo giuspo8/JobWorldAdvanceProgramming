@@ -1,4 +1,198 @@
 @charset "UTF-8";
-.test{
-	background-color:yellow;
+html {
+    font-family: 'Hepta Slab', serif;
+}
+
+header{
+    width:100%;
+    display: block;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top:0;
+    background-color: white;
+    z-index: 4;
+}
+
+.navigation_bar {
+    width: 100%;
+    border-bottom= 1px solid;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.navigation_bar #logo{
+    float:left;
+}
+
+.navigation_bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+}
+
+.navigation_bar li {
+    display:inline;
+    float: right;
+}
+
+
+.navigation_bar a {
+    display: block;
+    color: #333;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navigation_bar a:hover{
+    color: #FFAC15;
+}
+
+
+/* Corpo pagina*/
+
+.corpo {
+    display:block;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+/* SLide*/
+.container_slide {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 30px;
+    padding-bottom: 30px;
+}
+
+.slide_txt {
+    text-align: center;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+.slide_txt h1 {
+    font-family: 'Parisienne', cursive;
+    color: #FFAC15;
+    font-size: 65px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
+    z-index: 3;
+}
+.slide_txt h2 {
+    font-family: 'Parisienne', cursive;
+    font-size: 55px;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+    z-index: 3;
+}
+
+.slide {
+    width:100%;
+    align-content: center;
+}
+.corpo .slide img{
+    -webkit-filter: blur(4px);
+    filter: brightness(50%);
+    width:100%;
+    position:relative;
+    z-index:-1;
+}
+
+/*Chi siamo*/
+.chi_siamo {
+    width:90%;
+    margin:auto;
+    background-color: #F6F6F6;
+    margin-top:30px;
+    margin-bottom:30px;
+    padding-top:20px;
+    padding-bottom: 20px;
+    margin-bottom: 80px;
+}
+
+.chi_siamo h2{
+    font-family: 'Parisienne', cursive;
+    font-size: 50px;
+    color: #FFAC15;
+    text-align: center;
+    margin-bottom:0;
+    padding-bottom:0;
+    border-bottom:0;
+    padding-top: 0;
+    border-top:0;
+    margin-top:18px;
+}
+
+.chi_siamo h3{
+    font-family: 'Parisienne', cursive;
+    text-align: center;
+    font-size: 30px;
+    margin-top:0;
+    padding-top:0;
+    border-top:0;
+}
+
+.testo_foto_chi_siamo{
+}
+
+.chi_siamo #foto_chi_siamo {
+    vertical-align: top;
+    width:45%;
+    height: 40%;
+    margin-left: 4%;
+    margin-right: 1%;
+    display: inline-block;
+}
+.testo_chi_siamo {
+    width: 40%;
+    display: inline-block;
+    margin-left: 2%;
+    margin-right: 4%;
+}
+
+/*Galleria*/
+.conteiner_galleria{
+    width:90%;
+    text-align: center;
+    margin:auto;
+    background-color: #F6F6F6;
+    margin-top:30px;
+    margin-bottom:30px;
+    padding-top:20px;
+    padding-bottom: 20px;
+}
+
+.conteiner_galleria h2{
+    font-family: 'Parisienne', cursive;
+    font-size: 50px;
+    color: #FFAC15;
+    text-align: center;
+    margin-bottom:0;
+    padding-bottom:0;
+    border-bottom:0;
+    padding-top: 0;
+    border-top:0;
+    margin-top:18px;
+}
+
+.conteiner_galleria h3{
+    font-family: 'Parisienne', cursive;
+    text-align: center;
+    font-size: 30px;
+    margin-top:0;
+    padding-top:0;
+    border-top:0;
+}
+
+.conteiner_galleria img{
+    width: 30%;
+    display:inline-block;
 }
