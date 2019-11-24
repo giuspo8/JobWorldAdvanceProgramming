@@ -31,7 +31,7 @@ public class JobOfferController {
 	
 private final Logger logger = LoggerFactory.getLogger(JobOfferController.class);
 	
-	private JobOfferService jobOfferService;
+private JobOfferService jobOfferService;
 //	private MessageSource messageSource;
 	
 	@RequestMapping(value = "list", method = RequestMethod.GET)

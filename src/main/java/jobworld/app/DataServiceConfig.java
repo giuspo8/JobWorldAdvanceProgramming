@@ -80,7 +80,7 @@ public class DataServiceConfig {
 		hibernateProp.put("hibernate.jdbc.batch_size", 10);
 		hibernateProp.put("hibernate.jdbc.fetch_size", 50);
 //		    hibernateProp.put("hibernate.enable_lazy_load_no_trans", true);
-		hibernateProp.put("javax.persistence.schema-generation.database.action", "drop-and-create"); // importante,
+//		hibernateProp.put("javax.persistence.schema-generation.database.action", "drop-and-create"); // importante,
 																										// altrimenti si
 																										// aspetta il DB
 																										// gia`
