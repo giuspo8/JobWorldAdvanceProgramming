@@ -12,8 +12,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import jobworld.model.dao.User;
 import jobworld.model.entities.JobOffer;
+import jobworld.model.entities.User;
 import jobworld.services.JobOfferService;
 @Controller
 public class HomeController {
@@ -54,7 +54,7 @@ private JobOfferService jobOfferService;
 	@RequestMapping(value = "/prova", method = RequestMethod.POST)
 	public String user(@Validated User user, Model model) {
 		System.out.println("User Page Requested");
-		model.addAttribute("userName", user.getUserName());
+		model.addAttribute("userName", user.getEmail());
 		return "user";
 	}
 	
