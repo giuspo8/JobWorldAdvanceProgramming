@@ -6,62 +6,83 @@ html {
 header{
     width:100%;
     display: block;
-    position: -webkit-sticky; /* Safari */
+    position: -webkit-sticky;
     position: sticky;
     top:0;
     background-color: white;
     z-index: 4;
+    -webkit-box-shadow: 0px 9px 4px -6px #ffffff;
 }
 
 .navigation_bar {
-    width: 100%;
+	margin-top: 20px;
+    width: 96%;
     border-bottom= 1px solid;
     box-sizing: border-box;
-    background-color: white;
+    vertical-align: middle;
 }
 
 .navigation_bar #logo{
     float:left;
 }
-
+#logo>img {
+  	max-height:50px;
+  	width: auto;
+  	height: auto;
+  	margin-top: -10px;
+}
 .navigation_bar ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: white;
+    text-align: center;
 }
 
 .navigation_bar li {
-    display:inline;
+    display: block;
+    padding: 14px 6px;
+    display: inline-block;
     float: right;
+    box-sizing: content-box;
 }
 
 
 .navigation_bar a {
-    display: block;
-    color: #333;
-    text-align: center;
-    padding: 14px 16px;
     text-decoration: none;
+    color: #333;
 }
 
 .navigation_bar a:hover{
     color: #FFAC15;
 }
 
+.navigation_bar a.login_btn {
+    padding: 10px 13px;
+    margin-top: -10px;
+    background: #F6F6F6 !important;
+    border: 1px solid;
+    border-radius: 4px;
+    
+}
 
 /* Corpo pagina*/
 
-.corpo {
+.body {
     display:block;
     margin-left: 1%;
     margin-right: 1%;
 }
 
+.container_slide hr {
+	border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
 /* SLide*/
 .container_slide {
-    text-align: center;
     margin-bottom: 30px;
     border-bottom: 30px;
     padding-bottom: 30px;
@@ -98,9 +119,10 @@ header{
     width:100%;
     align-content: center;
 }
-.corpo .slide img{
+.body .slide img{
     -webkit-filter: blur(4px);
-    filter: brightness(50%);
+    filter: brightness(80%);
+    opacity: 0.65;
     width:100%;
     position:relative;
     z-index:-1;

@@ -34,23 +34,19 @@
 	<header>
 		<div class="navigation_bar">
 			<ul>
-				<li id="logo"><img src="img\logo.png"></li>
-				<li><a href="">CONTATTI</a></li>
-				<li><a href="#galleria">GALLERIA</a></li>
-				<li><a href="#chi">CHI SIAMO</a></li>
-				<li><a href="">HOME</a></li>
+				<li id="logo"><img src="<c:url value="resources/img/logo.png"/>"></li>
+				<li><a href="">Registrati</a></li>
+				<li>-</li>
+				<li><a href="" class="login_btn">Accedi</a></li>
 			</ul>
 		</div>
 	</header>
-	<div class="corpo">
+	<div class="body">
 		<div class="container_slide">
 			<div class="slide">
-				<div class="slide_txt">
-					<h2>Hello world!</h2>
-					<h1>The app name is ${appName}</h1>
-				</div>
-				<img src="<c:url value="resources/img/1.jpeg"/>">
+				<img src="<c:url value="resources/img/jobworldhome.jpeg"/>">
 			</div>
+			<hr>
 		</div>		
 		<c:if test="${fn:length(jobOffers) == 0}">Non ci sono offerte da mostrare</c:if>
 		<c:if test="${fn:length(jobOffers) gt 0}">
