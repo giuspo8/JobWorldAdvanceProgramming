@@ -35,12 +35,6 @@ private JobOfferDao jobofferRepository;
 
 	@Transactional
 	@Override
-	public JobOffer create(String firstName, String lastName) {
-		return this.create(firstName, lastName);
-	}
-
-	@Transactional
-	@Override
 	public JobOffer create(String region, String province, String town, String position, String description,
 			String contractType, String minEducationLevel, String minExperience, Company company) {
 		return this.jobofferRepository.create(region,province,town,position,description,contractType,minEducationLevel,minExperience,company);

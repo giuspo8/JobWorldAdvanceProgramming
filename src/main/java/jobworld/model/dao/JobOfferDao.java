@@ -25,6 +25,8 @@ public interface JobOfferDao {
 
 	List<JobOffer> findAll();
 	
+	JobOffer findbyId(long id);
+	
 /*
  	List<JobOffer> findbyRegion(String region);
  		

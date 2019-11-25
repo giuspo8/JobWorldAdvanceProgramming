@@ -35,16 +35,11 @@ private CompanyDao companyRepository;
 		return this.companyRepository.findAll();
 	}
 
-	@Transactional
-	@Override
-	public Company create(String firstName, String lastName) {
-		return this.create(firstName, lastName);
-	}
 
 	@Transactional
 	@Override
-	public Company create(String email, String password, String description, String image) {
-		return this.companyRepository.create(email,password,description, image);
+	public Company create(String name, String email, String password, String description, String image) {
+		return this.companyRepository.create(name,email,password,description, image);
 
 	}
 	

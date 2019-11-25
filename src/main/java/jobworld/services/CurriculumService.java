@@ -22,8 +22,6 @@ public interface CurriculumService {
 	Curriculum create(Person person, String workExperience, String education, String personalSkills,
 			String additionalInfo);
 		
-	Curriculum create(String string, String string2);
-		
 	Curriculum update(Curriculum curriculum);
 		
 		void delete(Curriculum contact);

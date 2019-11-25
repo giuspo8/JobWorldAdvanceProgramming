@@ -17,15 +17,13 @@ import jobworld.model.entities.Company;
  */
 public interface CompanyDao {
 	
-	Company create(String email, String password, String description, String image);
+	Company create(String name, String email, String password, String description, String image);
 
 	Company update(Company company);
 
 	void delete(Company company);
 
 	Company findbyId(long id);
-	
-	
 	
 	List<Company> findAll();
 	

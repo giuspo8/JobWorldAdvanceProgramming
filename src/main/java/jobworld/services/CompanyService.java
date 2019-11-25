@@ -21,12 +21,10 @@ List<Company> findAll();
 	
 Company findbyId(Long id);
 	
-Company create(String email, String password, String description, String image);
-	
-Company create(String string, String string2);
-	
+Company create(String name, String email, String password, String description, String image);
+		
 Company update(Company company);
 	
-	void delete(Company contact);
+void delete(Company contact);
 
 }

@@ -19,9 +19,7 @@ public interface JobOfferService {
 			
 	JobOffer create(String region, String province, String town, String position, String description,
 			String contractType, String minEducationLevel, String minExperience, Company company);
-		
-	JobOffer create(String string, String string2);
-		
+			
 	JobOffer update(JobOffer joboffer);
 		
 		void delete(JobOffer contact);

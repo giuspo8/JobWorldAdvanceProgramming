@@ -21,8 +21,6 @@ Person findById(Long id);
 Person create(String email, String password, String description, String image, String firstName, String secondName,
 		LocalDate birthDate, String number, String interests);
 	
-Person create(String string, String string2);
-	
 Person update(Person person);
 	
 	void delete(Person contact);

@@ -47,7 +47,7 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 	@Override
 	@Transactional(readOnly = true)
 	public List<JobOffer> findAll() {
-		return getSession().createQuery("from JobOffer j", JobOffer.class).getResultList();
+		return getSession().createQuery("from JobOffer j order by j.publicationDate desc", JobOffer.class).getResultList();
 	}
 
 	// ci restituisce tutte le offerte di lavoro filtrate per regione.
@@ -134,4 +134,9 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 				.getResultList();
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public JobOffer findbyId(long id) {
+		return getSession().find(JobOffer.class, id);
+	}
 }

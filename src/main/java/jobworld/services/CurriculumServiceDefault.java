@@ -43,12 +43,6 @@ private CurriculumDao curriculumRepository;
 		return this.curriculumRepository.create(person,workExperience,education,personalSkills,additionalInfo);
 	}
 
-	@Transactional
-	@Override
-	public Curriculum create(String firstName, String lastName) {
-		return this.create(firstName, lastName);
-
-	}
 	
 	@Transactional
 	@Override

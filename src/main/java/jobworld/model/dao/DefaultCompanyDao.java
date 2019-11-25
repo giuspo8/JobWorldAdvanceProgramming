@@ -23,8 +23,8 @@ public class DefaultCompanyDao extends DefaultDao implements CompanyDao {
 
 	@Override
 	@Transactional
-	public Company create(String email, String password, String description, String image) {
-		Company company = new Company(email, password, description, image);
+	public Company create(String name, String email, String password, String description, String image) {
+		Company company = new Company(name, email, password, description, image);
 		this.getSession().save(company);
 		return company;
 	}
@@ -48,6 +48,8 @@ public class DefaultCompanyDao extends DefaultDao implements CompanyDao {
 		return getSession().find(Company.class, id);
 	}
 
+	@Override
+	@Transactional(readOnly=true)
 	public List<Company> findAll() {
 		return getSession().createQuery("from Company c", Company.class)
 				.getResultList();

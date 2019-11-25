@@ -22,13 +22,15 @@ import javax.persistence.OneToMany;
 public class Company extends User {
 
 	private Set<JobOffer> jobOffers = new HashSet<JobOffer>();
+	private String name;
 
 	public Company() {
 		super();
 	}
 
-	public Company(String email, String password, String description, String image) {
+	public Company(String name, String email, String password, String description, String image) {
 		super(email, password, description, image);
+		this.name=name;
 	}
 
 	/**
@@ -47,6 +49,16 @@ public class Company extends User {
 
 	public void setJobOffers(Set<JobOffer> jobOffers) {
 		this.jobOffers = jobOffers;
+	}
+	
+	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
