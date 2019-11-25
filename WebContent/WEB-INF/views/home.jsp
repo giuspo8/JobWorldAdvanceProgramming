@@ -1,3 +1,14 @@
+<!--
+
+ * Home page del Portale JobWorld
+ * 
+ * @author Giuseppe Costantini
+ * @author Simone di Saverio
+ * @author Lorenzo Giuliani
+ * @author Savio Feng
+ * @version 1.0
+ 
+-->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>

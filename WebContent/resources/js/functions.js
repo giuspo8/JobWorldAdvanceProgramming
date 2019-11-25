@@ -1,3 +1,12 @@
+/**
+ * Javascript per la funzione mostra di più/meno
+ * 
+ * @author Giuseppe Costantini
+ * @author Simone di Saverio
+ * @author Lorenzo Giuliani
+ * @author Savio Feng
+ * @version 1.0
+ */
 $(document).ready(function() {
     var char_lim = 400;
     var dots = "...";
