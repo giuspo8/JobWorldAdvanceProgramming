@@ -27,8 +27,8 @@ public class Company extends User {
 		super();
 	}
 
-	public Company(String email, String password, String description) {
-		super(email, password, description);
+	public Company(String email, String password, String description, String image) {
+		super(email, password, description, image);
 	}
 
 	/**

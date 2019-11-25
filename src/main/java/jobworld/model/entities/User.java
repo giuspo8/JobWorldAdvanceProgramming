@@ -20,6 +20,7 @@ public abstract class User {
 	private String email;
 	private String password;
 	private String description;
+	private String image;
 
 	/**
 	 * crea un nuovo utente
@@ -28,15 +29,17 @@ public abstract class User {
 	 * @param password    password dell'account dell'utente
 	 * @param description descrizione dell'utente (che sia descrizione dell'azienda
 	 *                    o della persona)
+	 * @param image       path dell'immagine utente: logo per aziende e foto per utenti
 	 */
 	public User() {
 	}
 
-	public User(String email, String password, String description) {
+	public User(String email, String password, String description, String image) {
 		super();
 		this.email = email;
 		this.password = password;
 		this.description = description;
+		this.image = image;
 	}
 
 	/**
@@ -76,6 +79,15 @@ public abstract class User {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	@Column(unique=true)
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+	public String getImage() {
+		return image;
 	}
 
 }

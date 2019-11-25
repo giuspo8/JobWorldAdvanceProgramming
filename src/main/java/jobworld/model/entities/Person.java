@@ -40,9 +40,9 @@ public class Person extends User {
 		super();
 	}
 
-	public Person(String email, String password, String description, String firstName, String secondName,
+	public Person(String email, String password, String description, String image, String firstName, String secondName,
 			LocalDate birthDate, String number, String interests) {
-		super(email, password, description);
+		super(email, password, description, image);
 		this.firstName = firstName;
 		this.secondName = secondName;
 		this.birthDate = birthDate;

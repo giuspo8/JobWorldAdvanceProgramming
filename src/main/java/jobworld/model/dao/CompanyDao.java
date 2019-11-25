@@ -17,7 +17,7 @@ import jobworld.model.entities.Company;
  */
 public interface CompanyDao {
 	
-	Company create(String email, String password, String description);
+	Company create(String email, String password, String description, String image);
 
 	Company update(Company company);
 

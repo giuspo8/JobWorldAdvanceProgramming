@@ -23,9 +23,9 @@ public class DefaultPersonDao extends DefaultDao implements PersonDao {
 
 	@Override
 	@Transactional
-	public Person create(String email, String password, String description, String firstName, String secondName,
+	public Person create(String email, String password, String description, String image, String firstName, String secondName,
 			LocalDate birthDate, String number, String interests) {
-		Person person = new Person(email, password, description, firstName, secondName, birthDate, number, interests);
+		Person person = new Person(email, password, description, image , firstName, secondName, birthDate, number, interests);
 		this.getSession().save(person);
 		return person;
 	}

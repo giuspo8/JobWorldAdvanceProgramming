@@ -45,9 +45,9 @@ private PersonDao personRepository;
 
 	@Transactional
 	@Override
-	public Person create(String email, String password, String description, String firstName, String secondName,
+	public Person create(String email, String password, String description, String image, String firstName, String secondName,
 			LocalDate birthDate, String number, String interests) {
-		return this.personRepository.create(email,password,description,firstName,secondName,birthDate,number,interests);
+		return this.personRepository.create(email,password,description, image ,firstName,secondName,birthDate,number,interests);
 
 	}
 	

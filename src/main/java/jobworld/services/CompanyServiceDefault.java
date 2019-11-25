@@ -43,8 +43,8 @@ private CompanyDao companyRepository;
 
 	@Transactional
 	@Override
-	public Company create(String email, String password, String description) {
-		return this.companyRepository.create(email,password,description);
+	public Company create(String email, String password, String description, String image) {
+		return this.companyRepository.create(email,password,description, image);
 
 	}
 	

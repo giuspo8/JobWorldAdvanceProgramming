@@ -16,7 +16,7 @@ import jobworld.model.entities.Person;
  */
 public interface PersonDao {
 
-	Person create(String email, String password, String description, String firstName, String secondName,
+	Person create(String email, String password, String description, String image, String firstName, String secondName,
 			LocalDate birthDate, String number, String interests);
 
 	Person update(Person person);

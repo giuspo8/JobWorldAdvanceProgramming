@@ -23,8 +23,8 @@ public class DefaultCompanyDao extends DefaultDao implements CompanyDao {
 
 	@Override
 	@Transactional
-	public Company create(String email, String password, String description) {
-		Company company = new Company(email, password, description);
+	public Company create(String email, String password, String description, String image) {
+		Company company = new Company(email, password, description, image);
 		this.getSession().save(company);
 		return company;
 	}

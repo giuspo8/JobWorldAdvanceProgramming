@@ -21,7 +21,7 @@ List<Company> findAll();
 	
 Company findbyId(Long id);
 	
-Company create(String email, String password, String description);
+Company create(String email, String password, String description, String image);
 	
 Company create(String string, String string2);
 	
