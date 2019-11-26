@@ -11,9 +11,15 @@ header{
     top:0;
     background-color: white;
     z-index: 4;
-    -webkit-box-shadow: 0px 9px 4px -6px #ffffff;
+    -webkit-box-shadow: 0px 9px 4px -6px white;
 }
-
+footer {
+	display: block;
+	width: 100%;
+	background-color: #a2a2a2;
+	color: white;
+	bottom: 0;
+}
 .navigation_bar {
 	margin-top: 20px;
     width: 96%;
@@ -81,7 +87,6 @@ header{
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* SLide*/
 .container_slide {
     margin-bottom: 30px;
     border-bottom: 30px;
@@ -138,7 +143,7 @@ header{
     display: inline-block;
 }
 /*Chi siamo*/
-.chi_siamo {
+.offer {
     width:90%;
     margin:auto;
     background-color: #F6F6F6;
@@ -148,9 +153,15 @@ header{
     padding-bottom: 20px;
     margin-bottom: 80px;
 }
-
-.chi_siamo h2{
-    font-family: 'Parisienne', cursive;
+.offer hr {
+	width: 96%;
+	border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+	
+}
+.offer h2{
     font-size: 50px;
     color: #FFAC15;
     text-align: center;
@@ -162,8 +173,7 @@ header{
     margin-top:18px;
 }
 
-.chi_siamo h3{
-    font-family: 'Parisienne', cursive;
+.offer h3{
     text-align: center;
     font-size: 30px;
     margin-top:0;
@@ -171,33 +181,29 @@ header{
     border-top:0;
 }
 
-.testo_foto_chi_siamo{
-}
-
-.chi_siamo #foto_chi_siamo {
-    vertical-align: top;
-    width:45%;
-    height: 40%;
-    margin-left: 4%;
-    margin-right: 1%;
-    display: inline-block;
-}
-.testo_chi_siamo {
-    width: 40%;
+.general_info_body > .description{
+    width: 65%;
     display: inline-block;
     margin-left: 2%;
     margin-right: 4%;
 }
 
-/*Galleria*/
-.conteiner_galleria{
+.general_info_body > .pic {
+    vertical-align: top;
+    width: 20%;
+    height: auto;
+    margin-left: 4%;
+    margin-right: 1%;
+    display: inline-block;
+}
+.description {
+}
+
+footer > .container{
+	padding-top: 20px;
     width:90%;
     text-align: center;
     margin:auto;
-    background-color: #F6F6F6;
-    margin-top:30px;
-    margin-bottom:30px;
-    padding-top:20px;
     padding-bottom: 20px;
 }
 
@@ -223,7 +229,7 @@ header{
     border-top:0;
 }
 
-.conteiner_galleria img{
+footer > .container img{
     width: 30%;
     display:inline-block;
 }
