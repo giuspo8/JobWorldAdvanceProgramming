@@ -35,7 +35,39 @@ public class LoadData {
 			PersonDao personDao = ctx.getBean(PersonDao.class);
 
 			
-			// Aggiunta dei dati al database gi� fatto
+			// Aggiunta dei dati al database 
+			
+			Person p1= personDao.create("savioFengXiao@email.ii", "password1", null, 
+					"/resources/img/galleria5.jpg", "Xiao", "Feng", LocalDate.of(1995, 8, 11), 
+					"3588975899", "informatica, ingegneria", false);
+			Company c1=companyDao.create("Esselunga", "esselunga@email.it", "essepassword", 
+					"ESSELUNGA è una delle principali catene italiane nel settore della grande distribuzione che opera attraverso una rete di oltre 150 superstore e supermarket in Lombardia, Toscana, Emilia Romagna, Piemonte, Veneto, Liguria e Lazio. La storia di Esselunga inizia nel 1957 con l’apertura a Milano del primo supermercato in Italia; oggi il gruppo, con sede centrale a Limito di Pioltello, nell’hinterland Est di Milano, è costituito da oltre 21.000 dipendenti, fattura oltre 7 miliardi di euro e detiene una quota di mercato pari al 12 %.\r\n" + 
+					"L’azienda è costantemente impegnata nell’innovazione di prodotto, nella salvaguardia dell’ambiente e nella tutela del consumatore: produttore oltre che distributore, Esselunga ha tra i suoi punti di forza i prodotti a proprio marchio e i prodotti freschi.", 
+					"/resources/img/companies/esselunga.jpg", false);
+			JobOffer j1=jobOfferDao.create("Lombardia", "Mantova", "Mantova", "ADDETTO AL REPARTO GASTRONOMIA",
+					"Si richiedono le seguenti caratteristiche:\r\n" + 
+					"· Passione per la lavorazione/trasformazione delle materie prime\r\n" + 
+					"· Propensione all'utilizzo delle attrezzature da taglio e lavorazione\r\n" + 
+					"· Predisposizione al Servizio al Cliente\r\n" + 
+					"· Attitudini alle relazioni interpersonali\r\n" + 
+					"· Capacità di lavorare in team\r\n" + 
+					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
+					"· Precisione e serietà\r\n" + 
+					"· Preferibile esperienza pregressa nel ruolo, seppur di breve durata, maturata preferibilmente in contesti GDO.", 
+					"determinato", "licenza media", "1 anno", c1);
+			
+			Curriculum c11=curriculumDao.create(p1, "01/2005–alla data attuale Assistente amministrativo\r\n" + 
+					"Alma Mater Studiorum\r\n" + 
+					"Via Zamboni 37, 40126 Bologna\r\n" + 
+					"Gestione della documentazione contabile generale, fiscale e tributaria, relazione con la clientela", 
+					"Istituto Magistrale Maria Montessori, Via Mazzini 5 - 40123 Bologna\r\n" + 
+					"▪ espressione italiana\r\n" + 
+					"▪ matematica\r\n" + 
+					"▪ scienze\r\n" + 
+					"▪ lingua straniera (inglese, francese, tedesco)", 
+					"Capacità di lavorare in gruppo maturata in molteplici situazioni in cui era indispensabile la\r\n" + 
+					"collaborazione tra figure diverse e con modalità orarie varie (turni, fine settimana)", 
+					"scrittura creativa: corso presso l'Informagiovani del Comune di Bologna");
 			
 			// phase 2 : navigate data in the database
 			
@@ -59,16 +91,9 @@ public class LoadData {
 			 * jobOfferDao.filterBypositionAndprovince("assistente", "Ancona"); for
 			 * (JobOffer j : jobOffers5) { System.out.println(j); }
 			 */
-			Person p1= personDao.findById(1);
-			Person p2= personDao.findById(2);
-			JobOffer j1=jobOfferDao.findbyId(1);
-			JobOffer j2=jobOfferDao.findbyId(2);
-			JobOffer j3=jobOfferDao.findbyId(3);
-			Company c1=companyDao.findbyId(1);
-			Company c2=companyDao.findbyId(2);
-			Company c3=companyDao.findbyId(3);
-			p2.apply(j2);
-			jobOfferDao.update(j2);
+
+			p1.apply(j1);
+			jobOfferDao.update(j1);
 			List<JobOffer> joboffers6 = jobOfferDao.filter("Marche", "Ancona", "Ancona", "Ass", null, "Laurea",
 					"non rich");
 			for (JobOffer j : joboffers6) {
@@ -80,12 +105,7 @@ public class LoadData {
 				System.out.println(j);
 			}
 
-			System.out.println(curriculumDao.findByPersonId(p1));
-
-			for (JobOffer j : p1.getCandidacies()) {
-				System.out.println(j);
-			}
-			
+		
 
 		} catch (Exception e) {
 //			logger.error("Eccezione: " + e.getMessage());

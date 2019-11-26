@@ -40,8 +40,8 @@ private PersonDao personRepository;
 	@Transactional
 	@Override
 	public Person create(String email, String password, String description, String image, String firstName, String secondName,
-			LocalDate birthDate, String number, String interests) {
-		return this.personRepository.create(email,password,description, image ,firstName,secondName,birthDate,number,interests);
+			LocalDate birthDate, String number, String interests, boolean roleAdmin) {
+		return this.personRepository.create(email,password,description, image ,firstName,secondName,birthDate,number,interests,roleAdmin);
 
 	}
 	

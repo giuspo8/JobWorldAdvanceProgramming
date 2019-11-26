@@ -28,8 +28,8 @@ public class Company extends User {
 		super();
 	}
 
-	public Company(String name, String email, String password, String description, String image) {
-		super(email, password, description, image);
+	public Company(String name, String email, String password, String description, String image, Boolean roleAdmin) {
+		super(email, password, description, image, roleAdmin);
 		this.name=name;
 	}
 

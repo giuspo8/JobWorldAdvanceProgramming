@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Version;
 
 import jobworld.utils.LocalDateAttributeConverter;
 
@@ -43,6 +44,7 @@ public class JobOffer {
 	private Set<Person> candidancies = new HashSet<Person>();
 	private Company company;
 	private LocalDate publicationDate;
+	private int version;
 
 	public JobOffer() {
 		super();
@@ -169,6 +171,17 @@ public class JobOffer {
 
 	public void setCompany(Company company) {
 		this.company = company;
+	}
+	
+	@Version
+	@Column(name = "VERSION")
+	public int getVersion() {
+		return version;
+	}
+	
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 	// aggiorna la lista delle persone candidate per quel lavoro e il numero degli

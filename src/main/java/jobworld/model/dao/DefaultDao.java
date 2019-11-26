@@ -8,16 +8,13 @@ package jobworld.model.dao;
  * @author Savio Feng
  * @version 1.0
  */
-import java.util.List;
+
 
 import javax.annotation.Resource;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import jobworld.model.entities.Company;
-import jobworld.model.entities.Curriculum;
-import jobworld.model.entities.Person;
 
 public abstract class DefaultDao {
 

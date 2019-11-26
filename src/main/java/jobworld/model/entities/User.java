@@ -21,6 +21,7 @@ public abstract class User {
 	private String password;
 	private String description;
 	private String image;
+	private boolean roleAdmin;
 
 	/**
 	 * crea un nuovo utente
@@ -34,12 +35,13 @@ public abstract class User {
 	public User() {
 	}
 
-	public User(String email, String password, String description, String image) {
+	public User(String email, String password, String description, String image, boolean roleAdmin) {
 		super();
 		this.email = email;
 		this.password = password;
 		this.description = description;
 		this.image = image;
+		this.roleAdmin=roleAdmin;
 	}
 
 	/**
@@ -90,4 +92,13 @@ public abstract class User {
 		return image;
 	}
 
+	public boolean getRoleAdmin() {
+		return roleAdmin;
+	}
+
+	public void setRoleAdmin(boolean roleAdmin) {
+		this.roleAdmin = roleAdmin;
+	}
+
+	
 }

@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Version;
 
 /**
  * Classe Curriculum rappresentante il curriculum collegato ad una persona.
@@ -25,6 +26,7 @@ public class Curriculum {
 	private String education;
 	private String personalSkills;
 	private String additionalInfo;
+	private int version;
 
 	public Curriculum() {
 		super();
@@ -102,6 +104,17 @@ public class Curriculum {
 
 	public void setAdditionalInfo(String additionalInfo) {
 		this.additionalInfo = additionalInfo;
+	}
+	
+	@Version
+	@Column(name = "VERSION")
+	public int getVersion() {
+		return version;
+	}
+	
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 	@Override

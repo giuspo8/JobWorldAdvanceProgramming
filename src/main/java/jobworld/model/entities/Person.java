@@ -41,8 +41,8 @@ public class Person extends User {
 	}
 
 	public Person(String email, String password, String description, String image, String firstName, String secondName,
-			LocalDate birthDate, String number, String interests) {
-		super(email, password, description, image);
+			LocalDate birthDate, String number, String interests, Boolean roleAdmin) {
+		super(email, password, description, image, roleAdmin);
 		this.firstName = firstName;
 		this.secondName = secondName;
 		this.birthDate = birthDate;
