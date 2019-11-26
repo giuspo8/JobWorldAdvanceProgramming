@@ -35,7 +35,7 @@ public class LoadData {
 			PersonDao personDao = ctx.getBean(PersonDao.class);
 
 			
-			// Popolamento dei dati nel database 
+			// Popolamento dei dati nel databasee
 //Person			
 			
 
