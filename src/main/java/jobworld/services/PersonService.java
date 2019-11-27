@@ -19,8 +19,7 @@ List<Person> findAll();
 	
 Person findById(Long id);
 	
-Person create(String email, String password, String description, String image, String firstName, String secondName,
-		LocalDate birthDate, String number, String interests, boolean roleAdmin);
+Person create(String firstName, String secondName,LocalDate birthDate, String number, String interests);
 	
 Person update(Person person);
 

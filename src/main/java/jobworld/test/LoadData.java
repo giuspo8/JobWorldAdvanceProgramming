@@ -20,10 +20,16 @@ import jobworld.model.dao.CompanyDao;
 import jobworld.model.dao.CurriculumDao;
 import jobworld.model.dao.JobOfferDao;
 import jobworld.model.dao.PersonDao;
+import jobworld.model.dao.UserDao;
 import jobworld.model.entities.Company;
 import jobworld.model.entities.Curriculum;
 import jobworld.model.entities.JobOffer;
+import jobworld.model.entities.JobOffer.Education;
 import jobworld.model.entities.Person;
+import jobworld.model.entities.User;
+import jobworld.model.entities.User.Role;
+import jobworld.services.JobOfferService;
+import jobworld.services.PersonService;
 public class LoadData {			
 	public static void main(String ...args) {
 //		logger.info("Entrato ...");
@@ -33,17 +39,23 @@ public class LoadData {
 			JobOfferDao jobOfferDao = ctx.getBean(JobOfferDao.class);
 			CurriculumDao curriculumDao = ctx.getBean(CurriculumDao.class);
 			PersonDao personDao = ctx.getBean(PersonDao.class);
-
+			UserDao userDao=ctx.getBean(UserDao.class);
+			
+			PersonService personService= ctx.getBean(PersonService.class);
+			JobOfferService jobOfferService= ctx.getBean(JobOfferService.class);
 			
 			// Popolamento dei dati nel database 
 //Person			
-			Person p1= personDao.create("saviofeng@gmail.it", "c3asa2", null, 
-					"/resources/img/galleria5.jpg", "Savio", "Feng", LocalDate.of(1995, 8, 25), 
-					"3588975899", "informatica, ingegneria", false);
+			Person p1=personDao.create("Savio", "Feng", LocalDate.of(1995, 8, 25), "3588975899", "informatica, ingegneria");
 			
-			Person p2= personDao.create("loris@gmail.it", "passw3ord1", null, 
-					"/resources/img/galleria6.jpg", "Loris", "de luigi", LocalDate.of(1992, 4, 14), 
-					"3388775899", "informatica, ingegneria", false);
+			User u1=userDao.createPersonUser("saviofeng@gmail.it", "c3asa2",null,
+					"/resources/img/galleria5.jpg", Role.BASE, p1);
+			Person p2=personDao.create("Loris", "de luigi",LocalDate.of(1992, 4, 14),"3388775899", "informatica, ingegneria");
+			User u2=userDao.createPersonUser("loris@gmail.it", "passw3ord1", null, 
+					"/resources/img/galleria6.jpg", Role.BASE,p2);
+
+			/*
+			Person p2= personDao.create();
 			
 			Person p3= personDao.create("dark@gmail.it", "pass2word1", null, 
 					"/resources/img/galleria7.jpg", "Marco", "vitale", LocalDate.of(1997, 2, 6), 
@@ -180,12 +192,18 @@ public class LoadData {
 			Person p36= personDao.create("bimbo@gmail.it", "pa4ssw5ord1", null, 
 					"/resources/img/galleria40.jpg", "Loris", "Feng", LocalDate.of(1981, 12, 5), 
 					"3238975899", "Fisica", false);
+					*/
 			
 //Company			
+ 
+ 			Company c1=companyDao.create("Esselunga");
+ 			User u11=userDao.createCompanyUser("esselunga@gmail.it", "esselung23","ESSELUNGA � una delle principali catene italiane nel settore della grande distribuzione che opera attraverso una rete di oltre 150 superstore e supermarket in Lombardia, Toscana, Emilia Romagna, Piemonte, Veneto, Liguria e Lazio. La storia di Esselunga inizia nel 1957 con l’apertura a Milano del primo supermercato in Italia; oggi il gruppo, con sede centrale a Limito di Pioltello, nell’hinterland Est di Milano, è costituito da oltre 21.000 dipendenti, fattura oltre 7 miliardi di euro e detiene una quota di mercato pari al 12 %.\r\n" + 
+					"L’azienda è costantemente impegnata nell’innovazione di prodotto, nella salvaguardia dell’ambiente e nella tutela del consumatore: produttore oltre che distributore, Esselunga ha tra i suoi punti di forza i prodotti a proprio marchio e i prodotti freschi.",
+					"/resources/img/companies/esselunga.jpg", Role.BASE, c1);
+ /*
 			Company c1=companyDao.create("Esselunga", "esselunga@gmail.it", "esselung23", 
-					"ESSELUNGA � una delle principali catene italiane nel settore della grande distribuzione che opera attraverso una rete di oltre 150 superstore e supermarket in Lombardia, Toscana, Emilia Romagna, Piemonte, Veneto, Liguria e Lazio. La storia di Esselunga inizia nel 1957 con l’apertura a Milano del primo supermercato in Italia; oggi il gruppo, con sede centrale a Limito di Pioltello, nell’hinterland Est di Milano, è costituito da oltre 21.000 dipendenti, fattura oltre 7 miliardi di euro e detiene una quota di mercato pari al 12 %.\r\n" + 
-					"L’azienda è costantemente impegnata nell’innovazione di prodotto, nella salvaguardia dell’ambiente e nella tutela del consumatore: produttore oltre che distributore, Esselunga ha tra i suoi punti di forza i prodotti a proprio marchio e i prodotti freschi.", 
-					"/resources/img/companies/esselunga.jpg", false);
+					, 
+					, false);
 			
 			Company c2=companyDao.create("Gamestop", "gamestop@email.it", "gamestop1", 
 					"GameStop Corporation, noto semplicemente come GameStop, � un'azienda statunitense con sede nella citt� di Grapevine. � il pi� grande rivenditore di videogiochi nuovi e usati nel mondo, ma si occupa anche della vendita di accessori per videogiochi, console ed altri apparecchi elettronic", 
@@ -206,7 +224,7 @@ public class LoadData {
 			Company c6=companyDao.create("Alitalia", "alitalia@gmail.it", "alit2", 
 					"Alitalia - Societ� Aerea Italiana S.p.A. in a.s, o semplicemente Alitalia, � la maggiore compagnia aerea, nonch� compagnia aerea di bandiera, dell'Italia, attualmente in amministrazione straordinaria.", 
 					"/resources/img/companies/hp.jpg", false);
-
+*/
 //joboffer
 			JobOffer j1=jobOfferDao.create("Lombardia", "Mantova", "Mantova", "ADDETTO AL REPARTO GASTRONOMIA",
 					"Si richiedono le seguenti caratteristiche:\r\n" + 
@@ -218,7 +236,7 @@ public class LoadData {
 					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
 					"· Precisione e serietà\r\n" + 
 					"· Preferibile esperienza pregressa nel ruolo, seppur di breve durata, maturata preferibilmente in contesti GDO.", 
-					"determinato", "licenza media", "1 anno", c1);
+					"determinato", Education.LICENZA_MEDIA, "1 anno", c1);
 			
 			
 			JobOffer j2=jobOfferDao.create("Lazio", "Roma", "Roma", "Commesso GameStop",
@@ -231,7 +249,7 @@ public class LoadData {
 					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
 					"· Seriet�\r\n" + 
 					"· Capacit� di utilizzo del computer.", 
-					"determinato", "diploma", "6 mesi", c2);
+					"determinato", Education.DIPLOMA_DI_MATURITA, "6 mesi", c1);
 			
 			
 			JobOffer j3=jobOfferDao.create("Campania", "Napoli", "Napoli" , "Programmatore Java",
@@ -244,7 +262,7 @@ public class LoadData {
 					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
 					"· Esperienza di almeno 3 anni\r\n" + 
 					"· Preferibilmente lavoratore remoto", 
-					"determinato", "Laurea in Informatica/Ing Inf.", "3 anni", c4);
+					"determinato", Education.LAUREA_TRIENNALE, "3 anni", c1);
 			
 			
 			
@@ -258,7 +276,7 @@ public class LoadData {
 					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
 					"· Disposto a voli internazionali�\r\n" + 
 					"· Capacit� di comunicazione", 
-					"determinato", "Diploma", "1 anno", c6);
+					"determinato", Education.LAUREA_SPECIALISTICA, "1 anno", c1);
 			
 			//enum a titolo di studio, contratto, esperienza
 			
@@ -272,7 +290,7 @@ public class LoadData {
 					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
 					"· Precisione e serietà\r\n" + 
 					"· Disposto a trasferirsi nella sede centrale a Roma", 
-					"Indeterminato", "Laurea in Ingegneria Meccancia", "indeterminato", c3);
+					"Indeterminato", Education.LAUREA_SPECIALISTICA, "indeterminato",c1);
 			
 			
 			Curriculum c11=curriculumDao.create(p1, "01/2005–alla data attuale Assistente amministrativo\r\n" + 
@@ -311,8 +329,13 @@ public class LoadData {
 			 * (JobOffer j : jobOffers5) { System.out.println(j); }
 			 */
 
-			personDao.apply(p1, j1);
-			personDao.apply(p2, j1);
+			personService.apply(p1, j1);
+			personService.apply(p2, j1);
+			//jobOfferDao.delete(j1);//DA ERRORE 
+			//personService.apply(p1, j3);//DA ERRORE 
+			//personService.delete(p1);//DA ERRORE 
+			//companyDao.delete(c1); //DA ERRORE 
+			/*
 			personDao.apply(p3, j1);
 			personDao.apply(p4, j1);
 			personDao.apply(p5, j1);
@@ -345,7 +368,7 @@ public class LoadData {
 			personDao.apply(p32, j2);
 			personDao.apply(p33, j2);
 			personDao.apply(p34, j2);
-			personDao.apply(p35, j2);
+			personDao.apply(p35, j2);*/
 			//personDao.apply(p1, j1);; lancia un'eccezione perchè non ci si può candidare due volte per la stessa offerta
 				
 			//System.out.println(jobOfferDao.getInterested(j1)); da chiedere

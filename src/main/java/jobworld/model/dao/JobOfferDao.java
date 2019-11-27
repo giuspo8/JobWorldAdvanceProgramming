@@ -4,6 +4,7 @@ import java.util.List;
 
 import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
+import jobworld.model.entities.JobOffer.Education;
 import jobworld.model.entities.Person;
 
 /**
@@ -18,7 +19,7 @@ import jobworld.model.entities.Person;
 public interface JobOfferDao {
 
 	JobOffer create(String region, String province, String town, String position, String description,
-			String contractType, String minEducationLevel, String minExperience, Company company);
+			String contractType, Education minEducationLevel, String minExperience, Company company);
 
 	JobOffer update(JobOffer jobOffer);
 

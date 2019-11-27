@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
 
 /**
@@ -24,9 +23,9 @@ public class DefaultPersonDao extends DefaultDao implements PersonDao {
 
 	@Override
 	@Transactional
-	public Person create(String email, String password, String description, String image, String firstName, String secondName,
-			LocalDate birthDate, String number, String interests, boolean roleAdmin) {
-		Person person = new Person(email, password, description, image , firstName, secondName, birthDate, number, interests, roleAdmin);
+	public Person create(String firstName, String secondName,
+			LocalDate birthDate, String number, String interests) {
+		Person person = new Person(firstName, secondName, birthDate, number, interests);
 		this.getSession().save(person);
 		return person;
 	}
@@ -51,16 +50,12 @@ public class DefaultPersonDao extends DefaultDao implements PersonDao {
 	}
 
 	@Override
+	@Transactional
 	public List<Person> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return getSession().createQuery("from person p", Person.class).getResultList();
 	}
 
-	@Override
-	public void apply(Person person, JobOffer joboffer) {
-		person.apply(joboffer);
-		this.update(person);
-	}
+
+
 	
-
 }

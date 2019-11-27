@@ -19,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 import jobworld.model.dao.JobOfferDao;
 import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
+import jobworld.model.entities.JobOffer.Education;
+import jobworld.model.entities.Person;
 
 
 @Transactional
@@ -36,7 +38,7 @@ private JobOfferDao jobofferRepository;
 	@Transactional
 	@Override
 	public JobOffer create(String region, String province, String town, String position, String description,
-			String contractType, String minEducationLevel, String minExperience, Company company) {
+			String contractType, Education minEducationLevel, String minExperience, Company company) {
 		return this.jobofferRepository.create(region,province,town,position,description,contractType,minEducationLevel,minExperience,company);
 
 	}
@@ -58,4 +60,5 @@ private JobOfferDao jobofferRepository;
 	public void setJobOfferRepository(JobOfferDao jobofferRepository) {
 		this.jobofferRepository = jobofferRepository;
 	}
+
 }

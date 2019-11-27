@@ -21,7 +21,7 @@ List<Company> findAll();
 	
 Company findbyId(Long id);
 	
-Company create(String name, String email, String password, String description, String image, boolean roleAdmin);
+Company create(String name);
 		
 Company update(Company company);
 	

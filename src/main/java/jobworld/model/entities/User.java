@@ -1,9 +1,12 @@
 package jobworld.model.entities;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 
 /**
  * Classe User rappresentante un Utente ed i suoi attributi/metodi.
@@ -14,14 +17,19 @@ import javax.persistence.MappedSuperclass;
  * @author Savio Feng
  * @version 1.0
  */
-@MappedSuperclass//creare entità a parte (1 a 1 con company e person)
-public abstract class User {
+
+
+@Entity
+public class User {
+	public enum Role{ADMIN,BASE};
 	private long id;
 	private String email;
 	private String password;//fare cifratura, nel database no password in chiaro
 	private String description;
 	private String image;
-	private boolean roleAdmin;//descrivere come enumerazione
+	private Role role;
+	private Company company;
+	private Person person;
 
 	/**
 	 * crea un nuovo utente
@@ -35,14 +43,28 @@ public abstract class User {
 	public User() {
 	}
 
-	public User(String email, String password, String description, String image, boolean roleAdmin) {
+
+	public User(String email, String password, String description, String image, Role role, Company company) {
 		super();
 		this.email = email;
 		this.password = password;
 		this.description = description;
 		this.image = image;
-		this.roleAdmin=roleAdmin;
+		this.role = role;
+		this.company = company;
 	}
+
+
+	public User(String email, String password, String description, String image, Role role, Person person) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.description = description;
+		this.image = image;
+		this.role = role;
+		this.person = person;
+	}
+
 
 	/**
 	* Metodi setters/getters e definizione delle tabelle con le relative relazioni
@@ -50,6 +72,7 @@ public abstract class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="USER_ID")
 	public long getId() {
 		return id;
 	}
@@ -88,16 +111,43 @@ public abstract class User {
 		this.image = image;
 	}
 	
+	@Column(length = 1000)
 	public String getImage() {
 		return image;
 	}
 
-	public boolean getRoleAdmin() {
-		return roleAdmin;
+
+	public Role getRole() {
+		return role;
 	}
 
-	public void setRoleAdmin(boolean roleAdmin) {
-		this.roleAdmin = roleAdmin;
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	@OneToOne
+	@JoinColumn(name = "COMPANY_ID", updatable=false)
+	public Company getCompany() {
+		return company;
+	}
+
+
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+
+	@OneToOne
+	@JoinColumn(name = "PERSON_ID", updatable=false)
+	public Person getPerson() {
+		return person;
+	}
+
+
+
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 
 	

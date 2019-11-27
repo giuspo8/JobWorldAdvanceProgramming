@@ -18,6 +18,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import jobworld.utils.LocalDateAttributeConverter;
 
@@ -31,8 +33,12 @@ import jobworld.utils.LocalDateAttributeConverter;
  * @author Savio Feng
  * @version 1.0
  */
+
+
+
 @Entity
 public class JobOffer {
+	public enum Education{LAUREA_SPECIALISTICA,LAUREA_TRIENNALE,DIPLOMA_DI_MATURITA,LICENZA_MEDIA,SENZA_STUDI}
 	private long id;
 	private String region;
 	private String province;
@@ -40,7 +46,7 @@ public class JobOffer {
 	private String position;
 	private String description;
 	private String contractType;
-	private String minEducationLevel;
+	private Education minEducationLevel;
 	private String minExperience;
 	private Set<Person> candidancies = new HashSet<Person>();
 	private Company company;
@@ -51,8 +57,10 @@ public class JobOffer {
 		super();
 	}
 
+	
 	public JobOffer(String region, String province, String town, String position, String description,
-			String contractType, String minEducationLevel, String minExperience, Company company) {
+			String contractType, Education minEducationLevel, String minExperience,
+			Company company) {
 		super();
 		this.region = region;
 		this.province = province;
@@ -62,11 +70,14 @@ public class JobOffer {
 		this.contractType = contractType;
 		this.minEducationLevel = minEducationLevel;
 		this.minExperience = minExperience;
+		this.candidancies = candidancies;
 		this.company = company;
-		this.publicationDate = LocalDate.now();
+		this.publicationDate = publicationDate;
 	}
 
-	
+
+
+
 	/**
 	* Metodi setters/getters e definizione delle tabelle con le relative relazioni
 	 */	
@@ -129,13 +140,16 @@ public class JobOffer {
 		this.contractType = contractType;
 	}
 
-	public String getMinEducationLevel() {
+
+	public Education getMinEducationLevel() {
 		return minEducationLevel;
 	}
 
-	public void setMinEducationLevel(String minEducationLevel) {
+
+	public void setMinEducationLevel(Education minEducationLevel) {
 		this.minEducationLevel = minEducationLevel;
 	}
+
 
 	public String getMinExperience() {
 		return minExperience;
@@ -148,7 +162,7 @@ public class JobOffer {
 
 	//campo data candidatura
 	@ManyToMany(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "candidacies", joinColumns = @JoinColumn(name = "JOB_OFFER_ID"), inverseJoinColumns = @JoinColumn(name = "PERSON_ID"))
+	@JoinTable(name = "candidacies", joinColumns = @JoinColumn(name = "JOB_OFFER_ID", updatable=false), inverseJoinColumns = @JoinColumn(name = "PERSON_ID", updatable=false))
 	public Set<Person> getCandidancies() {
 		return candidancies;
 	}
