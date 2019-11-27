@@ -38,7 +38,7 @@ public class DefaultCompanyDao extends DefaultDao implements CompanyDao {
 	@Override
 	@Transactional
 	public void delete(Company company) {
-		this.delete(company);
+		this.getSession().delete(company);
 	}
 
 	@Override

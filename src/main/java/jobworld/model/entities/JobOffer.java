@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -16,6 +17,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
+
 
 import jobworld.utils.LocalDateAttributeConverter;
 
@@ -40,7 +42,6 @@ public class JobOffer {
 	private String contractType;
 	private String minEducationLevel;
 	private String minExperience;
-	private int interested;
 	private Set<Person> candidancies = new HashSet<Person>();
 	private Company company;
 	private LocalDate publicationDate;
@@ -63,7 +64,6 @@ public class JobOffer {
 		this.minExperience = minExperience;
 		this.company = company;
 		this.publicationDate = LocalDate.now();
-		this.interested = 0;
 	}
 
 	
@@ -145,15 +145,9 @@ public class JobOffer {
 		this.minExperience = minExperience;
 	}
 
-	public int getInterested() {
-		return interested;
-	}
 
-	public void setInterested(int interested) {
-		this.interested = interested;
-	}
-
-	@ManyToMany(fetch = FetchType.EAGER)
+	//campo data candidatura
+	@ManyToMany(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "candidacies", joinColumns = @JoinColumn(name = "JOB_OFFER_ID"), inverseJoinColumns = @JoinColumn(name = "PERSON_ID"))
 	public Set<Person> getCandidancies() {
 		return candidancies;
@@ -184,18 +178,12 @@ public class JobOffer {
 		this.version = version;
 	}
 
-	// aggiorna la lista delle persone candidate per quel lavoro e il numero degli
-	// interessati ovviamente
-	public void applying(Person p1) {
-		candidancies.add(p1);
-		interested++;
-	}
 
 	@Override
 	public String toString() {
 		return "JobOffer [id=" + id + ", region=" + region + ", province=" + province + ", town=" + town + ", position="
 				+ position + ", description=" + description + ", contractType=" + contractType + ", minEducationLevel="
-				+ minEducationLevel + ", minExperience=" + minExperience + ", interested=" + interested
+				+ minEducationLevel + ", minExperience=" + minExperience 
 				+ ", number of candidancies=" + candidancies.size() + ", company=" + company.getId()
 				+ ", publicationDate=" + publicationDate + "]";
 	}

@@ -40,7 +40,7 @@ public class DefaultCurriculumDao extends DefaultDao implements CurriculumDao {
 	@Override
 	@Transactional
 	public void delete(Curriculum curriculum) {
-		this.delete(curriculum);
+		this.getSession().delete(curriculum);
 	}
 
 	// data una persona ci restituisce il curriculum di quella persona

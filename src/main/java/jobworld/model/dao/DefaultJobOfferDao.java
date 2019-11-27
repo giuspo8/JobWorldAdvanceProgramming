@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
+import jobworld.model.entities.Person;
 
 /**
  * Implementazione dell'interfaccia JobOfferDao
@@ -36,11 +37,13 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 		JobOffer merged = (JobOffer) this.getSession().merge(jobOffer);
 		return merged;
 	}
+	
+
 
 	@Override
 	@Transactional
 	public void delete(JobOffer jobOffer) {
-		this.delete(jobOffer);
+		this.getSession().delete(jobOffer);
 	}
 	
 	// ci restituisce la lista di tutte le offerte di lavoro presenti sul sito
@@ -139,4 +142,11 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 	public JobOffer findbyId(long id) {
 		return getSession().find(JobOffer.class, id);
 	}
+
+	@Override
+	public Long getInterested(JobOffer jobOffer) {
+		return getSession().createQuery("select count(p) from Person p, JobOffer j where j.id=:jid", Long.class)
+				.setParameter("jid",jobOffer.getId()).getSingleResult();
+	}
+
 }

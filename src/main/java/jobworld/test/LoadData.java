@@ -183,28 +183,28 @@ public class LoadData {
 			
 //Company			
 			Company c1=companyDao.create("Esselunga", "esselunga@gmail.it", "esselung23", 
-					"ESSELUNGA è una delle principali catene italiane nel settore della grande distribuzione che opera attraverso una rete di oltre 150 superstore e supermarket in Lombardia, Toscana, Emilia Romagna, Piemonte, Veneto, Liguria e Lazio. La storia di Esselunga inizia nel 1957 con lâ€™apertura a Milano del primo supermercato in Italia; oggi il gruppo, con sede centrale a Limito di Pioltello, nellâ€™hinterland Est di Milano, Ã¨ costituito da oltre 21.000 dipendenti, fattura oltre 7 miliardi di euro e detiene una quota di mercato pari al 12 %.\r\n" + 
+					"ESSELUNGA ï¿½ una delle principali catene italiane nel settore della grande distribuzione che opera attraverso una rete di oltre 150 superstore e supermarket in Lombardia, Toscana, Emilia Romagna, Piemonte, Veneto, Liguria e Lazio. La storia di Esselunga inizia nel 1957 con lâ€™apertura a Milano del primo supermercato in Italia; oggi il gruppo, con sede centrale a Limito di Pioltello, nellâ€™hinterland Est di Milano, Ã¨ costituito da oltre 21.000 dipendenti, fattura oltre 7 miliardi di euro e detiene una quota di mercato pari al 12 %.\r\n" + 
 					"Lâ€™azienda Ã¨ costantemente impegnata nellâ€™innovazione di prodotto, nella salvaguardia dellâ€™ambiente e nella tutela del consumatore: produttore oltre che distributore, Esselunga ha tra i suoi punti di forza i prodotti a proprio marchio e i prodotti freschi.", 
 					"/resources/img/companies/esselunga.jpg", false);
 			
 			Company c2=companyDao.create("Gamestop", "gamestop@email.it", "gamestop1", 
-					"GameStop Corporation, noto semplicemente come GameStop, è un'azienda statunitense con sede nella città di Grapevine. È il più grande rivenditore di videogiochi nuovi e usati nel mondo, ma si occupa anche della vendita di accessori per videogiochi, console ed altri apparecchi elettronic", 
+					"GameStop Corporation, noto semplicemente come GameStop, ï¿½ un'azienda statunitense con sede nella cittï¿½ di Grapevine. ï¿½ il piï¿½ grande rivenditore di videogiochi nuovi e usati nel mondo, ma si occupa anche della vendita di accessori per videogiochi, console ed altri apparecchi elettronic", 
 					"/resources/img/companies/gamestop.jpg", false);
 			
 			Company c3=companyDao.create("Sony", "sony@gmail.it", "sony22", 
-					"La Sony Corporation, è una multinazionale conglomerata giapponese fondata nel 1946 con sede a Minato, quartiere di Tokyo. Sony si concentra principalmente sull'elettronica di consumo, sui videogiochi, intrattenimento e servizi finanziari.", 
+					"La Sony Corporation, ï¿½ una multinazionale conglomerata giapponese fondata nel 1946 con sede a Minato, quartiere di Tokyo. Sony si concentra principalmente sull'elettronica di consumo, sui videogiochi, intrattenimento e servizi finanziari.", 
 					"/resources/img/companies/sony.jpg", false);
 			
 			Company c4=companyDao.create("Samsung", "samsung@email.it", "samsun1sg", 
-					"Samsung è un'azienda multinazionale fondata il 1º marzo 1938 da Lee Byung-chul nella città di Taegu, nell'attuale Corea del Sud. Comprende filiali in 58 paesi nonché numerose aziende affiliate, la maggior parte con il nome madre Samsung, ed è il maggior conglomerato sudcoreano", 
+					"Samsung ï¿½ un'azienda multinazionale fondata il 1ï¿½ marzo 1938 da Lee Byung-chul nella cittï¿½ di Taegu, nell'attuale Corea del Sud. Comprende filiali in 58 paesi nonchï¿½ numerose aziende affiliate, la maggior parte con il nome madre Samsung, ed ï¿½ il maggior conglomerato sudcoreano", 
 					"/resources/img/companies/samsung.jpg", false);
 			
 			Company c5=companyDao.create("HP", "hp@gmail.it", "hpack", 
-					"La Hewlett-Packard è una multinazionale statunitense dell'informatica attiva sia nel mercato dell'hardware che in quello del software e dei servizi collegati all'informatica. Ad inizio 2011 era il primo produttore mondiale di computer portatili per unità vendute.", 
+					"La Hewlett-Packard ï¿½ una multinazionale statunitense dell'informatica attiva sia nel mercato dell'hardware che in quello del software e dei servizi collegati all'informatica. Ad inizio 2011 era il primo produttore mondiale di computer portatili per unitï¿½ vendute.", 
 					"/resources/img/companies/hp.jpg", false);
 			
 			Company c6=companyDao.create("Alitalia", "alitalia@gmail.it", "alit2", 
-					"Alitalia - Società Aerea Italiana S.p.A. in a.s, o semplicemente Alitalia, è la maggiore compagnia aerea, nonché compagnia aerea di bandiera, dell'Italia, attualmente in amministrazione straordinaria.", 
+					"Alitalia - Societï¿½ Aerea Italiana S.p.A. in a.s, o semplicemente Alitalia, ï¿½ la maggiore compagnia aerea, nonchï¿½ compagnia aerea di bandiera, dell'Italia, attualmente in amministrazione straordinaria.", 
 					"/resources/img/companies/hp.jpg", false);
 
 //joboffer
@@ -221,23 +221,23 @@ public class LoadData {
 					"determinato", "licenza media", "1 anno", c1);
 			
 			
-			JobOffer j2=jobOfferDao.create("Milano", "Roma", "Bologna", "Commesso GameStop",
+			JobOffer j2=jobOfferDao.create("Lazio", "Roma", "Roma", "Commesso GameStop",
 					"Si richiedono le seguenti caratteristiche:\r\n" + 
 					"Â· Passione per i giochi e esperienza videoludica\r\n" + 
-					"Â· Gentilezza e cordialità\r\n" + 
+					"Â· Gentilezza e cordialitï¿½\r\n" + 
 					"Â· Predisposizione al Servizio al Cliente\r\n" + 
 					"Â· Attitudini alle relazioni interpersonali\r\n" + 
 					"Â· CapacitÃ  di sopportare lo stress\r\n" + 
 					"Â· Ambizione e predisposizione al miglioramento continuo\r\n" + 
-					"Â· Serietà \r\n" + 
-					"Â· Capacità di utilizzo del computer.", 
+					"Â· Serietï¿½\r\n" + 
+					"Â· Capacitï¿½ di utilizzo del computer.", 
 					"determinato", "diploma", "6 mesi", c2);
 			
 			
-			JobOffer j3=jobOfferDao.create("Lombardia", "Napoli", "Roma" , "Programmatore Java",
+			JobOffer j3=jobOfferDao.create("Campania", "Napoli", "Napoli" , "Programmatore Java",
 					"Si richiedono le seguenti caratteristiche:\r\n" + 
 					"Â· Conoscenza del linguaggio di programmazione Java\r\n" + 
-					"Â· Capacità di adattamento \r\n" + 
+					"Â· Capacitï¿½ di adattamento \r\n" + 
 					"Â· Conoscensza della lingua inglese\r\n" + 
 					"Â· Voglia di crescere e imparare\r\n" + 
 					"Â· CapacitÃ  di lavorare in team\r\n" + 
@@ -248,7 +248,7 @@ public class LoadData {
 			
 			
 			
-			JobOffer j4=jobOfferDao.create("Puglia", "Abruzzo", "Mantova", "Assisente di volo",
+			JobOffer j4=jobOfferDao.create("Puglia", "Bari", "Bari", "Assisente di volo",
 					"Si richiedono le seguenti caratteristiche:\r\n" + 
 					"Â· Esperienza di 3 anni\r\n" + 
 					"Â· Conoscenza dell'inglese\r\n" + 
@@ -256,13 +256,13 @@ public class LoadData {
 					"Â· Gentilezza e empatia\r\n" + 
 					"Â· CapacitÃ  di lavorare in team\r\n" + 
 					"Â· Ambizione e predisposizione al miglioramento continuo\r\n" + 
-					"Â· Disposto a voli internazionali \r\n" + 
-					"Â· Capacità di comunicazione", 
+					"Â· Disposto a voli internazionaliï¿½\r\n" + 
+					"Â· Capacitï¿½ di comunicazione", 
 					"determinato", "Diploma", "1 anno", c6);
 			
+			//enum a titolo di studio, contratto, esperienza
 			
-			
-			JobOffer j5=jobOfferDao.create("Roma", "Firenze", "Ancona", "Programmatore Cad",
+			JobOffer j5=jobOfferDao.create("Marche", "Ancona", "Jesi", "Programmatore Cad",
 					"Si richiedono le seguenti caratteristiche:\r\n" + 
 					"Â· Esperienza di almeno 5 anni con AutoCAD\r\n" + 
 					"Â· Autonomia\r\n" + 
@@ -311,10 +311,48 @@ public class LoadData {
 			 * (JobOffer j : jobOffers5) { System.out.println(j); }
 			 */
 
-			p1.apply(j1);
-			jobOfferDao.update(j1);
-			List<JobOffer> joboffers6 = jobOfferDao.filter("Marche", "Ancona", "Ancona", "Ass", null, "Laurea",
-					"non rich");
+			personDao.apply(p1, j1);
+			personDao.apply(p2, j1);
+			personDao.apply(p3, j1);
+			personDao.apply(p4, j1);
+			personDao.apply(p5, j1);
+			personDao.apply(p6, j1);
+			personDao.apply(p7, j1);
+			personDao.apply(p8, j1);
+			personDao.apply(p9, j1);
+			personDao.apply(p10, j1);
+			personDao.apply(p11, j1);
+			personDao.apply(p12, j1);
+			personDao.apply(p13, j1);
+			personDao.apply(p14, j1);
+			personDao.apply(p15, j1);
+			personDao.apply(p16, j1);
+			personDao.apply(p17, j1);
+			personDao.apply(p18, j1);
+			personDao.apply(p19, j1);
+			personDao.apply(p20, j1);
+			personDao.apply(p21, j1);
+			personDao.apply(p22, j1);
+			personDao.apply(p23, j1);
+			personDao.apply(p24, j2);
+			personDao.apply(p25, j2);
+			personDao.apply(p26, j2);
+			personDao.apply(p27, j2);
+			personDao.apply(p28, j2);
+			personDao.apply(p29, j2);
+			personDao.apply(p30, j2);
+			personDao.apply(p31, j2);
+			personDao.apply(p32, j2);
+			personDao.apply(p33, j2);
+			personDao.apply(p34, j2);
+			personDao.apply(p35, j2);
+			//personDao.apply(p1, j1);; lancia un'eccezione perchÃ¨ non ci si puÃ² candidare due volte per la stessa offerta
+				
+			//System.out.println(jobOfferDao.getInterested(j1)); da chiedere
+			
+			
+			List<JobOffer> joboffers6 = jobOfferDao.filter("Lazio", "Roma", "Roma", null, null, null,
+					null);//assert
 			for (JobOffer j : joboffers6) {
 				System.out.println(j);
 			}
@@ -323,6 +361,12 @@ public class LoadData {
 			for (JobOffer j : joboffers7) {
 				System.out.println(j);
 			}
+			
+			//curriculumDao.delete(c11);
+			
+			//jobOfferDao.delete(j1);
+			//companyDao.delete(c1);
+			System.out.println(jobOfferDao.getInterested(j1));
 
 		
 

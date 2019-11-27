@@ -16,13 +16,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jobworld.model.dao.JobOfferDao;
 import jobworld.model.dao.PersonDao;
+import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
 
 @Transactional
 @Service("personService")
 public class PersonServiceDefault implements PersonService{
 private PersonDao personRepository;
+private JobOfferDao jobOfferRepository;
 	
 
 
@@ -61,5 +64,11 @@ private PersonDao personRepository;
 	@Autowired
 	public void setSingerRepository(PersonDao personRepository) {
 		this.personRepository = personRepository;
+	}
+
+	@Override
+	public void apply(Person person, JobOffer joboffer) {
+		this.personRepository.apply(person, joboffer);//fare apply qui
+
 	}
 }

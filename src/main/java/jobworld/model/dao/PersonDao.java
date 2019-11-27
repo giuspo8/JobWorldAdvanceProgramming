@@ -3,6 +3,7 @@ package jobworld.model.dao;
 import java.time.LocalDate;
 import java.util.List;
 
+import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
 
 /**
@@ -26,4 +27,6 @@ public interface PersonDao {
 	Person findById(long id);
 	
 	List<Person> findAll();
+	
+	void apply(Person person, JobOffer joboffer);
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
+import jobworld.model.entities.Person;
 
 /**
  * interfaccia JobOfferDao
@@ -26,6 +27,8 @@ public interface JobOfferDao {
 	List<JobOffer> findAll();
 	
 	JobOffer findbyId(long id);
+	
+	Long getInterested(JobOffer jobOffer);
 	
 /*
  	List<JobOffer> findbyRegion(String region);

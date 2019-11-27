@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
 
 /**
@@ -40,7 +41,7 @@ public class DefaultPersonDao extends DefaultDao implements PersonDao {
 	@Override
 	@Transactional
 	public void delete(Person person) {
-		this.delete(person);
+		this.getSession().delete(person);
 	}
 
 	@Override
@@ -54,5 +55,12 @@ public class DefaultPersonDao extends DefaultDao implements PersonDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void apply(Person person, JobOffer joboffer) {
+		person.apply(joboffer);
+		this.update(person);
+	}
+	
 
 }

@@ -12,6 +12,7 @@ package jobworld.services;
 import java.time.LocalDate;
 import java.util.List;
 
+import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
 public interface PersonService {
 List<Person> findAll();
@@ -22,7 +23,9 @@ Person create(String email, String password, String description, String image, S
 		LocalDate birthDate, String number, String interests, boolean roleAdmin);
 	
 Person update(Person person);
+
+void apply(Person person, JobOffer joboffer);
 	
-	void delete(Person contact);
+void delete(Person contact);
 
 }

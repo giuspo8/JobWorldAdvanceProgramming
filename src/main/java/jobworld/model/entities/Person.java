@@ -117,7 +117,6 @@ public class Person extends User {
 	// aggiunge quell'offerta di lavoro alla lista delle candidature
 	public void apply(JobOffer jobOffer) {
 		candidacies.add(jobOffer);
-		jobOffer.applying(this);
 	}
 
 }

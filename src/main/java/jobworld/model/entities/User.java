@@ -14,14 +14,14 @@ import javax.persistence.MappedSuperclass;
  * @author Savio Feng
  * @version 1.0
  */
-@MappedSuperclass
+@MappedSuperclass//creare entità a parte (1 a 1 con company e person)
 public abstract class User {
 	private long id;
 	private String email;
-	private String password;
+	private String password;//fare cifratura, nel database no password in chiaro
 	private String description;
 	private String image;
-	private boolean roleAdmin;
+	private boolean roleAdmin;//descrivere come enumerazione
 
 	/**
 	 * crea un nuovo utente
