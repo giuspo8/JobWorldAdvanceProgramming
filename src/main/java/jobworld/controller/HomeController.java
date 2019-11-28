@@ -42,6 +42,9 @@ private JobOfferService jobOfferService;
 		String appName = "WebApp";
 		model.addAttribute("appName", appName);
 		List<JobOffer> allJobOffers = this.jobOfferService.findAll();
+		for (JobOffer j : allJobOffers) {
+			System.out.println(j);
+		}
 		model.addAttribute("jobOffers", allJobOffers);
 		return "home";
 	}

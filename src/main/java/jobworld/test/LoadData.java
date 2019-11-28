@@ -15,7 +15,6 @@ import java.util.List;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import jobworld.app.TestConfig;
 import jobworld.model.dao.CompanyDao;
 import jobworld.model.dao.CurriculumDao;
 import jobworld.model.dao.JobOfferDao;
@@ -34,7 +33,6 @@ public class LoadData {
 	public static void main(String ...args) {
 //		logger.info("Entrato ...");
 		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(TestConfig.class)) {
-
 			CompanyDao companyDao = ctx.getBean(CompanyDao.class);
 			JobOfferDao jobOfferDao = ctx.getBean(JobOfferDao.class);
 			CurriculumDao curriculumDao = ctx.getBean(CurriculumDao.class);
@@ -250,7 +248,8 @@ public class LoadData {
 					"· Seriet�\r\n" + 
 					"· Capacit� di utilizzo del computer.", 
 					"determinato", Education.DIPLOMA_DI_MATURITA, "6 mesi", c1);
-			
+			j2.setPublicationDate(j2.getPublicationDate() + 10000);
+			jobOfferDao.update(j2);
 			
 			JobOffer j3=jobOfferDao.create("Campania", "Napoli", "Napoli" , "Programmatore Java",
 					"Si richiedono le seguenti caratteristiche:\r\n" + 
@@ -374,16 +373,15 @@ public class LoadData {
 			//System.out.println(jobOfferDao.getInterested(j1)); da chiedere
 			
 			
-			List<JobOffer> joboffers6 = jobOfferDao.filter("Lazio", "Roma", "Roma", null, null, null,
-					null);//assert
+			List<JobOffer> joboffers6 = jobOfferDao.findAll();//assert
 			for (JobOffer j : joboffers6) {
 				System.out.println(j);
 			}
-			
+			/*
 			List<JobOffer> joboffers7 = jobOfferDao.filter(null, null, null, null, null, null,null);
 			for (JobOffer j : joboffers7) {
 				System.out.println(j);
-			}
+			}*/
 			
 			//curriculumDao.delete(c11);
 			

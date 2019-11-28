@@ -21,7 +21,7 @@ import javax.persistence.Version;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import jobworld.utils.LocalDateAttributeConverter;
+import jobworld.utils.TimestampAttributeConverter;
 
 /**
  * Classe JobOffer rappresentante una Offerta di Lavoro ed i suoi
@@ -50,7 +50,8 @@ public class JobOffer {
 	private String minExperience;
 	private Set<Person> candidancies = new HashSet<Person>();
 	private Company company;
-	private LocalDate publicationDate;
+	private long publicationDate;
+	private long expiringDate;
 	private int version;
 
 	public JobOffer() {
@@ -61,7 +62,6 @@ public class JobOffer {
 	public JobOffer(String region, String province, String town, String position, String description,
 			String contractType, Education minEducationLevel, String minExperience,
 			Company company) {
-		super();
 		this.region = region;
 		this.province = province;
 		this.town = town;
@@ -70,9 +70,8 @@ public class JobOffer {
 		this.contractType = contractType;
 		this.minEducationLevel = minEducationLevel;
 		this.minExperience = minExperience;
-		this.candidancies = candidancies;
 		this.company = company;
-		this.publicationDate = publicationDate;
+		this.publicationDate = System.currentTimeMillis();
 	}
 
 
@@ -202,12 +201,12 @@ public class JobOffer {
 				+ ", publicationDate=" + publicationDate + "]";
 	}
 
-	@Convert(converter = LocalDateAttributeConverter.class)
-	public LocalDate getPublicationDate() {
+	@Convert(converter = TimestampAttributeConverter.class)
+	public Long getPublicationDate() {
 		return publicationDate;
 	}
 
-	public void setPublicationDate(LocalDate publicationDate) {
+	public void setPublicationDate(Long publicationDate) {
 		this.publicationDate = publicationDate;
 	}
 

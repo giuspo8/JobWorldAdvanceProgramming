@@ -20,16 +20,24 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+
+import jobworld.test.LoadData;
+import jobworld.test.TestConfig;
+
 @Configuration
-@ComponentScan(basePackages = {"jobworld.model","jobworld.services"})
+@ComponentScan(basePackages = {"jobworld.model","jobworld.services"},
+excludeFilters  = {@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {TestConfig.class, LoadData.class})})
 @EnableTransactionManagement
 @PropertySource("classpath:dbconfig.properties")
 public class DataServiceConfig {
@@ -75,7 +83,7 @@ public class DataServiceConfig {
 		hibernateProp.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 		hibernateProp.put("hibernate.format_sql", true);
 		hibernateProp.put("hibernate.use_sql_comments", true);
-		hibernateProp.put("hibernate.show_sql", true);
+		hibernateProp.put("hibernate.show_sql", false);
 		hibernateProp.put("hibernate.max_fetch_depth", 3);
 		hibernateProp.put("hibernate.jdbc.batch_size", 10);
 		hibernateProp.put("hibernate.jdbc.fetch_size", 50);
@@ -88,7 +96,7 @@ public class DataServiceConfig {
 	public SessionFactory sessionFactory() throws IOException {
 		LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
 		sessionFactoryBean.setDataSource(dataSource());
-		sessionFactoryBean.setPackagesToScan("jobworld");
+		sessionFactoryBean.setPackagesToScan("jobworld.model");
 		sessionFactoryBean.setHibernateProperties(hibernateProperties());
 		sessionFactoryBean.afterPropertiesSet();
 		return sessionFactoryBean.getObject();

@@ -32,11 +32,16 @@ import org.springframework.web.servlet.mvc.WebContentInterceptor;
 import org.springframework.web.servlet.theme.CookieThemeResolver;
 import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.web.servlet.view.JstlView;
+
+import jobworld.test.TestConfig;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"jobworld"})
+@ComponentScan(basePackages = {"jobworld"},
+excludeFilters  = {@ComponentScan.Filter(
+		type = FilterType.ASSIGNABLE_TYPE, classes = {TestConfig.class})})
 public class WebConfig implements WebMvcConfigurer {
 
 	//Declare our static resources. I added cache to the java config but it's not required.
