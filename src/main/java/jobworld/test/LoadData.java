@@ -332,7 +332,7 @@ public class LoadData {
 			personService.apply(p1, j1);
 			personService.apply(p2, j1);
 			//jobOfferDao.delete(j1);//DA ERRORE 
-			//personService.apply(p1, j3);//DA ERRORE 
+			personService.apply(p1, j3);
 			//personService.delete(p1);//DA ERRORE 
 			//companyDao.delete(c1); //DA ERRORE 
 			/*

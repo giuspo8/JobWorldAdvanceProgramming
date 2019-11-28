@@ -66,7 +66,7 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 	}
 
 	// ci restituisce la lista delle offerte di lavoro filtrate in base alla
-	// posizione (si può applicare a tutto)
+	// posizione (si puï¿½ applicare a tutto)
 	//caso sottoinsieme del filtro generale
 	
 	@Override
@@ -78,7 +78,7 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 	}
 
 	// ci restituisce la lista delle offerte di lavoro ordinata per data di
-	// pubblicazione (dalla più recente)
+	// pubblicazione (dalla piï¿½ recente)
 	//caso sottoinsieme del filtro generale
 	/*
 	@Override
@@ -146,7 +146,7 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 
 	@Override
 	public Long getInterested(JobOffer jobOffer) {
-		return getSession().createQuery("select count(p) from Person p, JobOffer j where j.id=:jid", Long.class)
+		return getSession().createQuery("select count(*) from Person p join p.candidacies c where c.id=:jid", Long.class)
 				.setParameter("jid",jobOffer.getId()).getSingleResult();
 	}
 

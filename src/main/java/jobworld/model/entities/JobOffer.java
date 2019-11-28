@@ -161,7 +161,7 @@ public class JobOffer {
 
 
 	//campo data candidatura
-	@ManyToMany(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch= FetchType.EAGER)
 	@JoinTable(name = "candidacies", joinColumns = @JoinColumn(name = "JOB_OFFER_ID", updatable=false), inverseJoinColumns = @JoinColumn(name = "PERSON_ID", updatable=false))
 	public Set<Person> getCandidancies() {
 		return candidancies;

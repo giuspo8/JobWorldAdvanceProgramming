@@ -17,8 +17,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
+import javax.persistence.CascadeType;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -160,6 +159,7 @@ public class Person  {
 
 	// aggiunge quell'offerta di lavoro alla lista delle candidature
 	public void apply(JobOffer jobOffer) {
+		System.out.print(jobOffer.getId());
 		candidacies.add(jobOffer);
 	}
 

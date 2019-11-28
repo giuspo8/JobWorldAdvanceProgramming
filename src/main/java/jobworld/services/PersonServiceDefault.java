@@ -25,6 +25,7 @@ import jobworld.model.entities.Person;
 @Service("personService")
 public class PersonServiceDefault implements PersonService{
 private PersonDao personRepository;
+//private JobOfferDao jobOfferRepository;
 	
 
 
@@ -66,7 +67,9 @@ private PersonDao personRepository;
 
 	@Override
 	public void apply(Person person, JobOffer joboffer) {
+		person.getCandidacies().clear();
 		person.getCandidacies().add(joboffer);
+	//	this.jobOfferRepository.update(joboffer);
 		this.personRepository.update(person);
 	}
 }
