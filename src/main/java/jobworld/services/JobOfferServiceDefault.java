@@ -9,6 +9,7 @@
  */
 package jobworld.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import jobworld.model.dao.JobOfferDao;
 import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.JobOffer.Education;
-import jobworld.model.entities.Person;
+
 
 
 @Transactional
@@ -38,8 +39,8 @@ private JobOfferDao jobofferRepository;
 	@Transactional
 	@Override
 	public JobOffer create(String region, String province, String town, String position, String description,
-			String contractType, Education minEducationLevel, String minExperience, Company company) {
-		return this.jobofferRepository.create(region,province,town,position,description,contractType,minEducationLevel,minExperience,company);
+			String contractType, Education minEducationLevel, String minExperience,LocalDate expiringDate, Company company) {
+		return this.jobofferRepository.create(region,province,town,position,description,contractType,minEducationLevel,minExperience,expiringDate,company);
 
 	}
 	

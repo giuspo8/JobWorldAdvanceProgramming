@@ -3,8 +3,6 @@ package jobworld.model.entities;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -18,9 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
+import jobworld.utils.LocalDateAttributeConverter;
 import jobworld.utils.TimestampAttributeConverter;
 
 /**
@@ -51,7 +47,7 @@ public class JobOffer {
 	private Set<Person> candidancies = new HashSet<Person>();
 	private Company company;
 	private long publicationDate;
-	private long expiringDate;
+	private LocalDate expiringDate;
 	private int version;
 
 	public JobOffer() {
@@ -60,7 +56,7 @@ public class JobOffer {
 
 	
 	public JobOffer(String region, String province, String town, String position, String description,
-			String contractType, Education minEducationLevel, String minExperience,
+			String contractType, Education minEducationLevel, String minExperience,LocalDate expiringDate,
 			Company company) {
 		this.region = region;
 		this.province = province;
@@ -72,6 +68,7 @@ public class JobOffer {
 		this.minExperience = minExperience;
 		this.company = company;
 		this.publicationDate = System.currentTimeMillis();
+		this.expiringDate=expiringDate;
 	}
 
 
@@ -209,5 +206,16 @@ public class JobOffer {
 	public void setPublicationDate(Long publicationDate) {
 		this.publicationDate = publicationDate;
 	}
+
+	@Convert(converter = LocalDateAttributeConverter.class)
+	public LocalDate getExpiringDate() {
+		return expiringDate;
+	}
+
+
+	public void setExpiringDate(LocalDate expiringDate) {
+		this.expiringDate = expiringDate;
+	}
+
 
 }

@@ -1,11 +1,11 @@
 package jobworld.model.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.JobOffer.Education;
-import jobworld.model.entities.Person;
 
 /**
  * interfaccia JobOfferDao
@@ -19,7 +19,7 @@ import jobworld.model.entities.Person;
 public interface JobOfferDao {
 
 	JobOffer create(String region, String province, String town, String position, String description,
-			String contractType, Education minEducationLevel, String minExperience, Company company);
+			String contractType, Education minEducationLevel, String minExperience,LocalDate expiringDateCompany, Company company);
 
 	JobOffer update(JobOffer jobOffer);
 

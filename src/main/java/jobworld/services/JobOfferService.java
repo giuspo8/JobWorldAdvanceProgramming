@@ -9,18 +9,19 @@
  */
 package jobworld.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.JobOffer.Education;
-import jobworld.model.entities.Person;
+
 
 public interface JobOfferService {
 	List<JobOffer> findAll();
 			
 	JobOffer create(String region, String province, String town, String position, String description,
-			String contractType, Education minEducationLevel, String minExperience, Company company);
+			String contractType, Education minEducationLevel, String minExperience,LocalDate expiringDate, Company company);
 			
 	JobOffer update(JobOffer joboffer);
 		

@@ -1,5 +1,6 @@
 package jobworld.model.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.JobOffer.Education;
-import jobworld.model.entities.Person;
 
 /**
  * Implementazione dell'interfaccia JobOfferDao
@@ -25,9 +25,9 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 	@Override
 	@Transactional
 	public JobOffer create(String region, String province, String town, String position, String description,
-			String contractType, Education minEducationLevel, String minExperience, Company company) {
+			String contractType, Education minEducationLevel, String minExperience, LocalDate expiringDate,Company company) {
 		JobOffer jobOffer = new JobOffer(region, province, town, position, description, contractType, minEducationLevel,
-				minExperience, company);
+				minExperience,expiringDate, company);
 		this.getSession().save(jobOffer);
 		return jobOffer;
 	}

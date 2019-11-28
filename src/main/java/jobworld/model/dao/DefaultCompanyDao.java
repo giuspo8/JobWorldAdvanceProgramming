@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import jobworld.model.entities.Company;
+import jobworld.model.entities.User;
 
 /**
  * Implementazione dell'interfaccia CompanyDao
@@ -22,8 +23,8 @@ public class DefaultCompanyDao extends DefaultDao implements CompanyDao {
 
 	@Override
 	@Transactional
-	public Company create(String name) {
-		Company company = new Company(name);
+	public Company create(String name, User user) {
+		Company company = new Company(name,user);
 		this.getSession().save(company);
 		return company;
 	}

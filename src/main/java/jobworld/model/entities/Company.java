@@ -2,18 +2,16 @@ package jobworld.model.entities;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * Classe Company rappresentante una Azienda ed i suoi attributi/metodi.
@@ -38,9 +36,9 @@ public class Company {
 
 
 
-	public Company(String name) {
-		super();
+	public Company(String name, User user) {
 		this.name = name;
+		this.user=user;
 	}
 
 
@@ -90,7 +88,8 @@ public class Company {
 	}
 	
 	
-	@OneToOne(mappedBy = "company")
+	@OneToOne
+	@JoinColumn(name = "USER_ID", updatable=false)
 	public User getUser() {
 		return user;
 	}

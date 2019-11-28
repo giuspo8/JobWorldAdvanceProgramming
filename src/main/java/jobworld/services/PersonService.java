@@ -14,12 +14,13 @@ import java.util.List;
 
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
+import jobworld.model.entities.User;
 public interface PersonService {
 List<Person> findAll();
 	
 Person findById(Long id);
 	
-Person create(String firstName, String secondName,LocalDate birthDate, String number, String interests);
+Person create(String firstName, String secondName,LocalDate birthDate, String number, String interests,User user);
 	
 Person update(Person person);
 

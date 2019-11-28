@@ -44,13 +44,12 @@ public class LoadData {
 			
 			// Popolamento dei dati nel database 
 //Person			
-			Person p1=personDao.create("Savio", "Feng", LocalDate.of(1995, 8, 25), "3588975899", "informatica, ingegneria");
-			
-			User u1=userDao.createPersonUser("saviofeng@gmail.it", "c3asa2",null,
-					"/resources/img/galleria5.jpg", Role.BASE, p1);
-			Person p2=personDao.create("Loris", "de luigi",LocalDate.of(1992, 4, 14),"3388775899", "informatica, ingegneria");
-			User u2=userDao.createPersonUser("loris@gmail.it", "passw3ord1", null, 
-					"/resources/img/galleria6.jpg", Role.BASE,p2);
+			User u1=userDao.create("saviofeng@gmail.it", "c3asa2",null,
+					"/resources/img/galleria5.jpg", Role.BASE);
+			Person p1=personDao.create("Savio", "Feng", LocalDate.of(1995, 8, 25), "3588975899", "informatica, ingegneria",u1);
+			User u2=userDao.create("loris@gmail.it", "passw3ord1", null, 
+					"/resources/img/galleria6.jpg", Role.BASE);
+			Person p2=personDao.create("Loris", "de luigi",LocalDate.of(1992, 4, 14),"3388775899", "informatica, ingegneria",u2);
 
 			/*
 			Person p2= personDao.create();
@@ -194,10 +193,11 @@ public class LoadData {
 			
 //Company			
  
- 			Company c1=companyDao.create("Esselunga");
- 			User u11=userDao.createCompanyUser("esselunga@gmail.it", "esselung23","ESSELUNGA � una delle principali catene italiane nel settore della grande distribuzione che opera attraverso una rete di oltre 150 superstore e supermarket in Lombardia, Toscana, Emilia Romagna, Piemonte, Veneto, Liguria e Lazio. La storia di Esselunga inizia nel 1957 con l’apertura a Milano del primo supermercato in Italia; oggi il gruppo, con sede centrale a Limito di Pioltello, nell’hinterland Est di Milano, è costituito da oltre 21.000 dipendenti, fattura oltre 7 miliardi di euro e detiene una quota di mercato pari al 12 %.\r\n" + 
+ 			User u3=userDao.create("esselunga@gmail.it", "esselung23","ESSELUNGA � una delle principali catene italiane nel settore della grande distribuzione che opera attraverso una rete di oltre 150 superstore e supermarket in Lombardia, Toscana, Emilia Romagna, Piemonte, Veneto, Liguria e Lazio. La storia di Esselunga inizia nel 1957 con l’apertura a Milano del primo supermercato in Italia; oggi il gruppo, con sede centrale a Limito di Pioltello, nell’hinterland Est di Milano, è costituito da oltre 21.000 dipendenti, fattura oltre 7 miliardi di euro e detiene una quota di mercato pari al 12 %.\r\n" + 
 					"L’azienda è costantemente impegnata nell’innovazione di prodotto, nella salvaguardia dell’ambiente e nella tutela del consumatore: produttore oltre che distributore, Esselunga ha tra i suoi punti di forza i prodotti a proprio marchio e i prodotti freschi.",
-					"/resources/img/companies/esselunga.jpg", Role.BASE, c1);
+					"/resources/img/companies/esselunga.jpg", Role.BASE);
+ 			Company c1=companyDao.create("Esselunga",u3);
+
  /*
 			Company c1=companyDao.create("Esselunga", "esselunga@gmail.it", "esselung23", 
 					, 
@@ -234,7 +234,7 @@ public class LoadData {
 					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
 					"· Precisione e serietà\r\n" + 
 					"· Preferibile esperienza pregressa nel ruolo, seppur di breve durata, maturata preferibilmente in contesti GDO.", 
-					"determinato", Education.LICENZA_MEDIA, "1 anno", c1);
+					"determinato", Education.LICENZA_MEDIA, "1 anno",LocalDate.of(2019, 12, 25), c1);
 			
 			
 			JobOffer j2=jobOfferDao.create("Lazio", "Roma", "Roma", "Commesso GameStop",
@@ -247,7 +247,7 @@ public class LoadData {
 					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
 					"· Seriet�\r\n" + 
 					"· Capacit� di utilizzo del computer.", 
-					"determinato", Education.DIPLOMA_DI_MATURITA, "6 mesi", c1);
+					"determinato", Education.DIPLOMA_DI_MATURITA, "6 mesi",LocalDate.of(2019, 12, 25), c1);
 			j2.setPublicationDate(j2.getPublicationDate() + 10000);
 			jobOfferDao.update(j2);
 			
@@ -261,7 +261,7 @@ public class LoadData {
 					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
 					"· Esperienza di almeno 3 anni\r\n" + 
 					"· Preferibilmente lavoratore remoto", 
-					"determinato", Education.LAUREA_TRIENNALE, "3 anni", c1);
+					"determinato", Education.LAUREA_TRIENNALE, "3 anni",LocalDate.of(2019, 12, 25), c1);
 			
 			
 			
@@ -275,7 +275,7 @@ public class LoadData {
 					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
 					"· Disposto a voli internazionali�\r\n" + 
 					"· Capacit� di comunicazione", 
-					"determinato", Education.LAUREA_SPECIALISTICA, "1 anno", c1);
+					"determinato", Education.LAUREA_SPECIALISTICA, "1 anno",LocalDate.of(2019, 12, 25), c1);
 			
 			//enum a titolo di studio, contratto, esperienza
 			
@@ -289,7 +289,7 @@ public class LoadData {
 					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
 					"· Precisione e serietà\r\n" + 
 					"· Disposto a trasferirsi nella sede centrale a Roma", 
-					"Indeterminato", Education.LAUREA_SPECIALISTICA, "indeterminato",c1);
+					"Indeterminato", Education.LAUREA_SPECIALISTICA, "indeterminato",LocalDate.of(2019, 12, 25),c1);
 			
 			
 			Curriculum c11=curriculumDao.create(p1, "01/2005–alla data attuale Assistente amministrativo\r\n" + 
@@ -374,9 +374,8 @@ public class LoadData {
 			
 			
 			List<JobOffer> joboffers6 = jobOfferDao.findAll();//assert
-			for (JobOffer j : joboffers6) {
-				System.out.println(j);
-			}
+			assert joboffers6.equals(3);
+			assert jobOfferDao.getInterested(j1).equals(2);
 			/*
 			List<JobOffer> joboffers7 = jobOfferDao.filter(null, null, null, null, null, null,null);
 			for (JobOffer j : joboffers7) {
@@ -387,7 +386,7 @@ public class LoadData {
 			
 			//jobOfferDao.delete(j1);
 			//companyDao.delete(c1);
-			System.out.println(jobOfferDao.getInterested(j1));
+
 
 		
 

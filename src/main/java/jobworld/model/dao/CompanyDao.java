@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import jobworld.model.entities.Company;
+import jobworld.model.entities.User;
 
 /**
  * Interfaccia di CompanyDao
@@ -17,7 +18,7 @@ import jobworld.model.entities.Company;
  */
 public interface CompanyDao {
 	
-	Company create(String name);
+	Company create(String name,User user);
 
 	Company update(Company company);
 

@@ -4,9 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import jobworld.model.entities.Company;
-import jobworld.model.entities.Person;
 import jobworld.model.entities.User;
 import jobworld.model.entities.User.Role;
 
@@ -16,21 +13,13 @@ public class DefaultUserDao extends DefaultDao implements UserDao {
 
 	@Override
 	@Transactional
-	public User createCompanyUser(String email, String password, String description, String image,
-			Role role, Company company) {
-		User user = new User(email,password,description,description,role,company);
+	public User create(String email, String password, String description, String image,
+			Role role) {
+		User user = new User(email,password,description,description,role);
 		this.getSession().save(user);
 		return user;
 	}
 
-	@Override
-	@Transactional
-	public User createPersonUser(String email, String password, String description, String image,
-			Role role, Person person) {
-		User user = new User(email,password,description,description,role,person);
-		this.getSession().save(user);
-		return user;
-	}
 
 	@Override
 	@Transactional

@@ -2,9 +2,8 @@ package jobworld.model.dao;
 
 import java.time.LocalDate;
 import java.util.List;
-
-import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
+import jobworld.model.entities.User;
 
 /**
  * Interfaccia PersonDao
@@ -18,7 +17,7 @@ import jobworld.model.entities.Person;
 public interface PersonDao {
 
 	Person create(String firstName, String secondName,LocalDate birthDate, String number,
-	String interests);
+	String interests,User user);
 
 	Person update(Person person);
 

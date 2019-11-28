@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import jobworld.model.entities.Person;
+import jobworld.model.entities.User;
 
 /**
  * Implementazione dell'interfaccia PersonDao
@@ -24,8 +25,8 @@ public class DefaultPersonDao extends DefaultDao implements PersonDao {
 	@Override
 	@Transactional
 	public Person create(String firstName, String secondName,
-			LocalDate birthDate, String number, String interests) {
-		Person person = new Person(firstName, secondName, birthDate, number, interests);
+			LocalDate birthDate, String number, String interests,User user) {
+		Person person = new Person(firstName, secondName, birthDate, number, interests,user);
 		this.getSession().save(person);
 		return person;
 	}

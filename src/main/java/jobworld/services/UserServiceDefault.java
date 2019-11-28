@@ -3,8 +3,6 @@ package jobworld.services;
 import java.util.List;
 
 import jobworld.model.dao.UserDao;
-import jobworld.model.entities.Company;
-import jobworld.model.entities.Person;
 import jobworld.model.entities.User;
 import jobworld.model.entities.User.Role;
 
@@ -13,15 +11,8 @@ public class UserServiceDefault implements UserService {
 	private UserDao userRepository;
 
 	@Override
-	public User createCompanyUser(String email, String password, String description, String image, Role role,
-			Company company) {
-		return this.userRepository.createCompanyUser(email, password, description, image, role, company);
-	}
-
-	@Override
-	public User createPersonUser(String email, String password, String description, String image, Role role,
-			Person person) {
-		return this.userRepository.createPersonUser(email, password, description, image, role, person);
+	public User create(String email, String password, String description, String image, Role role) {
+		return this.userRepository.create(email, password, description, image, role);
 	}
 
 	@Override

@@ -4,8 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+
 
 
 /**
@@ -44,26 +44,16 @@ public class User {
 	}
 
 
-	public User(String email, String password, String description, String image, Role role, Company company) {
+	public User(String email, String password, String description, String image, Role role) {
 		super();
 		this.email = email;
 		this.password = password;
 		this.description = description;
 		this.image = image;
 		this.role = role;
-		this.company = company;
 	}
 
 
-	public User(String email, String password, String description, String image, Role role, Person person) {
-		super();
-		this.email = email;
-		this.password = password;
-		this.description = description;
-		this.image = image;
-		this.role = role;
-		this.person = person;
-	}
 
 
 	/**
@@ -125,8 +115,7 @@ public class User {
 		this.role = role;
 	}
 
-	@OneToOne
-	@JoinColumn(name = "COMPANY_ID", updatable=false)
+	@OneToOne(mappedBy = "user")
 	public Company getCompany() {
 		return company;
 	}
@@ -138,8 +127,7 @@ public class User {
 	}
 
 
-	@OneToOne
-	@JoinColumn(name = "PERSON_ID", updatable=false)
+	@OneToOne(mappedBy = "user")
 	public Person getPerson() {
 		return person;
 	}

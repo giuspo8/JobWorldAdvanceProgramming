@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -17,7 +16,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
-import javax.persistence.CascadeType;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -52,12 +50,13 @@ public class Person  {
 
 	
 	public Person(String firstName, String secondName, LocalDate birthDate, String number,
-			String interests) {
+			String interests, User user) {
 		this.firstName = firstName;
 		this.secondName = secondName;
 		this.birthDate = birthDate;
 		this.number = number;
 		this.interests = interests;
+		this.user=user;
 	}
 
 
@@ -143,9 +142,9 @@ public class Person  {
 	public void setCandidacies(Set<JobOffer> candidacies) {
 		this.candidacies = candidacies;
 	}
-
-	@OneToOne(mappedBy = "person")
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	
+	@OneToOne
+	@JoinColumn(name = "USER_ID", updatable=false)
 	public User getUser() {
 		return user;
 	}

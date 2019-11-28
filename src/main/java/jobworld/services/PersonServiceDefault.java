@@ -15,11 +15,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import jobworld.model.dao.JobOfferDao;
 import jobworld.model.dao.PersonDao;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
+import jobworld.model.entities.User;
 
 @Transactional
 @Service("personService")
@@ -42,8 +41,8 @@ private PersonDao personRepository;
 
 	@Transactional
 	@Override
-	public Person create(String firstName, String secondName,LocalDate birthDate, String number, String interests) {
-		return this.personRepository.create(firstName,secondName,birthDate,number,interests);
+	public Person create(String firstName, String secondName,LocalDate birthDate, String number, String interests,User user) {
+		return this.personRepository.create(firstName,secondName,birthDate,number,interests,user);
 
 	}
 	
