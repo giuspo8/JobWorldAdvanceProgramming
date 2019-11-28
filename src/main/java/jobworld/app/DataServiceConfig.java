@@ -70,7 +70,7 @@ public class DataServiceConfig {
 		}
 	}
 
-	private Properties hibernateProperties() {
+	protected Properties hibernateProperties() {
 		Properties hibernateProp = new Properties();
 		hibernateProp.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 		hibernateProp.put("hibernate.format_sql", true);
@@ -80,7 +80,7 @@ public class DataServiceConfig {
 		hibernateProp.put("hibernate.jdbc.batch_size", 10);
 		hibernateProp.put("hibernate.jdbc.fetch_size", 50);
 //		    hibernateProp.put("hibernate.enable_lazy_load_no_trans", true);
-		hibernateProp.put("javax.persistence.schema-generation.database.action", "drop-and-create");
+		hibernateProp.put("javax.persistence.schema-generation.database.action", "none");
 		return hibernateProp;
 	}
 

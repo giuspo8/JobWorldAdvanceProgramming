@@ -15,7 +15,7 @@ import java.util.List;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import jobworld.app.DataServiceConfig;
+import jobworld.app.TestConfig;
 import jobworld.model.dao.CompanyDao;
 import jobworld.model.dao.CurriculumDao;
 import jobworld.model.dao.JobOfferDao;
@@ -33,7 +33,7 @@ import jobworld.services.PersonService;
 public class LoadData {			
 	public static void main(String ...args) {
 //		logger.info("Entrato ...");
-		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(DataServiceConfig.class)) {
+		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(TestConfig.class)) {
 
 			CompanyDao companyDao = ctx.getBean(CompanyDao.class);
 			JobOfferDao jobOfferDao = ctx.getBean(JobOfferDao.class);
