@@ -12,7 +12,77 @@ header{
     background-color: white;
     z-index: 4;
     -webkit-box-shadow: 0px 9px 4px -6px white;
+    max-height: 70px;
 }
+
+
+
+.burger-wrapper {
+  cursor: pointer;
+}
+#meny {
+    background: white;
+    width: 25em;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    transition-timing-function: cubic-bezier(10,2,3,1);
+    transform: translateX(-100%);
+    top: 70px;
+    z-index: 0;
+    transition: 0.5s;
+}
+
+#menyAvPaa {
+    display: none;
+}
+
+#menyAvPaa:checked ~ #meny {
+    transform: translateX(0rem);
+}
+.ham_menu_div {
+	vertical-align: middle;
+	margin-bottom:43px;
+	box-sizing: content-box;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+#logo>span {
+	display:inline-block;
+}
+#burger {
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+    left: 1rem;
+    top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+#burger > div {
+    height: 2px;
+    background-color: #000;
+    transition: 0.5s;
+    z-index: 999;
+}
+
+#menyAvPaa:checked ~ #burger > div {
+  background-color: #000;
+}
+
+#menyAvPaa:checked ~ #burger > div:nth-child(1) {
+    transform: translateY(15px) rotate(45deg);
+}
+#menyAvPaa:checked ~ #burger > div:nth-child(2) {
+    opacity: 0;
+}
+#menyAvPaa:checked ~ #burger > div:nth-child(3) {
+    transform: translateY(-15px) rotate(-45deg);
+}
+
+
 footer {
 	display: block;
 	width: 100%;
@@ -31,7 +101,8 @@ footer {
 .navigation_bar #logo{
     float:left;
 }
-#logo>img {
+#logo>span>img {
+	display: inline-block;
   	max-height:50px;
   	width: auto;
   	height: auto;
