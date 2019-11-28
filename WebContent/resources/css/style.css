@@ -32,7 +32,58 @@ header{
     z-index: 0;
     transition: 0.5s;
 }
-
+#meny > div {
+	display: flex;
+}
+#meny > div > form {
+	margin-top: 50px;
+	margin-left: 18px;
+	width: 70%;
+}
+#meny > div > form> table {
+	width: 100%;
+	text-align: left;
+}
+.searchsub_input:hover {
+	border-color: #FFAC15;
+}
+.searchsub_lbl {
+	border-bottom: 1px solid #a3a3a3;
+}
+.searchsub_input {
+	width: 100%;
+	height: 40px;
+	margin-top: 6px;
+	margin-bottom: 6px;
+	background-color: #f6f6f6;
+	border: 1px solid;
+	border-radius: 4px;
+	font-family: 'Hepta Slab', serif;
+	font-size: 16px;
+	outline: none;
+}
+#searchsub {
+	text-align: right;
+}
+#searchsub > input:hover {
+	border-color: #FFAC15;
+	color: #FFAC15;
+}
+#searchsub > input {
+	right:0;
+	width: 30%;
+	cursor: pointer;
+	height: 30px;
+	margin-top: 6px;
+	margin-bottom: 6px;
+	background-color: #f6f6f6;
+	border: 1px solid;
+	border-radius: 4px;
+	font-family: 'Hepta Slab', serif;
+	font-size: 18px;
+	outline: none;
+	margin-right: -11px;
+}
 #menyAvPaa {
     display: none;
 }

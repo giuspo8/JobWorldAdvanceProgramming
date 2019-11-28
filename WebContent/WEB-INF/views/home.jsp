@@ -13,6 +13,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page session="false"%>
 <!DOCTYPE html>
 <html>
@@ -38,16 +39,39 @@
 		<div class="navigation_bar">
 
 			<ul>
-				<li id="logo"><span class="ham_menu_div">
-						<input type="checkbox" id="menyAvPaa"> <label id="burger"
-							for="menyAvPaa">
+				<li id="logo"><span class="ham_menu_div"><input
+						type="checkbox" id="menyAvPaa"> <label id="burger"
+						for="menyAvPaa">
 							<div></div>
 							<div></div>
 							<div></div>
-						</label>
-						<nav id="meny">aosidp asd alkd lknadnlk</nav>
-					</span>
-					<span><img src="<c:url value="resources/img/logo.png"/>"></span></li>
+					</label>
+						<nav id="meny">
+							<div>
+								<c:url value="/" var="action_url" />
+								        
+								<form:form method="POST" action="${action_url}"
+									modelAttribute="filter">
+             						<table>
+										<tr><td>
+											<label class="searchsub_lbl">Filtro 1</label>
+										</td></tr>
+										<tr><td>
+											<input placeholder="Regione..." class="searchsub_input">
+										</td></tr>
+										<tr><td>
+											<label class="searchsub_lbl">Filtro 2</label>
+										</td></tr>
+										<tr><td>
+											<input placeholder="Filtrooo" class="searchsub_input">
+										</td></tr>
+										         
+									</table>
+									<div id="searchsub"><input type="submit" value="Invio">  </div>
+								</form:form>
+							</div>
+						</nav>
+				</span> <span><img src="<c:url value="resources/img/logo.png"/>"></span></li>
 				<li><a href="">Registrati</a></li>
 				<li>-</li>
 				<li><a href="" class="login_btn">Accedi</a></li>
