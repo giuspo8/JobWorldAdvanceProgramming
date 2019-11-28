@@ -4,13 +4,16 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.User;
@@ -30,21 +33,7 @@ public class HomeController {
 private JobOfferService jobOfferService;
 	@RequestMapping(method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		System.out.println("Home Page Requested, locale = " + locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
-		String formattedDate = dateFormat.format(date);
-
-		model.addAttribute("serverTime", formattedDate);
-		
-		String appName = "WebApp";
-		model.addAttribute("appName", appName);
 		List<JobOffer> allJobOffers = this.jobOfferService.findAll();
-		for (JobOffer j : allJobOffers) {
-			System.out.println(j);
-		}
 		model.addAttribute("jobOffers", allJobOffers);
 		return "home";
 	}
@@ -54,11 +43,14 @@ private JobOfferService jobOfferService;
 		this.jobOfferService = jobOfferService;
 	}
 
-	@RequestMapping(value = "/prova", method = RequestMethod.POST)
-	public String user(@Validated User user, Model model) {
-		System.out.println("User Page Requested");
-		model.addAttribute("userName", user.getEmail());
-		return "user";
+	@PostMapping(value = "/filter")
+	public String filter(@RequestParam Map<String,String> allParams, Model model) {
+		List<JobOffer> jobOffers = this.jobOfferService.filter(allParams.get("region"),
+				allParams.get("province"), allParams.get("town"),
+				allParams.get("position"), allParams.get("contractType"),
+				allParams.get("minEducationLevel"), allParams.get("minExperience"));
+		model.addAttribute("jobOffers", jobOffers);
+		return "home";
 	}
 	
 }

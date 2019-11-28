@@ -62,4 +62,10 @@ private JobOfferDao jobofferRepository;
 		this.jobofferRepository = jobofferRepository;
 	}
 
+	@Override
+	public List<JobOffer> filter(String region, String province, String town, String position, String contractType,
+			String minEducationLevel, String minExperience) {
+		return this.jobofferRepository.filter(region, province, town, position, contractType, minEducationLevel, minExperience);
+	}
+
 }

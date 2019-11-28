@@ -25,6 +25,9 @@ public interface JobOfferService {
 			
 	JobOffer update(JobOffer joboffer);
 		
-		void delete(JobOffer contact);
+	void delete(JobOffer contact);
+	
+	List<JobOffer> filter(String region, String province, String town, String position, String contractType,
+			String minEducationLevel, String minExperience);
 		
 }

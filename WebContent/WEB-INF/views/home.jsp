@@ -48,24 +48,53 @@
 					</label>
 						<nav id="meny">
 							<div>
-								<c:url value="/" var="action_url" />
+								<c:url value="/filter" var="action_url" />
 								        
-								<form:form method="POST" action="${action_url}"
-									modelAttribute="filter">
+								<form:form method="POST" action="${action_url}">
+								<h2>Cerca lavoro:</h2>
              						<table>
 										<tr><td>
-											<label class="searchsub_lbl">Filtro 1</label>
+											<label class="searchsub_lbl">Posizione ricercata</label>
 										</td></tr>
 										<tr><td>
-											<input placeholder="Regione..." class="searchsub_input">
+											<input placeholder="Posizione ricercata" name="position" class="searchsub_input">
 										</td></tr>
 										<tr><td>
-											<label class="searchsub_lbl">Filtro 2</label>
+											<label class="searchsub_lbl">Tipologia di contratto</label>
 										</td></tr>
 										<tr><td>
-											<input placeholder="Filtrooo" class="searchsub_input">
+											<input placeholder="Tipologia di contratto" name="contractType" class="searchsub_input">
 										</td></tr>
-										         
+										<tr><td>
+											<label class="searchsub_lbl">Livello di esperienza richiesto</label>
+										</td></tr>
+										<tr><td>
+											<input placeholder="Esperienza" name="minExperience" class="searchsub_input">
+										</td></tr>
+										<tr><td>
+											<label class="searchsub_lbl">Livello di istruzione richiesto</label>
+										</td></tr>
+										<tr><td>
+											<input placeholder="Istruzione" name="minEducationLevel" class="searchsub_input">
+										</td></tr>
+										<tr><td>
+											<label class="searchsub_lbl">Regione</label>
+										</td></tr>
+										<tr><td>
+											<input placeholder="Regione" name="region" class="searchsub_input">
+										</td></tr>
+										<tr><td>
+											<label class="searchsub_lbl">Provincia</label>
+										</td></tr>
+										<tr><td>
+											<input placeholder="Provincia" name="province" class="searchsub_input">
+										</td></tr>
+										<tr><td>
+											<label class="searchsub_lbl">Città</label>
+										</td></tr>
+										<tr><td>
+											<input placeholder="Città" name="town" class="searchsub_input">
+										</td></tr>
 									</table>
 									<div id="searchsub"><input type="submit" value="Invio">  </div>
 								</form:form>
