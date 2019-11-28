@@ -32,7 +32,7 @@
 <script type="text/javascript"
 	src="<c:url value="/resources/js/functions.js"/>"></script>
 </head>
-
+<body>
 <body>
 
 	<header>
@@ -113,25 +113,30 @@
 				<img src="<c:url value="resources/img/jobworldhome.jpeg"/>">
 			</div>
 			<hr>
-		</div>
-		<c:if test="${fn:length(jobOffers) == 0}">Non ci sono offerte da mostrare.</c:if>
-		<c:if test="${fn:length(jobOffers) gt 0}">
-			<c:forEach items="${jobOffers}" var="j">
-				<div class="offer">
-					<h3>${j.position}</h3>
-					<hr>
-					<div class="general_info"></div>
+			<div class="offer">
+					<h3>Chi Siamo?</h3>
 					<hr>
 					<div class="general_info_body">
 						<img class="pic" src="<c:url value="" />">
 						<div class="description">
-							<span class="more">${j.description}</span>
+							<span>Informazioni su Indeed
+Indeed è il sito web #1 al mondo per la ricerca di lavoro1 con più di 250 milioni di singole visite2 ogni mese. Indeed mette al primo posto gli utenti in cerca di lavoro, consentendo loro di accedere a offerte di lavoro, pubblicare curriculum ed eseguire ricerche sulle aziende, gratuitamente. Ogni giorno mettiamo in contatto milioni di persone con nuove opportunità.
+250 milioni
+di visitatori unici al mese2
+150 milioni
+di curriculum
+150 milioni
+di valutazioni e recensioni di aziende
+10
+offerte aggiunte al secondo in tutto il mondo
+600 milioni
+di stipendi
+Le nostre persone
+La mission di Indeed consiste nell'aiutare le persone a trovare lavoro. Abbiamo più di 8.900 dipendenti in tutto il mondo che lavorano appassionatamente per raggiungere questo obiettivo e per migliorare i processi di selezione del personale attraverso storie e dati reali. Promuoviamo un ambiente di lavoro collaborativo, al fine di creare la migliore esperienza possibile per le persone in cerca di lavoro.</span>
 						</div>
 					</div>
 				</div>
-			</c:forEach>
-		</c:if>
-
+		</div>
 	</div>
 	<footer>
 		<div class="container">
@@ -143,18 +148,14 @@
 					src="<c:url value="/resources/img/galleria3.jpg"/>">
 			</div>
 		</div>
-		
 		<div>
 			<div class="faq">
-				<a href="">Tutto su JobWorld</a>
+				<a href="<c:url value=""/>">Tutto su JobWorld</a>
 				-
 				<a href="">FAQ - Aiuto</a>
 			</div>
 		</div>
 		<p>JobWorld.it ottempera alla normativa vigente sulla Privacy. JobWorld S.r.l. a socio unico, società soggetta a direzione e coordinamento di Coordination S.r.l. - Sede legale Via Monte D'Ago 19, 20159 Ancona. Codice Fiscale, Partita I.V.A., Registro Imprese 04603040967; Capitale Sociale 98.100 i. v. JobWorld S.r.l. è iscritta all'Albo Informatico - Sez. IV - Aut. Min. Prov. Prot. n. 0000138</p>
 	</footer>
-
-
 </body>
-
 </html>

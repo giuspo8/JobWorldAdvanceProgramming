@@ -355,3 +355,14 @@ footer > .container img{
     width: 30%;
     display:inline-block;
 }
+
+footer p{
+	text-align: center;
+	font-size:8pt;
+}
+
+footer .faq{
+	text-align:center;
+	display-block:inline;
+	font-size:10pt;
+}

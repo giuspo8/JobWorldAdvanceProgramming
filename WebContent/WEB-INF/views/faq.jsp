@@ -32,7 +32,7 @@
 <script type="text/javascript"
 	src="<c:url value="/resources/js/functions.js"/>"></script>
 </head>
-
+<body>
 <body>
 
 	<header>
@@ -113,25 +113,17 @@
 				<img src="<c:url value="resources/img/jobworldhome.jpeg"/>">
 			</div>
 			<hr>
-		</div>
-		<c:if test="${fn:length(jobOffers) == 0}">Non ci sono offerte da mostrare.</c:if>
-		<c:if test="${fn:length(jobOffers) gt 0}">
-			<c:forEach items="${jobOffers}" var="j">
-				<div class="offer">
-					<h3>${j.position}</h3>
-					<hr>
-					<div class="general_info"></div>
+			<div class="offer">
+					<h3>Chi Siamo?</h3>
 					<hr>
 					<div class="general_info_body">
 						<img class="pic" src="<c:url value="" />">
 						<div class="description">
-							<span class="more">${j.description}</span>
+							<span></span>
 						</div>
 					</div>
 				</div>
-			</c:forEach>
-		</c:if>
-
+		</div>
 	</div>
 	<footer>
 		<div class="container">
@@ -143,18 +135,14 @@
 					src="<c:url value="/resources/img/galleria3.jpg"/>">
 			</div>
 		</div>
-		
 		<div>
 			<div class="faq">
-				<a href="">Tutto su JobWorld</a>
+				<a href="<c:url value=""/>">Tutto su JobWorld</a>
 				-
 				<a href="">FAQ - Aiuto</a>
 			</div>
 		</div>
 		<p>JobWorld.it ottempera alla normativa vigente sulla Privacy. JobWorld S.r.l. a socio unico, società soggetta a direzione e coordinamento di Coordination S.r.l. - Sede legale Via Monte D'Ago 19, 20159 Ancona. Codice Fiscale, Partita I.V.A., Registro Imprese 04603040967; Capitale Sociale 98.100 i. v. JobWorld S.r.l. è iscritta all'Albo Informatico - Sez. IV - Aut. Min. Prov. Prot. n. 0000138</p>
 	</footer>
-
-
 </body>
-
 </html>
