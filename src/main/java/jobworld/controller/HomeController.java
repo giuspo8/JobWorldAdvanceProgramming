@@ -40,9 +40,10 @@ private JobOfferService jobOfferService;
 		model.addAttribute("jobOffers", allJobOffers);
 		//Warning: Non ci sono le province dobbiamo risolverlo sulla vista
 		//Implementazione delle api rest per ip address in base alla zona di appartenenza;
+		//TODO: cambiate l'ip per vedere come la form filter cambia automaticamente i nomi di regione, città, provincia.
 		//String ip ="79.18.192.39";  //Abruzzo Atri
-		//String ip ="37.160.70.194";   //Lazio Roma
-		String ip ="2.235.168.0";	// Nichelino Piemonte
+		String ip ="37.160.70.194";   //Lazio Roma
+		//String ip ="2.235.168.0";	// Nichelino Piemonte
 		String uri = "https://ipapi.co/"+ip+"/json/";
 		RestTemplate restTemplate = new RestTemplate();
 		String result= restTemplate.getForObject(uri, String.class);
@@ -80,9 +81,9 @@ private JobOfferService jobOfferService;
 	public String chisiamo(){
 		return "chisiamo";
 	}
+	
 	@RequestMapping("/faq")
 	public String faq(){
 		return "faq";
 	}
-	
 }

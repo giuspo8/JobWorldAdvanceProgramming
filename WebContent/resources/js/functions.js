@@ -38,7 +38,7 @@ $(document).ready(function() {
 });
 
 
-$(document).ready(function(){
+function form (data){
 	var dict_region= {
 			"Latium" : "Lazio",
 			"Lombardy" : "Lombardia",
@@ -60,10 +60,33 @@ $(document).ready(function(){
 	}
 	var region=$('input[name="region"]').val();
 	var town=$('input[name="town"]').val();
+	var provincia;
 	if (dict_region[region]!= null){
 		$('input[name="region"]').val(dict_region[region]);
 	}
 	if (dict_town[town]!= null){
 		$('input[name="town"]').val(dict_town[town]);
 	}
+	$.each(data, function(index, element){
+		if (element.nome==$('input[name="town"]').val()){
+			provincia = element.provincia.nome;
+		}
+	});
+	if (provincia != null) {
+		$('input[name="province"]').val(provincia);
+	} else {
+		temp=$('input[name="town"]').val();
+		$('input[name="province"]').val(temp);
+	}
+};
+
+$.ajax({
+    url : "https://raw.githubusercontent.com/matteocontrini/comuni-json/master/comuni.json",
+    dataType : 'json', //restituisce un oggetto JSON
+    success : function (data,stato) {
+    	form(data);
+    },
+    error : function (richiesta,stato,errori) {
+        alert("E' evvenuto un errore. Il stato della chiamata: "+stato);
+    },
 });
