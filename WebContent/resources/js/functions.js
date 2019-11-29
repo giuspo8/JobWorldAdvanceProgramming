@@ -36,3 +36,34 @@ $(document).ready(function() {
         return false;
     });
 });
+
+
+$(document).ready(function(){
+	var dict_region= {
+			"Latium" : "Lazio",
+			"Lombardy" : "Lombardia",
+			"Piedmont" : "Piemonte",
+			"Sicily" : "Sicilia",
+			"Tuscany" : "Toscana",
+			"Sardinia": "Sardegna",
+			"Molise" : "Molise",
+			"Apulia" : "Puglia",
+	};
+	var dict_town= {
+			"Rome": "Roma",
+			"Milan" : "Milano",
+			"Truin" : "Torino",
+			"Genoa" : "Genova",
+			"Florence" : "Firenze",
+			"Venice":"Venezia",
+			"Naples":"Napoli",
+	}
+	var region=$('input[name="region"]').val();
+	var town=$('input[name="town"]').val();
+	if (dict_region[region]!= null){
+		$('input[name="region"]').val(dict_region[region]);
+	}
+	if (dict_town[town]!= null){
+		$('input[name="town"]').val(dict_town[town]);
+	}
+});

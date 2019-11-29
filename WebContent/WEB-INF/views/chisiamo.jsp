@@ -150,12 +150,12 @@ La mission di Indeed consiste nell'aiutare le persone a trovare lavoro. Abbiamo 
 		</div>
 		<div>
 			<div class="faq">
-				<a href="<c:url value=""/>">Tutto su JobWorld</a>
+				<a href="<c:url value="/chisiamo" var="action_url" />">Tutto su JobWorld</a>
 				-
 				<a href="">FAQ - Aiuto</a>
 			</div>
 		</div>
-		<p>JobWorld.it ottempera alla normativa vigente sulla Privacy. JobWorld S.r.l. a socio unico, società soggetta a direzione e coordinamento di Coordination S.r.l. - Sede legale Via Monte D'Ago 19, 20159 Ancona. Codice Fiscale, Partita I.V.A., Registro Imprese 04603040967; Capitale Sociale 98.100 i. v. JobWorld S.r.l. è iscritta all'Albo Informatico - Sez. IV - Aut. Min. Prov. Prot. n. 0000138</p>
+		<p>JobWorld.it ottempera alla normativa vigente sulla Privacy. JobWorld S.r.l. a socio unico, società soggetta a direzione e coordinamento di Coordination S.r.l. - Sede legale Via Monte D'Ago 19, 20159 Ancona. Codice Fiscale, Partita I.V.A., Registro Imprese 0519849; Capitale Sociale 66.150 i. v. JobWorld S.r.l. è iscritta all'Albo Informatico - Sez. IV - Aut. Min. Prov. Prot. n. 5849456</p>
 	</footer>
 </body>
 </html>

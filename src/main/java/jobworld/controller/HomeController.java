@@ -41,7 +41,8 @@ private JobOfferService jobOfferService;
 		//Warning: Non ci sono le province dobbiamo risolverlo sulla vista
 		//Implementazione delle api rest per ip address in base alla zona di appartenenza;
 		//String ip ="79.18.192.39";  //Abruzzo Atri
-		String ip ="37.160.70.194";   //Lazio Roma
+		//String ip ="37.160.70.194";   //Lazio Roma
+		String ip ="2.235.168.0";	// Nichelino Piemonte
 		String uri = "https://ipapi.co/"+ip+"/json/";
 		RestTemplate restTemplate = new RestTemplate();
 		String result= restTemplate.getForObject(uri, String.class);
