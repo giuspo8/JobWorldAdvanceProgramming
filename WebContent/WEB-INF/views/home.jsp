@@ -51,56 +51,74 @@
 								<c:url value="/filter" var="action_url" />
 								        
 								<form:form method="POST" action="${action_url}">
-								<h2>Cerca lavoro:</h2>
+									<h2>Cerca lavoro:</h2>
              						<table>
-										<tr><td>
-											<label class="searchsub_lbl">Posizione ricercata</label>
-										</td></tr>
-										<tr><td>
-											<input placeholder="Posizione ricercata" name="position" class="searchsub_input">
-										</td></tr>
-										<tr><td>
-											<label class="searchsub_lbl">Tipologia di contratto</label>
-										</td></tr>
-										<tr><td>
-											<input placeholder="Tipologia di contratto" name="contractType" class="searchsub_input">
-										</td></tr>
-										<tr><td>
-											<label class="searchsub_lbl">Livello di esperienza richiesto</label>
-										</td></tr>
-										<tr><td>
-											<input placeholder="Esperienza" name="minExperience" class="searchsub_input">
-										</td></tr>
-										<tr><td>
-											<label class="searchsub_lbl">Livello di istruzione richiesto</label>
-										</td></tr>
-										<tr><td>
-											<input placeholder="Istruzione" name="minEducationLevel" class="searchsub_input">
-										</td></tr>
-										<tr><td>
-											<label class="searchsub_lbl">Regione</label>
-										</td></tr>
-										<tr><td>
-											<input placeholder="Regione" name="region" class="searchsub_input" value="${region}">
-										</td></tr>
-										<tr><td>
-											<label class="searchsub_lbl">Provincia</label>
-										</td></tr>
-										<tr><td>
-											<input placeholder="Provincia" name="province" class="searchsub_input">
-										</td></tr>
-										<tr><td>
-											<label class="searchsub_lbl">Città</label>
-										</td></tr>
-										<tr><td>
-											<input placeholder="Città" name="town" class="searchsub_input" value="${city}">
-										</td></tr>
+										<tr>
+											<td><label class="searchsub_lbl">Posizione
+													ricercata</label></td>
+										</tr>
+										<tr>
+											<td><input placeholder="Posizione ricercata"
+												name="position" class="searchsub_input"></td>
+										</tr>
+										<tr>
+											<td><label class="searchsub_lbl">Tipologia di
+													contratto</label></td>
+										</tr>
+										<tr>
+											<td><input placeholder="Tipologia di contratto"
+												name="contractType" class="searchsub_input"></td>
+										</tr>
+										<tr>
+											<td><label class="searchsub_lbl">Livello di
+													esperienza richiesto</label></td>
+										</tr>
+										<tr>
+											<td><input placeholder="Esperienza" name="minExperience"
+												class="searchsub_input"></td>
+										</tr>
+										<tr>
+											<td><label class="searchsub_lbl">Livello di
+													istruzione richiesto</label></td>
+										</tr>
+										<tr>
+											<td><select class="searchsub_input searchsub_select">
+													<option value="" selected>Livello di istruzione</option>
+													<option value="SENZA_STUDI">Nessun livello di istruzione</option>
+													<option value="LICENZA_MEDIA">Licenza media</option>
+													<option value="DIPLOMA_DI_MATURITA">Diploma di maturità</option>
+													<option value="LAUREA_TRIENNALE">Laurea di primo livello</option>
+													<option value="LAUREA_SPECIALISTICA">Laurea di secondo livello</option>
+											</select></td>
+										</tr>
+										<tr>
+											<td><label class="searchsub_lbl">Regione</label></td>
+										</tr>
+										<tr>
+											<td><input placeholder="Regione" name="region"
+												class="searchsub_input" value="${region}"></td>
+										</tr>
+										<tr>
+											<td><label class="searchsub_lbl">Provincia</label></td>
+										</tr>
+										<tr>
+											<td><input placeholder="Provincia" name="province"
+												class="searchsub_input"></td>
+										</tr>
+										<tr>
+											<td><label class="searchsub_lbl">Città</label></td>
+										</tr>
+										<tr>
+											<td><input placeholder="Città" name="town"
+												class="searchsub_input" value="${city}"></td>
+										</tr>
 									</table>
-									<div id="searchsub"><input type="submit" value="Invio">  </div>
+									<div id="searchsub">
+										<input type="submit" value="Invio">  
+									</div>
 								</form:form>
 							</div>
-						</nav>
-				</span> <span><img src="<c:url value="resources/img/logo.png"/>"></span></li>
+						</nav> </span> <span><img src="<c:url value="resources/img/logo.png"/>"></span></li>
 				<li><a href="">Registrati</a></li>
 				<li>-</li>
 				<li><a href="" class="login_btn">Accedi</a></li>
@@ -143,15 +161,19 @@
 					src="<c:url value="/resources/img/galleria3.jpg"/>">
 			</div>
 		</div>
-		
+
 		<div>
 			<div class="faq">
-				<a href="<c:url value="/chisiamo"/>">Tutto su JobWorld</a>
-				-
-				<a href="">FAQ - Aiuto</a>
+				<a href="<c:url value="/chisiamo"/>">Tutto su JobWorld</a> - <a
+					href="">FAQ - Aiuto</a>
 			</div>
 		</div>
-		<p>JobWorld.it ottempera alla normativa vigente sulla Privacy. JobWorld S.r.l. a socio unico, società soggetta a direzione e coordinamento di Coordination S.r.l. - Sede legale Via Monte D'Ago 19, 20159 Ancona. Codice Fiscale, Partita I.V.A., Registro Imprese 0519849; Capitale Sociale 66.150 i. v. JobWorld S.r.l. è iscritta all'Albo Informatico - Sez. IV - Aut. Min. Prov. Prot. n. 5849456</p>
+		<p>JobWorld.it ottempera alla normativa vigente sulla Privacy.
+			JobWorld S.r.l. a socio unico, società soggetta a direzione e
+			coordinamento di Coordination S.r.l. - Sede legale Via Monte D'Ago
+			19, 20159 Ancona. Codice Fiscale, Partita I.V.A., Registro Imprese
+			0519849; Capitale Sociale 66.150 i. v. JobWorld S.r.l. è iscritta
+			all'Albo Informatico - Sez. IV - Aut. Min. Prov. Prot. n. 5849456</p>
 	</footer>
 
 
