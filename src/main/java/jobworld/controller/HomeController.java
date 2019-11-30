@@ -1,6 +1,8 @@
 package jobworld.controller;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
-
+import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.User;
 import jobworld.services.JobOfferService;
@@ -37,7 +39,14 @@ private JobOfferService jobOfferService;
 	@RequestMapping(method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		List<JobOffer> allJobOffers = this.jobOfferService.findAll();
+		List<String> company_image = new ArrayList<String>();
+		for (JobOffer job : allJobOffers) {
+			company_image.add(job.getCompany().getUser().getImage());
+		}
 		model.addAttribute("jobOffers", allJobOffers);
+		model.addAttribute("image", company_image);
+		
+		
 		//Warning: Non ci sono le province dobbiamo risolverlo sulla vista
 		//Implementazione delle api rest per ip address in base alla zona di appartenenza;
 		//TODO: cambiate l'ip per vedere come la form filter cambia automaticamente i nomi di regione, città, provincia.
@@ -58,6 +67,19 @@ private JobOfferService jobOfferService;
 		if (ip_client== null) {
 			ip_client = request.getHeader("X-FORWARDED-FOR");   // Nel caso di collegamento attraverso proxy serve comunque a trovare un ip
 		}*/
+		
+		ArrayList<Long> interested= new ArrayList<Long>();
+		List<JobOffer> best_three= new ArrayList<JobOffer>();
+		for (JobOffer job : allJobOffers) {
+			interested.add(this.jobOfferService.getInterested(job));
+		}
+		for (int i=0; i<3; i++) {
+			int id_job = interested.indexOf(Collections.max(interested));
+			best_three.add(allJobOffers.get(id_job));
+			interested.remove(id_job);
+		}
+		model.addAttribute("best_three",best_three);
+		
 		
 		return "home";
 	}

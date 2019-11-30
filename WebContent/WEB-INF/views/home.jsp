@@ -141,7 +141,7 @@
 					<div class="general_info"></div>
 					<hr>
 					<div class="general_info_body">
-						<img class="pic" src="<c:url value="" />">
+						<img class="pic" src="<c:url value="${j.getCompany().getUser().getImage()}" />">
 						<div class="description">
 							<span class="more">${j.description}</span>
 						</div>
@@ -156,9 +156,9 @@
 			<h2>Le principali aziende</h2>
 			<h3>che collaborano con noi</h3>
 			<div>
-				<img src="<c:url value="/resources/img/galleria1.jpg"/>"> <img
-					src="<c:url value="/resources/img/galleria2.jpg"/>"> <img
-					src="<c:url value="/resources/img/galleria3.jpg"/>">
+				<c:forEach items="${best_three}" var="j">
+				<img src="<c:url value="${j.getCompany().getUser().getImage()}"/>">
+				</c:forEach>
 			</div>
 		</div>
 

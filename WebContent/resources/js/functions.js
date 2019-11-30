@@ -38,7 +38,7 @@ $(document).ready(function() {
 });
 
 
-function form (data){
+function form_filter (data){
 	var dict_region= {
 			"Latium" : "Lazio",
 			"Lombardy" : "Lombardia",
@@ -84,7 +84,7 @@ $.ajax({
     url : "https://raw.githubusercontent.com/matteocontrini/comuni-json/master/comuni.json",
     dataType : 'json', //restituisce un oggetto JSON
     success : function (data,stato) {
-    	form(data);
+    	form_filter(data);
     },
     error : function (richiesta,stato,errori) {
         alert("E' evvenuto un errore. Il stato della chiamata: "+stato);

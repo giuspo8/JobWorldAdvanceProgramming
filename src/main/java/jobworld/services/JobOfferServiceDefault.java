@@ -67,5 +67,10 @@ private JobOfferDao jobofferRepository;
 			String minEducationLevel, String minExperience) {
 		return this.jobofferRepository.filter(region, province, town, position, contractType, minEducationLevel, minExperience);
 	}
+	
+	@Override
+	public Long getInterested(JobOffer jobOffer) {
+		return this.jobofferRepository.getInterested(jobOffer);
+	}
 
 }

@@ -29,5 +29,7 @@ public interface JobOfferService {
 	
 	List<JobOffer> filter(String region, String province, String town, String position, String contractType,
 			String minEducationLevel, String minExperience);
+	
+	Long getInterested(JobOffer jobOffer);
 		
 }
