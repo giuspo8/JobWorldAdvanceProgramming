@@ -162,4 +162,15 @@ public class Person  {
 		candidacies.add(jobOffer);
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "Person [id=" + id + ", firstName=" + firstName + ", secondName=" + secondName + ", birthDate="
+				+ birthDate + ", number=" + number + ", curriculum=" + curriculum + ", interests=" + interests
+				+ ", candidacies=" + candidacies + ", user=" + user + "]";
+	}
+	
+	
+
 }

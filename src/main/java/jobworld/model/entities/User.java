@@ -138,5 +138,12 @@ public class User {
 		this.person = person;
 	}
 
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", email=" + email + ", password=" + password + ", description=" + description
+				+ ", image=" + image + ", role=" + role + ", company=" + company + ", person=" + person + "]";
+	}
+
 	
 }

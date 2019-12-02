@@ -13,13 +13,11 @@ public class DefaultUserDao extends DefaultDao implements UserDao {
 
 	@Override
 	@Transactional
-	public User create(String email, String password, String description, String image,
-			Role role) {
-		User user = new User(email,password,description,description,role);
+	public User create(String email, String password, String description, String image, Role role) {
+		User user = new User(email, password, description, description, role);
 		this.getSession().save(user);
 		return user;
 	}
-
 
 	@Override
 	@Transactional
@@ -31,7 +29,7 @@ public class DefaultUserDao extends DefaultDao implements UserDao {
 	@Override
 	@Transactional
 	public void delete(User user) {
-		this.getSession().delete(user);		
+		this.getSession().delete(user);
 	}
 
 	@Override
@@ -39,12 +37,18 @@ public class DefaultUserDao extends DefaultDao implements UserDao {
 	public User findById(long id) {
 		return getSession().find(User.class, id);
 	}
-	
 
 	@Override
 	@Transactional
 	public List<User> findAll() {
-		return getSession().createQuery("from user u",User.class).getResultList();
+		return getSession().createQuery("from User u", User.class).getResultList();
+	}
+
+	@Override
+	@Transactional
+	public User findByMailandPassword(String email, String password) {
+		return getSession().createQuery("from User u where u.email=:email and u.password=:password", User.class)
+				.setParameter("email", email).setParameter("password",password).getSingleResult();
 	}
 
 }

@@ -16,5 +16,7 @@ public interface UserDao {
 	
 	List<User> findAll();
 
+	User findByMailandPassword(String email, String password);
+	//ritorna l'utente associato con quella mail e password
 
 }

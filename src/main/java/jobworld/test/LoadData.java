@@ -50,7 +50,11 @@ public class LoadData {
 			User u2=userDao.create("loris@gmail.it", "passw3ord1", null, 
 					"/resources/img/galleria6.jpg", Role.BASE);
 			Person p2=personDao.create("Loris", "de luigi",LocalDate.of(1992, 4, 14),"3388775899", "informatica, ingegneria",u2);
-
+			User u4=userDao.create("dark@gmail.it", "pass2word1", null, 
+					"/resources/img/galleria7.jpg", Role.BASE);
+			Person p3= personDao.create("Marco", "vitale", LocalDate.of(1997, 2, 6), 
+					"3387675899", "informatica, ingegneria", u4);
+			
 			/*
 			Person p2= personDao.create();
 			
@@ -376,6 +380,7 @@ public class LoadData {
 			List<JobOffer> joboffers6 = jobOfferDao.findAll();//assert
 			assert joboffers6.equals(3);
 			assert jobOfferDao.getInterested(j1).equals(2);
+			System.out.println(userDao.findByMailandPassword("loris@gmail.it","passw3ord1"));
 			/*
 			List<JobOffer> joboffers7 = jobOfferDao.filter(null, null, null, null, null, null,null);
 			for (JobOffer j : joboffers7) {

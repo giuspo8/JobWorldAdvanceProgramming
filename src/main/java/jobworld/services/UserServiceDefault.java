@@ -45,4 +45,9 @@ public class UserServiceDefault implements UserService {
 		this.userRepository = userRepository;
 	}
 
+	@Override
+	public User findByMailandPassword(String email, String password) {
+		return this.userRepository.findByMailandPassword(email, password);
+	}
+
 }
