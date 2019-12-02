@@ -39,6 +39,7 @@ public class DefaultUserDao extends DefaultDao implements UserDao {
 	public User findById(long id) {
 		return getSession().find(User.class, id);
 	}
+	
 
 	@Override
 	@Transactional

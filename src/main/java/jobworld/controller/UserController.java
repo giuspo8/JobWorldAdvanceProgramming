@@ -1,40 +1,30 @@
 package jobworld.controller;
 
-import java.text.DateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
-import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
-import jobworld.model.entities.Person;
-import jobworld.model.entities.User;
-import jobworld.model.entities.User.Role;
 import jobworld.services.JobOfferService;
 import jobworld.services.PersonService;
 import jobworld.services.UserService;
-@Controller
-public class HomeController {
 
+@RequestMapping("/user")
+@Controller
+public class UserController {
 	/**
-	 * Classe Controllore Home
+	 * Classe Controllore User
 	 * 
 	 * @author Giuseppe Costantini
 	 * @author Simone di Saverio
@@ -42,11 +32,13 @@ public class HomeController {
 	 * @author Savio Feng
 	 * @version 1.0
 	 */
-private JobOfferService jobOfferService;
-private UserService userService;
-private PersonService personService;
-	@RequestMapping(method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	private JobOfferService jobOfferService;
+	private UserService userService;
+	private PersonService personService;
+	
+
+	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+	public String homeUser(@PathVariable("userId") Long userId,Locale locale , Model model) {
 		List<JobOffer> allJobOffers = this.jobOfferService.findAll();
 		List<String> company_image = new ArrayList<String>();
 		for (JobOffer job : allJobOffers) {
@@ -54,6 +46,7 @@ private PersonService personService;
 		}
 		model.addAttribute("jobOffers", allJobOffers);
 		model.addAttribute("image", company_image);
+		
 		
 		//Warning: Non ci sono le province dobbiamo risolverlo sulla vista
 		//Implementazione delle api rest per ip address in base alla zona di appartenenza;
@@ -88,10 +81,11 @@ private PersonService personService;
 		}
 		model.addAttribute("best_three",best_three);
 		
-		
-		
-		
-		return "home";
+		String firstName= this.personService.findById(userId).getFirstName();
+		String secondName=this.personService.findById(userId).getSecondName();
+		model.addAttribute("firstName",firstName);
+		model.addAttribute("secondName",secondName);
+		return "user/homeUser";
 	}
 	
 	@Autowired
@@ -105,56 +99,5 @@ private PersonService personService;
 	@Autowired
 	public void setPersonService(PersonService personService) {
 		this.personService = personService;
-	}
-
-	@PostMapping(value = "/filter")
-	public String filter(@RequestParam Map<String,String> allParams, Model model) {
-		List<JobOffer> jobOffers = this.jobOfferService.filter(allParams.get("region"),
-				allParams.get("province"), allParams.get("town"),
-				allParams.get("position"), allParams.get("contractType"),
-				allParams.get("minEducationLevel"), allParams.get("minExperience"));
-		model.addAttribute("jobOffers", jobOffers);
-		return "home";
-	}
-	
-	@GetMapping("/register")
-	public String register() {
-		return "register";
-	}
-	
-	@PostMapping("/add")
-	public String add(@RequestParam Map<String,String> allParams) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-		LocalDate birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
-		User user = userService.create(allParams.get("email"), allParams.get("password"), allParams.get("description"), "/resources/img/galleria5.jpg", Role.BASE);
-		if(true) {
-			Person person = personService.create(allParams.get("firstName"), allParams.get("secondName"), birthDate,allParams.get("number"), null, user);
-		} else {
-			
-		}
-		return "redirect:/";
-		
-	}
-	
-	@GetMapping("/login")
-	public String login(){
-		return "login";
-	}
-	
-	@PostMapping("/autentication")
-	public String autentication(@RequestParam Map<String,String> allParams) {
-		//mi serve una select che mi permetta di cercare lo user a partire da email e password.
-		return "redirect:/";
-		
-	}
-	
-	@GetMapping("/chisiamo")
-	public String chisiamo(){
-		return "chisiamo";
-	}
-	
-	@GetMapping("/faq")
-	public String faq(){
-		return "faq";
 	}
 }

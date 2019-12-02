@@ -15,4 +15,6 @@ public interface UserDao {
 	User findById(long id);
 	
 	List<User> findAll();
+
+
 }
