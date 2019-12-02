@@ -132,11 +132,11 @@ private CompanyService companyService;
 	@PostMapping("/add")
 	public String add(@RequestParam Map<String,String> allParams) {
 		User user = userService.create(allParams.get("email"), allParams.get("password"), allParams.get("description"), null, Role.BASE);
-		if(allParams.get("type") == "person") {
+		if(allParams.get("type").equals("person")) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 			LocalDate birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
 			Person person = personService.create(allParams.get("firstName"), allParams.get("secondName"), birthDate, allParams.get("number"), null, user);
-		} else if(allParams.get("type") == "company"){
+		} else if(allParams.get("type").equals("company")){
 			Company company = companyService.create(allParams.get("name"), user);
 		}
 		return "redirect:/";
