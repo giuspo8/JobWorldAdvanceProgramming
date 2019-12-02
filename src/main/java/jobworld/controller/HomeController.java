@@ -135,6 +135,11 @@ private PersonService personService;
 		
 	}
 	
+	@GetMapping("/login")
+	public String login(){
+		return "login";
+	}
+	
 	@GetMapping("/chisiamo")
 	public String chisiamo(){
 		return "chisiamo";
