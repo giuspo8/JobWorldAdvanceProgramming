@@ -8,6 +8,14 @@
  * @version 1.0
  */
 $(document).ready(function() {
+	$('input[name=type]:radio').change(function() {
+	    if (this.value == 'person') {
+	        $("#regform_div").html("<table><tr><td><label class='searchsub_lbl'>E-mail</label></td></tr><tr><td><input placeholder='E-mail' name='email' class='searchsub_input'></td></tr></table><table><tr><td><label class='searchsub_lbl'>Password</label></td><td><label class='searchsub_lbl'>Ripeti Password</label></td></tr><tr><td><input type='password' id='p' placeholder='Password' name='password' class='searchsub_input'></td><td><input type='password' id='rp' oninput='passvalid()' placeholder='Ripeti Password' class='searchsub_input'></td></tr><tr><td><label class='searchsub_lbl'>Nome</label></td><td><label class='searchsub_lbl'>Cognome</label></td></tr><tr><td><input placeholder='Nome' name='firstName' class='searchsub_input'></td><td><input placeholder='Cognome' name='secondName' class='searchsub_input'></td></tr><tr><td><label class='searchsub_lbl'>Data di nascita</label></td><td><label class='searchsub_lbl'>Numero di telefono</label></td><tr><td><input placeholder='Data di nascita' name='birthDate' class='searchsub_input'></td> <td><input placeholder='Numero di telefono' name='number' class='searchsub_input'></td></tr></table><table><tr><td><label class='searchsub_lbl'>Interessi</label><select multiple name='interests' class='searchsub_input'><option value='' selected>Interessi</option><option value='INFORMATICA'>Informatica</option><option value='ECONOMIA'>Economia</option></select></td></tr></table><label class='searchsub_lbl'>Descrizione</label><br><textarea form='regform' name='description'></textarea><div id='searchsub'><input disabled id='submit' type='submit' value='Invio'></div>");
+	    }
+	    else if (this.value == 'company') {
+	    	$("#regform_div").html("<table><tr><td><label class='searchsub_lbl'>E-mail</label></td></tr><tr><td><input placeholder='E-mail' name='email' class='searchsub_input'></td></tr></table><table><tr><td><label class='searchsub_lbl'>Password</label></td><td><label class='searchsub_lbl'>Ripeti Password</label></td></tr><tr><td><input type='password' id='p' placeholder='Password' name='password' class='searchsub_input'></td><td><input type='password' id='rp' oninput='passvalid()' placeholder='Ripeti Password' class='searchsub_input'></td></tr><tr><td><label class='searchsub_lbl'>Nome Azienda</label></td></tr><tr><td><input placeholder='Nome Azienda' name='name' class='searchsub_input'></td></tr></table><div id='searchsub'><input disabled id='submit' type='submit' value='Invio'></div>");
+	    }
+	});
     var char_lim = 400;
     var dots = "...";
     var more_t = "Mostra di più";
@@ -90,3 +98,16 @@ $.ajax({
         alert("E' evvenuto un errore. Il stato della chiamata: "+stato);
     },
 });
+
+
+function passvalid() {
+	if($('#rp').val() != $('#p').val()) {
+		$("#submit").attr("disabled", true).addClass("searchsub_hover");
+		$('#rp').addClass("error searchsub_input_"); $('#p').addClass("error searchsub_input_");
+	} else {
+		$("#submit").attr("disabled", false).removeClass("searchsub_hover");
+		$('#rp').removeClass("error searchsub_input_"); $('#p').removeClass("error searchsub_input_");
+	}
+}
+
+

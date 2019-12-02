@@ -395,3 +395,7 @@ footer .faq {
 	display-block: inline;
 	font-size: 10pt;
 }
+
+.error {
+	border-color: red;
+}

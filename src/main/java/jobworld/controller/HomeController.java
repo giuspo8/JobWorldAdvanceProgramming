@@ -27,6 +27,7 @@ import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
 import jobworld.model.entities.User;
 import jobworld.model.entities.User.Role;
+import jobworld.services.CompanyService;
 import jobworld.services.JobOfferService;
 import jobworld.services.PersonService;
 import jobworld.services.UserService;
@@ -45,6 +46,7 @@ public class HomeController {
 private JobOfferService jobOfferService;
 private UserService userService;
 private PersonService personService;
+private CompanyService companyService;
 	@RequestMapping(method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		List<JobOffer> allJobOffers = this.jobOfferService.findAll();
@@ -106,6 +108,10 @@ private PersonService personService;
 	public void setPersonService(PersonService personService) {
 		this.personService = personService;
 	}
+	@Autowired
+	public void setCompanyService(CompanyService companyService) {
+		this.companyService = companyService;
+	}
 
 	@PostMapping(value = "/filter")
 	public String filter(@RequestParam Map<String,String> allParams, Model model) {
@@ -122,15 +128,16 @@ private PersonService personService;
 		return "register";
 	}
 	
+	@SuppressWarnings("unused")
 	@PostMapping("/add")
 	public String add(@RequestParam Map<String,String> allParams) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-		LocalDate birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
-		User user = userService.create(allParams.get("email"), allParams.get("password"), allParams.get("description"), "/resources/img/galleria5.jpg", Role.BASE);
-		if(true) {
-			Person person = personService.create(allParams.get("firstName"), allParams.get("secondName"), birthDate,allParams.get("number"), null, user);
-		} else {
-			
+		User user = userService.create(allParams.get("email"), allParams.get("password"), allParams.get("description"), null, Role.BASE);
+		if(allParams.get("type") == "person") {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+			LocalDate birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
+			Person person = personService.create(allParams.get("firstName"), allParams.get("secondName"), birthDate, allParams.get("number"), null, user);
+		} else if(allParams.get("type") == "company"){
+			Company company = companyService.create(allParams.get("name"), user);
 		}
 		return "redirect:/";
 		
