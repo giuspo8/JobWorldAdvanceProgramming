@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,7 +50,7 @@ private JobOfferService jobOfferService;
 		
 		//Warning: Non ci sono le province dobbiamo risolverlo sulla vista
 		//Implementazione delle api rest per ip address in base alla zona di appartenenza;
-		//TODO: cambiate l'ip per vedere come la form filter cambia automaticamente i nomi di regione, città, provincia.
+		//TODO: cambiate l'ip per vedere come la form filter cambia automaticamente i nomi di regione, cittï¿½, provincia.
 		//String ip ="79.18.192.39";  //Abruzzo Atri
 		String ip ="37.160.70.194";   //Lazio Roma
 		//String ip ="2.235.168.0";	// Nichelino Piemonte
@@ -99,12 +100,17 @@ private JobOfferService jobOfferService;
 		return "home";
 	}
 	
-	@RequestMapping("/chisiamo")
+	@GetMapping("/register")
+	public String register() {
+		return "register";
+	}
+	
+	@GetMapping("/chisiamo")
 	public String chisiamo(){
 		return "chisiamo";
 	}
 	
-	@RequestMapping("/faq")
+	@GetMapping("/faq")
 	public String faq(){
 		return "faq";
 	}

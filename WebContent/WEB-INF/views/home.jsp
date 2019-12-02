@@ -119,7 +119,7 @@
 								</form:form>
 							</div>
 						</nav> </span> <span><img src="<c:url value="resources/img/logo.png"/>"></span></li>
-				<li><a href="">Registrati</a></li>
+				<li><a href="<c:url value="/register"/>">Registrati</a></li>
 				<li>-</li>
 				<li><a href="" class="login_btn">Accedi</a></li>
 			</ul>
