@@ -50,59 +50,68 @@
 				<c:url value="/add" var="action_url" />
 				        
 				<form:form id="regform" method="POST" action="${action_url}">
-					<h2>Cerca lavoro:</h2>
-             						<table>
+					<h2>Registrati</h2>
+					<h4>Che tipo di utente sei?</h4>
+					<input type="radio" name="type" checked value="person">Persona<br>
+					<input type="radio" name="type" value="company">Azienda<br>
+					<div id="regform_div">
+             		<table>
 						<tr>
-							<td><label class="searchsub_lbl">E-mail</label></td>
+							<td><label class='searchsub_lbl'>E-mail</label></td>
 						</tr>
 						<tr>
-							<td><input placeholder="E-mail" name="email"
-								class="searchsub_input"></td>
+							<td><input placeholder='E-mail' name='email'
+								class='searchsub_input'></td>
+						</tr>
+						</table><table>
+						<tr>
+							<td><label class='searchsub_lbl'>Password</label></td>
+							<td><label class='searchsub_lbl'>Ripeti Password</label></td>
 						</tr>
 						<tr>
-							<td><label class="searchsub_lbl">Password</label></td>
-							<td><label class="searchsub_lbl">Ripeti Password</label></td>
+							<td><input type='password' id='p' placeholder='Password' name='password'
+								class='searchsub_input'></td>
+							<td><input type='password' id='rp' oninput='passvalid()' placeholder='Ripeti Password'
+								class='searchsub_input'></td>
 						</tr>
 						<tr>
-							<td><input placeholder="Password" name="password"
-								class="searchsub_input"></td>
-							<td><input type="password" placeholder="Ripeti Password"
-								class="searchsub_input"></td>
+							<td><label class='searchsub_lbl'>Nome</label></td>
+							<td><label class='searchsub_lbl'>Cognome</label></td>
 						</tr>
 						<tr>
-							<td><label class="searchsub_lbl">Nome</label></td>
-							<td><label class="searchsub_lbl">Cognome</label></td>
+							<td><input placeholder='Nome' name='firstName'
+								class='searchsub_input'></td>
+							<td><input placeholder='Cognome' name='secondName'
+								class='searchsub_input'></td>
 						</tr>
 						<tr>
-							<td><input placeholder="Nome" name="firstName"
-								class="searchsub_input"></td>
-							<td><input placeholder="Cognome" name="secondName"
-								class="searchsub_input"></td>
-						</tr>
+							<td><label class='searchsub_lbl'>Data di nascita</label></td>
+							<td><label class='searchsub_lbl'>Numero di telefono</label></td>
 						<tr>
-							<td><label class="searchsub_lbl">Data di nascita</label></td>
-							<td><label class="searchsub_lbl">Numero di telefono</label></td>
-						</tr>
-						<tr>
-							<td><input placeholder="Data di nascita" name="birthDate"
-								class="searchsub_input"></td>
-							<td><input placeholder="Numero di telefono" name="number"
-								class="searchsub_input"></td>
-						</tr>
+							<td><input placeholder='Data di nascita' name='birthDate'
+								class='searchsub_input'></td>
+							<td><input placeholder='Numero di telefono' name='number'
+								class='searchsub_input'></td>
+						</tr>						
 					</table>
-
-
-					<div id="searchsub">
-						<input type="submit" value="Invio">  
+					<table><tr>
+							<td><label class='searchsub_lbl'>Interessi</label><select
+								multiple name='interests'
+								class='searchsub_input'>
+									<option value='' selected>Interessi</option>
+									<option value='INFORMATICA'>Informatica</option>
+									<option value='ECONOMIA'>Economia</option>
+							</select></td>
+						</tr></table>
+						<label class='searchsub_lbl'>Descrizione</label><br>
+					<textarea form='regform' name='description'></textarea>
+					<div id='searchsub'>
+						<input disabled id='submit' type='submit' value='Invio'>  
+					</div>
 					</div>
 				</form:form>
-				<textarea form="regform" name="description">
-At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
-			</textarea>
 			</div>
 		</div>
-		<footer>
-			
-		</footer>
+		<footer> </footer>
 </body>
 </html>
