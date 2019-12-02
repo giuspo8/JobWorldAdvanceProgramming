@@ -128,7 +128,7 @@
 	<div class="body">
 		<div class="container_slide">
 			<div class="slide">
-				<img src="<c:url value="resources/img/jobworldhome.jpeg"/>">
+				<img src="<c:url value="../resources/img/jobworldhome.jpeg"/>">
 			</div>
 			<hr>
 		</div>

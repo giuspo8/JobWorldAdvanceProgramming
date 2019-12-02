@@ -150,8 +150,12 @@ private CompanyService companyService;
 	
 	@PostMapping("/autentication")
 	public String autentication(@RequestParam Map<String,String> allParams) {
-		//mi serve una select che mi permetta di cercare lo user a partire da email e password.
-		return "redirect:/";
+		User user= this.userService.findByMailandPassword(allParams.get("email"), allParams.get("password"));
+		if (user==null) {
+			return "redirect:/";
+		} else {
+			return "redirect:/user/"+user.getId();
+		}
 		
 	}
 	

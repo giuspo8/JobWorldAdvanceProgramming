@@ -50,7 +50,7 @@
 		</div>
 		<div class="offer" style="width: 50%;">
 			<div style="text-align:center; width:80%; margin:auto;">
-				<c:url value="/filter" var="action_url" />
+				<c:url value="/autentication" var="action_url" />
 				       
 				<form:form method="POST" action="${action_url}">
 					<h2>LOGIN</h2>
