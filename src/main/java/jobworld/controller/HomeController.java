@@ -1,6 +1,8 @@
 package jobworld.controller;
 
 import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -22,8 +24,12 @@ import org.springframework.web.client.RestTemplate;
 
 import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
+import jobworld.model.entities.Person;
 import jobworld.model.entities.User;
+import jobworld.model.entities.User.Role;
 import jobworld.services.JobOfferService;
+import jobworld.services.PersonService;
+import jobworld.services.UserService;
 @Controller
 public class HomeController {
 
@@ -37,6 +43,8 @@ public class HomeController {
 	 * @version 1.0
 	 */
 private JobOfferService jobOfferService;
+private UserService userService;
+private PersonService personService;
 	@RequestMapping(method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		List<JobOffer> allJobOffers = this.jobOfferService.findAll();
@@ -89,6 +97,14 @@ private JobOfferService jobOfferService;
 	public void setJobOfferService(JobOfferService jobOfferService) {
 		this.jobOfferService = jobOfferService;
 	}
+	@Autowired
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+	@Autowired
+	public void setPersonService(PersonService personService) {
+		this.personService = personService;
+	}
 
 	@PostMapping(value = "/filter")
 	public String filter(@RequestParam Map<String,String> allParams, Model model) {
@@ -103,6 +119,20 @@ private JobOfferService jobOfferService;
 	@GetMapping("/register")
 	public String register() {
 		return "register";
+	}
+	
+	@PostMapping("/add")
+	public String add(@RequestParam Map<String,String> allParams) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+		LocalDate birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
+		User user = userService.create(allParams.get("email"), allParams.get("password"), allParams.get("description"), "/resources/img/galleria5.jpg", Role.BASE);
+		if(true) {
+			Person person = personService.create(allParams.get("firstName"), allParams.get("secondName"), birthDate,allParams.get("number"), null, user);
+		} else {
+			
+		}
+		return "redirect:/";
+		
 	}
 	
 	@GetMapping("/chisiamo")

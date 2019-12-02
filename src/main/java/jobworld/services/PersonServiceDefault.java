@@ -60,7 +60,7 @@ private PersonDao personRepository;
 
 
 	@Autowired
-	public void setSingerRepository(PersonDao personRepository) {
+	public void setPersonRepository(PersonDao personRepository) {
 		this.personRepository = personRepository;
 	}
 

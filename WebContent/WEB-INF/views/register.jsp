@@ -46,31 +46,63 @@
 	</header>
 	<div class="body">
 		<div class="container_slide">
-			<div class="slide"></div>
+			<div class="slide">
+				<c:url value="/add" var="action_url" />
+				        
+				<form:form id="regform" method="POST" action="${action_url}">
+					<h2>Cerca lavoro:</h2>
+             						<table>
+						<tr>
+							<td><label class="searchsub_lbl">E-mail</label></td>
+						</tr>
+						<tr>
+							<td><input placeholder="E-mail" name="email"
+								class="searchsub_input"></td>
+						</tr>
+						<tr>
+							<td><label class="searchsub_lbl">Password</label></td>
+							<td><label class="searchsub_lbl">Ripeti Password</label></td>
+						</tr>
+						<tr>
+							<td><input placeholder="Password" name="password"
+								class="searchsub_input"></td>
+							<td><input type="password" placeholder="Ripeti Password"
+								class="searchsub_input"></td>
+						</tr>
+						<tr>
+							<td><label class="searchsub_lbl">Nome</label></td>
+							<td><label class="searchsub_lbl">Cognome</label></td>
+						</tr>
+						<tr>
+							<td><input placeholder="Nome" name="firstName"
+								class="searchsub_input"></td>
+							<td><input placeholder="Cognome" name="secondName"
+								class="searchsub_input"></td>
+						</tr>
+						<tr>
+							<td><label class="searchsub_lbl">Data di nascita</label></td>
+							<td><label class="searchsub_lbl">Numero di telefono</label></td>
+						</tr>
+						<tr>
+							<td><input placeholder="Data di nascita" name="birthDate"
+								class="searchsub_input"></td>
+							<td><input placeholder="Numero di telefono" name="number"
+								class="searchsub_input"></td>
+						</tr>
+					</table>
+
+
+					<div id="searchsub">
+						<input type="submit" value="Invio">  
+					</div>
+				</form:form>
+				<textarea form="regform" name="description">
+At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
+			</textarea>
+			</div>
 		</div>
 		<footer>
-			<div class="container">
-				<h2>Le principali aziende</h2>
-				<h3>che collaborano con noi</h3>
-				<div>
-					<img src="<c:url value="/resources/img/galleria1.jpg"/>"> <img
-						src="<c:url value="/resources/img/galleria2.jpg"/>"> <img
-						src="<c:url value="/resources/img/galleria3.jpg"/>">
-				</div>
-			</div>
-			<div>
-				<div class="faq">
-					<a href="<c:url value=""/>">Tutto su JobWorld</a> - <a href="">FAQ
-						- Aiuto</a>
-				</div>
-			</div>
-			<p>JobWorld.it ottempera alla normativa vigente sulla Privacy.
-				JobWorld S.r.l. a socio unico, società soggetta a direzione e
-				coordinamento di Coordination S.r.l. - Sede legale Via Monte D'Ago
-				19, 20159 Ancona. Codice Fiscale, Partita I.V.A., Registro Imprese
-				04603040967; Capitale Sociale 98.100 i. v. JobWorld S.r.l. è
-				iscritta all'Albo Informatico - Sez. IV - Aut. Min. Prov. Prot. n.
-				0000138</p>
+			
 		</footer>
 </body>
 </html>

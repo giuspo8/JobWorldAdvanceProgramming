@@ -2,14 +2,20 @@ package jobworld.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+
 import jobworld.model.dao.UserDao;
 import jobworld.model.entities.User;
 import jobworld.model.entities.User.Role;
-
+@Transactional
+@Service("userService")
 public class UserServiceDefault implements UserService {
 	
 	private UserDao userRepository;
-
+	@Transactional
 	@Override
 	public User create(String email, String password, String description, String image, Role role) {
 		return this.userRepository.create(email, password, description, image, role);
@@ -33,6 +39,10 @@ public class UserServiceDefault implements UserService {
 	@Override
 	public List<User> findAll() {
 		return this.userRepository.findAll();
+	}
+	@Autowired
+	public void setUserRepository(UserDao userRepository) {
+		this.userRepository = userRepository;
 	}
 
 }

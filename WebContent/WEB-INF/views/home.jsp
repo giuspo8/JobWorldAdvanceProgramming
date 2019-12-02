@@ -82,7 +82,7 @@
 													istruzione richiesto</label></td>
 										</tr>
 										<tr>
-											<td><select class="searchsub_input searchsub_select">
+											<td><select name="minEducationLevel" class="searchsub_input searchsub_select">
 													<option value="" selected>Livello di istruzione</option>
 													<option value="SENZA_STUDI">Nessun livello di istruzione</option>
 													<option value="LICENZA_MEDIA">Licenza media</option>
