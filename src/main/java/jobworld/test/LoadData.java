@@ -334,8 +334,10 @@ public class LoadData {
 
 			personService.apply(p1, j1);
 			personService.apply(p2, j1);
-			//jobOfferDao.delete(j1);//DA ERRORE 
 			personService.apply(p1, j3);
+			personDao.unApplyAll(j1);
+			//jobOfferDao.update(j1);
+			//jobOfferService.delete(j1);//DA ERRORE
 			//personService.delete(p1);//DA ERRORE 
 			//companyDao.delete(c1); //DA ERRORE 
 			/*
@@ -380,7 +382,7 @@ public class LoadData {
 			List<JobOffer> joboffers6 = jobOfferDao.findAll();//assert
 			assert joboffers6.equals(3);
 			assert jobOfferDao.getInterested(j1).equals(2);
-			System.out.println(userDao.findByMailandPassword("loris@gmail.it","passw3ord1"));
+			//System.out.println(userDao.findByMailandPassword("loris@gmail.it","passw3ord1"));
 			/*
 			List<JobOffer> joboffers7 = jobOfferDao.filter(null, null, null, null, null, null,null);
 			for (JobOffer j : joboffers7) {

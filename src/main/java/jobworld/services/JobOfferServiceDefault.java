@@ -18,9 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import jobworld.model.dao.JobOfferDao;
+import jobworld.model.dao.PersonDao;
 import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.JobOffer.Education;
+
 
 
 
@@ -28,6 +30,7 @@ import jobworld.model.entities.JobOffer.Education;
 @Service("jobofferService")
 public class JobOfferServiceDefault implements JobOfferService{
 private JobOfferDao jobofferRepository;
+private PersonDao personRepository;
 	
 
 
@@ -53,6 +56,7 @@ private JobOfferDao jobofferRepository;
 	@Transactional
 	@Override
 	public void delete(JobOffer joboffer) {
+		//this.personRepository.unApplyAll(joboffer);
 		this.jobofferRepository.delete(joboffer);
 	}
 
@@ -61,14 +65,21 @@ private JobOfferDao jobofferRepository;
 	public void setJobOfferRepository(JobOfferDao jobofferRepository) {
 		this.jobofferRepository = jobofferRepository;
 	}
+	
+	@Autowired
+	public void setPersonRepository(PersonDao personRepository) {
+		this.personRepository = personRepository;
+	}
 
 	@Override
+	@Transactional
 	public List<JobOffer> filter(String region, String province, String town, String position, String contractType,
 			String minEducationLevel, String minExperience) {
 		return this.jobofferRepository.filter(region, province, town, position, contractType, minEducationLevel, minExperience);
 	}
 	
 	@Override
+	@Transactional
 	public Long getInterested(JobOffer jobOffer) {
 		return this.jobofferRepository.getInterested(jobOffer);
 	}

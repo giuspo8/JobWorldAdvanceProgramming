@@ -1,5 +1,6 @@
 package jobworld.model.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -158,9 +159,9 @@ public class JobOffer {
 
 	//campo data candidatura
 	@ManyToMany(fetch= FetchType.EAGER)
-	@JoinTable(name = "candidacies", joinColumns = @JoinColumn(name = "JOB_OFFER_ID", updatable=false), inverseJoinColumns = @JoinColumn(name = "PERSON_ID", updatable=false))
+	@JoinTable(name = "candidacies", joinColumns = @JoinColumn(name = "JOB_OFFER_ID"), inverseJoinColumns = @JoinColumn(name = "PERSON_ID"))
 	public Set<Person> getCandidancies() {
-		return candidancies;
+		return this.candidancies;
 	}
 
 	public void setCandidancies(Set<Person> candidancies) {

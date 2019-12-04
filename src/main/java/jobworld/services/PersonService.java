@@ -28,4 +28,6 @@ void apply(Person person, JobOffer joboffer);
 	
 void delete(Person contact);
 
+void unapplyAll(JobOffer joboffer);
+
 }

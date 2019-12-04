@@ -1,11 +1,14 @@
 package jobworld.model.dao;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
 import jobworld.model.entities.User;
 
@@ -53,7 +56,26 @@ public class DefaultPersonDao extends DefaultDao implements PersonDao {
 	@Override
 	@Transactional
 	public List<Person> findAll() {
-		return getSession().createQuery("from person p", Person.class).getResultList();
+		return getSession().createQuery("from Person p", Person.class).getResultList();
+	}
+
+
+	@Override
+	@Transactional
+	public void unApplyAll(JobOffer jobOffer) {	
+		List<Long> personId=getSession().createQuery("select p.id from Person p join p.candidacies c where c.id=:jobOfferid",Long.class)
+				.setParameter("jobOfferid", jobOffer.getId()).getResultList();
+		for(Long pId:personId) {
+			Person p=findById(pId);
+			//Set<JobOffer> jobOfferList=new HashSet<JobOffer>();
+			p.getCandidacies().remove(jobOffer);
+			//jobOfferList.addAll(p.getCandidacies());
+			//p.setCandidacies(jobOfferList);
+			//p.getCandidacies().clear();
+			update(p);
+			//p.setCandidacies(jobOfferList);
+			//update(p);
+		}		
 	}
 
 

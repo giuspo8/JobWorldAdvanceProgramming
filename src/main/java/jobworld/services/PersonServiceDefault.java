@@ -10,11 +10,16 @@
 package jobworld.services;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import jobworld.model.dao.JobOfferDao;
 import jobworld.model.dao.PersonDao;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
@@ -65,10 +70,20 @@ private PersonDao personRepository;
 	}
 
 	@Override
+	@Transactional
 	public void apply(Person person, JobOffer joboffer) {
+		Set<JobOffer> jobOfferList=new HashSet<JobOffer>();
+		jobOfferList.addAll(person.getCandidacies());
 		person.getCandidacies().clear();
-		person.getCandidacies().add(joboffer);
-	//	this.jobOfferRepository.update(joboffer);
 		this.personRepository.update(person);
+		jobOfferList.add(joboffer);
+		person.setCandidacies(jobOfferList);
+		this.personRepository.update(person);
+	}
+
+	@Override
+	@Transactional
+	public void unapplyAll(JobOffer joboffer) {
+		this.personRepository.unApplyAll(joboffer);
 	}
 }
