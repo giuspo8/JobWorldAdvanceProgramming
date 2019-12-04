@@ -253,7 +253,7 @@ public class LoadData {
 					"· Capacit� di utilizzo del computer.", 
 					"determinato", Education.DIPLOMA_DI_MATURITA, "6 mesi",LocalDate.of(2019, 12, 25), c1);
 			j2.setPublicationDate(j2.getPublicationDate() + 10000);
-			jobOfferDao.update(j2);
+			j2=jobOfferDao.update(j2);
 			
 			JobOffer j3=jobOfferDao.create("Campania", "Napoli", "Napoli" , "Programmatore Java",
 					"Si richiedono le seguenti caratteristiche:\r\n" + 
@@ -332,10 +332,10 @@ public class LoadData {
 			 * (JobOffer j : jobOffers5) { System.out.println(j); }
 			 */
 
-			personService.apply(p1, j1);
-			personService.apply(p2, j1);
-			personService.apply(p1, j3);
-			personDao.unApplyAll(j1);
+			p1=personService.apply(p1, j1);
+			p2=personService.apply(p2, j1);
+			p1=personService.apply(p1, j3);
+			//personDao.unApplyAll(j1);
 			//jobOfferDao.update(j1);
 			//jobOfferService.delete(j1);//DA ERRORE
 			//personService.delete(p1);//DA ERRORE 

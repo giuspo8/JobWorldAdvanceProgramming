@@ -24,7 +24,7 @@ Person create(String firstName, String secondName,LocalDate birthDate, String nu
 	
 Person update(Person person);
 
-void apply(Person person, JobOffer joboffer);
+Person apply(Person person, JobOffer joboffer);
 	
 void delete(Person contact);
 
