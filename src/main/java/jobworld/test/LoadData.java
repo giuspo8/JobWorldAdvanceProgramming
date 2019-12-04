@@ -335,6 +335,9 @@ public class LoadData {
 			p1=personService.apply(p1, j1);
 			p2=personService.apply(p2, j1);
 			p1=personService.apply(p1, j3);
+			p3=personService.apply(p3, j2);
+			p3=personService.apply(p3, j4);
+			p3=personService.apply(p3, j5);
 			//personDao.unApplyAll(j1);
 			//jobOfferDao.update(j1);
 			//jobOfferService.delete(j1);//DA ERRORE
