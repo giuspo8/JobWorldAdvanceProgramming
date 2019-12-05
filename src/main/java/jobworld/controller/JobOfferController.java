@@ -23,8 +23,6 @@ import jobworld.controller.JobOfferController;
 import jobworld.model.entities.JobOffer;
 import jobworld.services.JobOfferService;
 
-
-
 @RequestMapping("/jobOffers")
 @Controller
 public class JobOfferController {
@@ -39,8 +37,7 @@ private JobOfferService jobOfferService;
 		logger.info("Listing JobOffers");
 		List<JobOffer> allJobOffers = this.jobOfferService.findAll();
 		uiModel.addAttribute("jobOffers", allJobOffers);
-		logger.info("No. of jobOffers: " + allJobOffers.size());
-		
+		logger.info("No. of jobOffers: " + allJobOffers.size());		
 		return "jobOffers/list";
 	}
 	

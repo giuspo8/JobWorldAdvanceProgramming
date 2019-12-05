@@ -40,6 +40,7 @@ public class LoadData {
 			UserDao userDao=ctx.getBean(UserDao.class);
 			
 			PersonService personService= ctx.getBean(PersonService.class);
+			@SuppressWarnings("unused")
 			JobOfferService jobOfferService= ctx.getBean(JobOfferService.class);
 			
 			// Popolamento dei dati nel database 
@@ -296,6 +297,7 @@ public class LoadData {
 					"Indeterminato", Education.LAUREA_SPECIALISTICA, "indeterminato",LocalDate.of(2019, 12, 25),c1);
 			
 			
+			@SuppressWarnings("unused")
 			Curriculum c11=curriculumDao.create(p1, "01/2005–alla data attuale Assistente amministrativo\r\n" + 
 					"Alma Mater Studiorum\r\n" + 
 					"Via Zamboni 37, 40126 Bologna\r\n" + 

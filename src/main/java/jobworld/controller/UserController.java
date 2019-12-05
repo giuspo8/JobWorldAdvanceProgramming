@@ -33,6 +33,7 @@ public class UserController {
 	 * @version 1.0
 	 */
 	private JobOfferService jobOfferService;
+	@SuppressWarnings("unused")
 	private UserService userService;
 	private PersonService personService;
 	
@@ -85,7 +86,16 @@ public class UserController {
 		String secondName=this.personService.findById(userId).getSecondName();
 		model.addAttribute("firstName",firstName);
 		model.addAttribute("secondName",secondName);
-		return "user/homeUser";
+		return "user/home";
+	}
+	
+	@GetMapping("/profile")
+	public String profile() {
+		return "user/profile";
+	}
+	@GetMapping("/curriculum")
+	public String curriculum() {
+		return "user/curriculum";
 	}
 	
 	@Autowired

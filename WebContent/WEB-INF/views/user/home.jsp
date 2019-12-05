@@ -119,16 +119,16 @@
 								</form:form>
 							</div>
 						</nav> </span> <span><img src="<c:url value="resources/img/logo.png"/>"></span></li>
-				<li><a href=""> Curriculum </a></li>
+				<li><a href="">Logout</a></li>
 				<li>-</li>
-				<li><a href="" class="login_btn"> ${firstName} ${secondName }</a></li>
+				<li><a href="<c:url value="/user/profile"/>" class="login_btn">${firstName} ${secondName}</a></li>
 			</ul>
 		</div>
 	</header>
 	<div class="body">
 		<div class="container_slide">
 			<div class="slide">
-				<img src="<c:url value="../resources/img/jobworldhome.jpeg"/>">
+				<img src="<c:url value="resources/img/jobworldhome.jpeg"/>">
 			</div>
 			<hr>
 		</div>

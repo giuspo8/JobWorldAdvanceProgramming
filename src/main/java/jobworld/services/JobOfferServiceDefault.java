@@ -30,6 +30,7 @@ import jobworld.model.entities.JobOffer.Education;
 @Service("jobofferService")
 public class JobOfferServiceDefault implements JobOfferService{
 private JobOfferDao jobofferRepository;
+@SuppressWarnings("unused")
 private PersonDao personRepository;
 	
 

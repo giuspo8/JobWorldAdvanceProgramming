@@ -88,10 +88,6 @@ private CompanyService companyService;
 			interested.remove(id_job);
 		}
 		model.addAttribute("best_three",best_three);
-		
-		
-		
-		
 		return "home";
 	}
 	
@@ -154,8 +150,7 @@ private CompanyService companyService;
 			return "redirect:/";
 		} else {
 			return "redirect:/user/"+user.getId();
-		}
-		
+		}		
 	}
 	
 	@GetMapping("/chisiamo")
