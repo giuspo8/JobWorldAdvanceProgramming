@@ -1,14 +1,3 @@
-<!--
-
- * Home page del Portale JobWorld
- * 
- * @author Giuseppe Costantini
- * @author Simone di Saverio
- * @author Lorenzo Giuliani
- * @author Savio Feng
- * @version 1.0
- 
--->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -26,7 +15,7 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Hepta+Slab&display=swap"
 	rel="stylesheet">
-<title>Home</title>
+<title>Profilo di: ${company.getName()}</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript"
@@ -39,7 +28,7 @@
 
 			<ul>
 				<li id="logo"><span><img
-						src="<c:url value="resources/img/logo.png"/>"></span></li>
+						src="../../<c:url value="resources/img/logo.png"/>"></span></li>
 			</ul>
 		</div>
 	</header>
@@ -47,26 +36,26 @@
 		<div class="container_slide">
 			<div class="slide"></div>
 		</div>
-		<div class="offer" style="width: 50%;">
-			<div style="text-align:center; width:80%; margin:auto;">
-				<c:url value="/autentication" var="action_url" />
+		<div class="offer">
+			<div style="text-align:center; margin:auto;">
+				<c:url value="/update" var="action_url" />
 				       
 				<form:form method="POST" action="${action_url}">
-					<h2>LOGIN</h2>
-             						<table style="text-align:center; margin:auto;">
+					<h3>Cambia le informazioni della tua azienda:</h3>
+             						<table style="text-align:center; width:500px; margin:auto;">
 						<tr>
-							<td><label class="searchsub_lbl" style="text-align:center;">Email</label></td>
+							<td><label class="searchsub_lbl" style="text-align:center;">Nome azienda:</label></td>
 						</tr>
 						<tr>
-							<td style="text-align:center;"><input placeholder="Inserisci qui la tua e-mail"
-								name="email" class="searchsub_input" ></td>
+							<td style="text-align:center;"><input value="${company.getName()}"
+								name="nome_azienda" class="searchsub_input" ></td>
 						</tr>
 						<tr>
-							<td><label class="searchsub_lbl" style="text-align:center;">Password</label></td>
+							<td><label class="searchsub_lbl" style="text-align:center;">Modifica la tua descrizione: </label></td>
 						</tr>
 						<tr>
-							<td style="text-align:center;"><input placeholder="Inserisci qui la tua password"
-								name="password" class="searchsub_input"></td>
+							<td style="text-align:center;"><textarea placeholder="Inserisci qui una descrizione della tua azienda"
+								name="description" class="searchsub_input" style="height:500px;;">${user.getDescription()}</textarea></td>
 						</tr>
 					</table>
 					<div id="searchsub" style="text-align:center;">

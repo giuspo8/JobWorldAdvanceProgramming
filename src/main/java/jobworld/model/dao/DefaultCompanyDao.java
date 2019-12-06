@@ -47,6 +47,13 @@ public class DefaultCompanyDao extends DefaultDao implements CompanyDao {
 	public Company findbyId(long id) {
 		return getSession().find(Company.class, id);
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Company findbyUserId(long id_user) {
+		return getSession().createQuery("from Company c where c.user.id=:id", Company.class)
+				.setParameter("id", id_user).getSingleResult();
+	}
 
 	@Override
 	@Transactional(readOnly=true)

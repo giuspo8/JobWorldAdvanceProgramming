@@ -27,6 +27,8 @@ public interface CompanyDao {
 	Company findbyId(long id);
 	
 	List<Company> findAll();
+
+	Company findbyUserId(long id_user);
 	
 
 	

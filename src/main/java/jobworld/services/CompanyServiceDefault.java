@@ -29,6 +29,13 @@ private CompanyDao companyRepository;
 	public Company findbyId(Long id) {
 		return this.companyRepository.findbyId(id);
 	}
+	
+	
+	@Transactional(readOnly=true)
+	@Override
+	public Company findbyUserId(Long id) {
+		return this.companyRepository.findbyUserId(id);
+	}
 
 	@Transactional(readOnly=true)
 	public List<Company> findAll() {
