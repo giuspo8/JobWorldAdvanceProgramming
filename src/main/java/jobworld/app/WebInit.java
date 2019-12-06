@@ -9,6 +9,9 @@ package jobworld.app;
  * @version 1.0
  */
 import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration;
+
 //import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
@@ -47,20 +50,18 @@ public class WebInit extends AbstractAnnotationConfigDispatcherServletInitialize
 	}
 
 //	// <=> <multipart-config>
-//	@Override
-//	protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-//		registration.setMultipartConfig(getMultipartConfigElement());
-//	}
-//
-//	private MultipartConfigElement getMultipartConfigElement() {
-//		return  new MultipartConfigElement(
-//				null, MAX_FILE_SIZE, MAX_REQUEST_SIZE, FILE_SIZE_THRESHOLD);
-//	}
-//
-//	private static final long MAX_FILE_SIZE = 5000000;
+	@Override
+	protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+		registration.setMultipartConfig(getMultipartConfigElement());
+	}
+
+	private MultipartConfigElement getMultipartConfigElement() {
+		return  new MultipartConfigElement(
+				null, MAX_FILE_SIZE, MAX_REQUEST_SIZE, FILE_SIZE_THRESHOLD);
+	}
+	private static final long MAX_FILE_SIZE = 5000000;
 //	// Beyond that size spring will throw exception.
-//	private static final long MAX_REQUEST_SIZE = 5000000;
-//
+	private static final long MAX_REQUEST_SIZE = 5000000;
 //	// Size threshold after which files will be written to disk
-//	private static final int FILE_SIZE_THRESHOLD = 0;
+	private static final int FILE_SIZE_THRESHOLD = 0;
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
@@ -105,8 +106,10 @@ public class CompanyController {
 	}
 	
 	@PostMapping("/update")
-	public String update(@RequestParam Map<String,String> allParams) {
-		return null; // per il momento inserito così lo cambio
+	public String update(@RequestParam Map<String,String> allParams, @RequestParam("image") MultipartFile image) {
+		String temp=image.getName();
+		System.out.println(temp);
+		return "company/profile"; // per il momento inserito così lo cambio
 	}
 	
 	@Autowired

@@ -399,3 +399,7 @@ footer .faq {
 .error {
 	border-color: red;
 }
+
+form img{
+	width:30%;
+}
