@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import jobworld.model.dao.PersonDao;
+import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
 import jobworld.model.entities.User;
@@ -74,5 +75,11 @@ private PersonDao personRepository;
 	@Transactional
 	public void unapplyAll(JobOffer joboffer) {
 		this.personRepository.unApplyAll(joboffer);
+	}
+
+	@Transactional(readOnly=true)
+	@Override
+	public Person findbyUserId(Long id) {
+		return this.personRepository.findbyUserId(id);
 	}
 }

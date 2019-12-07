@@ -12,6 +12,7 @@ package jobworld.services;
 import java.time.LocalDate;
 import java.util.List;
 
+import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
 import jobworld.model.entities.User;
@@ -25,6 +26,8 @@ Person create(String firstName, String secondName,LocalDate birthDate, String nu
 Person update(Person person);
 
 Person apply(Person person, JobOffer joboffer);
+
+Person findbyUserId(Long id);
 	
 void delete(Person contact);
 

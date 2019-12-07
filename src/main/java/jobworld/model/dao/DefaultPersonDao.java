@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
 import jobworld.model.entities.User;
@@ -54,7 +56,13 @@ public class DefaultPersonDao extends DefaultDao implements PersonDao {
 	public List<Person> findAll() {
 		return getSession().createQuery("from Person p", Person.class).getResultList();
 	}
-
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Person findbyUserId(long id_user) {
+		return getSession().createQuery("from Person p where p.user.id=:id", Person.class)
+				.setParameter("id", id_user).getSingleResult();
+	}
 
 	@Override
 	@Transactional
