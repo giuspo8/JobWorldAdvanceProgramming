@@ -19,6 +19,8 @@ import jobworld.model.entities.JobOffer.Education;
 
 public interface JobOfferService {
 	List<JobOffer> findAll();
+	
+	public List<JobOffer> findbyCompanyId(long companyid);
 			
 	JobOffer create(String region, String province, String town, String position, String description,
 			String contractType, Education minEducationLevel, String minExperience,LocalDate expiringDate, Company company);

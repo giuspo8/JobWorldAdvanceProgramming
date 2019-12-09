@@ -143,6 +143,13 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 	public JobOffer findbyId(long id) {
 		return getSession().find(JobOffer.class, id);
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<JobOffer> findbyCompanyId(long id) {
+		return getSession().createQuery("from JobOffer j where j.company.id=:id_company", JobOffer.class)
+				.setParameter("id_company", id).getResultList();
+	}
 
 	@Override
 	public Long getInterested(JobOffer jobOffer) {

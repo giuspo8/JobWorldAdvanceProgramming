@@ -125,6 +125,15 @@ public class CompanyController {
 		return "company/profile";
 	}
 	
+	
+	@GetMapping("/joboffer/{userId}")
+	public String joboffercompany (@PathVariable("userId") Long userId, Model model) {
+		long companyId= this.companyService.findbyUserId(userId).getId();
+		List<JobOffer> jobs = this.jobOfferService.findbyCompanyId(companyId);
+		model.addAttribute("jobs",jobs);
+		return "company/listjoboffer";
+	}
+	
 	@Autowired
 	public void setJobOfferService(JobOfferService jobOfferService) {
 		this.jobOfferService = jobOfferService;
