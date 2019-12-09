@@ -1,5 +1,9 @@
 package jobworld.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -45,6 +49,8 @@ public class CompanyController {
 	private JobOfferService jobOfferService;
 	private CompanyService companyService;
 	private UserService userService;
+	//TODO:MODIFICATE IL CAZZO DI UPLOAD PATH ALTRIMENTI VI DA ERRORE!!!!!
+	private static String UPLOADED_FOLDER = "C:\\Users\\cicci\\git\\JobWorldAdvance_work\\WebContent\\resources\\img\\companies\\";
 
 
 	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
@@ -107,9 +113,16 @@ public class CompanyController {
 	
 	@PostMapping("/update")
 	public String update(@RequestParam Map<String,String> allParams, @RequestParam("image") MultipartFile image) {
-		String temp=image.getName();
-		System.out.println(temp);
-		return "company/profile"; // per il momento inserito così lo cambio
+		try {
+			byte[] bytes = image.getBytes();
+	        Path path = Paths.get(UPLOADED_FOLDER + image.getOriginalFilename());
+	        Files.write(path, bytes);
+			System.out.println("You successfully uploaded '" + image.getOriginalFilename() + "'");
+			return "company/profile"; // per il momento inserito così lo cambio
+		} catch(IOException e) {
+			 e.printStackTrace();
+		}
+		return "company/profile";
 	}
 	
 	@Autowired
