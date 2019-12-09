@@ -41,6 +41,11 @@ private PersonDao personRepository;
 	}
 	
 	@Transactional(readOnly=true)
+	public JobOffer findbyId(long id) {
+		return this.jobofferRepository.findbyId(id);
+	}
+	
+	@Transactional(readOnly=true)
 	public List<JobOffer> findbyCompanyId(long companyid) {
 		return this.jobofferRepository.findbyCompanyId(companyid);
 	}

@@ -33,5 +33,7 @@ public interface JobOfferService {
 			String minEducationLevel, String minExperience);
 	
 	Long getInterested(JobOffer jobOffer);
+	
+	public JobOffer findbyId(long id);
 		
 }

@@ -410,10 +410,10 @@ form img{
 }
 
 .tabelle_lista tr:hover {
-	background-color: #FFAC15;
+	background-color: #808080;
 	}
 	
-.tabelle_lista th, td {
+.tabelle_lista th, .tabelle_lista td {
 	padding: 15px;
 	border-bottom: 1px solid #ddd;
 }

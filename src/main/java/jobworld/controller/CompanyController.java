@@ -126,12 +126,19 @@ public class CompanyController {
 	}
 	
 	
-	@GetMapping("/joboffer/{userId}")
-	public String joboffercompany (@PathVariable("userId") Long userId, Model model) {
+	@GetMapping("/listjoboffer/{userId}")
+	public String listjobofferscompany (@PathVariable("userId") Long userId, Model model) {
 		long companyId= this.companyService.findbyUserId(userId).getId();
 		List<JobOffer> jobs = this.jobOfferService.findbyCompanyId(companyId);
 		model.addAttribute("jobs",jobs);
 		return "company/listjoboffer";
+	}
+	
+	@GetMapping("/joboffer/{jobId}")
+	public String joboffercompany (@PathVariable("jobId") Long jobId, Model model) {
+		JobOffer job = this.jobOfferService.findbyId(jobId);
+		model.addAttribute("job",job);
+		return "company/editjoboffer";
 	}
 	
 	@Autowired

@@ -46,6 +46,7 @@
     				<th>Regione</th>
     				<th>Provincia</th>
     				<th>Città</th>
+    				<th>Numero di interessati</th>
     				<th></th>
     				<th></th>
 				</tr>
@@ -57,8 +58,9 @@
 					<td>${job.region } </td>
 					<td>${job.province } </td>
 					<td>${job.town } </td>
+					<td>Ci va il numero di interessati</td>
 					<td><a href="">Elimina</a></td>
-					<td><a href="">Modifica</a></td>
+					<td><a href="<c:url value="/company/joboffer/${job.id}"/>">Modifica</a></td>
 				</tr>
 				</c:forEach>
 				</table>
