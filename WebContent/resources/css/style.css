@@ -403,3 +403,25 @@ footer .faq {
 form img{
 	width:30%;
 }
+
+.tabelle_lista{
+	margin:auto;
+	text-align:center;
+}
+
+.tabelle_lista tr:hover {
+	background-color: #FFAC15;
+	}
+	
+.tabelle_lista th, td {
+	padding: 15px;
+	border-bottom: 1px solid #ddd;
+}
+
+.tabelle_lista td{
+	text-align:left;
+}
+
+.tabelle_lista a{
+	font-size:14px;
+	}
