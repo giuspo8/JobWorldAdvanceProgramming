@@ -29,7 +29,15 @@ public abstract class DefaultDao {
 		this.sessionFactory = sessionFactory;
 	}
 
-	protected Session getSession() {
+	public Session getSession() {
 		return sessionFactory.getCurrentSession();
+	}
+	
+	public Session setSession(Session session) {
+		if (session==null) 
+		{
+			return sessionFactory.getCurrentSession();//da rivedere
+		}
+		return session;
 	}
 }

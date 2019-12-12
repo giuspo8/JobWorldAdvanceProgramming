@@ -12,11 +12,17 @@ package jobworld.test;
 import java.time.LocalDate;
 import java.util.List;
 
-
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import jobworld.model.dao.CompanyDao;
 import jobworld.model.dao.CurriculumDao;
+import jobworld.model.dao.DefaultCompanyDao;
+import jobworld.model.dao.DefaultCurriculumDao;
+import jobworld.model.dao.DefaultJobOfferDao;
+import jobworld.model.dao.DefaultPersonDao;
+import jobworld.model.dao.DefaultUserDao;
 import jobworld.model.dao.JobOfferDao;
 import jobworld.model.dao.PersonDao;
 import jobworld.model.dao.UserDao;
@@ -33,6 +39,8 @@ public class LoadData {
 	public static void main(String ...args) {
 //		logger.info("Entrato ...");
 		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(TestConfig.class)) {
+			
+			SessionFactory sf=ctx.getBean("sessionFactory", SessionFactory.class);
 			CompanyDao companyDao = ctx.getBean(CompanyDao.class);
 			JobOfferDao jobOfferDao = ctx.getBean(JobOfferDao.class);
 			CurriculumDao curriculumDao = ctx.getBean(CurriculumDao.class);
@@ -42,7 +50,16 @@ public class LoadData {
 			PersonService personService= ctx.getBean(PersonService.class);
 			@SuppressWarnings("unused")
 			JobOfferService jobOfferService= ctx.getBean(JobOfferService.class);
-			
+			//try(Session session=sf.openSession()){
+			//	companyDao.setSession(session);
+			//	jobOfferDao.setSession(session);
+			//	curriculumDao.setSession(session);
+			//	personDao.setSession(session);
+			//	userDao.setSession(session);
+				
+			//	session.beginTransaction();
+				
+			//}
 			// Popolamento dei dati nel database 
 //Person			
 			User u1=userDao.create("saviofeng@gmail.it", "c3asa2",null,

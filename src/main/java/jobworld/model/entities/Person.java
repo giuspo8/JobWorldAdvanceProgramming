@@ -117,7 +117,6 @@ public class Person  {
 	}
 
 	@OneToOne(mappedBy = "person")
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	public Curriculum getCurriculum() {
 		return curriculum;
 	}
