@@ -142,11 +142,11 @@ public class User {
 
 
 	 @ManyToMany
-	  @JoinTable( name = "users_roles", joinColumns = @JoinColumn(name = "email", 
-	  referencedColumnName = "email"), 
-	  inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")) 
-	  private Set<Role> roles = new HashSet<Role>();
-	
+	  @JoinTable( name = "users", joinColumns = @JoinColumn(name = "ROLE_ID", 
+	  referencedColumnName = "idd"), 
+	  inverseJoinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "id")) 
+	  public Set<Role> roles = new HashSet<Role>();
+		
 	 public Set<Role> roles () {
 		  return this.roles;
 	  }
