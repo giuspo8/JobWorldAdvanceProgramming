@@ -148,7 +148,8 @@ private CompanyService companyService;
 		if (user==null) {
 			return "redirect:/";
 		} else {
-			return "redirect:/user/"+user.getId();
+			return null;
+			//return "redirect:/user/"+user.getId();//TODO l'user non ha piu l'id. adesso l'id è la email
 		}		
 	}
 	

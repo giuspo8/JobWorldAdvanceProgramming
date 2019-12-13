@@ -41,7 +41,7 @@ public class LoadData {
 //		logger.info("Entrato ...");
 		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(TestConfig.class)) {
 			
-	//		SessionFactory sf=ctx.getBean("sessionFactory", SessionFactory.class);
+			SessionFactory sf = ctx.getBean("sessionFactory", SessionFactory.class);
 			CompanyDao companyDao = ctx.getBean(CompanyDao.class);
 			JobOfferDao jobOfferDao = ctx.getBean(JobOfferDao.class);
 			CurriculumDao curriculumDao = ctx.getBean(CurriculumDao.class);

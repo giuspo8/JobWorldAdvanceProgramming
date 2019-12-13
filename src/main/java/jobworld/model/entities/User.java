@@ -39,6 +39,7 @@ public class User {
 	private String image;
 	private Company company;
 	private Person person;
+	private Set<Role> roles = new HashSet<Role>();
 
 	/**
 	 * crea un nuovo utente
@@ -70,15 +71,6 @@ public class User {
 	 */	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="USER_ID")
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 	@Column(unique = true)
 	public String getEmail() {
 		return email;
@@ -141,15 +133,7 @@ public class User {
 	}
 
 
-	 @ManyToMany
-	  @JoinTable( name = "users", joinColumns = @JoinColumn(name = "ROLE_ID", 
-	  referencedColumnName = "idd"), 
-	  inverseJoinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "id")) 
-	  public Set<Role> roles = new HashSet<Role>();
-		
-	 public Set<Role> roles () {
-		  return this.roles;
-	  }
+
 
 	  public void addRole(Role role) {
 		  if (this.roles == null) {
@@ -163,9 +147,18 @@ public class User {
 		  this.roles = roles;
 	  }
 	  
+		 @ManyToMany
+		  @JoinTable( name = "users", joinColumns = @JoinColumn(name = "email", 
+		  referencedColumnName = "email"), 
+		  inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")) 
 	  public Set<Role> getRoles() {
 		  return this.roles;
 	  }
+		 
+		 //da valutare se serve
+		  public Set<Role> roles () {
+			  return this.roles;
+		  }
 	 
 	 
 	 
