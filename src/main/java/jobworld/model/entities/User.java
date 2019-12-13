@@ -41,19 +41,19 @@ public class User {
 	private Person person;
 	private Set<Role> roles = new HashSet<Role>();
 
+	public User() {
+	}
+	
+	
 	/**
-	 * crea un nuovo utente
+	 * Metodo che crea un nuovo utente
 	 * 
 	 * @param email       email dell'utente
 	 * @param password    password dell'account dell'utente
-	 * @param description descrizione dell'utente (che sia descrizione dell'azienda
-	 *                    o della persona)
+	 * @param description descrizione dell'utente che può essere sia un utente che un azienda
 	 * @param image       path dell'immagine utente: logo per aziende e foto per utenti
 	 */
-	public User() {
-	}
-
-
+	
 	public User(String email, String password, String description, String image) {
 		super();
 		this.email = email;
@@ -63,11 +63,8 @@ public class User {
 		
 	}
 
-
-
-
 	/**
-	* Metodi setters/getters e definizione delle tabelle con le relative relazioni
+	 	Metodi get/set dell'email-password-description-image
 	 */	
 	
 	@Id
@@ -107,7 +104,10 @@ public class User {
 		return image;
 	}
 
-
+	/**
+	 * Definizione della relazione uno a uno tra User e Company
+	 * 
+	 */
 
 	@OneToOne(mappedBy = "user")
 	public Company getCompany() {
@@ -120,58 +120,55 @@ public class User {
 		this.company = company;
 	}
 
-
+	/**
+	 * Definizione della relazione uno a uno tra User e Person
+	 * 
+	 */
 	@OneToOne(mappedBy = "user")
 	public Person getPerson() {
 		return person;
 	}
 
-
-
+	
 	public void setPerson(Person person) {
 		this.person = person;
 	}
 
 
-
-
-	  public void addRole(Role role) {
+	public void addRole(Role role) {
 		  if (this.roles == null) {
 			  this.roles = new HashSet<Role>();
-		  }
-		  
+		  }		  
 		  this.roles.add(role);
-	  }
+	}
 	  
-	  public void setRoles(Set<Role> roles) {
+	public void setRoles(Set<Role> roles) {
 		  this.roles = roles;
-	  }
-	  
-		 @ManyToMany
-		  @JoinTable( name = "users", joinColumns = @JoinColumn(name = "email", 
-		  referencedColumnName = "email"), 
-		  inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")) 
-	  public Set<Role> getRoles() {
+	}
+	  /**
+	   * Definizione della relazione molti a molti tra User e Role
+	   * 
+	   */
+	@ManyToMany
+	@JoinTable( name = "users", joinColumns = @JoinColumn(name = "email", referencedColumnName = "email"), 
+		        inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")) 
+	public Set<Role> getRoles() {
 		  return this.roles;
-	  }
+    }
 		 
-		 //da valutare se serve
-		  public Set<Role> roles () {
-			  return this.roles;
-		  }
+	  //da valutare se serve
+	public Set<Role> roles () {
+		  return this.roles;
+	}
 	 
 	 
 	 
 	 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + ", description=" + description
-				+ ", image=" + image + ", company=" + company + ", person=" + person + "]";
-	}
-
-	
-	
-	
-	
+		return "User [id=" + id + ", email=" + email + ", password=" + password + ","
+				+ " description=" + description+ ", image=" + image + ", company=" + 
+				company + ", person=" + person + "]";
+	}	
 	
 }

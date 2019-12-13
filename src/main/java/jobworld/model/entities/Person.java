@@ -63,7 +63,7 @@ public class Person  {
 
 
 	/**
-	* Metodi setters/getters e definizione delle tabelle con le relative relazioni
+	* Metodi set/get più la definizione delle colonne 
 	 */	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -81,9 +81,6 @@ public class Person  {
 	public String getFirstName() {
 		return firstName;
 	}
-
-
-
 
 
 	public void setFirstName(String firstName) {
@@ -115,7 +112,11 @@ public class Person  {
 	public void setNumber(String number) {
 		this.number = number;
 	}
-
+	
+	/**
+	 * Definizione della relazione uno a uno tra Person e Curriculum
+	 * @return curriculum
+	 */
 	@OneToOne(mappedBy = "person")
 	public Curriculum getCurriculum() {
 		return curriculum;
@@ -132,7 +133,11 @@ public class Person  {
 	public void setInterests(String interests) {
 		this.interests = interests;
 	}
-
+	
+	/**
+	 * Definizione della relazione molti a molti tra Person e JobOffer
+	 * 
+	 */
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "candidacies", joinColumns = @JoinColumn(name = "PERSON_ID"), inverseJoinColumns = @JoinColumn(name = "JOB_OFFER_ID"))
 	public Set<JobOffer> getCandidacies() {
@@ -143,6 +148,10 @@ public class Person  {
 		this.candidacies = candidacies;
 	}
 	
+	/**
+	 * Definizione della relazione uno a uno tra User e Person
+	 * 
+	 */
 	@OneToOne
 	@JoinColumn(name = "USER_ID", updatable=false)
 	public User getUser() {
@@ -155,15 +164,20 @@ public class Person  {
 	}
 
 
-
-	// aggiunge quell'offerta di lavoro alla lista delle candidature
+	/**
+	 * Metodo che aggiunge l'offerta di lavoro alla lista delle candidature
+	 * @param jobOffer
+	 */
+	
 	public void apply(JobOffer jobOffer) {
 		System.out.print(jobOffer.getId());
 		candidacies.add(jobOffer);
 	}
 
 
-
+	/**
+	 * Metodo per la stampa
+	 */
 	@Override
 	public String toString() {
 		return "Person [id=" + id + ", firstName=" + firstName + ", secondName=" + secondName + ", birthDate="
