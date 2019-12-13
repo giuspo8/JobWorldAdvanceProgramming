@@ -1,10 +1,21 @@
 package jobworld.model.entities;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+
+import jobworld.model.entities.Role;
+
+
 
 
 
@@ -21,13 +32,11 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class User {
-	public enum Role{ADMIN,BASE};
 	private long id;
 	private String email;
 	private String password;//fare cifratura, nel database no password in chiaro
 	private String description;
 	private String image;
-	private Role role;
 	private Company company;
 	private Person person;
 
@@ -44,13 +53,13 @@ public class User {
 	}
 
 
-	public User(String email, String password, String description, String image, Role role) {
+	public User(String email, String password, String description, String image) {
 		super();
 		this.email = email;
 		this.password = password;
 		this.description = description;
 		this.image = image;
-		this.role = role;
+		
 	}
 
 
@@ -107,13 +116,6 @@ public class User {
 	}
 
 
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
 
 	@OneToOne(mappedBy = "user")
 	public Company getCompany() {
@@ -139,11 +141,44 @@ public class User {
 	}
 
 
+	 @ManyToMany
+	  @JoinTable( name = "users_roles", joinColumns = @JoinColumn(name = "email", 
+	  referencedColumnName = "email"), 
+	  inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")) 
+	  private Set<Role> roles = new HashSet<Role>();
+	
+	 public Set<Role> roles () {
+		  return this.roles;
+	  }
+
+	  public void addRole(Role role) {
+		  if (this.roles == null) {
+			  this.roles = new HashSet<Role>();
+		  }
+		  
+		  this.roles.add(role);
+	  }
+	  
+	  public void setRoles(Set<Role> roles) {
+		  this.roles = roles;
+	  }
+	  
+	  public Set<Role> getRoles() {
+		  return this.roles;
+	  }
+	 
+	 
+	 
+	 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", password=" + password + ", description=" + description
-				+ ", image=" + image + ", role=" + role + ", company=" + company + ", person=" + person + "]";
+				+ ", image=" + image + ", company=" + company + ", person=" + person + "]";
 	}
 
+	
+	
+	
+	
 	
 }

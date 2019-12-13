@@ -20,7 +20,6 @@ import jobworld.app.DataServiceConfig;
 @ComponentScan(basePackages = {"jobworld.model","jobworld.services"})
 @EnableTransactionManagement
 public class TestConfig extends DataServiceConfig {
-
 	@Override
 	protected Properties hibernateProperties() {
 		Properties hibernateProp = super.hibernateProperties();

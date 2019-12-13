@@ -16,6 +16,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import jobworld.model.entities.Role;
 import jobworld.model.dao.CompanyDao;
 import jobworld.model.dao.CurriculumDao;
 import jobworld.model.dao.DefaultCompanyDao;
@@ -25,6 +26,7 @@ import jobworld.model.dao.DefaultPersonDao;
 import jobworld.model.dao.DefaultUserDao;
 import jobworld.model.dao.JobOfferDao;
 import jobworld.model.dao.PersonDao;
+import jobworld.model.dao.RoleDao;
 import jobworld.model.dao.UserDao;
 import jobworld.model.entities.Company;
 import jobworld.model.entities.Curriculum;
@@ -32,7 +34,6 @@ import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.JobOffer.Education;
 import jobworld.model.entities.Person;
 import jobworld.model.entities.User;
-import jobworld.model.entities.User.Role;
 import jobworld.services.JobOfferService;
 import jobworld.services.PersonService;
 public class LoadData {			
@@ -40,12 +41,14 @@ public class LoadData {
 //		logger.info("Entrato ...");
 		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(TestConfig.class)) {
 			
-			SessionFactory sf=ctx.getBean("sessionFactory", SessionFactory.class);
+	//		SessionFactory sf=ctx.getBean("sessionFactory", SessionFactory.class);
 			CompanyDao companyDao = ctx.getBean(CompanyDao.class);
 			JobOfferDao jobOfferDao = ctx.getBean(JobOfferDao.class);
 			CurriculumDao curriculumDao = ctx.getBean(CurriculumDao.class);
 			PersonDao personDao = ctx.getBean(PersonDao.class);
 			UserDao userDao=ctx.getBean(UserDao.class);
+			RoleDao roleDao = ctx.getBean(RoleDao.class);
+			
 			
 			PersonService personService= ctx.getBean(PersonService.class);
 			@SuppressWarnings("unused")
@@ -61,17 +64,37 @@ public class LoadData {
 				
 			//}
 			// Popolamento dei dati nel database 
-//Person			
-			User u1=userDao.create("saviofeng@gmail.it", "c3asa2",null,
-					"/resources/img/galleria5.jpg", Role.BASE);
-			Person p1=personDao.create("Savio", "Feng", LocalDate.of(1995, 8, 25), "3588975899", "informatica, ingegneria",u1);
-			User u2=userDao.create("loris@gmail.it", "passw3ord1", null, 
-					"/resources/img/galleria6.jpg", Role.BASE);
+			
+			
+			
+			
+			
+			
+			//parte cifratura, va messo in ordine
+			Role r1 = roleDao.create("USER");
+			Role r2 = roleDao.create("ADMIN");
+			User u1 = userDao.create("saviofeng@gmail.it", userDao.encryptPassword("user1"), null,"/resources/img/galleria5.jpg");				
+			u1.addRole(r1);
+			
+			User u2 = userDao.create("tizioacaso@gmail.com", userDao.encryptPassword("user2"), null,"/resources/img/galleria23.jpg");
+			u2.addRole(r2);
 			Person p2=personDao.create("Loris", "de luigi",LocalDate.of(1992, 4, 14),"3388775899", "informatica, ingegneria",u2);
-			User u4=userDao.create("dark@gmail.it", "pass2word1", null, 
-					"/resources/img/galleria7.jpg", Role.BASE);
-			Person p3= personDao.create("Marco", "vitale", LocalDate.of(1997, 2, 6), 
-					"3387675899", "informatica, ingegneria", u4);
+			Person p1=personDao.create("Savio", "Feng", LocalDate.of(1995, 8, 25), "3588975899", "informatica, ingegneria",u1);
+			Company c1=companyDao.create("Esselunga",u1);
+			userDao.update(u1);
+			userDao.update(u2);
+			
+//Person			
+//			User u1=userDao.create("saviofeng@gmail.it", "c3asa2",null,
+	//				"/resources/img/galleria5.jpg");
+	//		Person p1=personDao.create("Savio", "Feng", LocalDate.of(1995, 8, 25), "3588975899", "informatica, ingegneria",u1);
+//			User u2=userDao.create("loris@gmail.it", "passw3ord1", null, 
+//					"/resources/img/galleria6.jpg");
+	//		Person p2=personDao.create("Loris", "de luigi",LocalDate.of(1992, 4, 14),"3388775899", "informatica, ingegneria",u2);
+//			User u4=userDao.create("dark@gmail.it", "pass2word1", null, 
+//					"/resources/img/galleria7.jpg");
+		//	Person p3= personDao.create("Marco", "vitale", LocalDate.of(1997, 2, 6), 
+		//			"3387675899", "informatica, ingegneria", u4);
 			
 			/*
 			Person p2= personDao.create();
@@ -215,12 +238,12 @@ public class LoadData {
 			
 //Company			
  
- 			User u3=userDao.create("esselunga@gmail.it", "esselung23","ESSELUNGA � una delle principali catene italiane nel settore della grande distribuzione che opera attraverso una rete di oltre 150 superstore e supermarket in Lombardia, Toscana, Emilia Romagna, Piemonte, Veneto, Liguria e Lazio. La storia di Esselunga inizia nel 1957 con l’apertura a Milano del primo supermercato in Italia; oggi il gruppo, con sede centrale a Limito di Pioltello, nell’hinterland Est di Milano, è costituito da oltre 21.000 dipendenti, fattura oltre 7 miliardi di euro e detiene una quota di mercato pari al 12 %.\r\n" + 
-					"L’azienda è costantemente impegnata nell’innovazione di prodotto, nella salvaguardia dell’ambiente e nella tutela del consumatore: produttore oltre che distributore, Esselunga ha tra i suoi punti di forza i prodotti a proprio marchio e i prodotti freschi.",
-					"/resources/img/companies/esselunga.jpg", Role.BASE);
- 			Company c1=companyDao.create("Esselunga",u3);
+ 	//		User u3=userDao.create("esselunga@gmail.it", "esselung23","ESSELUNGA � una delle principali catene italiane nel settore della grande distribuzione che opera attraverso una rete di oltre 150 superstore e supermarket in Lombardia, Toscana, Emilia Romagna, Piemonte, Veneto, Liguria e Lazio. La storia di Esselunga inizia nel 1957 con l’apertura a Milano del primo supermercato in Italia; oggi il gruppo, con sede centrale a Limito di Pioltello, nell’hinterland Est di Milano, è costituito da oltre 21.000 dipendenti, fattura oltre 7 miliardi di euro e detiene una quota di mercato pari al 12 %.\r\n" + 
+	//				"L’azienda è costantemente impegnata nell’innovazione di prodotto, nella salvaguardia dell’ambiente e nella tutela del consumatore: produttore oltre che distributore, Esselunga ha tra i suoi punti di forza i prodotti a proprio marchio e i prodotti freschi.",
+	//				"/resources/img/companies/esselunga.jpg");
+ 		//	Company c1=companyDao.create("Esselunga",u1);
 
- /*
+			/*
 			Company c1=companyDao.create("Esselunga", "esselunga@gmail.it", "esselung23", 
 					, 
 					, false);
@@ -228,7 +251,7 @@ public class LoadData {
 			Company c2=companyDao.create("Gamestop", "gamestop@email.it", "gamestop1", 
 					"GameStop Corporation, noto semplicemente come GameStop, � un'azienda statunitense con sede nella citt� di Grapevine. � il pi� grande rivenditore di videogiochi nuovi e usati nel mondo, ma si occupa anche della vendita di accessori per videogiochi, console ed altri apparecchi elettronic", 
 					"/resources/img/companies/gamestop.jpg", false);
-			
+			 
 			Company c3=companyDao.create("Sony", "sony@gmail.it", "sony22", 
 					"La Sony Corporation, � una multinazionale conglomerata giapponese fondata nel 1946 con sede a Minato, quartiere di Tokyo. Sony si concentra principalmente sull'elettronica di consumo, sui videogiochi, intrattenimento e servizi finanziari.", 
 					"/resources/img/companies/sony.jpg", false);
@@ -245,6 +268,14 @@ public class LoadData {
 					"Alitalia - Societ� Aerea Italiana S.p.A. in a.s, o semplicemente Alitalia, � la maggiore compagnia aerea, nonch� compagnia aerea di bandiera, dell'Italia, attualmente in amministrazione straordinaria.", 
 					"/resources/img/companies/hp.jpg", false);
 */
+			
+			
+			
+	
+			
+			
+			
+			
 //joboffer
 			JobOffer j1=jobOfferDao.create("Lombardia", "Mantova", "Mantova", "ADDETTO AL REPARTO GASTRONOMIA",
 					"Si richiedono le seguenti caratteristiche:\r\n" + 
@@ -351,12 +382,34 @@ public class LoadData {
 			 * (JobOffer j : jobOffers5) { System.out.println(j); }
 			 */
 
+		
+			
+	//parte cifratura
+	/*		
+			Role r1 = roleDao.create("USER");
+			Role r2 = roleDao.create("ADMIN");
+			
+		
+			User u1 = userDao.create("saviofeng@gmail.it", userDao.encryptPassword("user1"), null,"/resources/img/galleria5.jpg");				
+			u1.addRole(r1);
+			
+			User u2 = userDao.create("tizioacaso@gmail.com", userDao.encryptPassword("user2"), null,"/resources/img/galleria23.jpg");
+			u2.addRole(r2);
+			Person p2=personDao.create("Loris", "de luigi",LocalDate.of(1992, 4, 14),"3388775899", "informatica, ingegneria",u2);
+			Person p1=personDao.create("Savio", "Feng", LocalDate.of(1995, 8, 25), "3588975899", "informatica, ingegneria",u1);
+			Company c1=companyDao.create("Esselunga",u1);
+			*/
+			
+			
 			p1=personService.apply(p1, j1);
 			p2=personService.apply(p2, j1);
 			p1=personService.apply(p1, j3);
-			p3=personService.apply(p3, j2);
-			p3=personService.apply(p3, j4);
-			p3=personService.apply(p3, j5);
+			
+			
+			
+			//p3=personService.apply(p3, j2);
+		//	p3=personService.apply(p3, j4);
+			//p3=personService.apply(p3, j5);
 			//personDao.unApplyAll(j1);
 			//jobOfferDao.update(j1);
 			//jobOfferService.delete(j1);//DA ERRORE
@@ -401,9 +454,9 @@ public class LoadData {
 			//System.out.println(jobOfferDao.getInterested(j1)); da chiedere
 			
 			
-			List<JobOffer> joboffers6 = jobOfferDao.findAll();//assert
-			assert joboffers6.equals(3);
-			assert jobOfferDao.getInterested(j1).equals(2);
+//			List<JobOffer> joboffers6 = jobOfferDao.findAll();//assert
+//			assert joboffers6.equals(3);
+//			assert jobOfferDao.getInterested(j1).equals(2);
 			//System.out.println(userDao.findByMailandPassword("loris@gmail.it","passw3ord1"));
 			/*
 			List<JobOffer> joboffers7 = jobOfferDao.filter(null, null, null, null, null, null,null);

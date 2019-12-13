@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jobworld.model.dao.UserDao;
 import jobworld.model.entities.User;
-import jobworld.model.entities.User.Role;
 @Transactional
 @Service("userService")
 public class UserServiceDefault implements UserService {
@@ -17,8 +16,8 @@ public class UserServiceDefault implements UserService {
 	private UserDao userRepository;
 	@Transactional
 	@Override
-	public User create(String email, String password, String description, String image, Role role) {
-		return this.userRepository.create(email, password, description, image, role);
+	public User create(String email, String password, String description, String image) {
+		return this.userRepository.create(email, password, description, image);
 	}
 
 	@Override

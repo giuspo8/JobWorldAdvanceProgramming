@@ -2,19 +2,24 @@ package jobworld.model.dao;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import jobworld.model.entities.User;
-import jobworld.model.entities.User.Role;
 
 @Transactional
-@Repository("userDao")
+@Repository("userDao") 
 public class DefaultUserDao extends DefaultDao implements UserDao {
 
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@Override
 	@Transactional
-	public User create(String email, String password, String description, String image, Role role) {
-		User user = new User(email, password, description, description, role);
+	public User create(String email, String password, String description, String image) {
+		User user = new User(email, password, description, description);
 		this.getSession().save(user);
 		return user;
 	}
@@ -44,6 +49,16 @@ public class DefaultUserDao extends DefaultDao implements UserDao {
 		return getSession().createQuery("from User u", User.class).getResultList();
 	}
 
+	@Override
+	public String encryptPassword(String password) {
+		return this.passwordEncoder.encode(password);
+	}
+	
+	
+
+
+
+	
 	@Override
 	@Transactional
 	public User findByMailandPassword(String email, String password) {

@@ -25,7 +25,6 @@ import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
 import jobworld.model.entities.User;
-import jobworld.model.entities.User.Role;
 import jobworld.services.CompanyService;
 import jobworld.services.JobOfferService;
 import jobworld.services.PersonService;
@@ -126,7 +125,7 @@ private CompanyService companyService;
 	@SuppressWarnings("unused")
 	@PostMapping("/add")
 	public String add(@RequestParam Map<String,String> allParams) {
-		User user = userService.create(allParams.get("email"), allParams.get("password"), allParams.get("description"), null, Role.BASE);
+		User user = userService.create(allParams.get("email"), allParams.get("password"), allParams.get("description"), null);
 		if(allParams.get("type").equals("person")) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 			LocalDate birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
