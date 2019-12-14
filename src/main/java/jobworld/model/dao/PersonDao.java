@@ -3,6 +3,8 @@ package jobworld.model.dao;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.Session;
+
 import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
@@ -18,10 +20,16 @@ import jobworld.model.entities.User;
  * @version 1.0
  */
 public interface PersonDao {
+	
+	Session getSession();
+	
+	public void setSession(Session session);
 
 	Person create(String firstName, String secondName,LocalDate birthDate, String number,
 	String interests,User user);
-
+	
+	Person apply(Person person, JobOffer joboffer);
+	
 	Person update(Person person);
 
 	void delete(Person person);

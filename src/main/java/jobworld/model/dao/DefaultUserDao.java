@@ -12,6 +12,11 @@ import jobworld.model.entities.User;
 @Repository("userDao") 
 public class DefaultUserDao extends DefaultDao implements UserDao {
 
+	@Autowired
+	CompanyDao companyDao;
+	
+	@Autowired
+	PersonDao personDao;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -39,8 +44,8 @@ public class DefaultUserDao extends DefaultDao implements UserDao {
 
 	@Override
 	@Transactional
-	public User findById(long id) {
-		return getSession().find(User.class, id);
+	public User findByEmail(String email) {
+		return getSession().find(User.class, email);
 	}
 
 	@Override
@@ -49,15 +54,13 @@ public class DefaultUserDao extends DefaultDao implements UserDao {
 		return getSession().createQuery("from User u", User.class).getResultList();
 	}
 
+
 	@Override
 	public String encryptPassword(String password) {
 		return this.passwordEncoder.encode(password);
 	}
 	
 	
-
-
-
 	
 	@Override
 	@Transactional

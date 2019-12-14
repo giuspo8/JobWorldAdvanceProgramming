@@ -4,6 +4,8 @@ package jobworld.model.entities;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -35,7 +37,7 @@ import jobworld.utils.TimestampAttributeConverter;
 
 @Entity
 public class JobOffer {
-	public enum Education{LAUREA_SPECIALISTICA,LAUREA_TRIENNALE,DIPLOMA_DI_MATURITA,LICENZA_MEDIA,SENZA_STUDI}
+	public enum Education{LAUREA_SPECIALISTICA,LAUREA_TRIENNALE,DIPLOMA_DI_MATURITA,LICENZA_MEDIA,SENZA_STUDI};
 	private long id;
 	private String region;
 	private String province;
@@ -158,7 +160,14 @@ public class JobOffer {
 
 
 	//campo data candidatura
-	@ManyToMany(fetch= FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER,        
+			cascade =
+        {
+                CascadeType.DETACH,
+                CascadeType.MERGE,
+                CascadeType.REFRESH,
+                CascadeType.PERSIST
+        })
 	@JoinTable(name = "candidacies", joinColumns = @JoinColumn(name = "JOB_OFFER_ID"), inverseJoinColumns = @JoinColumn(name = "PERSON_ID"))
 	public Set<Person> getCandidancies() {
 		return this.candidancies;

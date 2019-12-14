@@ -17,6 +17,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import jobworld.model.entities.Role;
+import jobworld.model.entities.Role.TypeRole;
 import jobworld.model.dao.CompanyDao;
 import jobworld.model.dao.CurriculumDao;
 import jobworld.model.dao.DefaultCompanyDao;
@@ -34,6 +35,8 @@ import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.JobOffer.Education;
 import jobworld.model.entities.Person;
 import jobworld.model.entities.User;
+import jobworld.services.CompanyService;
+import jobworld.services.CurriculumService;
 import jobworld.services.JobOfferService;
 import jobworld.services.PersonService;
 public class LoadData {			
@@ -49,20 +52,16 @@ public class LoadData {
 			UserDao userDao=ctx.getBean(UserDao.class);
 			RoleDao roleDao = ctx.getBean(RoleDao.class);
 			
+			try(Session session=sf.openSession()){
+				companyDao.setSession(session);
+				jobOfferDao.setSession(session);
+				curriculumDao.setSession(session);
+				personDao.setSession(session);
+				userDao.setSession(session);
+				roleDao.setSession(session);
+				session.beginTransaction();
+				
 			
-			PersonService personService= ctx.getBean(PersonService.class);
-			@SuppressWarnings("unused")
-			JobOfferService jobOfferService= ctx.getBean(JobOfferService.class);
-			//try(Session session=sf.openSession()){
-			//	companyDao.setSession(session);
-			//	jobOfferDao.setSession(session);
-			//	curriculumDao.setSession(session);
-			//	personDao.setSession(session);
-			//	userDao.setSession(session);
-				
-			//	session.beginTransaction();
-				
-			//}
 			// Popolamento dei dati nel database 
 			
 			
@@ -71,8 +70,8 @@ public class LoadData {
 			
 			
 			//parte cifratura, va messo in ordine
-			Role r1 = roleDao.create("USER");
-			Role r2 = roleDao.create("ADMIN");
+			Role r1 = roleDao.create(TypeRole.USER);
+			Role r2 = roleDao.create(TypeRole.ADMIN);
 			User u1 = userDao.create("saviofeng@gmail.it", userDao.encryptPassword("user1"), null,"/resources/img/galleria5.jpg");				
 			u1.addRole(r1);
 			
@@ -81,8 +80,8 @@ public class LoadData {
 			Person p2=personDao.create("Loris", "de luigi",LocalDate.of(1992, 4, 14),"3388775899", "informatica, ingegneria",u2);
 			Person p1=personDao.create("Savio", "Feng", LocalDate.of(1995, 8, 25), "3588975899", "informatica, ingegneria",u1);
 			Company c1=companyDao.create("Esselunga",u1);
-			userDao.update(u1);
-			userDao.update(u2);
+
+			
 			
 //Person			
 //			User u1=userDao.create("saviofeng@gmail.it", "c3asa2",null,
@@ -301,8 +300,8 @@ public class LoadData {
 					"· Seriet�\r\n" + 
 					"· Capacit� di utilizzo del computer.", 
 					"determinato", Education.DIPLOMA_DI_MATURITA, "6 mesi",LocalDate.of(2019, 12, 25), c1);
-			j2.setPublicationDate(j2.getPublicationDate() + 10000);
-			j2=jobOfferDao.update(j2);
+			
+
 			
 			JobOffer j3=jobOfferDao.create("Campania", "Napoli", "Napoli" , "Programmatore Java",
 					"Si richiedono le seguenti caratteristiche:\r\n" + 
@@ -345,8 +344,8 @@ public class LoadData {
 					"Indeterminato", Education.LAUREA_SPECIALISTICA, "indeterminato",LocalDate.of(2019, 12, 25),c1);
 			
 			
-			@SuppressWarnings("unused")
-			Curriculum c11=curriculumDao.create(p1, "01/2005–alla data attuale Assistente amministrativo\r\n" + 
+			
+			Curriculum c11=curriculumDao.create(new Curriculum(p1, "01/2005–alla data attuale Assistente amministrativo\r\n" + 
 					"Alma Mater Studiorum\r\n" + 
 					"Via Zamboni 37, 40126 Bologna\r\n" + 
 					"Gestione della documentazione contabile generale, fiscale e tributaria, relazione con la clientela", 
@@ -357,7 +356,9 @@ public class LoadData {
 					"▪ lingua straniera (inglese, francese, tedesco)", 
 					"Capacità di lavorare in gruppo maturata in molteplici situazioni in cui era indispensabile la\r\n" + 
 					"collaborazione tra figure diverse e con modalità orarie varie (turni, fine settimana)", 
-					"scrittura creativa: corso presso l'Informagiovani del Comune di Bologna");
+					"scrittura creativa: corso presso l'Informagiovani del Comune di Bologna"));
+			
+			
 			
 			// phase 2 : navigate data in the database
 			
@@ -401,9 +402,9 @@ public class LoadData {
 			*/
 			
 			
-			p1=personService.apply(p1, j1);
-			p2=personService.apply(p2, j1);
-			p1=personService.apply(p1, j3);
+			p1=personDao.apply(p1, j1);
+			p2=personDao.apply(p2, j1);
+			p1=personDao.apply(p1, j3);
 			
 			
 			
@@ -412,9 +413,7 @@ public class LoadData {
 			//p3=personService.apply(p3, j5);
 			//personDao.unApplyAll(j1);
 			//jobOfferDao.update(j1);
-			//jobOfferService.delete(j1);//DA ERRORE
-			//personService.delete(p1);//DA ERRORE 
-			//companyDao.delete(c1); //DA ERRORE 
+
 			/*
 			personDao.apply(p3, j1);
 			personDao.apply(p4, j1);
@@ -469,7 +468,20 @@ public class LoadData {
 			//jobOfferDao.delete(j1);
 			//companyDao.delete(c1);
 
+			session.getTransaction().commit();
+			
+			session.beginTransaction();
+			
+			jobOfferDao.delete(j1);
+			session.getTransaction().commit();
+			session.beginTransaction();
+			//companyDao.delete(c1); 
+			//personDao.delete(p1);
+			session.getTransaction().commit();
+			
+			
 
+			}
 		
 
 		} catch (Exception e) {

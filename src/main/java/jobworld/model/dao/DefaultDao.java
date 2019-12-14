@@ -30,19 +30,15 @@ public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 public void setSession(Session session) {
-	// added to allow a single thread session sharing scheme
+	// aggiunto per permettere a una singola sessione di essere condivisa
 	this.session = session; 
 }
 
-	public Session setSession() {
-		return sessionFactory.getCurrentSession();
-	}
-	
 	public Session getSession() {
-		// 1. in case a shared session exists, return it (e.g. data generation script)
+		// 1. nel caso esista una sessione condivisa, la ritorna (e.g. data generation script)
 		Session session = this.session;
 		if (session == null) {
-			// 2. otherwise generate a new session using the factory (e.g. Spring MVC)
+			// 2. altrimenti genera una nuova sessione utilizzando la factory (e.g. Spring MVC)
 			session = this.sessionFactory.getCurrentSession();
 		}
 		return session;

@@ -67,8 +67,8 @@ private PersonDao personRepository;
 	@Override
 	@Transactional
 	public Person apply(Person person, JobOffer joboffer) {
-		person.getCandidacies().add(joboffer);
-		return this.personRepository.update(person);
+		//person.getCandidacies().add(joboffer);
+		return this.personRepository.apply(person, joboffer);
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package jobworld.model.dao;
 
 import java.util.List;
 
+import org.hibernate.Session;
 
 import jobworld.model.entities.Company;
 import jobworld.model.entities.User;
@@ -17,6 +18,10 @@ import jobworld.model.entities.User;
  * @version 1.0
  */
 public interface CompanyDao {
+	
+	Session getSession();
+	
+	public void setSession(Session session);
 	
 	Company create(String name,User user);
 

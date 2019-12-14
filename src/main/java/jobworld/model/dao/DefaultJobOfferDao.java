@@ -2,12 +2,15 @@ package jobworld.model.dao;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.JobOffer.Education;
+import jobworld.model.entities.Person;
 
 /**
  * Implementazione dell'interfaccia JobOfferDao
@@ -21,6 +24,11 @@ import jobworld.model.entities.JobOffer.Education;
 @Transactional
 @Repository("jobOfferDao")
 public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
+	
+	@Autowired
+	CompanyDao companyDao;
+	@Autowired
+	PersonDao personDao;
 
 	@Override
 	@Transactional
@@ -28,7 +36,9 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 			String contractType, Education minEducationLevel, String minExperience, LocalDate expiringDate,Company company) {
 		JobOffer jobOffer = new JobOffer(region, province, town, position, description, contractType, minEducationLevel,
 				minExperience,expiringDate, company);
+		company.getJobOffers().add(jobOffer);
 		this.getSession().save(jobOffer);
+		companyDao.update(company);
 		return jobOffer;
 	}
 
@@ -40,10 +50,17 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 	}
 	
 
-
 	@Override
 	@Transactional
 	public void delete(JobOffer jobOffer) {
+		for (Person p:jobOffer.getCandidancies()) {
+			p.getCandidacies().remove(jobOffer);
+			p=personDao.update(p);
+		}
+		jobOffer.getCandidancies().clear();
+		Company company=jobOffer.getCompany();
+		company.getJobOffers().remove(jobOffer);
+		companyDao.update(company);
 		this.getSession().delete(jobOffer);
 	}
 	

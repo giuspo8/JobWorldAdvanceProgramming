@@ -10,6 +10,8 @@ package jobworld.model.dao;
  */
 import java.util.List;
 
+import org.hibernate.Session;
+
 /**
  * Interfaccia del Dao del curriculum.
  * 
@@ -23,9 +25,12 @@ import jobworld.model.entities.Curriculum;
 import jobworld.model.entities.Person;
 
 public interface CurriculumDao {
+	
+	Session getSession();
 
-	Curriculum create(Person person, String workExperience, String education, String personalSkills,
-			String additionalInfo);
+	public void setSession(Session session);
+	
+	Curriculum create(Curriculum curriculum);
 
 	Curriculum update(Curriculum curriculum);
 

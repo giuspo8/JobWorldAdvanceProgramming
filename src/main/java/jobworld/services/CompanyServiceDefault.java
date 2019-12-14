@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import jobworld.model.dao.CompanyDao;
+import jobworld.model.dao.UserDao;
 import jobworld.model.entities.Company;
 import jobworld.model.entities.User;
 
@@ -23,6 +24,7 @@ import jobworld.model.entities.User;
 public class CompanyServiceDefault implements CompanyService{
 
 private CompanyDao companyRepository;
+private UserDao userRepository;
 	
 	@Transactional(readOnly=true)
 	@Override
@@ -47,7 +49,6 @@ private CompanyDao companyRepository;
 	@Override
 	public Company create(String name,User user) {
 		return this.companyRepository.create(name,user);
-
 	}
 	
 	@Transactional

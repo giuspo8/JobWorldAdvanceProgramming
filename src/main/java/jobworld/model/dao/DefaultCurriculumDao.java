@@ -2,6 +2,7 @@ package jobworld.model.dao;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,13 +21,17 @@ import jobworld.model.entities.Person;
 @Transactional
 @Repository("curriculumDao")
 public class DefaultCurriculumDao extends DefaultDao implements CurriculumDao {
+	
+	@Autowired
+	PersonDao personDao;
 
 	@Override
 	@Transactional
-	public Curriculum create(Person person, String workExperience, String education, String personalSkills,
-			String additionalInfo) {
-		Curriculum curriculum = new Curriculum(person, workExperience, education, personalSkills, additionalInfo);
+	public Curriculum create(Curriculum curriculum) {
+		Person p=curriculum.getPerson();
+		p.setCurriculum(curriculum);
 		this.getSession().save(curriculum);
+		personDao.update(p);
 		return curriculum;
 	}
 

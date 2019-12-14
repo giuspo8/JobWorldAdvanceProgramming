@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -117,7 +118,7 @@ public class Person  {
 	 * Definizione della relazione uno a uno tra Person e Curriculum
 	 * @return curriculum
 	 */
-	@OneToOne(mappedBy = "person")
+	@OneToOne(mappedBy = "person", cascade=CascadeType.ALL)
 	public Curriculum getCurriculum() {
 		return curriculum;
 	}
@@ -138,8 +139,13 @@ public class Person  {
 	 * Definizione della relazione molti a molti tra Person e JobOffer
 	 * 
 	 */
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "candidacies", joinColumns = @JoinColumn(name = "PERSON_ID"), inverseJoinColumns = @JoinColumn(name = "JOB_OFFER_ID"))
+	@ManyToMany(fetch = FetchType.EAGER,         cascade =
+        {
+                CascadeType.DETACH,
+                CascadeType.MERGE,
+                CascadeType.REFRESH,
+                CascadeType.PERSIST
+        }, mappedBy = "candidancies")
 	public Set<JobOffer> getCandidacies() {
 		return this.candidacies;
 	}
@@ -152,8 +158,8 @@ public class Person  {
 	 * Definizione della relazione uno a uno tra User e Person
 	 * 
 	 */
-	@OneToOne
-	@JoinColumn(name = "USER_ID", updatable=false)
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "USER_ID",updatable=false)
 	public User getUser() {
 		return user;
 	}

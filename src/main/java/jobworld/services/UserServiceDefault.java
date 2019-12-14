@@ -31,8 +31,8 @@ public class UserServiceDefault implements UserService {
 	}
 
 	@Override
-	public User findById(long id) {
-		return this.userRepository.findById(id);
+	public User findByEmail(String email) {
+		return this.userRepository.findByEmail(email);
 	}
 
 	@Override
