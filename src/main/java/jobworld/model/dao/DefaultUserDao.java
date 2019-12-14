@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import jobworld.model.entities.Company;
+import jobworld.model.entities.Person;
+import jobworld.model.entities.Role;
 import jobworld.model.entities.User;
 
 @Transactional
@@ -17,6 +21,9 @@ public class DefaultUserDao extends DefaultDao implements UserDao {
 	
 	@Autowired
 	PersonDao personDao;
+	
+	@Autowired
+	RoleDao roleDao;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;

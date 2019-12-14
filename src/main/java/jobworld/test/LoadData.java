@@ -77,9 +77,15 @@ public class LoadData {
 			
 			User u2 = userDao.create("tizioacaso@gmail.com", userDao.encryptPassword("user2"), null,"/resources/img/galleria23.jpg");
 			u2.addRole(r2);
+			User u3=userDao.create("esselunga@gmail.com", userDao.encryptPassword("user3"), null,"/resources/img/galleria24.jpg");
+			u2.addRole(r1);
 			Person p2=personDao.create("Loris", "de luigi",LocalDate.of(1992, 4, 14),"3388775899", "informatica, ingegneria",u2);
 			Person p1=personDao.create("Savio", "Feng", LocalDate.of(1995, 8, 25), "3588975899", "informatica, ingegneria",u1);
-			Company c1=companyDao.create("Esselunga",u1);
+			Company c1=companyDao.create("Esselunga",u3);
+			
+			User u4=userDao.create("dark@gmail.it","pass2word1", null, "/resources/img/galleria7.jpg");
+			Person p3= personDao.create("Marco", "vitale", LocalDate.of(1997, 2, 6), 
+					"3387675899", "informatica, ingegneria", u4);
 
 			
 			
@@ -97,11 +103,7 @@ public class LoadData {
 			
 			/*
 			Person p2= personDao.create();
-			
-			Person p3= personDao.create("dark@gmail.it", "pass2word1", null, 
-					"/resources/img/galleria7.jpg", "Marco", "vitale", LocalDate.of(1997, 2, 6), 
-					"3387675899", "informatica, ingegneria", false);
-			
+	
 			Person p4= personDao.create("pippo@outlook.it", "pa41ssword1", null, 
 					"/resources/img/galleria8.jpg", "Pippo", "Baudo", LocalDate.of(1985, 8, 9), 
 					"3388775899", "informatica, ingegneria", false);
@@ -468,20 +470,61 @@ public class LoadData {
 			//jobOfferDao.delete(j1);
 			//companyDao.delete(c1);
 
+			//DELETE JOBOFFER
+			/*
 			session.getTransaction().commit();
 			
 			session.beginTransaction();
-			
-			jobOfferDao.delete(j1);
-			session.getTransaction().commit();
-			session.beginTransaction();
-			//companyDao.delete(c1); 
-			//personDao.delete(p1);
-			session.getTransaction().commit();
-			
-			
-
+			for (Person p:j1.getCandidancies()) {
+				p.getCandidacies().remove(j1);
 			}
+			j1.getCandidancies().clear();
+			jobOfferDao.update(j1);
+			Company company=j1.getCompany();
+			company.getJobOffers().remove(j1);
+			jobOfferDao.delete(j1);
+			session.getTransaction().commit();*/
+			
+			//DELETE COMPANY
+			/*session.beginTransaction();
+			for (JobOffer j:c1.getJobOffers()) {
+				jobOfferDao.delete(j);
+			}
+			c1.getJobOffers().clear();
+			c1=companyDao.update(c1);
+			companyDao.delete(c1); 
+			session.getTransaction().commit();
+			
+			*/
+			
+			//DELETE USER
+			/*session.beginTransaction();
+			
+			u3.getRoles().clear();
+			userDao.update(u3);
+			userDao.delete(u3);
+			session.getTransaction().commit();
+			*/
+			/*
+			 * 
+			//DELETE PERSON
+			session.beginTransaction();
+			for (JobOffer j:p1.getCandidacies()) {
+				j.getCandidancies().remove(p1);
+			};
+			p1.getCandidacies().clear();
+			personDao.delete(p1);
+			session.getTransaction().commit();*/
+			
+			//DELETE CURRICULUM
+			/*
+			session.beginTransaction();
+			Person p=c11.getPerson();
+			p.setCurriculum(null);
+			p=personDao.update(p);
+			curriculumDao.delete(c11);
+			session.getTransaction().commit();
+			}*/
 		
 
 		} catch (Exception e) {
@@ -491,5 +534,5 @@ public class LoadData {
 //		logger.info("Esco ...");
 	}
 	
-	
+	}
 }

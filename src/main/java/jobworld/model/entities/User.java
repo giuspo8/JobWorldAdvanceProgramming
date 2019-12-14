@@ -2,6 +2,7 @@ package jobworld.model.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -109,7 +110,7 @@ public class User {
 	 * 
 	 */
 
-	@OneToOne(mappedBy = "user")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
 	public Company getCompany() {
 		return company;
 	}
@@ -124,7 +125,7 @@ public class User {
 	 * Definizione della relazione uno a uno tra User e Person
 	 * 
 	 */
-	@OneToOne(mappedBy = "user")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
 	public Person getPerson() {
 		return person;
 	}

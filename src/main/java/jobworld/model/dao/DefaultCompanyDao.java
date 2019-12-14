@@ -33,7 +33,6 @@ public class DefaultCompanyDao extends DefaultDao implements CompanyDao {
 	public Company create(String name, User user) {
 		Company company = new Company(name,user);
 		user.setCompany(company);
-		this.userDao.update(user);
 		this.getSession().save(company);
 		return company;
 	}
@@ -46,15 +45,10 @@ public class DefaultCompanyDao extends DefaultDao implements CompanyDao {
 
 	@Override
 	public void delete(Company company) {
-		User u=company.getUser();
-		u.setCompany(null);
-		userDao.delete(u);
+		/*User u=company.getUser();
 		company.setUser(null);
-		for (JobOffer j:company.getJobOffers()) 
-		{
-			jobOfferDao.delete(j);
-		}
-		//company.getJobOffers().clear();
+		company=update(company);
+		userDao.delete(u);*/
 		this.getSession().delete(company);
 	}
 

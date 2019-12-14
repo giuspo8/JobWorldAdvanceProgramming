@@ -38,7 +38,6 @@ public class DefaultPersonDao extends DefaultDao implements PersonDao {
 			LocalDate birthDate, String number, String interests,User user) {
 		Person person = new Person(firstName, secondName, birthDate, number, interests,user);
 		user.setPerson(person);
-		userDao.update(user);
 		this.getSession().save(person);
 		return person;
 	}
@@ -53,10 +52,6 @@ public class DefaultPersonDao extends DefaultDao implements PersonDao {
 	@Override
 	@Transactional
 	public void delete(Person person) {
-		for (JobOffer j:person.getCandidacies()) {
-			j.getCandidancies().remove(person);
-		};
-		person.getCandidacies().clear();
 		this.getSession().delete(person);
 	}
 

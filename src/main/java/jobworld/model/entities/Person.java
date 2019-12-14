@@ -159,7 +159,7 @@ public class Person  {
 	 * 
 	 */
 	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "USER_ID",updatable=false)
+	@JoinColumn(name = "USER_ID")
 	public User getUser() {
 		return user;
 	}

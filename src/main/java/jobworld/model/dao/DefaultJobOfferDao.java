@@ -53,14 +53,6 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 	@Override
 	@Transactional
 	public void delete(JobOffer jobOffer) {
-		for (Person p:jobOffer.getCandidancies()) {
-			p.getCandidacies().remove(jobOffer);
-			p=personDao.update(p);
-		}
-		jobOffer.getCandidancies().clear();
-		Company company=jobOffer.getCompany();
-		company.getJobOffers().remove(jobOffer);
-		companyDao.update(company);
 		this.getSession().delete(jobOffer);
 	}
 	
