@@ -59,6 +59,8 @@ public class LoadData {
 				personDao.setSession(session);
 				userDao.setSession(session);
 				roleDao.setSession(session);
+				
+				
 				session.beginTransaction();
 				
 			
@@ -465,10 +467,7 @@ public class LoadData {
 				System.out.println(j);
 			}*/
 			
-			//curriculumDao.delete(c11);
-			
-			//jobOfferDao.delete(j1);
-			//companyDao.delete(c1);
+			session.getTransaction().commit();
 
 			//DELETE JOBOFFER
 			/*
@@ -524,7 +523,9 @@ public class LoadData {
 			p=personDao.update(p);
 			curriculumDao.delete(c11);
 			session.getTransaction().commit();
-			}*/
+			*/
+
+			}
 		
 
 		} catch (Exception e) {
@@ -534,5 +535,5 @@ public class LoadData {
 //		logger.info("Esco ...");
 	}
 	
-	}
+
 }
