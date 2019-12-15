@@ -3,17 +3,51 @@ package jobworld.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
 import jobworld.model.dao.UserDao;
+import jobworld.model.entities.Role;
+import jobworld.model.entities.Role.TypeRole;
 import jobworld.model.entities.User;
 @Transactional
 @Service("userService")
-public class UserServiceDefault implements UserService {
+public class UserServiceDefault implements UserService,UserDetailsService {
 	
 	private UserDao userRepository;
+	
+	@Transactional(readOnly = true)
+	  @Override
+	  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
+	    User user = userRepository.findByEmail(email);
+	    UserBuilder builder = null;
+	    if (user != null) {
+	      
+	      // qui "mappiamo" uno User della nostra app in uno User di spring
+	      builder = org.springframework.security.core.userdetails.User.withUsername(email);
+	      builder.password(user.getPassword());
+	            
+	      TypeRole [] roles = new TypeRole[user.getRoles().size()];
+
+	      int j = 0;
+	      for (Role r : user.getRoles()) {
+	    	  roles[j++] = r.getName();
+	      }
+	            
+	      builder.roles(roles.toString());
+	    } else {
+	      throw new UsernameNotFoundException("User not found.");
+	    }
+	    return builder.build();
+	  }
+	
+	
 	@Transactional
 	@Override
 	public User create(String email, String password, String description, String image) {
