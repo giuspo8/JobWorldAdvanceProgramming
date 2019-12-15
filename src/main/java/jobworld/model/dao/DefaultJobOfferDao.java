@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.JobOffer.Education;
-import jobworld.model.entities.Person;
 
 /**
  * Implementazione dell'interfaccia JobOfferDao

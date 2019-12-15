@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import jobworld.model.dao.CurriculumDao;
-import jobworld.model.dao.PersonDao;
 import jobworld.model.entities.Curriculum;
 import jobworld.model.entities.Person;
 
@@ -24,7 +23,7 @@ import jobworld.model.entities.Person;
 @Service("curriculumService")
 public class CurriculumServiceDefault implements CurriculumService {
 private CurriculumDao curriculumRepository;
-private PersonDao personRepository;
+
 	
 	@Transactional(readOnly=true)
 	@Override

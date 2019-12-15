@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import jobworld.model.entities.Company;
-import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.User;
 
 /**
@@ -45,10 +44,6 @@ public class DefaultCompanyDao extends DefaultDao implements CompanyDao {
 
 	@Override
 	public void delete(Company company) {
-		/*User u=company.getUser();
-		company.setUser(null);
-		company=update(company);
-		userDao.delete(u);*/
 		this.getSession().delete(company);
 	}
 

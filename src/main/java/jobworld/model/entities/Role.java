@@ -10,7 +10,7 @@ import javax.persistence.Id;
 @Entity
 public class Role {
 	
-	    public enum TypeRole{ADMIN,USER};
+	    public enum TypeRole{ADMIN,USER,COMPANY};
 	    
 	    private TypeRole name;
 	 
@@ -35,12 +35,7 @@ public class Role {
 		}	    
 		
 		
-	    
-	   /* @ManyToMany
-		  @JoinTable( name = "users", joinColumns = @JoinColumn(name = "USER_ID", 
-		  referencedColumnName = "id"), 
-		  inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "idd")) 
-	    public Set<Role> roles = new HashSet<Role>();*/
+
 	   /**
 	    * Metodo get/set di name e id
 	    * 

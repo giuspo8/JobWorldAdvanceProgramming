@@ -12,7 +12,6 @@ package jobworld.services;
 import java.time.LocalDate;
 import java.util.List;
 
-import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
 import jobworld.model.entities.User;

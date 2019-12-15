@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jobworld.model.dao.UserDao;
 import jobworld.model.entities.Role;
-import jobworld.model.entities.Role.TypeRole;
 import jobworld.model.entities.User;
 @Transactional
 @Service("userService")

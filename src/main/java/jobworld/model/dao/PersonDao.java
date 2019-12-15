@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
 import jobworld.model.entities.User;

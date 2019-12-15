@@ -10,21 +10,13 @@ package jobworld.test;
  */
 
 import java.time.LocalDate;
-import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
 import jobworld.model.entities.Role;
 import jobworld.model.entities.Role.TypeRole;
 import jobworld.model.dao.CompanyDao;
 import jobworld.model.dao.CurriculumDao;
-import jobworld.model.dao.DefaultCompanyDao;
-import jobworld.model.dao.DefaultCurriculumDao;
-import jobworld.model.dao.DefaultJobOfferDao;
-import jobworld.model.dao.DefaultPersonDao;
-import jobworld.model.dao.DefaultUserDao;
 import jobworld.model.dao.JobOfferDao;
 import jobworld.model.dao.PersonDao;
 import jobworld.model.dao.RoleDao;
@@ -35,10 +27,7 @@ import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.JobOffer.Education;
 import jobworld.model.entities.Person;
 import jobworld.model.entities.User;
-import jobworld.services.CompanyService;
-import jobworld.services.CurriculumService;
-import jobworld.services.JobOfferService;
-import jobworld.services.PersonService;
+
 public class LoadData {			
 	public static void main(String ...args) {
 //		logger.info("Entrato ...");
@@ -85,30 +74,39 @@ public class LoadData {
 			Person p1=personDao.create("Savio", "Feng", LocalDate.of(1995, 8, 25), "3588975899", "informatica, ingegneria",u1);
 			Company c1=companyDao.create("Esselunga",u3);
 			
-			User u4=userDao.create("dark@gmail.it","pass2word1", null, "/resources/img/galleria7.jpg");
+			User u4=userDao.create("dark@gmail.it",userDao.encryptPassword("pass2word1"), null, "/resources/img/galleria7.jpg");
+			u4.addRole(r1);
 			Person p3= personDao.create("Marco", "vitale", LocalDate.of(1997, 2, 6), 
 					"3387675899", "informatica, ingegneria", u4);
+			
+			User u5=userDao.create("luca@gmail.it", userDao.encryptPassword("passwo42rd1"), null, 
+					"/resources/img/galleria9.jpg");
+			u5.addRole(r1);
+			Person p4=personDao.create("Luca", "Nervi", LocalDate.of(1987, 8, 11), "3333475899", "informatica, ingegneria", u5);
+			
+			User u6=userDao.create("pippo@outlook.it", userDao.encryptPassword("pa41ssword1"), null, "/resources/img/galleria8.jpg");
+			u6.addRole(r1);
+			Person p5=personDao.create("Pippo", "Baudo", LocalDate.of(1985, 8, 9), 
+					"3388775899", "informatica, ingegneria",u6);
+			
+			
+			User u7=userDao.create("gamestop@email.it", userDao.encryptPassword("gamestop1"), 
+					"GameStop Corporation, noto semplicemente come GameStop, � un'azienda statunitense con sede nella citt� di Grapevine. � il pi� grande rivenditore di videogiochi nuovi e usati nel mondo, ma si occupa anche della vendita di accessori per videogiochi, console ed altri apparecchi elettronic", 
+					"/resources/img/companies/gamestop.jpg");
+			u7.addRole(r1);
+			Company c2=companyDao.create("Gamestop",u7);
 
+			User u8=userDao.create("sony@gmail.it",  userDao.encryptPassword("sony22"), "La Sony Corporation, � una multinazionale conglomerata giapponese fondata nel 1946 con sede a Minato, quartiere di Tokyo. Sony si concentra principalmente sull'elettronica di consumo, sui videogiochi, intrattenimento e servizi finanziari.", 
+					"/resources/img/companies/sony.jpg");
+			u8.addRole(r1);
+			Company c3=companyDao.create("Sony", u8);
 			
-			
-//Person			
-//			User u1=userDao.create("saviofeng@gmail.it", "c3asa2",null,
-	//				"/resources/img/galleria5.jpg");
-	//		Person p1=personDao.create("Savio", "Feng", LocalDate.of(1995, 8, 25), "3588975899", "informatica, ingegneria",u1);
-//			User u2=userDao.create("loris@gmail.it", "passw3ord1", null, 
-//					"/resources/img/galleria6.jpg");
-	//		Person p2=personDao.create("Loris", "de luigi",LocalDate.of(1992, 4, 14),"3388775899", "informatica, ingegneria",u2);
-//			User u4=userDao.create("dark@gmail.it", "pass2word1", null, 
-//					"/resources/img/galleria7.jpg");
-		//	Person p3= personDao.create("Marco", "vitale", LocalDate.of(1997, 2, 6), 
-		//			"3387675899", "informatica, ingegneria", u4);
-			
-			/*
-			Person p2= personDao.create();
+			User u9=userDao.create("samsung@email.it", userDao.encryptPassword("samsun1sg"), "Samsung � un'azienda multinazionale fondata il 1� marzo 1938 da Lee Byung-chul nella citt� di Taegu, nell'attuale Corea del Sud. Comprende filiali in 58 paesi nonch� numerose aziende affiliate, la maggior parte con il nome madre Samsung, ed � il maggior conglomerato sudcoreano", 
+					"/resources/img/companies/samsung.jpg");
+			u9.addRole(r1);
+			Company c4=companyDao.create("Samsung",u9);
+/*
 	
-			Person p4= personDao.create("pippo@outlook.it", "pa41ssword1", null, 
-					"/resources/img/galleria8.jpg", "Pippo", "Baudo", LocalDate.of(1985, 8, 9), 
-					"3388775899", "informatica, ingegneria", false);
 			
 			Person p5= personDao.create("luca@gmail.it", "passwo42rd1", null, 
 					"/resources/img/galleria9.jpg", "Luca", "Nervi", LocalDate.of(1987, 8, 11), 
@@ -241,27 +239,8 @@ public class LoadData {
 			
 //Company			
  
- 	//		User u3=userDao.create("esselunga@gmail.it", "esselung23","ESSELUNGA � una delle principali catene italiane nel settore della grande distribuzione che opera attraverso una rete di oltre 150 superstore e supermarket in Lombardia, Toscana, Emilia Romagna, Piemonte, Veneto, Liguria e Lazio. La storia di Esselunga inizia nel 1957 con l’apertura a Milano del primo supermercato in Italia; oggi il gruppo, con sede centrale a Limito di Pioltello, nell’hinterland Est di Milano, è costituito da oltre 21.000 dipendenti, fattura oltre 7 miliardi di euro e detiene una quota di mercato pari al 12 %.\r\n" + 
-	//				"L’azienda è costantemente impegnata nell’innovazione di prodotto, nella salvaguardia dell’ambiente e nella tutela del consumatore: produttore oltre che distributore, Esselunga ha tra i suoi punti di forza i prodotti a proprio marchio e i prodotti freschi.",
-	//				"/resources/img/companies/esselunga.jpg");
- 		//	Company c1=companyDao.create("Esselunga",u1);
-
 			/*
-			Company c1=companyDao.create("Esselunga", "esselunga@gmail.it", "esselung23", 
-					, 
-					, false);
-			
-			Company c2=companyDao.create("Gamestop", "gamestop@email.it", "gamestop1", 
-					"GameStop Corporation, noto semplicemente come GameStop, � un'azienda statunitense con sede nella citt� di Grapevine. � il pi� grande rivenditore di videogiochi nuovi e usati nel mondo, ma si occupa anche della vendita di accessori per videogiochi, console ed altri apparecchi elettronic", 
-					"/resources/img/companies/gamestop.jpg", false);
-			 
-			Company c3=companyDao.create("Sony", "sony@gmail.it", "sony22", 
-					"La Sony Corporation, � una multinazionale conglomerata giapponese fondata nel 1946 con sede a Minato, quartiere di Tokyo. Sony si concentra principalmente sull'elettronica di consumo, sui videogiochi, intrattenimento e servizi finanziari.", 
-					"/resources/img/companies/sony.jpg", false);
-			
-			Company c4=companyDao.create("Samsung", "samsung@email.it", "samsun1sg", 
-					"Samsung � un'azienda multinazionale fondata il 1� marzo 1938 da Lee Byung-chul nella citt� di Taegu, nell'attuale Corea del Sud. Comprende filiali in 58 paesi nonch� numerose aziende affiliate, la maggior parte con il nome madre Samsung, ed � il maggior conglomerato sudcoreano", 
-					"/resources/img/companies/samsung.jpg", false);
+
 			
 			Company c5=companyDao.create("HP", "hp@gmail.it", "hpack", 
 					"La Hewlett-Packard � una multinazionale statunitense dell'informatica attiva sia nel mercato dell'hardware che in quello del software e dei servizi collegati all'informatica. Ad inizio 2011 era il primo produttore mondiale di computer portatili per unit� vendute.", 
@@ -333,7 +312,6 @@ public class LoadData {
 					"· Capacit� di comunicazione", 
 					"determinato", Education.LAUREA_SPECIALISTICA, "1 anno",LocalDate.of(2019, 12, 25), c1);
 			
-			//enum a titolo di studio, contratto, esperienza
 			
 			JobOffer j5=jobOfferDao.create("Marche", "Ancona", "Jesi", "Programmatore Cad",
 					"Si richiedono le seguenti caratteristiche:\r\n" + 
@@ -366,62 +344,21 @@ public class LoadData {
 			
 			// phase 2 : navigate data in the database
 			
-			
-			/*
-			 * List<JobOffer> jobOffers = jobOfferDao.findAll(); for (JobOffer j :
-			 * jobOffers) { System.out.println(j); }
-			 * 
-			 * List<JobOffer> jobOffers2 = jobOfferDao.findbyRegion("Abruzzo"); for
-			 * (JobOffer j : jobOffers2) { System.out.println(j); }
-			 * 
-			 * List<JobOffer> jobOffers3 = jobOfferDao.filterByPosition("adlla"); for
-			 * (JobOffer j : jobOffers3) { System.out.println(j); }
-			 * 
-			 * 
-			 * List<JobOffer> jobOffers4 = jobOfferDao.orderedByPublicationDate(); for
-			 * (JobOffer j : jobOffers4) { System.out.println(j); }
-			 * 
-			 * 
-			 * List<JobOffer> jobOffers5 =
-			 * jobOfferDao.filterBypositionAndprovince("assistente", "Ancona"); for
-			 * (JobOffer j : jobOffers5) { System.out.println(j); }
-			 */
-
-		
-			
-	//parte cifratura
-	/*		
-			Role r1 = roleDao.create("USER");
-			Role r2 = roleDao.create("ADMIN");
-			
-		
-			User u1 = userDao.create("saviofeng@gmail.it", userDao.encryptPassword("user1"), null,"/resources/img/galleria5.jpg");				
-			u1.addRole(r1);
-			
-			User u2 = userDao.create("tizioacaso@gmail.com", userDao.encryptPassword("user2"), null,"/resources/img/galleria23.jpg");
-			u2.addRole(r2);
-			Person p2=personDao.create("Loris", "de luigi",LocalDate.of(1992, 4, 14),"3388775899", "informatica, ingegneria",u2);
-			Person p1=personDao.create("Savio", "Feng", LocalDate.of(1995, 8, 25), "3588975899", "informatica, ingegneria",u1);
-			Company c1=companyDao.create("Esselunga",u1);
-			*/
-			
+	
 			
 			p1=personDao.apply(p1, j1);
 			p2=personDao.apply(p2, j1);
 			p1=personDao.apply(p1, j3);
+			p3=personDao.apply(p3, j1);
+			p4=personDao.apply(p4, j1);
+			p5=personDao.apply(p5, j1);
+			p3=personDao.apply(p2, j2);
+			p4=personDao.apply(p4, j2);
+			p5=personDao.apply(p5, j4);
+			p5=personDao.apply(p5, j5);
 			
 			
-			
-			//p3=personService.apply(p3, j2);
-		//	p3=personService.apply(p3, j4);
-			//p3=personService.apply(p3, j5);
-			//personDao.unApplyAll(j1);
-			//jobOfferDao.update(j1);
-
 			/*
-			personDao.apply(p3, j1);
-			personDao.apply(p4, j1);
-			personDao.apply(p5, j1);
 			personDao.apply(p6, j1);
 			personDao.apply(p7, j1);
 			personDao.apply(p8, j1);
@@ -454,24 +391,12 @@ public class LoadData {
 			personDao.apply(p35, j2);*/
 			//personDao.apply(p1, j1);; lancia un'eccezione perchè non ci si può candidare due volte per la stessa offerta
 				
-			//System.out.println(jobOfferDao.getInterested(j1)); da chiedere
-			
-			
-//			List<JobOffer> joboffers6 = jobOfferDao.findAll();//assert
-//			assert joboffers6.equals(3);
-//			assert jobOfferDao.getInterested(j1).equals(2);
-			//System.out.println(userDao.findByMailandPassword("loris@gmail.it","passw3ord1"));
-			/*
-			List<JobOffer> joboffers7 = jobOfferDao.filter(null, null, null, null, null, null,null);
-			for (JobOffer j : joboffers7) {
-				System.out.println(j);
-			}*/
+
 			
 			session.getTransaction().commit();
 
 			//DELETE JOBOFFER
 			/*
-			session.getTransaction().commit();
 			
 			session.beginTransaction();
 			for (Person p:j1.getCandidancies()) {
