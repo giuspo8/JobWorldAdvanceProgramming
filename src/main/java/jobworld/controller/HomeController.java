@@ -138,7 +138,18 @@ private CompanyService companyService;
 	}
 	
 	@GetMapping("/login")
-	public String login(){
+	public String login(@RequestParam(value = "error", required = false) String error, 
+            @RequestParam(value = "logout", required = false) String logout,
+            Model model){
+		 String errorMessage = null;
+	        if(error != null) {
+	        	errorMessage = "Username o Password errati !!";
+	        }
+	        if(logout != null) {
+	        	// entriamo in questo caso se non specifichiamo una .logoutSuccessUrl in WebSecurityConf.configure
+	        	errorMessage = "Uscita dal sistema avvenuta !!";
+	        }
+	        model.addAttribute("errorMessage", errorMessage);
 		return "login";
 	}
 	

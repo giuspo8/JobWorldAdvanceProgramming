@@ -33,14 +33,14 @@ public class UserServiceDefault implements UserService,UserDetailsService {
 	      builder = org.springframework.security.core.userdetails.User.withUsername(email);
 	      builder.password(user.getPassword());
 	            
-	      TypeRole [] roles = new TypeRole[user.getRoles().size()];
+	      String [] roles = new String[user.getRoles().size()];
 
 	      int j = 0;
 	      for (Role r : user.getRoles()) {
-	    	  roles[j++] = r.getName();
+	    	  roles[j++] = r.getName().toString();
 	      }
-	            
-	      builder.roles(roles.toString());
+	      System.out.print(roles);
+	      builder.roles(roles);
 	    } else {
 	      throw new UsernameNotFoundException("User not found.");
 	    }

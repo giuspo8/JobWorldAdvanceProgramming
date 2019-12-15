@@ -58,9 +58,9 @@ public class DefaultCompanyDao extends DefaultDao implements CompanyDao {
 	}
 	
 	@Override
-	public Company findbyUserId(long id_user) {
+	public Company findbyUserId(String email) {
 		return getSession().createQuery("from Company c where c.user.id=:id", Company.class)
-				.setParameter("id", id_user).getSingleResult();
+				.setParameter("id", email).getSingleResult();
 	}
 
 	@Override

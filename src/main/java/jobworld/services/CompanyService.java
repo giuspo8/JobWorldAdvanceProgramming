@@ -28,6 +28,6 @@ Company update(Company company);
 	
 void delete(Company contact);
 
-Company findbyUserId(Long id);
+Company findbyUserId(String email);
 
 }

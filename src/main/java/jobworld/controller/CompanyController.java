@@ -52,60 +52,13 @@ public class CompanyController {
 	//TODO:MODIFICATE IL CAZZO DI UPLOAD PATH ALTRIMENTI VI DA ERRORE!!!!!
 	private static String UPLOADED_FOLDER = "C:\\Users\\cicci\\git\\JobWorldAdvance_work\\WebContent\\resources\\img\\companies\\";
 
-
-	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-	public String homeCompany(@PathVariable("userId") Long userId,Locale locale , Model model) {
-		List<JobOffer> allJobOffers = this.jobOfferService.findAll();
-		List<String> company_image = new ArrayList<String>();
-		for (JobOffer job : allJobOffers) {
-			company_image.add(job.getCompany().getUser().getImage());
-		}
-		model.addAttribute("jobOffers", allJobOffers);
-		model.addAttribute("image", company_image);
-		//Warning: Non ci sono le province dobbiamo risolverlo sulla vista
-		//Implementazione delle api rest per ip address in base alla zona di appartenenza;
-		//TODO: cambiate l'ip per vedere come la form filter cambia automaticamente i nomi di regione, citt�, provincia.
-		//String ip ="79.18.192.39";  //Abruzzo Atri
-		String ip ="37.160.70.194";   //Lazio Roma
-		//String ip ="2.235.168.0";	// Nichelino Piemonte
-		String uri = "https://ipapi.co/"+ip+"/json/";
-		RestTemplate restTemplate = new RestTemplate();
-		String result= restTemplate.getForObject(uri, String.class);
-		JSONObject obj = new JSONObject(result);
-		System.out.println(obj.getString("region"));
-		model.addAttribute("region", obj.getString("region"));
-		model.addAttribute("city", obj.getString("city"));
-
-		//Per estrarre ip dal client che effettua la richiesta
-		/*
-				String ip_client=request.getRemoteAddr();
-				if (ip_client== null) {
-					ip_client = request.getHeader("X-FORWARDED-FOR");   // Nel caso di collegamento attraverso proxy serve comunque a trovare un ip
-				}*/
-
-		ArrayList<Long> interested= new ArrayList<Long>();
-		List<JobOffer> best_three= new ArrayList<JobOffer>();
-		for (JobOffer job : allJobOffers) {
-			interested.add(this.jobOfferService.getInterested(job));
-		}
-		for (int i=0; i<3; i++) {
-			int id_job = interested.indexOf(Collections.max(interested));
-			best_three.add(allJobOffers.get(id_job));
-			interested.remove(id_job);
-		}
-		model.addAttribute("best_three",best_three);
-		
-		String name_company= this.companyService.findbyUserId(userId).getName();
-		model.addAttribute("name_company",name_company);
-		model.addAttribute("user_id",userId);
-		return "company/home";
-	}
 	
 	
-	@GetMapping(value="/profile/{userId}")
-	public String profile(@PathVariable("userId") Long userId,Model model) {
-		Company company=this.companyService.findbyUserId(userId);
-		User user=this.userService.findById(userId);
+	@GetMapping(value="/profile/{email}")
+	public String profile(@PathVariable("email") String email,Model model) {
+		email=email+".com";
+		Company company=this.companyService.findbyUserId(email);
+		User user=this.userService.findByEmail(email);
 		model.addAttribute("company",company);
 		model.addAttribute("user",user);
 		return "company/profile";
@@ -126,9 +79,10 @@ public class CompanyController {
 	}
 	
 	
-	@GetMapping("/listjoboffer/{userId}")
-	public String listjobofferscompany (@PathVariable("userId") Long userId, Model model) {
-		long companyId= this.companyService.findbyUserId(userId).getId();
+	@GetMapping("/listjoboffer/{email}")
+	public String listjobofferscompany (@PathVariable("email") String email, Model model) {
+		email=email+".com";
+		long companyId= this.companyService.findbyUserId(email).getId();
 		List<JobOffer> jobs = this.jobOfferService.findbyCompanyId(companyId);
 		model.addAttribute("jobs",jobs);
 		return "company/listjoboffer";

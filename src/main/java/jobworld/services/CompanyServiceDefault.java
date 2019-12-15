@@ -35,7 +35,7 @@ private UserDao userRepository;
 	
 	@Transactional(readOnly=true)
 	@Override
-	public Company findbyUserId(Long id) {
+	public Company findbyUserId(String id) {
 		return this.companyRepository.findbyUserId(id);
 	}
 

@@ -15,6 +15,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page session="false"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -119,9 +120,29 @@
 								</form:form>
 							</div>
 						</nav> </span> <span><img src="<c:url value="resources/img/logo.png"/>"></span></li>
-				<li><a href="<c:url value="/register"/>">Registrati</a></li>
-				<li>-</li>
-				<li><a href="<c:url value="/login"/>" class="login_btn">Accedi</a></li>
+				<sec:authorize access="hasRole('ADMIN')" var="isCompany" />
+				<sec:authorize access="hasRole('USER')" var="isUser" />
+				<sec:authorize access="isAuthenticated()" var="isAuth" />
+
+				<c:choose>
+					<c:when test="${isCompany}">
+					<li><a href="<c:url value="/logout" />">Logout</a></li>
+					<li>-</li>
+					<li><a href="<c:url value="/company/listjoboffer/"/><sec:authentication property="principal.username" />">Offerte di lavoro</a></li>
+					<li>-</li>
+					<li><a href="<c:url value="/company/profile/"/><sec:authentication property="principal.username" />" class="login_btn"><sec:authentication property="principal.username" /></a></li>
+					</c:when>
+					<c:when test="${isUser}">
+					<li><a href="<c:url value="/logout" />">Logout</a></li>
+					<li>-</li>
+					<li><a href="<c:url value="/user/profile/"/><sec:authentication property="principal.username" />" class="login_btn"><sec:authentication property="principal.username" /></a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="<c:url value="/register"/>">Registrati</a></li>
+						<li>-</li>
+						<li><a href="<c:url value="/login"/>" class="login_btn">Accedi</a></li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 	</header>

@@ -33,7 +33,7 @@ public interface CompanyDao {
 	
 	List<Company> findAll();
 
-	Company findbyUserId(long id_user);
+	Company findbyUserId(String id);
 	
 
 	
