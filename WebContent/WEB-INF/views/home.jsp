@@ -128,12 +128,14 @@
 					<c:when test="${isCompany}">
 					<li><a href="<c:url value="/logout" />">Logout</a></li>
 					<li>-</li>
-					<li><a href="<c:url value="/company/listjoboffer/"/><sec:authentication property="principal.username" />">Offerte di lavoro</a></li>
+					<li><a href="<c:url value="/company/listjoboffer?email="/><sec:authentication property="principal.username" />">Offerte di lavoro</a></li>
 					<li>-</li>
 					<li><a href="<c:url value="/company/profile?email="/><sec:authentication property="principal.username" />" class="login_btn"><sec:authentication property="principal.username" /></a></li>
 					</c:when>
 					<c:when test="${isUser}">
 					<li><a href="<c:url value="/logout" />">Logout</a></li>
+					<li>-</li>
+					<li><a href="<c:url value="/user/curriculum?email="/><sec:authentication property="principal.username" />">Curriculum</a></li>
 					<li>-</li>
 					<li><a href="<c:url value="/user/profile?email="/><sec:authentication property="principal.username" />" class="login_btn"><sec:authentication property="principal.username" /></a></li>
 					</c:when>

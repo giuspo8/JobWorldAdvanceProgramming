@@ -70,7 +70,7 @@ public class CompanyController {
 	        Path path = Paths.get(UPLOADED_FOLDER + image.getOriginalFilename());
 	        Files.write(path, bytes);
 			System.out.println("You successfully uploaded '" + image.getOriginalFilename() + "'");
-			return "company/profile"; // per il momento inserito così lo cambio
+			return "company/profile"; // per il momento inserito cosï¿½ lo cambio
 		} catch(IOException e) {
 			 e.printStackTrace();
 		}
@@ -78,11 +78,10 @@ public class CompanyController {
 	}
 	
 	
-	@GetMapping("/listjoboffer/{email}")
-	public String listjobofferscompany (@PathVariable("email") String email, Model model) {
-		email=email+".com";
-		long companyId= this.companyService.findbyUserId(email).getId();
-		List<JobOffer> jobs = this.jobOfferService.findbyCompanyId(companyId);
+	@GetMapping("/listjoboffer")
+	public String listjobofferscompany (@RequestParam(value="email") String email, Model model) {
+		Company company=this.companyService.findbyUserId(email);
+		List<JobOffer> jobs = this.jobOfferService.findbyCompanyId(company.getId());
 		model.addAttribute("jobs",jobs);
 		return "company/listjoboffer";
 	}

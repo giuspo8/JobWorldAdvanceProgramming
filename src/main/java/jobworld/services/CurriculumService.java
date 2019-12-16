@@ -19,10 +19,10 @@ public interface CurriculumService {
 	
 	Curriculum findByPersonId(Person person);
 		
-	Curriculum create(Person person, String workExperience, String education, String personalSkills,
-			String additionalInfo);
 		
 	Curriculum update(Curriculum curriculum);
 		
-		void delete(Curriculum contact);
+	void delete(Curriculum contact);
+
+	Curriculum create(Curriculum curriculum);
 }

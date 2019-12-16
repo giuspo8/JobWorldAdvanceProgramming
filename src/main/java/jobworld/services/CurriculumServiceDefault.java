@@ -38,9 +38,7 @@ private CurriculumDao curriculumRepository;
 
 	@Transactional
 	@Override
-	public Curriculum create(Person person, String workExperience, String education, String personalSkills,
-			String additionalInfo) {
-		Curriculum curriculum=new Curriculum(person,workExperience,education,personalSkills,additionalInfo);
+	public Curriculum create(Curriculum curriculum) {
 		return this.curriculumRepository.create(curriculum);
 	}
 
@@ -62,4 +60,6 @@ private CurriculumDao curriculumRepository;
 	public void setCurriculumRepository(CurriculumDao curriculumRepository) {
 		this.curriculumRepository = curriculumRepository;
 	}
+
+
 }
