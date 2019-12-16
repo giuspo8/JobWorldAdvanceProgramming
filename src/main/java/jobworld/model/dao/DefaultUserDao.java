@@ -27,7 +27,7 @@ public class DefaultUserDao extends DefaultDao implements UserDao {
 	@Override
 	@Transactional
 	public User create(String email, String password, String description, String image) {
-		User user = new User(email, password, description, description);
+		User user = new User(email, password, description, image);
 		this.getSession().save(user);
 		return user;
 	}

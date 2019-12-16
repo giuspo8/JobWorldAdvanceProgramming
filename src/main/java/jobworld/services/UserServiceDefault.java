@@ -82,4 +82,10 @@ public class UserServiceDefault implements UserService,UserDetailsService {
 		return this.userRepository.findByMailandPassword(email, password);
 	}
 
+
+	@Override
+	public String encryptPassword(String password) {
+		return this.userRepository.encryptPassword(password);
+	}
+
 }

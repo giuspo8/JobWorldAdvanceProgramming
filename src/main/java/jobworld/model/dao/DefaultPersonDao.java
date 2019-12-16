@@ -35,7 +35,7 @@ public class DefaultPersonDao extends DefaultDao implements PersonDao {
 	@Transactional
 	public Person create(String firstName, String secondName,
 			LocalDate birthDate, String number, String interests,User user) {
-		Person person = new Person(firstName, secondName, birthDate, number, interests,user);
+		Person person = new Person(firstName, secondName, birthDate, number, interests, user);
 		user.setPerson(person);
 		this.getSession().save(person);
 		return person;

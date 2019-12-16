@@ -18,5 +18,7 @@ public interface UserService {
 	List<User> findAll();
 	
 	User findByMailandPassword(String email,String password);
+	
+	public String encryptPassword(String password);
 
 }

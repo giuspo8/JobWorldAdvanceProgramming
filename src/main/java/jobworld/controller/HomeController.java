@@ -1,6 +1,5 @@
 package jobworld.controller;
 
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -12,6 +11,7 @@ import java.util.Map;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.BeanDefinitionDsl.Role;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,10 +25,13 @@ import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
 import jobworld.model.entities.User;
+import jobworld.model.entities.Role.TypeRole;
 import jobworld.services.CompanyService;
 import jobworld.services.JobOfferService;
 import jobworld.services.PersonService;
+import jobworld.services.RoleService;
 import jobworld.services.UserService;
+
 @Controller
 public class HomeController {
 
@@ -41,10 +44,12 @@ public class HomeController {
 	 * @author Savio Feng
 	 * @version 1.0
 	 */
-private JobOfferService jobOfferService;
-private UserService userService;
-private PersonService personService;
-private CompanyService companyService;
+	private JobOfferService jobOfferService;
+	private UserService userService;
+	private PersonService personService;
+	private CompanyService companyService;
+	private RoleService roleService;
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		List<JobOffer> allJobOffers = this.jobOfferService.findAll();
@@ -54,123 +59,138 @@ private CompanyService companyService;
 		}
 		model.addAttribute("jobOffers", allJobOffers);
 		model.addAttribute("image", company_image);
-		
-		//Warning: Non ci sono le province dobbiamo risolverlo sulla vista
-		//Implementazione delle api rest per ip address in base alla zona di appartenenza;
-		//TODO: cambiate l'ip per vedere come la form filter cambia automaticamente i nomi di regione, cittï¿½, provincia.
-		//String ip ="79.18.192.39";  //Abruzzo Atri
-		String ip ="37.160.70.194";   //Lazio Roma
-		//String ip ="2.235.168.0";	// Nichelino Piemonte
-		String uri = "https://ipapi.co/"+ip+"/json/";
+
+		// Warning: Non ci sono le province dobbiamo risolverlo sulla vista
+		// Implementazione delle api rest per ip address in base alla zona di
+		// appartenenza;
+		// TODO: cambiate l'ip per vedere come la form filter cambia automaticamente i
+		// nomi di regione, cittï¿½, provincia.
+		// String ip ="79.18.192.39"; //Abruzzo Atri
+		String ip = "37.160.70.194"; // Lazio Roma
+		// String ip ="2.235.168.0"; // Nichelino Piemonte
+		String uri = "https://ipapi.co/" + ip + "/json/";
 		RestTemplate restTemplate = new RestTemplate();
-		String result= restTemplate.getForObject(uri, String.class);
+		String result = restTemplate.getForObject(uri, String.class);
 		JSONObject obj = new JSONObject(result);
 		System.out.println(obj.getString("region"));
 		model.addAttribute("region", obj.getString("region"));
 		model.addAttribute("city", obj.getString("city"));
-						    
-		//Per estrarre ip dal client che effettua la richiesta
+
+		// Per estrarre ip dal client che effettua la richiesta
 		/*
-		String ip_client=request.getRemoteAddr();
-		if (ip_client== null) {
-			ip_client = request.getHeader("X-FORWARDED-FOR");   // Nel caso di collegamento attraverso proxy serve comunque a trovare un ip
-		}*/
-		
-		ArrayList<Long> interested= new ArrayList<Long>();
-		List<JobOffer> best_three= new ArrayList<JobOffer>();
+		 * String ip_client=request.getRemoteAddr(); if (ip_client== null) { ip_client =
+		 * request.getHeader("X-FORWARDED-FOR"); // Nel caso di collegamento attraverso
+		 * proxy serve comunque a trovare un ip }
+		 */
+
+		ArrayList<Long> interested = new ArrayList<Long>();
+		List<JobOffer> best_three = new ArrayList<JobOffer>();
 		for (JobOffer job : allJobOffers) {
 			interested.add(this.jobOfferService.getInterested(job));
 		}
-		for (int i=0; i<3; i++) {
+		for (int i = 0; i < 3; i++) {
 			int id_job = interested.indexOf(Collections.max(interested));
 			best_three.add(allJobOffers.get(id_job));
 			interested.remove(id_job);
 		}
-		model.addAttribute("best_three",best_three);
+		model.addAttribute("best_three", best_three);
 		return "home";
 	}
-	
+
 	@Autowired
 	public void setJobOfferService(JobOfferService jobOfferService) {
 		this.jobOfferService = jobOfferService;
 	}
+
 	@Autowired
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
+
 	@Autowired
 	public void setPersonService(PersonService personService) {
 		this.personService = personService;
 	}
+
 	@Autowired
 	public void setCompanyService(CompanyService companyService) {
 		this.companyService = companyService;
 	}
 
+	@Autowired
+	public void setRoleService(RoleService roleService) {
+		this.roleService = roleService;
+	}
+
 	@PostMapping(value = "/filter")
-	public String filter(@RequestParam Map<String,String> allParams, Model model) {
-		List<JobOffer> jobOffers = this.jobOfferService.filter(allParams.get("region"),
-				allParams.get("province"), allParams.get("town"),
-				allParams.get("position"), allParams.get("contractType"),
+	public String filter(@RequestParam Map<String, String> allParams, Model model) {
+		List<JobOffer> jobOffers = this.jobOfferService.filter(allParams.get("region"), allParams.get("province"),
+				allParams.get("town"), allParams.get("position"), allParams.get("contractType"),
 				allParams.get("minEducationLevel"), allParams.get("minExperience"));
 		model.addAttribute("jobOffers", jobOffers);
 		return "home";
 	}
-	
+
 	@GetMapping("/register")
 	public String register() {
 		return "register";
 	}
-	
+
 	@SuppressWarnings("unused")
 	@PostMapping("/add")
-	public String add(@RequestParam Map<String,String> allParams) {
-		User user = userService.create(allParams.get("email"), allParams.get("password"), allParams.get("description"), null);
-		if(allParams.get("type").equals("person")) {
+	public String add(@RequestParam Map<String, String> allParams) {
+		User user = userService.create(allParams.get("email"), userService.encryptPassword(allParams.get("password")),
+				allParams.get("description"), null);
+		if (allParams.get("type").equals("person")) {
+			user.addRole(roleService.getRoleByTypeRole(TypeRole.USER));
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 			LocalDate birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
-			Person person = personService.create(allParams.get("firstName"), allParams.get("secondName"), birthDate, allParams.get("number"), null, user);
-		} else if(allParams.get("type").equals("company")){
+			Person person = personService.create(allParams.get("firstName"), allParams.get("secondName"), birthDate,
+					allParams.get("number"), null, user);
+		} else if (allParams.get("type").equals("company")) {
+			System.out.print(roleService.getRoleByTypeRole(TypeRole.COMPANY).toString());
+			user.addRole(roleService.getRoleByTypeRole(TypeRole.COMPANY));
 			Company company = companyService.create(allParams.get("name"), user);
 		}
 		return "redirect:/";
-		
+
 	}
-	
+
 	@GetMapping("/login")
-	public String login(@RequestParam(value = "error", required = false) String error, 
-            @RequestParam(value = "logout", required = false) String logout,
-            Model model){
-		 String errorMessage = null;
-	        if(error != null) {
-	        	errorMessage = "Username o Password errati !!";
-	        }
-	        if(logout != null) {
-	        	// entriamo in questo caso se non specifichiamo una .logoutSuccessUrl in WebSecurityConf.configure
-	        	errorMessage = "Uscita dal sistema avvenuta !!";
-	        }
-	        model.addAttribute("errorMessage", errorMessage);
+	public String login(@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout, Model model) {
+		String errorMessage = null;
+		if (error != null) {
+			errorMessage = "Username o Password errati!!";
+		}
+		if (logout != null) {
+			// entriamo in questo caso se non specifichiamo una .logoutSuccessUrl in
+			// WebSecurityConf.configure
+			errorMessage = "Uscita dal sistema avvenuta!!";
+		}
+		model.addAttribute("errorMessage", errorMessage);
 		return "login";
 	}
-	
+
 	@PostMapping("/autentication")
-	public String autentication(@RequestParam Map<String,String> allParams) {
-		User user= this.userService.findByMailandPassword(allParams.get("email"), allParams.get("password"));
-		if (user==null) {
+	public String autentication(@RequestParam Map<String, String> allParams) {
+		User user = this.userService.findByMailandPassword(allParams.get("email"), allParams.get("password"));
+		if (user == null) {
 			return "redirect:/";
 		} else {
 			return null;
-			//return "redirect:/user/"+user.getId();//TODO l'user non ha piu l'id. adesso l'id è la email
-		}		
+			// return "redirect:/user/"+user.getId();//TODO l'user non ha piu l'id. adesso
+			// l'id Ã¨ la email
+		}
 	}
-	
+
 	@GetMapping("/chisiamo")
-	public String chisiamo(){
+	public String chisiamo() {
 		return "chisiamo";
 	}
-	
+
 	@GetMapping("/faq")
-	public String faq(){
+	public String faq() {
 		return "faq";
 	}
 }

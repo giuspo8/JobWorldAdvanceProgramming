@@ -32,7 +32,8 @@ public class Role {
 
 		public TypeRole getName() {
 			return name;
-		}	    
+		}
+		
 		
 		
 

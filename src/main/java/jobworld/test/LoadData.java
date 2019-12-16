@@ -63,6 +63,7 @@ public class LoadData {
 			//parte cifratura, va messo in ordine
 			Role r1 = roleDao.create(TypeRole.USER);
 			Role r2 = roleDao.create(TypeRole.ADMIN);
+			Role r3 = roleDao.create(TypeRole.COMPANY);
 			User u1 = userDao.create("saviofeng@gmail.it", userDao.encryptPassword("user1"), null,"/resources/img/galleria5.jpg");				
 			u1.addRole(r1);
 			
