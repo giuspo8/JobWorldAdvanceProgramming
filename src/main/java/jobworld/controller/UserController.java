@@ -96,10 +96,10 @@ public class UserController {
 		return "user/home";
 	}
 	
-	@GetMapping("/profile/{userId}")
-	public String profile(@PathVariable("userId") Long userId,Model model) {
-		Person person=this.personService.findbyUserId(userId);
-		User user=this.userService.findById(userId);
+	@GetMapping("/profile")
+	public String profile(@RequestParam(value="email") String email,Model model) {
+		User user=this.userService.findByEmail(email);
+		Person person=this.personService.findbyUserId(email);
 		model.addAttribute("person",person);
 		model.addAttribute("user",user);
 		return "user/profile";

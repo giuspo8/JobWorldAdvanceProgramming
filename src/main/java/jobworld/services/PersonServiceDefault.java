@@ -78,7 +78,7 @@ private PersonDao personRepository;
 
 	@Transactional(readOnly=true)
 	@Override
-	public Person findbyUserId(Long id) {
+	public Person findbyUserId(String id) {
 		return this.personRepository.findbyUserId(id);
 	}
 }

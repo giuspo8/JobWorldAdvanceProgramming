@@ -39,7 +39,7 @@ public interface PersonDao {
 	
 	void unApplyAll(JobOffer jobOffer);
 	
-	Person findbyUserId(long id_user);
+	Person findbyUserId(String id_user);
 	
 	
 

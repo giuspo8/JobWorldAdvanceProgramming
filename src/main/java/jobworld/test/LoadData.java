@@ -449,6 +449,7 @@ public class LoadData {
 			curriculumDao.delete(c11);
 			session.getTransaction().commit();
 			*/
+			assert(personDao.findbyUserId("saviofeng@gmail.it")==p1);
 
 			}
 		

@@ -49,14 +49,13 @@ public class CompanyController {
 	private JobOfferService jobOfferService;
 	private CompanyService companyService;
 	private UserService userService;
-	//TODO:MODIFICATE IL CAZZO DI UPLOAD PATH ALTRIMENTI VI DA ERRORE!!!!!
+	//TODO:MODIFICATE L'UPLOAD PATH ALTRIMENTI VI DA ERRORE!!!!!
 	private static String UPLOADED_FOLDER = "C:\\Users\\cicci\\git\\JobWorldAdvance_work\\WebContent\\resources\\img\\companies\\";
 
 	
 	
-	@GetMapping(value="/profile/{email}")
-	public String profile(@PathVariable("email") String email,Model model) {
-		email=email+".com";
+	@GetMapping(value="/profile")
+	public String profile(@RequestParam(value="email") String email,Model model) {
 		Company company=this.companyService.findbyUserId(email);
 		User user=this.userService.findByEmail(email);
 		model.addAttribute("company",company);

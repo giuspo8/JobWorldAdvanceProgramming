@@ -68,8 +68,8 @@ public class DefaultPersonDao extends DefaultDao implements PersonDao {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Person findbyUserId(long id_user) {
-		return getSession().createQuery("from Person p where p.user.id=:id", Person.class)
+	public Person findbyUserId(String id_user) {
+		return getSession().createQuery("from Person p where p.user.email=:id", Person.class)
 				.setParameter("id", id_user).getSingleResult();
 	}
 
