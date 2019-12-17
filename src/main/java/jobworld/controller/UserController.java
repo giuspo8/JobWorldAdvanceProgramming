@@ -42,7 +42,6 @@ public class UserController {
 	 * @version 1.0
 	 */
 	private JobOfferService jobOfferService;
-	@SuppressWarnings("unused")
 	private UserService userService;
 	private PersonService personService;
 	private CurriculumService curriculumService;
@@ -85,7 +84,12 @@ public class UserController {
 	@PostMapping("/updateCurriculum")
 	public String updateCurriculum(@RequestParam Map<String,String> allParams, Model model) {
 		Person person = personService.findbyUserId(allParams.get("email"));
-		Curriculum curriculum = curriculumService.update(person.getCurriculum()); ////////////////////////
+		Curriculum curriculum = curriculumService.update(person.getCurriculum());
+		curriculum.setWorkExperience(allParams.get("workExperience"));
+		curriculum.setEducation(allParams.get("education"));
+		curriculum.setPersonalSkills(allParams.get("personalSkills"));
+		curriculum.setAdditionalInfo(allParams.get("additionalInfo"));
+		curriculumService.update(curriculum);
 		model.addAttribute("curriculum", curriculum);
 		return "redirect:/user/curriculum?email=" + allParams.get("email");
 	}
