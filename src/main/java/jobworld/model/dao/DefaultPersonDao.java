@@ -99,6 +99,14 @@ public class DefaultPersonDao extends DefaultDao implements PersonDao {
 		return update(person);
 	}
 
+	@Override
+	public Person unapply(Person person, JobOffer joboffer) {
+		joboffer.getCandidancies().remove(person);
+		person.getCandidacies().remove(joboffer);
+		jobOfferDao.update(joboffer);		
+		return update(person);
+	}
+
 
 
 

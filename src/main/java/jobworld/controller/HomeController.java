@@ -15,6 +15,7 @@ import org.springframework.context.support.BeanDefinitionDsl.Role;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -120,6 +121,17 @@ public class HomeController {
 	@Autowired
 	public void setRoleService(RoleService roleService) {
 		this.roleService = roleService;
+	}
+	
+	@GetMapping("/moreinfo/{companyid}/{jobid}")
+	public String moreinfo(@PathVariable(value="jobid") Long jobId,
+						   @PathVariable(value="companyid") Long companyId,
+						   										Model model) {
+		JobOffer joboffer = jobOfferService.findbyId(jobId);
+		Company company = companyService.findbyId(companyId);
+		model.addAttribute("company", company);
+		model.addAttribute("joboffer", joboffer);
+		return "moreinfo";
 	}
 
 	@PostMapping(value = "/filter")

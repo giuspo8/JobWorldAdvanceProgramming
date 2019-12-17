@@ -348,6 +348,9 @@ public class LoadData {
 	
 			
 			p1=personDao.apply(p1, j1);
+			p1.setBirthDate(null);
+			p1=personDao.unapply(p1, j1);
+			/*
 			p2=personDao.apply(p2, j1);
 			p1=personDao.apply(p1, j3);
 			p3=personDao.apply(p3, j1);
@@ -356,7 +359,7 @@ public class LoadData {
 			p3=personDao.apply(p2, j2);
 			p4=personDao.apply(p4, j2);
 			p5=personDao.apply(p5, j4);
-			p5=personDao.apply(p5, j5);
+			p5=personDao.apply(p5, j5); */
 			
 			
 			/*

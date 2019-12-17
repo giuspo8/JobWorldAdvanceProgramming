@@ -159,7 +159,7 @@
 		<c:if test="${fn:length(jobOffers) gt 0}">
 			<c:forEach items="${jobOffers}" var="j">
 				<div class="offer">
-					<h3>${j.position}</h3>
+					<h3><a href="<c:url value="/moreinfo/${j.getCompany().getId()}/${j.id}"/>">${j.position}</a></h3>
 					<hr>
 					<div class="general_info"></div>
 					<hr>
@@ -167,6 +167,9 @@
 						<img class="pic" src="<c:url value="${j.getCompany().getUser().getImage()}" />">
 						<div class="description">
 							<span class="more">${j.description}</span>
+							<c:if test='${isUser}'>
+							<a href="<c:url value="/user/apply/${j.id}?email="/><sec:authentication property="principal.username" />">Candidati</a>
+							</c:if>
 						</div>
 					</div>
 				</div>

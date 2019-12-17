@@ -81,4 +81,10 @@ private PersonDao personRepository;
 	public Person findbyUserId(String id) {
 		return this.personRepository.findbyUserId(id);
 	}
+
+	@Override
+	public Person unapply(Person person, JobOffer joboffer) {
+		// TODO Auto-generated method stub
+		return this.personRepository.unapply(person, joboffer);
+	}
 }

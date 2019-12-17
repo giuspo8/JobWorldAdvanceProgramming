@@ -26,6 +26,8 @@ Person update(Person person);
 
 Person apply(Person person, JobOffer joboffer);
 
+Person unapply(Person person, JobOffer joboffer);
+
 Person findbyUserId(String id);
 	
 void delete(Person contact);

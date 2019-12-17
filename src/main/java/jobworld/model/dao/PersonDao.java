@@ -35,6 +35,8 @@ public interface PersonDao {
 
 	Person findById(long id);
 	
+	Person unapply(Person person, JobOffer joboffer);
+	
 	List<Person> findAll();
 	
 	void unApplyAll(JobOffer jobOffer);
