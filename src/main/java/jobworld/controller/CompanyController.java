@@ -9,9 +9,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
+import jobworld.model.entities.Person;
 import jobworld.model.entities.User;
 import jobworld.services.CompanyService;
 import jobworld.services.JobOfferService;
@@ -50,48 +54,85 @@ public class CompanyController {
 	private CompanyService companyService;
 	private UserService userService;
 	//TODO:MODIFICATE L'UPLOAD PATH ALTRIMENTI VI DA ERRORE!!!!!
-	private static String UPLOADED_FOLDER = "C:\\Users\\cicci\\git\\JobWorldAdvance_work\\WebContent\\resources\\img\\companies\\";
+	private static String UPLOADED_FOLDER = "C:\\Users\\cicci\\git\\JobWorldAdvanceProgramming\\WebContent\\resources\\img\\companies\\";
 
 	
 	
 	@GetMapping(value="/profile")
-	public String profile(@RequestParam(value="email") String email,Model model) {
-		Company company=this.companyService.findbyUserId(email);
-		User user=this.userService.findByEmail(email);
-		model.addAttribute("company",company);
+	public String profile(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Company company = companyService.findbyUserId(auth.getName());
+		User user=userService.findByEmail(auth.getName());
+		model.addAttribute("company", company);
 		model.addAttribute("user",user);
 		return "company/profile";
 	}
 	
 	@PostMapping("/update")
-	public String update(@RequestParam Map<String,String> allParams, @RequestParam("image") MultipartFile image) {
+	public String update(@RequestParam Map<String,String> allParams, @RequestParam("image") MultipartFile image,Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user =userService.update(userService.findByEmail(auth.getName()));
+		Company company = companyService.update(user.getCompany());
 		try {
 			byte[] bytes = image.getBytes();
+			System.out.print(image.getOriginalFilename().toString());
 	        Path path = Paths.get(UPLOADED_FOLDER + image.getOriginalFilename());
+	        String path_image = "/companies/"+ image.getOriginalFilename();
 	        Files.write(path, bytes);
-			System.out.println("You successfully uploaded '" + image.getOriginalFilename() + "'");
-			return "company/profile"; // per il momento inserito cos� lo cambio
+	        user.setImage(path_image);
 		} catch(IOException e) {
 			 e.printStackTrace();
 		}
-		return "company/profile";
+		user.setDescription(allParams.get("description"));
+		company.setName(allParams.get("name"));
+		userService.update(user);
+		companyService.update(company);
+		model.addAttribute("company", company);
+		model.addAttribute("user",user);
+		return "redirect:/company/profile";
 	}
 	
 	
 	@GetMapping("/listjoboffer")
-	public String listjobofferscompany (@RequestParam(value="email") String email, Model model) {
-		Company company=this.companyService.findbyUserId(email);
-		List<JobOffer> jobs = this.jobOfferService.findbyCompanyId(company.getId());
+	public String listjobofferscompany (Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Company company=companyService.findbyUserId(auth.getName());
+		List<JobOffer> jobs = jobOfferService.findbyCompanyId(company.getId());
 		model.addAttribute("jobs",jobs);
 		return "company/listjoboffer";
 	}
 	
 	@GetMapping("/joboffer/{jobId}")
 	public String joboffercompany (@PathVariable("jobId") Long jobId, Model model) {
-		JobOffer job = this.jobOfferService.findbyId(jobId);
+		JobOffer job = jobOfferService.findbyId(jobId);
 		model.addAttribute("job",job);
 		return "company/editjoboffer";
 	}
+	
+	@GetMapping("/joboffer/{jobId}/delete")
+	public String jobofferdelete (@PathVariable("jobId") Long jobId, Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Company company=companyService.findbyUserId(auth.getName());
+		JobOffer job = jobOfferService.findbyId(jobId);
+		jobOfferService.delete(job);
+		List<JobOffer> jobs = jobOfferService.findbyCompanyId(company.getId());
+		model.addAttribute("jobs",jobs);
+		model.addAttribute("company",company);
+		return "redirect:/company/listjoboffer";
+	}
+	
+	@GetMapping("/interested/{jobId}")
+	public String intrested (@PathVariable("jobId") Long jobId, Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Company company=companyService.findbyUserId(auth.getName());
+		JobOffer job = jobOfferService.findbyId(jobId);
+		Set<Person> candidencies= job.getCandidancies();
+		model.addAttribute("candidencies",candidencies);
+		model.addAttribute("company",company);
+		return "company/interested";
+	}
+	
+	
 	
 	@Autowired
 	public void setJobOfferService(JobOfferService jobOfferService) {

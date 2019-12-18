@@ -40,27 +40,20 @@
 			<div style="text-align:center; margin:auto;">
 				<table class="tabelle_lista">
 				<tr>
-					<th>Posizione</th>
-    				<th>Tipo di contratto</th>
-    				<th>Data di scadenza</th>
-    				<th>Regione</th>
-    				<th>Provincia</th>
-    				<th>Città</th>
-    				<th></th>
-    				<th></th>
-    				<th></th>
+					<th>Nome</th>
+    				<th>Cognome</th>
+    				<th>Numero di telefono</th>
+    				<th>Email</th>
+    				<th>Curriculum</th>
 				</tr>
-				<c:forEach items="${jobs }" var="job">
+				<c:forEach items="${candidencies }" var="candidate">
 				<tr>
-					<td>${job.position} </td>
-					<td>${job.contractType} </td>
-					<td>${job.expiringDate } </td>
-					<td>${job.region } </td>
-					<td>${job.province } </td>
-					<td>${job.town } </td>
-					<td><a href="<c:url value="/company/interested/${job.id}"/>">Visualizza candidati</a></td>
-					<td><a href="<c:url value="/company/joboffer/${job.id}/delete"/>">Elimina</a></td>
-					<td><a href="<c:url value="/company/joboffer/${job.id}"/>">Modifica</a></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td><a href="<c:url value="/company/joboffer/"/>">Visualizza Curriculum</a></td>
 				</tr>
 				</c:forEach>
 				</table>

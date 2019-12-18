@@ -56,7 +56,7 @@ public class HomeController {
 	@GetMapping
 	public String home(Locale locale, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (auth.getName() != "anonymousUser") {
+		if (auth.getName() != "anonymousUser" & auth.getAuthorities().toString()=="ROLE_USER") {
 			Person person = personService.findbyUserId(auth.getName());
 			model.addAttribute("person", person);
 		}
