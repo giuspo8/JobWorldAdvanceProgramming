@@ -73,20 +73,30 @@ public class CompanyController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user =userService.update(userService.findByEmail(auth.getName()));
 		Company company = companyService.update(user.getCompany());
+		boolean trovato=true;
+		int i=image.getOriginalFilename().length()-1;
+		while(trovato & i>=0) {
+			char temp=image.getOriginalFilename().charAt(i);
+			if (temp=='\\' || i==0) {
+				trovato=false;
+			}
+			i--;
+		}
 		try {
 			byte[] bytes = image.getBytes();
-			System.out.print(image.getOriginalFilename().toString());
-	        Path path = Paths.get(UPLOADED_FOLDER + image.getOriginalFilename());
-	        String path_image = "/companies/"+ image.getOriginalFilename();
-	        Files.write(path, bytes);
+			String name_image= image.getOriginalFilename().substring(i+1);
+			System.out.print(name_image);
+	        Path path_disk = Paths.get(UPLOADED_FOLDER + name_image);
+	        String path_image = "/companies/"+ name_image;
+	        Files.write(path_disk, bytes);
 	        user.setImage(path_image);
 		} catch(IOException e) {
 			 e.printStackTrace();
 		}
 		user.setDescription(allParams.get("description"));
 		company.setName(allParams.get("name"));
-		userService.update(user);
-		companyService.update(company);
+		user=userService.update(user);
+		company=companyService.update(company);
 		model.addAttribute("company", company);
 		model.addAttribute("user",user);
 		return "redirect:/company/profile";
