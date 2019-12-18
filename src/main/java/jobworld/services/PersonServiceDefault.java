@@ -66,7 +66,6 @@ private PersonDao personRepository;
 	@Override
 	@Transactional
 	public Person apply(Person person, JobOffer joboffer) {
-		//person.getCandidacies().add(joboffer);
 		return this.personRepository.apply(person, joboffer);
 	}
 
@@ -83,8 +82,14 @@ private PersonDao personRepository;
 	}
 
 	@Override
+	@Transactional
 	public Person unapply(Person person, JobOffer joboffer) {
-		// TODO Auto-generated method stub
 		return this.personRepository.unapply(person, joboffer);
+	}
+
+	@Override
+	@Transactional
+	public boolean isInterested(JobOffer jobOffer) {
+		return this.personRepository.isInterested(jobOffer);
 	}
 }

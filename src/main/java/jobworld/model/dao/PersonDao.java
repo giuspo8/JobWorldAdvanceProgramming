@@ -24,8 +24,7 @@ public interface PersonDao {
 	
 	public void setSession(Session session);
 
-	Person create(String firstName, String secondName,LocalDate birthDate, String number,
-	String interests,User user);
+	Person create(String firstName, String secondName,LocalDate birthDate, String number, String interests,User user);
 	
 	Person apply(Person person, JobOffer joboffer);
 	
@@ -43,6 +42,5 @@ public interface PersonDao {
 	
 	Person findbyUserId(String id_user);
 	
-	
-
+	public boolean isInterested(JobOffer jobOffer);
 }

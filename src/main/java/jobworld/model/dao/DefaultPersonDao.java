@@ -80,18 +80,13 @@ public class DefaultPersonDao extends DefaultDao implements PersonDao {
 				.setParameter("jobOfferid", jobOffer.getId()).getResultList();
 		for(Long pId:personId) {
 			Person p=findById(pId);
-			//Set<JobOffer> jobOfferList=new HashSet<JobOffer>();
 			p.getCandidacies().remove(jobOffer);
-			//jobOfferList.addAll(p.getCandidacies());
-			//p.setCandidacies(jobOfferList);
-			//p.getCandidacies().clear();
 			update(p);
-			//p.setCandidacies(jobOfferList);
-			//update(p);
 		}		
 	}
 
 	@Override
+	@Transactional
 	public Person apply(Person person, JobOffer joboffer) {
 		joboffer.getCandidancies().add(person);
 		jobOfferDao.update(joboffer);
@@ -100,16 +95,17 @@ public class DefaultPersonDao extends DefaultDao implements PersonDao {
 	}
 
 	@Override
+	@Transactional
 	public Person unapply(Person person, JobOffer joboffer) {
 		joboffer.getCandidancies().remove(person);
+		jobOfferDao.update(joboffer);
 		person.getCandidacies().remove(joboffer);
-		jobOfferDao.update(joboffer);		
 		return update(person);
 	}
 
-
-
-
-
-	
+	@Override
+	@Transactional
+	public boolean isInterested(JobOffer jobOffer) {
+		return isInterested(jobOffer);
+	}	
 }

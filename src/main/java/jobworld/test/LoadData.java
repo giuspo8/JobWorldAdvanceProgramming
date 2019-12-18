@@ -347,9 +347,6 @@ public class LoadData {
 			
 	
 			
-			p1=personDao.apply(p1, j1);
-			p1.setBirthDate(null);
-			p1=personDao.unapply(p1, j1);
 			/*
 			p2=personDao.apply(p2, j1);
 			p1=personDao.apply(p1, j3);
@@ -396,9 +393,12 @@ public class LoadData {
 			//personDao.apply(p1, j1);; lancia un'eccezione perchè non ci si può candidare due volte per la stessa offerta
 				
 
-			
-			session.getTransaction().commit();
 
+			p1=personDao.apply(p1, j1);
+			session.getTransaction().commit();
+			session.beginTransaction();
+			p1=personDao.unapply(p1, j1);
+			session.getTransaction().commit();
 			//DELETE JOBOFFER
 			/*
 			

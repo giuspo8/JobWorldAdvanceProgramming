@@ -36,17 +36,6 @@ public interface JobOfferDao {
 	JobOffer findbyId(long id);
 	
 	Long getInterested(JobOffer jobOffer);
-	
-/*
- 	List<JobOffer> findbyRegion(String region);
- 		
-	List<JobOffer> filterByPosition(String keywords);
-
-	List<JobOffer> orderedByPublicationDate();
-
-	List<JobOffer> filterBypositionAndprovince(String position, String province);
-	
-	*/
 
 	List<JobOffer> filter(String region, String province, String town, String position, String contractType,
 			String minEducationLevel, String minExperience);

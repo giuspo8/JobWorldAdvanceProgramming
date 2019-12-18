@@ -12,6 +12,8 @@ import java.util.Map;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.BeanDefinitionDsl.Role;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,8 +53,13 @@ public class HomeController {
 	private CompanyService companyService;
 	private RoleService roleService;
 
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
 	public String home(Locale locale, Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth.getName() != "anonymousUser") {
+			Person person = personService.findbyUserId(auth.getName());
+			model.addAttribute("person", person);
+		}
 		List<JobOffer> allJobOffers = this.jobOfferService.findAll();
 		List<String> company_image = new ArrayList<String>();
 		for (JobOffer job : allJobOffers) {
@@ -122,11 +129,10 @@ public class HomeController {
 	public void setRoleService(RoleService roleService) {
 		this.roleService = roleService;
 	}
-	
+
 	@GetMapping("/moreinfo/{companyid}/{jobid}")
-	public String moreinfo(@PathVariable(value="jobid") Long jobId,
-						   @PathVariable(value="companyid") Long companyId,
-						   										Model model) {
+	public String moreinfo(@PathVariable(value = "jobid") Long jobId, @PathVariable(value = "companyid") Long companyId,
+			Model model) {
 		JobOffer joboffer = jobOfferService.findbyId(jobId);
 		Company company = companyService.findbyId(companyId);
 		model.addAttribute("company", company);
@@ -148,7 +154,6 @@ public class HomeController {
 		return "register";
 	}
 
-	@SuppressWarnings("unused")
 	@PostMapping("/add")
 	public String add(@RequestParam Map<String, String> allParams) {
 		User user = userService.create(allParams.get("email"), userService.encryptPassword(allParams.get("password")),

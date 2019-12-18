@@ -103,6 +103,15 @@ public class UserController {
 		
 	}
 	
+	@GetMapping("/unapply/{jobid}")
+	public String unapply(@RequestParam(value="email") String email, @PathVariable("jobid") Long jobId) {
+		Person person = personService.findbyUserId(email);
+		JobOffer joboffer = jobOfferService.findbyId(jobId);
+		personService.unapply(person, joboffer);
+		return "redirect:/";
+		
+	}
+	
 	@GetMapping("/deleteCurriculum")
 	public String deleteCurriculum(@RequestParam(value="email") String email) {
 		Person person = personService.findbyUserId(email);

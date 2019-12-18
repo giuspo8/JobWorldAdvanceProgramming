@@ -45,8 +45,6 @@ public class Person  {
 	public Person() {
 		super();
 	}
-
-
 	
 	public Person(String firstName, String secondName, LocalDate birthDate, String number,
 			String interests, User user) {
@@ -58,10 +56,8 @@ public class Person  {
 		this.user=user;
 	}
 
-
-
 	/**
-	* Metodi set/get più la definizione delle colonne 
+	* Metodi set/get piÃ¹ la definizione delle colonne 
 	 */	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,11 +66,9 @@ public class Person  {
 		return id;
 	}
 
-
 	public void setId(long id) {
 		this.id = id;
-	}
-	
+	}	
 	
 	public String getFirstName() {
 		return firstName;
@@ -136,7 +130,7 @@ public class Person  {
 	 * Definizione della relazione molti a molti tra Person e JobOffer
 	 * 
 	 */
-	@ManyToMany(fetch = FetchType.EAGER,         cascade =
+	@ManyToMany(fetch = FetchType.EAGER, cascade =
         {
                 CascadeType.DETACH,
                 CascadeType.MERGE,
@@ -161,22 +155,20 @@ public class Person  {
 		return user;
 	}
 
-
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-
-	/**
-	 * Metodo che aggiunge l'offerta di lavoro alla lista delle candidature
-	 * @param jobOffer
-	 */
 	
-	public void apply(JobOffer jobOffer) {
-		System.out.print(jobOffer.getId());
-		candidacies.add(jobOffer);
+	public boolean isInterested(JobOffer jobOffer) {
+		boolean interested = false;
+		for (JobOffer j:candidacies) {
+			if(j.getId() == jobOffer.getId()) {
+				interested = true;
+				break;
+			}
+		};
+		return interested;
 	}
-
 
 	/**
 	 * Metodo per la stampa
