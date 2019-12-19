@@ -48,12 +48,11 @@
 				</tr>
 				<c:forEach items="${candidencies }" var="candidate">
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><a href="<c:url value="/company/joboffer/"/>">Visualizza Curriculum</a></td>
+					<td>${candidate.getFirstName()}</td>
+					<td>${candidate.getSecondName()}</td>
+					<td>${candidate.getNumber()}</td>
+					<td>${candidate.getUser().getEmail()}</td>
+					<td><a href="<c:url value="/company/listjoboffer"/>">QUI CI VA IL LINK AL CURRICULUM</a></td>
 				</tr>
 				</c:forEach>
 				</table>

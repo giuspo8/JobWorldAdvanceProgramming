@@ -407,15 +407,16 @@ public class LoadData {
 				
 
 			p1=personDao.apply(p1, j1);
+			
 			session.getTransaction().commit();
-			session.beginTransaction();
-			p1=personDao.unapply(p1, j1);
-			session.getTransaction().commit();
+			//session.beginTransaction();
+			//p1=personDao.unapply(p1, j1);
+			//session.getTransaction().commit();
 			//DELETE JOBOFFER
 			deleteJobOffer(j1,session,jobOfferDao);
 
 			//DELETE COMPANY
-			deleteCompany(c1,session,companyDao,jobOfferDao);
+			//deleteCompany(c1,session,companyDao,jobOfferDao);
 	
 			//DELETE USER
 			deleteUser(u4,session,userDao);
