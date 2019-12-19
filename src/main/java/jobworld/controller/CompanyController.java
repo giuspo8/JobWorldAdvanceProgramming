@@ -71,8 +71,7 @@ public class CompanyController {
 	@PostMapping("/update")
 	public String update(@RequestParam Map<String,String> allParams, @RequestParam("image") MultipartFile image,Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user =userService.update(userService.findByEmail(auth.getName()));
-		Company company = companyService.update(user.getCompany());
+		User user = userService.update(userService.findByEmail(auth.getName()));
 		boolean trovato=true;
 		int i=image.getOriginalFilename().length()-1;
 		while(trovato & i>=0) {
@@ -90,15 +89,16 @@ public class CompanyController {
 	        String path_image = "resources/img/companies/"+ name_image;
 	        Files.write(path_disk, bytes);
 	        user.setImage(path_image);
+	        user.setDescription(allParams.get("description"));
+	        user= userService.update(user);
 		} catch(IOException e) {
 			 e.printStackTrace();
 		}
-		user.setDescription(allParams.get("description"));
-		company.setName(allParams.get("name"));
-		user=userService.update(user);
-		company=companyService.update(company);
+		Company company = companyService.update(user.getCompany());
+        company.setName(allParams.get("nome_azienda"));
+        company= companyService.update(company);
+        model.addAttribute("user",user);
 		model.addAttribute("company", company);
-		model.addAttribute("user",user);
 		return "redirect:/company/profile";
 	}
 	
