@@ -49,7 +49,7 @@
 						</tr>
 						<tr>
 							
-							<td><img src="../../<c:url value="${user.getImage()}"/>"></td>
+							<td><img src="../..<c:url value="${user.getImage()}"/>"></td>
 						</tr>
 						<tr>
 							<td style="text-align:center;"><input type="file" value="${user.getImage()}"

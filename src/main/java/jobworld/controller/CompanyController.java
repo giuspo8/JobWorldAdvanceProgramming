@@ -54,8 +54,8 @@ public class CompanyController {
 	private CompanyService companyService;
 	private UserService userService;
 	//TODO:MODIFICATE L'UPLOAD PATH ALTRIMENTI VI DA ERRORE!!!!!
-	//private static String UPLOADED_FOLDER = "C:\\Users\\cicci\\git\\JobWorldAdvanceProgramming\\WebContent\\resources\\img\\companies\\";
-	private static String UPLOADED_FOLDER ="C:\\Users\\giusp\\git\\JobWorldAdvanceProgramming\\WebContent\\resources\\img\\companies\\";
+	private static String UPLOADED_FOLDER = "C:/Users/cicci/git/JobWorldAdvanceProgramming/WebContent/resources/img/companies/";
+	//private static String UPLOADED_FOLDER ="C:\\Users\\giusp\\git\\JobWorldAdvanceProgramming\\WebContent\\resources\\img\\companies\\";
 	
 	
 	@GetMapping(value="/profile")
@@ -87,7 +87,7 @@ public class CompanyController {
 			String name_image= image.getOriginalFilename().substring(i+1);
 			System.out.print(name_image);
 	        Path path_disk = Paths.get(UPLOADED_FOLDER + name_image);
-	        String path_image = "/companies/"+ name_image;
+	        String path_image = "resources/img/companies/"+ name_image;
 	        Files.write(path_disk, bytes);
 	        user.setImage(path_image);
 		} catch(IOException e) {

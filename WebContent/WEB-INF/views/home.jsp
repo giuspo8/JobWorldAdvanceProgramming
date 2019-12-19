@@ -120,7 +120,7 @@
 								</form:form>
 							</div>
 						</nav> </span> <span><img src="<c:url value="resources/img/logo.png"/>"></span></li>
-				<sec:authorize access="hasRole('ADMIN')" var="isCompany" />
+				<sec:authorize access="hasRole('COMPANY')" var="isCompany" />
 				<sec:authorize access="hasRole('USER')" var="isUser" />
 				<sec:authorize access="isAuthenticated()" var="isAuth" />
 
