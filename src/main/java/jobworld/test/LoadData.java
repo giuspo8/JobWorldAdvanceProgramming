@@ -64,48 +64,51 @@ public class LoadData {
 			Role r1 = roleDao.create(TypeRole.USER);
 			Role r2 = roleDao.create(TypeRole.ADMIN);
 			Role r3 = roleDao.create(TypeRole.COMPANY);
+			
 			User u1 = userDao.create("saviofeng@gmail.it", userDao.encryptPassword("user1"), null,"/resources/img/galleria5.jpg");				
 			u1.addRole(r1);
 			
 			User u2 = userDao.create("tizioacaso@gmail.com", userDao.encryptPassword("user2"), null,"/resources/img/galleria23.jpg");
 			u2.addRole(r3);
+			
 			User u3=userDao.create("esselunga@gmail.com", userDao.encryptPassword("user3"), null,"/resources/img/galleria24.jpg");
 			u3.addRole(r3);
-			Person p2=personDao.create("Loris", "de luigi",LocalDate.of(1992, 4, 14),"3388775899", "informatica, ingegneria",u2);
-			Person p1=personDao.create("Savio", "Feng", LocalDate.of(1995, 8, 25), "3588975899", "informatica, ingegneria",u1);
-			Company c1=companyDao.create("Esselunga",u3);
+			
+			Person p2=createPerson("Loris", "de luigi",LocalDate.of(1992, 4, 14),"3388775899", "informatica, ingegneria",u2,personDao);
+			Person p1=createPerson("Savio", "Feng", LocalDate.of(1995, 8, 25), "3588975899", "informatica, ingegneria",u1,personDao);
+			Company c1=createCompany("Esselunga",u3,companyDao);
 			
 			User u4=userDao.create("dark@gmail.it",userDao.encryptPassword("pass2word1"), null, "/resources/img/galleria7.jpg");
 			u4.addRole(r1);
-			Person p3= personDao.create("Marco", "vitale", LocalDate.of(1997, 2, 6), 
-					"3387675899", "informatica, ingegneria", u4);
+			Person p3= createPerson("Marco", "vitale", LocalDate.of(1997, 2, 6), 
+					"3387675899", "informatica, ingegneria", u4, personDao);
 			
 			User u5=userDao.create("luca@gmail.it", userDao.encryptPassword("passwo42rd1"), null, 
 					"/resources/img/galleria9.jpg");
 			u5.addRole(r1);
-			Person p4=personDao.create("Luca", "Nervi", LocalDate.of(1987, 8, 11), "3333475899", "informatica, ingegneria", u5);
+			Person p4=createPerson("Luca", "Nervi", LocalDate.of(1987, 8, 11), "3333475899", "informatica, ingegneria", u5, personDao);
 			
 			User u6=userDao.create("pippo@outlook.it", userDao.encryptPassword("pa41ssword1"), null, "/resources/img/galleria8.jpg");
 			u6.addRole(r1);
-			Person p5=personDao.create("Pippo", "Baudo", LocalDate.of(1985, 8, 9), 
-					"3388775899", "informatica, ingegneria",u6);
+			Person p5=createPerson("Pippo", "Baudo", LocalDate.of(1985, 8, 9), 
+					"3388775899", "informatica, ingegneria",u6, personDao);
 			
 			
 			User u7=userDao.create("gamestop@email.it", userDao.encryptPassword("gamestop1"), 
 					"GameStop Corporation, noto semplicemente come GameStop, � un'azienda statunitense con sede nella citt� di Grapevine. � il pi� grande rivenditore di videogiochi nuovi e usati nel mondo, ma si occupa anche della vendita di accessori per videogiochi, console ed altri apparecchi elettronic", 
 					"/resources/img/companies/gamestop.jpg");
 			u7.addRole(r1);
-			Company c2=companyDao.create("Gamestop",u7);
+			Company c2=createCompany("Gamestop",u7,companyDao);
 
 			User u8=userDao.create("sony@gmail.it",  userDao.encryptPassword("sony22"), "La Sony Corporation, � una multinazionale conglomerata giapponese fondata nel 1946 con sede a Minato, quartiere di Tokyo. Sony si concentra principalmente sull'elettronica di consumo, sui videogiochi, intrattenimento e servizi finanziari.", 
 					"/resources/img/companies/sony.jpg");
 			u8.addRole(r1);
-			Company c3=companyDao.create("Sony", u8);
+			Company c3=createCompany("Sony", u8,companyDao);
 			
 			User u9=userDao.create("samsung@email.it", userDao.encryptPassword("samsun1sg"), "Samsung � un'azienda multinazionale fondata il 1� marzo 1938 da Lee Byung-chul nella citt� di Taegu, nell'attuale Corea del Sud. Comprende filiali in 58 paesi nonch� numerose aziende affiliate, la maggior parte con il nome madre Samsung, ed � il maggior conglomerato sudcoreano", 
 					"/resources/img/companies/samsung.jpg");
 			u9.addRole(r1);
-			Company c4=companyDao.create("Samsung",u9);
+			Company c4=createCompany("Samsung",u9, companyDao);
 /*
 	
 			
@@ -260,7 +263,7 @@ public class LoadData {
 			
 			
 //joboffer
-			JobOffer j1=jobOfferDao.create("Lombardia", "Mantova", "Mantova", "ADDETTO AL REPARTO GASTRONOMIA",
+			JobOffer j1=createJobOffer("Lombardia", "Mantova", "Mantova", "ADDETTO AL REPARTO GASTRONOMIA",
 					"Si richiedono le seguenti caratteristiche:\r\n" + 
 					"· Passione per la lavorazione/trasformazione delle materie prime\r\n" + 
 					"· Propensione all'utilizzo delle attrezzature da taglio e lavorazione\r\n" + 
@@ -270,10 +273,10 @@ public class LoadData {
 					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
 					"· Precisione e serietà\r\n" + 
 					"· Preferibile esperienza pregressa nel ruolo, seppur di breve durata, maturata preferibilmente in contesti GDO.", 
-					"determinato", Education.LICENZA_MEDIA, "1 anno",LocalDate.of(2019, 12, 25), c1);
+					"determinato", Education.LICENZA_MEDIA, "1 anno",LocalDate.of(2019, 12, 25), c1,jobOfferDao,companyDao);
 			
 			
-			JobOffer j2=jobOfferDao.create("Lazio", "Roma", "Roma", "Commesso GameStop",
+			JobOffer j2=createJobOffer("Lazio", "Roma", "Roma", "Commesso GameStop",
 					"Si richiedono le seguenti caratteristiche:\r\n" + 
 					"· Passione per i giochi e esperienza videoludica\r\n" + 
 					"· Gentilezza e cordialit�\r\n" + 
@@ -283,11 +286,11 @@ public class LoadData {
 					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
 					"· Seriet�\r\n" + 
 					"· Capacit� di utilizzo del computer.", 
-					"determinato", Education.DIPLOMA_DI_MATURITA, "6 mesi",LocalDate.of(2019, 12, 25), c1);
+					"determinato", Education.DIPLOMA_DI_MATURITA, "6 mesi",LocalDate.of(2019, 12, 25), c2,jobOfferDao,companyDao);
 			
 
 			
-			JobOffer j3=jobOfferDao.create("Campania", "Napoli", "Napoli" , "Programmatore Java",
+			JobOffer j3=createJobOffer("Campania", "Napoli", "Napoli" , "Programmatore Java",
 					"Si richiedono le seguenti caratteristiche:\r\n" + 
 					"· Conoscenza del linguaggio di programmazione Java\r\n" + 
 					"· Capacit� di adattamento \r\n" + 
@@ -297,11 +300,11 @@ public class LoadData {
 					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
 					"· Esperienza di almeno 3 anni\r\n" + 
 					"· Preferibilmente lavoratore remoto", 
-					"determinato", Education.LAUREA_TRIENNALE, "3 anni",LocalDate.of(2019, 12, 25), c1);
+					"determinato", Education.LAUREA_TRIENNALE, "3 anni",LocalDate.of(2019, 12, 25), c1,jobOfferDao,companyDao);
 			
 			
 			
-			JobOffer j4=jobOfferDao.create("Puglia", "Bari", "Bari", "Assisente di volo",
+			JobOffer j4=createJobOffer("Puglia", "Bari", "Bari", "Assisente di volo",
 					"Si richiedono le seguenti caratteristiche:\r\n" + 
 					"· Esperienza di 3 anni\r\n" + 
 					"· Conoscenza dell'inglese\r\n" + 
@@ -311,10 +314,10 @@ public class LoadData {
 					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
 					"· Disposto a voli internazionali�\r\n" + 
 					"· Capacit� di comunicazione", 
-					"determinato", Education.LAUREA_SPECIALISTICA, "1 anno",LocalDate.of(2019, 12, 25), c1);
+					"determinato", Education.LAUREA_SPECIALISTICA, "1 anno",LocalDate.of(2019, 12, 25), c3,jobOfferDao,companyDao);
 			
 			
-			JobOffer j5=jobOfferDao.create("Marche", "Ancona", "Jesi", "Programmatore Cad",
+			JobOffer j5=createJobOffer("Marche", "Ancona", "Jesi", "Programmatore Cad",
 					"Si richiedono le seguenti caratteristiche:\r\n" + 
 					"· Esperienza di almeno 5 anni con AutoCAD\r\n" + 
 					"· Autonomia\r\n" + 
@@ -324,11 +327,11 @@ public class LoadData {
 					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
 					"· Precisione e serietà\r\n" + 
 					"· Disposto a trasferirsi nella sede centrale a Roma", 
-					"Indeterminato", Education.LAUREA_SPECIALISTICA, "indeterminato",LocalDate.of(2019, 12, 25),c1);
+					"Indeterminato", Education.LAUREA_SPECIALISTICA, "indeterminato",LocalDate.of(2019, 12, 25),c4,jobOfferDao,companyDao);
 			
 			
 			
-			Curriculum c11=curriculumDao.create(new Curriculum(p1, "01/2005–alla data attuale Assistente amministrativo\r\n" + 
+			Curriculum c11=createCurriculum(new Curriculum(p1, "01/2005–alla data attuale Assistente amministrativo\r\n" + 
 					"Alma Mater Studiorum\r\n" + 
 					"Via Zamboni 37, 40126 Bologna\r\n" + 
 					"Gestione della documentazione contabile generale, fiscale e tributaria, relazione con la clientela", 
@@ -339,15 +342,25 @@ public class LoadData {
 					"▪ lingua straniera (inglese, francese, tedesco)", 
 					"Capacità di lavorare in gruppo maturata in molteplici situazioni in cui era indispensabile la\r\n" + 
 					"collaborazione tra figure diverse e con modalità orarie varie (turni, fine settimana)", 
-					"scrittura creativa: corso presso l'Informagiovani del Comune di Bologna"));
+					"scrittura creativa: corso presso l'Informagiovani del Comune di Bologna"),curriculumDao,personDao);
 			
+			Curriculum c12=createCurriculum(new Curriculum(p2, "01/2005–alla data attuale Assistente amministrativo\r\n" + 
+					"Alma Mater Studiorum\r\n" + 
+					"Via Zamboni 37, 40126 Bologna\r\n" + 
+					"Gestione della documentazione contabile generale, fiscale e tributaria, relazione con la clientela", 
+					"Istituto Magistrale Maria Montessori, Via Mazzini 5 - 40123 Bologna\r\n" + 
+					"▪ espressione italiana\r\n" + 
+					"▪ matematica\r\n" + 
+					"▪ scienze\r\n" + 
+					"▪ lingua straniera (inglese, francese, tedesco)", 
+					"Capacità di lavorare in gruppo maturata in molteplici situazioni in cui era indispensabile la\r\n" + 
+					"collaborazione tra figure diverse e con modalità orarie varie (turni, fine settimana)", 
+					"scrittura creativa: corso presso l'Informagiovani del Comune di Bologna"),curriculumDao,personDao);
 			
 			
 			// phase 2 : navigate data in the database
 			
 	
-			
-			/*
 			p2=personDao.apply(p2, j1);
 			p1=personDao.apply(p1, j3);
 			p3=personDao.apply(p3, j1);
@@ -356,7 +369,7 @@ public class LoadData {
 			p3=personDao.apply(p2, j2);
 			p4=personDao.apply(p4, j2);
 			p5=personDao.apply(p5, j4);
-			p5=personDao.apply(p5, j5); */
+			p5=personDao.apply(p5, j5); 
 			
 			
 			/*
@@ -393,67 +406,27 @@ public class LoadData {
 			//personDao.apply(p1, j1);; lancia un'eccezione perchè non ci si può candidare due volte per la stessa offerta
 				
 
-
 			p1=personDao.apply(p1, j1);
 			session.getTransaction().commit();
 			session.beginTransaction();
 			p1=personDao.unapply(p1, j1);
 			session.getTransaction().commit();
 			//DELETE JOBOFFER
-			/*
-			
-			session.beginTransaction();
-			for (Person p:j1.getCandidancies()) {
-				p.getCandidacies().remove(j1);
-			}
-			j1.getCandidancies().clear();
-			jobOfferDao.update(j1);
-			Company company=j1.getCompany();
-			company.getJobOffers().remove(j1);
-			jobOfferDao.delete(j1);
-			session.getTransaction().commit();*/
-			
+			deleteJobOffer(j1,session,jobOfferDao);
+
 			//DELETE COMPANY
-			/*session.beginTransaction();
-			for (JobOffer j:c1.getJobOffers()) {
-				jobOfferDao.delete(j);
-			}
-			c1.getJobOffers().clear();
-			c1=companyDao.update(c1);
-			companyDao.delete(c1); 
-			session.getTransaction().commit();
-			
-			*/
-			
+			deleteCompany(c1,session,companyDao,jobOfferDao);
+	
 			//DELETE USER
-			/*session.beginTransaction();
-			
-			u3.getRoles().clear();
-			userDao.update(u3);
-			userDao.delete(u3);
-			session.getTransaction().commit();
-			*/
-			/*
-			 * 
+			deleteUser(u4,session,userDao);
+
 			//DELETE PERSON
-			session.beginTransaction();
-			for (JobOffer j:p1.getCandidacies()) {
-				j.getCandidancies().remove(p1);
-			};
-			p1.getCandidacies().clear();
-			personDao.delete(p1);
-			session.getTransaction().commit();*/
+			deletePerson(p1,session,personDao);
 			
 			//DELETE CURRICULUM
-			/*
-			session.beginTransaction();
-			Person p=c11.getPerson();
-			p.setCurriculum(null);
-			p=personDao.update(p);
-			curriculumDao.delete(c11);
-			session.getTransaction().commit();
-			*/
-			assert(personDao.findbyUserId("saviofeng@gmail.it")==p1);
+			deleteCurriculum(c12,session,personDao,curriculumDao);
+
+			//assert(personDao.findbyUserId("saviofeng@gmail.it")==p1);
 
 			}
 		
@@ -463,6 +436,102 @@ public class LoadData {
 			e.printStackTrace(System.err);
 		}
 //		logger.info("Esco ...");
+	}
+
+	private static Curriculum createCurriculum(Curriculum curriculum, CurriculumDao curriculumDao,
+			PersonDao personDao) {
+		Person p=curriculum.getPerson();
+		p.setCurriculum(curriculum);
+		curriculum=curriculumDao.create(curriculum);
+		personDao.update(p);
+		return curriculum;
+	}
+
+	private static JobOffer createJobOffer(String region, String province, String town, String position,
+			String description, String contractType, Education minEducationLevel, String minExperience, LocalDate expiringDate, Company company,
+			JobOfferDao jobOfferDao,CompanyDao companyDao) {
+		JobOffer jobOffer = new JobOffer(region, province, town, position, description, contractType, minEducationLevel,
+				minExperience,expiringDate, company);
+		company.getJobOffers().add(jobOffer);
+		jobOffer=jobOfferDao.create(jobOffer);
+		companyDao.update(company);
+		return jobOffer;
+	}
+
+	private static Person createPerson(String firstName, String secondName, LocalDate birthdate, String number, String interests,
+			User user,PersonDao personDao) {
+		Person person = new Person(firstName, secondName, birthdate, number, interests, user);
+		user.setPerson(person);
+		person=personDao.create(person);
+		return person;
+	}
+
+	private static Company createCompany(String name, User user, CompanyDao companyDao) {
+		Company company = new Company(name,user);
+		user.setCompany(company);
+		return companyDao.create(company);
+		
+	}
+
+	private static void deleteJobOffer(JobOffer j, Session session, JobOfferDao jobOfferDao) {
+		session.beginTransaction();
+		for (Person p:j.getCandidancies()) {
+			p.getCandidacies().remove(j);
+		}
+		j.getCandidancies().clear();
+		jobOfferDao.update(j);
+		Company company=j.getCompany();
+		company.getJobOffers().remove(j);
+		jobOfferDao.delete(j);
+		session.getTransaction().commit();
+		
+	}
+
+	private static void deleteCurriculum(Curriculum c, Session session, PersonDao personDao,
+			CurriculumDao curriculumDao) {
+		session.beginTransaction();
+		Person p=c.getPerson();
+		p.setCurriculum(null);
+		p=personDao.update(p);
+		c.setPerson(null);
+		c=curriculumDao.update(c);
+		curriculumDao.delete(c);
+		session.getTransaction().commit();
+		
+	}
+
+	private static void deletePerson(Person p, Session session, PersonDao personDao) {
+		session.beginTransaction();
+		for (JobOffer j:p.getCandidacies()) {
+			j.getCandidancies().remove(p);
+		};
+		p.getCandidacies().clear();
+		personDao.delete(p);
+		session.getTransaction().commit();
+		
+	}
+
+	private static void deleteUser(User u, Session session, UserDao userDao) {
+		
+		session.beginTransaction();
+		u.getRoles().clear();
+		userDao.update(u);
+		userDao.delete(u);
+		session.getTransaction().commit();
+		
+	}
+
+	private static void deleteCompany(Company c, Session session, CompanyDao companyDao, JobOfferDao jobOfferDao) {
+		
+		session.beginTransaction();
+		for (JobOffer j:c.getJobOffers()) {
+			jobOfferDao.delete(j);
+		}
+		c.getJobOffers().clear();
+		c=companyDao.update(c);
+		companyDao.delete(c); 
+		session.getTransaction().commit();
+		
 	}
 	
 

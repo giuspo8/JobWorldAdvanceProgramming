@@ -1,15 +1,13 @@
 package jobworld.model.dao;
 
-import java.time.LocalDate;
+
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import jobworld.model.entities.Company;
+
 import jobworld.model.entities.JobOffer;
-import jobworld.model.entities.JobOffer.Education;
 
 /**
  * Implementazione dell'interfaccia JobOfferDao
@@ -24,20 +22,11 @@ import jobworld.model.entities.JobOffer.Education;
 @Repository("jobOfferDao")
 public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 	
-	@Autowired
-	CompanyDao companyDao;
-	@Autowired
-	PersonDao personDao;
 
 	@Override
 	@Transactional
-	public JobOffer create(String region, String province, String town, String position, String description,
-			String contractType, Education minEducationLevel, String minExperience, LocalDate expiringDate,Company company) {
-		JobOffer jobOffer = new JobOffer(region, province, town, position, description, contractType, minEducationLevel,
-				minExperience,expiringDate, company);
-		company.getJobOffers().add(jobOffer);
+	public JobOffer create(JobOffer jobOffer) {
 		this.getSession().save(jobOffer);
-		companyDao.update(company);
 		return jobOffer;
 	}
 

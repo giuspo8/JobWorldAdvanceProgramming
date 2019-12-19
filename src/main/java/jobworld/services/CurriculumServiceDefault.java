@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import jobworld.model.dao.CurriculumDao;
+import jobworld.model.dao.PersonDao;
 import jobworld.model.entities.Curriculum;
 import jobworld.model.entities.Person;
 
@@ -23,7 +24,7 @@ import jobworld.model.entities.Person;
 @Service("curriculumService")
 public class CurriculumServiceDefault implements CurriculumService {
 private CurriculumDao curriculumRepository;
-
+private PersonDao personRepository;
 	
 	@Transactional(readOnly=true)
 	@Override
@@ -39,7 +40,11 @@ private CurriculumDao curriculumRepository;
 	@Transactional
 	@Override
 	public Curriculum create(Curriculum curriculum) {
-		return this.curriculumRepository.create(curriculum);
+		Person p=curriculum.getPerson();
+		p.setCurriculum(curriculum);
+		curriculum=this.curriculumRepository.create(curriculum);
+		p=personRepository.update(p);
+		return curriculum;
 	}
 
 	
@@ -52,7 +57,12 @@ private CurriculumDao curriculumRepository;
 	@Transactional
 	@Override
 	public void delete(Curriculum curriculum) {
-		this.curriculumRepository.delete(curriculum);
+		Person p=curriculum.getPerson();
+		p.setCurriculum(null);
+		p=personRepository.update(p);
+		curriculum.setPerson(null);
+		curriculum=curriculumRepository.update(curriculum);
+		curriculumRepository.delete(curriculum);
 	}
 
 
@@ -62,4 +72,8 @@ private CurriculumDao curriculumRepository;
 	}
 
 
+	@Autowired
+	public void setPersonRepository(PersonDao personRepository) {
+		this.personRepository = personRepository;
+	}
 }

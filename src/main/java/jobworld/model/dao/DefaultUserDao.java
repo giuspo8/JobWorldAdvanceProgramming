@@ -12,14 +12,6 @@ import jobworld.model.entities.User;
 @Repository("userDao") 
 public class DefaultUserDao extends DefaultDao implements UserDao {
 
-	@Autowired
-	CompanyDao companyDao;
-	
-	@Autowired
-	PersonDao personDao;
-	
-	@Autowired
-	RoleDao roleDao;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;

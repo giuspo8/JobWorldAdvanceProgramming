@@ -3,8 +3,6 @@ package jobworld.model.dao;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import jobworld.model.entities.Curriculum;
-import jobworld.model.entities.Person;
 import jobworld.model.entities.Role;
 import jobworld.model.entities.Role.TypeRole;
 

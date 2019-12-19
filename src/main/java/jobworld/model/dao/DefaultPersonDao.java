@@ -1,6 +1,6 @@
 package jobworld.model.dao;
 
-import java.time.LocalDate;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
-import jobworld.model.entities.User;
+
 
 /**
  * Implementazione dell'interfaccia PersonDao
@@ -25,18 +25,12 @@ import jobworld.model.entities.User;
 public class DefaultPersonDao extends DefaultDao implements PersonDao {
 	
 	@Autowired
-	UserDao userDao;
-	@Autowired
 	JobOfferDao jobOfferDao;
-	@Autowired
-	CurriculumDao curriculumDao;
+
 
 	@Override
 	@Transactional
-	public Person create(String firstName, String secondName,
-			LocalDate birthDate, String number, String interests,User user) {
-		Person person = new Person(firstName, secondName, birthDate, number, interests, user);
-		user.setPerson(person);
+	public Person create(Person person) {
 		this.getSession().save(person);
 		return person;
 	}

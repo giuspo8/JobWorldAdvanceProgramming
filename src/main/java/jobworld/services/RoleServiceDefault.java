@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import jobworld.model.dao.PersonDao;
 import jobworld.model.dao.RoleDao;
 import jobworld.model.entities.Role;
 import jobworld.model.entities.Role.TypeRole;

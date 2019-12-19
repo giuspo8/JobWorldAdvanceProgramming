@@ -23,7 +23,7 @@ import jobworld.model.entities.User;
 @Service("personService")
 public class PersonServiceDefault implements PersonService{
 private PersonDao personRepository;
-//private JobOfferDao jobOfferRepository;
+
 	
 
 
@@ -41,7 +41,9 @@ private PersonDao personRepository;
 	@Transactional
 	@Override
 	public Person create(String firstName, String secondName,LocalDate birthDate, String number, String interests,User user) {
-		return this.personRepository.create(firstName,secondName,birthDate,number,interests,user);
+		Person person = new Person(firstName, secondName, birthDate, number, interests, user);
+		user.setPerson(person);
+		return this.personRepository.create(person);
 
 	}
 	
@@ -54,7 +56,11 @@ private PersonDao personRepository;
 	@Transactional
 	@Override
 	public void delete(Person person) {
-		this.personRepository.delete(person);
+		for (JobOffer j:person.getCandidacies()) {
+			j.getCandidancies().remove(person);
+		};
+		person.getCandidacies().clear();
+		personRepository.delete(person);
 	}
 
 

@@ -1,13 +1,13 @@
 package jobworld.model.dao;
 
-import java.time.LocalDate;
+
 import java.util.List;
 
 import org.hibernate.Session;
 
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
-import jobworld.model.entities.User;
+
 
 /**
  * Interfaccia PersonDao
@@ -24,7 +24,7 @@ public interface PersonDao {
 	
 	public void setSession(Session session);
 
-	Person create(String firstName, String secondName,LocalDate birthDate, String number, String interests,User user);
+	Person create(Person person);
 	
 	Person apply(Person person, JobOffer joboffer);
 	

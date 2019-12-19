@@ -16,11 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import jobworld.model.dao.CompanyDao;
 import jobworld.model.dao.JobOfferDao;
-import jobworld.model.dao.PersonDao;
 import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
+import jobworld.model.entities.Person;
 import jobworld.model.entities.JobOffer.Education;
 
 
@@ -29,10 +29,9 @@ import jobworld.model.entities.JobOffer.Education;
 @Transactional
 @Service("jobofferService")
 public class JobOfferServiceDefault implements JobOfferService{
+
 private JobOfferDao jobofferRepository;
-@SuppressWarnings("unused")
-private PersonDao personRepository;
-	
+private CompanyDao companyRepository;	
 
 
 	@Transactional(readOnly=true)
@@ -54,7 +53,12 @@ private PersonDao personRepository;
 	@Override
 	public JobOffer create(String region, String province, String town, String position, String description,
 			String contractType, Education minEducationLevel, String minExperience,LocalDate expiringDate, Company company) {
-		return this.jobofferRepository.create(region,province,town,position,description,contractType,minEducationLevel,minExperience,expiringDate,company);
+		JobOffer jobOffer = new JobOffer(region, province, town, position, description, contractType, minEducationLevel,
+				minExperience,expiringDate, company);
+		company.getJobOffers().add(jobOffer);
+		jobOffer=jobofferRepository.create(jobOffer);
+		company=companyRepository.update(company);
+		return jobOffer;
 
 	}
 	
@@ -67,8 +71,14 @@ private PersonDao personRepository;
 	@Transactional
 	@Override
 	public void delete(JobOffer joboffer) {
-		//this.personRepository.unApplyAll(joboffer);
-		this.jobofferRepository.delete(joboffer);
+		for (Person p:joboffer.getCandidancies()) {
+			p.getCandidacies().remove(joboffer);
+		}
+		joboffer.getCandidancies().clear();
+		jobofferRepository.update(joboffer);
+		Company company=joboffer.getCompany();
+		company.getJobOffers().remove(joboffer);
+		jobofferRepository.delete(joboffer);
 	}
 
 
@@ -78,9 +88,10 @@ private PersonDao personRepository;
 	}
 	
 	@Autowired
-	public void setPersonRepository(PersonDao personRepository) {
-		this.personRepository = personRepository;
+	public void setCompanyRepository(CompanyDao companyRepository) {
+		this.companyRepository = companyRepository;
 	}
+	
 
 	@Override
 	@Transactional

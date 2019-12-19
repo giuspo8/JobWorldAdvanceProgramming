@@ -2,12 +2,10 @@ package jobworld.model.dao;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import jobworld.model.entities.Company;
-import jobworld.model.entities.User;
 
 /**
  * Implementazione dell'interfaccia CompanyDao
@@ -22,16 +20,9 @@ import jobworld.model.entities.User;
 @Repository("companyDao")
 public class DefaultCompanyDao extends DefaultDao implements CompanyDao {
 	
-	@Autowired
-	UserDao userDao;
-	
-	@Autowired
-	JobOfferDao jobOfferDao;
 
 	@Override
-	public Company create(String name, User user) {
-		Company company = new Company(name,user);
-		user.setCompany(company);
+	public Company create(Company company) {
 		this.getSession().save(company);
 		return company;
 	}

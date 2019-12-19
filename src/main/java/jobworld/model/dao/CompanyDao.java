@@ -6,7 +6,6 @@ import java.util.List;
 import org.hibernate.Session;
 
 import jobworld.model.entities.Company;
-import jobworld.model.entities.User;
 
 /**
  * Interfaccia di CompanyDao
@@ -23,7 +22,7 @@ public interface CompanyDao {
 	
 	public void setSession(Session session);
 	
-	Company create(String name,User user);
+	Company create(Company company);
 
 	Company update(Company company);
 

@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import jobworld.model.dao.CompanyDao;
+import jobworld.model.dao.JobOfferDao;
 import jobworld.model.entities.Company;
+import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.User;
 
 @Transactional
@@ -23,7 +25,7 @@ import jobworld.model.entities.User;
 public class CompanyServiceDefault implements CompanyService{
 
 private CompanyDao companyRepository;
-
+private JobOfferDao jobOfferRepository;
 	
 	@Transactional(readOnly=true)
 	@Override
@@ -47,7 +49,9 @@ private CompanyDao companyRepository;
 	@Transactional
 	@Override
 	public Company create(String name,User user) {
-		return this.companyRepository.create(name,user);
+		Company company = new Company(name,user);
+		user.setCompany(company);
+		return this.companyRepository.create(company);
 	}
 	
 	@Transactional
@@ -59,12 +63,22 @@ private CompanyDao companyRepository;
 	@Transactional
 	@Override
 	public void delete(Company company) {
-		this.companyRepository.delete(company);
+		for (JobOffer j:company.getJobOffers()) {
+			jobOfferRepository.delete(j);
+		}
+		company.getJobOffers().clear();
+		company=companyRepository.update(company);
+		companyRepository.delete(company); 
 	}
 
 
 	@Autowired
-	public void setCompanyRepository(CompanyDao singerRepository) {
-		this.companyRepository = singerRepository;
+	public void setCompanyRepository(CompanyDao companyRepository) {
+		this.companyRepository = companyRepository;
+	}
+	
+	@Autowired
+	public void setjobOfferRepository(JobOfferDao jobOfferRepository) {
+		this.jobOfferRepository = jobOfferRepository;
 	}
 }
