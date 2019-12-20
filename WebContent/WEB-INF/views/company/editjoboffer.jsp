@@ -38,7 +38,12 @@
 		</div>
 		<div class="offer">
 			<div style="text-align:center; margin:auto;">
-				<c:url value="/company/joboffer/${job.getId()}/update" var="action_url" />
+			<c:if test="${empty job }">Curriculum non individuato, inizia inserendone uno nuovo:
+			<c:url value="/company/joboffer/create" var="action_url" />
+			</c:if>
+			<c:if test="${not empty job }">
+			<c:url value="/company/joboffer/${job.getId()}/update" var="action_url" />
+			</c:if>
 				       
 				<form:form method="POST" action="${action_url}" enctype="multipart/form-data">
 					<h3>Informazoni dell'offerta di lavoro:</h3>
@@ -64,8 +69,49 @@
 							<td><label class="searchsub_lbl" style="text-align:center;">Data di scadenza offerta:</label></td>
 						</tr>
 						<tr>
-							<td style="text-align:center;"><input value="${job.minEducationLevel}"
-								name="minEducationLevel" class="searchsub_input" ></td>
+							<td style="text-align:center;"><select value="${job.minEducationLevel}"
+								name="minEducationLevel" class="searchsub_input" >
+									<c:choose>
+	    							<c:when test="${job.minEducationLevel == 'SENZA_STUDI'}">
+	    								<option value="SENZA_STUDI" selected>Nessun livello di istruzione</option>
+	   								</c:when>    
+	    							<c:otherwise>
+	    								<option value="SENZA_STUDI" >Nessun livello di istruzione</option>
+	    							</c:otherwise>
+									</c:choose>
+									<c:choose>
+	    							<c:when test="${job.minEducationLevel == 'LICENZA_MEDIA'}">
+	    								<option value="LICENZA_MEDIA" selected>Licenza media</option>
+	   								</c:when>    
+	    							<c:otherwise>
+	    								<option value="LICENZA_MEDIA" >Licenza media</option>
+	    							</c:otherwise>
+									</c:choose>
+									<c:choose>
+									<c:when test="${job.minEducationLevel == 'DIPLOMA_DI_MATURITA'}">
+	    								<option value="DIPLOMA_DI_MATURITA" selected>Diploma di maturità</option>
+	   								</c:when>    
+	    							<c:otherwise>
+	    								<option value="DIPLOMA_DI_MATURITA">Diploma di maturità</option>
+	    							</c:otherwise>
+									</c:choose>
+									<c:choose>
+									<c:when test="${job.minEducationLevel == 'LAUREA_TRIENNALE'}">
+	    								<option value="LAUREA_TRIENNALE" selected>Laurea di primo livello</option>
+	   								</c:when>    
+	    							<c:otherwise>
+	    								<option value="LAUREA_TRIENNALE">Laurea di primo livello</option>
+	    							</c:otherwise>
+									</c:choose>
+									<c:choose>
+									<c:when test="${job.minEducationLevel == 'LAUREA_SPECIALISTICA'}">
+	    								<option value="LAUREA_SPECIALISTICA" selected>Laurea di secondo livello</option>
+	   								</c:when>    
+	    							<c:otherwise>
+	    								<option value="LAUREA_SPECIALISTICA">Laurea di secondo livello</option>
+	    							</c:otherwise>
+									</c:choose>
+								</select></td>
 							<td  style="text-align:center;"><input value="${job.minExperience}"
 								name="minExperience" class="searchsub_input" ></td>
 							<td  style="text-align:center;"><input value="${job.expiringDate}"

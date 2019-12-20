@@ -119,6 +119,13 @@ public class CompanyController {
 		return "company/listjoboffer";
 	}
 	
+	@GetMapping("/joboffer")
+	public String joboffercompany (Model model) {
+		JobOffer job = null;
+		model.addAttribute("job",job);
+		return "company/editjoboffer";
+	}
+	
 	@GetMapping("/joboffer/{jobId}")
 	public String joboffercompany (@PathVariable("jobId") Long jobId, Model model) {
 		JobOffer job = jobOfferService.findbyId(jobId);
@@ -150,23 +157,25 @@ public class CompanyController {
 	@PostMapping("/joboffer/create")
 	public String joboffercompanycrate(@RequestParam Map<String,String> allParams, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Company company=companyService.findbyUserId(auth.getName());
-		LocalDate date = LocalDate.parse(allParams.get("expiringDate"));
+		Company company=companyService.update(companyService.findbyUserId(auth.getName()));
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+		LocalDate date = LocalDate.parse(allParams.get("expiringDate"), formatter);
+		System.out.print(date.toString());
 		JobOffer job = jobOfferService.create(allParams.get("region"), allParams.get("province_"), allParams.get("town"),
 				allParams.get("position"), allParams.get("description"), allParams.get("contractType")
 				, Education.valueOf(allParams.get("minEducationLevel")), allParams.get("minExperience"),
 				date, company);
 		model.addAttribute("company",company);
 		model.addAttribute("job",job);
-		return "company/editjoboffer";
+		return "company/listjoboffer";
 	}
 	
 	@GetMapping("/joboffer/{jobId}/delete")
 	public String jobofferdelete (@PathVariable("jobId") Long jobId, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Company company=companyService.findbyUserId(auth.getName());
 		JobOffer job = jobOfferService.findbyId(jobId);
 		jobOfferService.delete(job);
+		Company company=companyService.findbyUserId(auth.getName());
 		List<JobOffer> jobs = jobOfferService.findbyCompanyId(company.getId());
 		model.addAttribute("jobs",jobs);
 		model.addAttribute("company",company);
