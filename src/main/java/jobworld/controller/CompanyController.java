@@ -61,7 +61,7 @@ public class CompanyController {
 	private UserService userService;
 	private PersonService personService;
 	//TODO:MODIFICATE L'UPLOAD PATH ALTRIMENTI VI DA ERRORE!!!!!
-	private static String UPLOADED_FOLDER = "C:/Users/cicci/git/JobWorldAdvanceProgramming/WebContent/resources/img/companies/";
+	private static String UPLOADED_FOLDER = "/Users/giulianilorenzo/Documents/eclipse-workspace/JobWorldAdvanceProgramming/WebContent/resources/img/companies/";
 	//private static String UPLOADED_FOLDER ="C:/Users/giusp/git/JobWorldAdvanceProgramming/WebContent/resources/img/companies/";
 	
 	

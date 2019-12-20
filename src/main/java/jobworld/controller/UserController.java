@@ -1,5 +1,11 @@
 package jobworld.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,6 +14,8 @@ import java.util.Map;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,27 +53,61 @@ public class UserController {
 	private UserService userService;
 	private PersonService personService;
 	private CurriculumService curriculumService;
+	private static String UPLOADED_FOLDER = "/Users/giulianilorenzo/Documents/eclipse-workspace/JobWorldAdvanceProgramming/WebContent/resources/img/users/";
 	
 	
 	@GetMapping("/profile")
-	public String profile(@RequestParam(value="email") String email,Model model) {
-		User user=this.userService.findByEmail(email);
-		Person person=this.personService.findbyUserId(email);
+	public String profile(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Person person = personService.findbyUserId(auth.getName());
+		User user= userService.findByEmail(auth.getName());
 		model.addAttribute("person",person);
 		model.addAttribute("user",user);
 		return "user/profile";
 	}
 	
 	@PostMapping("/update")
-	public String update(@RequestParam Map<String,String> allParams, @RequestParam("image") MultipartFile image) {
-		String temp=image.getName();
-		System.out.println(temp);
-		return "user/profile"; // per il momento inserito così lo cambio
+	public String update(@RequestParam Map<String,String> allParams, @RequestParam("image") MultipartFile image, Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.update(userService.findByEmail(auth.getName()));
+		boolean trovato=true;
+		int i=image.getOriginalFilename().length()-1;
+		while(trovato & i>=0) {
+			char temp=image.getOriginalFilename().charAt(i);
+			if (temp=='\\' || i==0) {
+				trovato=false;
+			}
+			i--;
+		}
+		try {
+			byte[] bytes = image.getBytes();
+			String name_image= image.getOriginalFilename().substring(i+1);
+	        Path path_disk = Paths.get(UPLOADED_FOLDER + name_image);
+	        String path_image = "resources/img/users/"+ name_image;
+	        Files.write(path_disk, bytes);
+	        user.setImage(path_image);
+		} catch(IOException e) {
+			 e.printStackTrace();
+		}
+        user.setDescription(allParams.get("description"));			
+        user = userService.update(user);
+		Person person = personService.findbyUserId(auth.getName());
+        person.setFirstName(allParams.get("firstName"));
+        person.setSecondName(allParams.get("secondName"));
+        person.setNumber(allParams.get("number"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+		LocalDate birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
+		person.setBirthDate(birthDate);
+        person = personService.update(person);
+        model.addAttribute("user",user);
+		model.addAttribute("person", person);
+		return "redirect:/user/profile";
 	}
 	
 	@GetMapping("/curriculum")
-	public String curriculum(@RequestParam(value="email") String email, Model model) {
-		Person person = personService.findbyUserId(email);
+	public String curriculum(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Person person = personService.findbyUserId(auth.getName());
 		Curriculum curriculum = person.getCurriculum();
 		model.addAttribute("curriculum", curriculum);
 		model.addAttribute("email", person.getUser().getEmail());
@@ -74,7 +116,8 @@ public class UserController {
 	
 	@PostMapping("/createCurriculum")
 	public String createCurriculum(@RequestParam Map<String,String> allParams, Model model) {
-		Person person = personService.findbyUserId(allParams.get("email"));
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Person person = personService.findbyUserId(auth.getName());
 		Curriculum curriculum = curriculumService.create(
 				new Curriculum(person, allParams.get("workExperience"), allParams.get("education"), allParams.get("personalSkills"), allParams.get("additionalInfo")));
 		model.addAttribute("curriculum", curriculum);
@@ -89,14 +132,15 @@ public class UserController {
 		curriculum.setEducation(allParams.get("education"));
 		curriculum.setPersonalSkills(allParams.get("personalSkills"));
 		curriculum.setAdditionalInfo(allParams.get("additionalInfo"));
-		curriculumService.update(curriculum);
+		curriculum = curriculumService.update(curriculum);
 		model.addAttribute("curriculum", curriculum);
-		return "redirect:/user/curriculum?email=" + allParams.get("email");
+		return "redirect:/user/curriculum";
 	}
 	
 	@GetMapping("/apply/{jobid}")
-	public String apply(@RequestParam(value="email") String email, @PathVariable("jobid") Long jobId) {
-		Person person = personService.findbyUserId(email);
+	public String apply(@PathVariable("jobid") Long jobId) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Person person = personService.findbyUserId(auth.getName());
 		JobOffer joboffer = jobOfferService.findbyId(jobId);
 		personService.apply(person, joboffer);
 		return "redirect:/";
@@ -104,8 +148,9 @@ public class UserController {
 	}
 	
 	@GetMapping("/unapply/{jobid}")
-	public String unapply(@RequestParam(value="email") String email, @PathVariable("jobid") Long jobId) {
-		Person person = personService.findbyUserId(email);
+	public String unapply(@PathVariable("jobid") Long jobId) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Person person = personService.findbyUserId(auth.getName());
 		JobOffer joboffer = jobOfferService.findbyId(jobId);
 		personService.unapply(person, joboffer);
 		return "redirect:/";
@@ -113,11 +158,12 @@ public class UserController {
 	}
 	
 	@GetMapping("/deleteCurriculum")
-	public String deleteCurriculum(@RequestParam(value="email") String email) {
-		Person person = personService.findbyUserId(email);
+	public String deleteCurriculum() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Person person = personService.findbyUserId(auth.getName());
 		Curriculum curriculum = person.getCurriculum();
 		curriculumService.delete(curriculum);
-		return "redirect:/user/curriculum?email=" + email;
+		return "redirect:/user/curriculum";
 	}
 	
 	@Autowired

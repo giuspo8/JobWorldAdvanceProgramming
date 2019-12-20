@@ -128,16 +128,16 @@
 					<c:when test="${isCompany}">
 					<li><a href="<c:url value="/logout" />">Logout</a></li>
 					<li>-</li>
-					<li><a href="<c:url value="/company/listjoboffer"/>"> Offerte di lavoro</a></li>
+					<li><a href="<c:url value="/company/listjoboffer"/>">Offerte di lavoro</a></li>
 					<li>-</li>
 					<li><a href="<c:url value="/company/profile"/>" class="login_btn"><sec:authentication property="principal.username" /></a></li>
 					</c:when>
 					<c:when test="${isUser}">
 					<li><a href="<c:url value="/logout" />">Logout</a></li>
 					<li>-</li>
-					<li><a href="<c:url value="/user/curriculum?email="/><sec:authentication property="principal.username" />">Curriculum</a></li>
+					<li><a href="<c:url value="/user/curriculum"/>">Curriculum</a></li>
 					<li>-</li>
-					<li><a href="<c:url value="/user/profile?email="/><sec:authentication property="principal.username" />" class="login_btn"><sec:authentication property="principal.username" /></a></li>
+					<li><a href="<c:url value="/user/profile"/>" class="login_btn"><sec:authentication property="principal.username" /></a></li>
 					</c:when>
 					<c:otherwise>
 						<li><a href="<c:url value="/register"/>">Registrati</a></li>
@@ -171,10 +171,10 @@
 							<span class="more">${j.description}</span>
 							<c:if test='${isUser}'>							
 							<c:if test="${person.isInterested(j)}">
-							<a href="<c:url value="/user/unapply/${j.id}?email="/><sec:authentication property="principal.username" />">Togli la candidatura</a>
+							<a href="<c:url value="/user/unapply/${j.id}"/>">Togli la candidatura</a>
 							</c:if>
 							<c:if test="${! person.isInterested(j)}">
-							<a href="<c:url value="/user/apply/${j.id}?email="/><sec:authentication property="principal.username" />">Candidati</a>
+							<a href="<c:url value="/user/apply/${j.id}"/>">Candidati</a>
 							</c:if>
 							</c:if>
 						</div>

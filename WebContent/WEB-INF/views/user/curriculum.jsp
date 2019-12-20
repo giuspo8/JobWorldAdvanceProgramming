@@ -155,7 +155,7 @@
 					</div>
 				</form:form>
 				<c:if test="${not empty curriculum}">
-				<a href="<c:url value="/user/deleteCurriculum?email="/><sec:authentication property="principal.username" />">Elimina Curriculum</a>
+				<a href="<c:url value="/user/deleteCurriculum"/>">Elimina Curriculum</a>
 				</c:if>
 				${email }
 		</div>

@@ -171,10 +171,10 @@ public class WebConfig implements WebMvcConfigurer {
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
-
+/*
 	// <=> <mvc:view-controller .../>
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/").setViewName("jobOffers/list");
-	}
+	}*/
 }
