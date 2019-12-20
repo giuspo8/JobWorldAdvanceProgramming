@@ -97,7 +97,7 @@ public class LoadData {
 			User u7=userDao.create("gamestop@email.it", userDao.encryptPassword("gamestop1"), 
 					"GameStop Corporation, noto semplicemente come GameStop, � un'azienda statunitense con sede nella citt� di Grapevine. � il pi� grande rivenditore di videogiochi nuovi e usati nel mondo, ma si occupa anche della vendita di accessori per videogiochi, console ed altri apparecchi elettronic", 
 					"/resources/img/companies/gamestop.jpg");
-			u7.addRole(r1);
+			u7.addRole(r3);
 			Company c2=createCompany("Gamestop",u7,companyDao);
 
 			User u8=userDao.create("sony@gmail.it",  userDao.encryptPassword("sony22"), "La Sony Corporation, � una multinazionale conglomerata giapponese fondata nel 1946 con sede a Minato, quartiere di Tokyo. Sony si concentra principalmente sull'elettronica di consumo, sui videogiochi, intrattenimento e servizi finanziari.", 

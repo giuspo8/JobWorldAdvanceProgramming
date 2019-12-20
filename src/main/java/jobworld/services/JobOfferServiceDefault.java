@@ -75,7 +75,7 @@ private CompanyDao companyRepository;
 			p.getCandidacies().remove(joboffer);
 		}
 		joboffer.getCandidancies().clear();
-		jobofferRepository.update(joboffer);
+		joboffer=jobofferRepository.update(joboffer);
 		Company company=joboffer.getCompany();
 		company.getJobOffers().remove(joboffer);
 		jobofferRepository.delete(joboffer);
