@@ -38,7 +38,7 @@
 		</div>
 		<div class="offer">
 			<div style="text-align:center; margin:auto;">
-				<c:url value="" var="action_url" />
+				<c:url value="/company/joboffer/${job.getId()}/update" var="action_url" />
 				       
 				<form:form method="POST" action="${action_url}" enctype="multipart/form-data">
 					<h3>Informazoni dell'offerta di lavoro:</h3>
@@ -89,7 +89,7 @@
 							<td style="text-align:center;"><input value="${job.province}"
 								name="province_" class="searchsub_input" ></td>
 							<td style="text-align:center;"><input value="${job.town}"
-								name="region" class="searchsub_input" ></td>
+								name="town" class="searchsub_input" ></td>
 						</tr>
 					</table>
 					<div id="searchsub" style="text-align:center;">

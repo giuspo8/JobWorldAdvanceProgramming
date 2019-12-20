@@ -407,8 +407,9 @@ public class LoadData {
 				
 
 			p1=personDao.apply(p1, j1);
-			
+
 			session.getTransaction().commit();
+			/*
 			//session.beginTransaction();
 			//p1=personDao.unapply(p1, j1);
 			//session.getTransaction().commit();
@@ -427,7 +428,7 @@ public class LoadData {
 			//DELETE CURRICULUM
 			deleteCurriculum(c12,session,personDao,curriculumDao);
 
-			//assert(personDao.findbyUserId("saviofeng@gmail.it")==p1);
+			//assert(personDao.findbyUserId("saviofeng@gmail.it")==p1);*/
 
 			}
 		

@@ -28,7 +28,7 @@
 
 			<ul>
 				<li id="logo"><span><img
-						src="../../<c:url value="resources/img/logo.png"/>"></span></li>
+						src=<c:url value="/resources/img/logo.png"/>></span></li>
 			</ul>
 		</div>
 	</header>
@@ -64,6 +64,7 @@
 				</tr>
 				</c:forEach>
 				</table>
+				<a href="<c:url value="/company/joboffer/"/>">Crea offerta di lavoro</a>
 			</div>
 		</div>
 	</div>

@@ -42,6 +42,7 @@
 				<tr>
 					<th>Nome</th>
     				<th>Cognome</th>
+    				<th>Età</th>
     				<th>Numero di telefono</th>
     				<th>Email</th>
     				<th>Curriculum</th>
@@ -50,9 +51,10 @@
 				<tr>
 					<td>${candidate.getFirstName()}</td>
 					<td>${candidate.getSecondName()}</td>
+					<td>${now_year - candidate.getBirthDate().getYear()}</td>
 					<td>${candidate.getNumber()}</td>
 					<td>${candidate.getUser().getEmail()}</td>
-					<td><a href="<c:url value="/company/listjoboffer"/>">QUI CI VA IL LINK AL CURRICULUM</a></td>
+					<td><a href="<c:url value="/company/curriculum"/>?email=${candidate.getUser().getEmail()}">Visualizza Curriculum</a></td>
 				</tr>
 				</c:forEach>
 				</table>

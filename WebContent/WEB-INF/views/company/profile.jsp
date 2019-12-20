@@ -28,7 +28,7 @@
 
 			<ul>
 				<li id="logo"><span><img
-						src="../../<c:url value="resources/img/logo.png"/>"></span></li>
+						src=<c:url value="/resources/img/logo.png"/>></span></li>
 			</ul>
 		</div>
 	</header>
