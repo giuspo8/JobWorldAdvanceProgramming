@@ -136,7 +136,7 @@
 			<h3>Informazioni generali</h3>
 			<div class="offer">
 			<div style="text-align:center; margin:auto;">
-				<c:url value="/person/update" var="action_url" />
+				<c:url value="/user/update" var="action_url" />
 				       
 				<form:form method="POST" action="${action_url}" enctype="multipart/form-data">
 					<h3>Visualizza le tue informazioni</h3>
@@ -159,9 +159,9 @@
 						</tr>
 						<tr>
 							<td style="text-align:center;"><input value="${person.getFirstName()}"
-								name="nome_azienda" class="searchsub_input" ></td>
+								name="firstName" class="searchsub_input" ></td>
 								<td style="text-align:center;"><input value="${person.getSecondName()}"
-								name="nome_azienda" class="searchsub_input" ></td>
+								name="secondName" class="searchsub_input" ></td>
 						</tr>
 						<tr>
 							<td><label class="searchsub_lbl" style="text-align:center;">Modifica la tua descrizione: </label></td>
@@ -176,9 +176,9 @@
 						</tr>
 						<tr>
 							<td style="text-align:center;"><input value="${person.getBirthDate()}"
-								name="nome_azienda" class="searchsub_input" ></td>
+								name="birthDate" class="searchsub_input" ></td>
 								<td style="text-align:center;"><input value="${person.getNumber()}"
-								name="nome_azienda" class="searchsub_input" ></td>
+								name="number" class="searchsub_input" ></td>
 						</tr>
 					</table>
 					<div id="searchsub" style="text-align:center;">
