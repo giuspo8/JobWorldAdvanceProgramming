@@ -103,8 +103,6 @@
 									<option value='ECONOMIA'>Economia</option>
 							</select></td>
 						</tr></table>
-						<label class='searchsub_lbl'>Descrizione</label><br>
-					<textarea form='regform' name='description'></textarea>
 					<div id='searchsub'>
 						<input disabled id='submit' type='submit' value='Invio'>  
 					</div>

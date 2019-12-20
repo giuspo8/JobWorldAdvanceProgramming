@@ -156,20 +156,18 @@ public class HomeController {
 
 	@PostMapping("/add")
 	public String add(@RequestParam Map<String, String> allParams) {
-		User user = userService.create(allParams.get("email"), userService.encryptPassword(allParams.get("password")),
-				allParams.get("description"), null);
+		User user = userService.create(allParams.get("email"), userService.encryptPassword(allParams.get("password")), null, null);
 		if (allParams.get("type").equals("person")) {
 			user.addRole(roleService.getRoleByTypeRole(TypeRole.USER));
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 			LocalDate birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
-			Person person = personService.create(allParams.get("firstName"), allParams.get("secondName"), birthDate,
+			personService.create(allParams.get("firstName"), allParams.get("secondName"), birthDate,
 					allParams.get("number"), null, user);
 		} else if (allParams.get("type").equals("company")) {
-			System.out.print(roleService.getRoleByTypeRole(TypeRole.COMPANY).toString());
 			user.addRole(roleService.getRoleByTypeRole(TypeRole.COMPANY));
-			Company company = companyService.create(allParams.get("name"), user);
+			companyService.create(allParams.get("name"), user);
 		}
-		return "redirect:/";
+		return "redirect:/login";
 
 	}
 
