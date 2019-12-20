@@ -165,8 +165,9 @@ public class CompanyController {
 				allParams.get("position"), allParams.get("description"), allParams.get("contractType")
 				, Education.valueOf(allParams.get("minEducationLevel")), allParams.get("minExperience"),
 				date, company);
+		List<JobOffer> jobs = jobOfferService.findbyCompanyId(company.getId());
+		model.addAttribute("jobs",jobs);
 		model.addAttribute("company",company);
-		model.addAttribute("job",job);
 		return "company/listjoboffer";
 	}
 	
