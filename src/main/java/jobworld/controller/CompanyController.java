@@ -52,8 +52,9 @@ import jobworld.services.UserService;
  */
 
 
-@RequestMapping("/company")
+
 @Controller
+@RequestMapping("/company")
 public class CompanyController {
 
 	private JobOfferService jobOfferService;

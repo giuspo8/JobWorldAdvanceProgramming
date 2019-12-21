@@ -1,0 +1,24 @@
+<?xml  version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache  Software
+   Foundation//DTD Tiles  Configuration 3.0//EN"
+   "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+  <definition extends="default" name="login">
+   <put-attribute name="body" value="/WEB-INF/views/login.jsp" />
+  </definition>
+  <definition extends="default" name="home">
+   <put-attribute name="body" value="/WEB-INF/views/home.jsp" />
+  </definition>
+  <definition extends="default" name="chisiamo">
+   <put-attribute name="body" value="/WEB-INF/views/chisiamo.jsp" />
+  </definition>
+  <definition extends="default" name="faq">
+   <put-attribute name="body" value="/WEB-INF/views/faq.jsp" />
+  </definition>
+  <definition extends="default" name="moreinfo">
+   <put-attribute name="body" value="/WEB-INF/views/moreinfo.jsp" />
+  </definition>
+  <definition extends="default" name="register">
+   <put-attribute name="body" value="/WEB-INF/views/register.jsp" />
+  </definition>
+</tiles-definitions>

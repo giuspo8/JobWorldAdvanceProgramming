@@ -37,8 +37,9 @@ import jobworld.services.JobOfferService;
 import jobworld.services.PersonService;
 import jobworld.services.UserService;
 
-@RequestMapping("/user")
+
 @Controller
+@RequestMapping("/user")
 public class UserController {
 	/**
 	 * Classe Controllore User

@@ -34,6 +34,9 @@ import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesView;
 
 import jobworld.test.TestConfig;
 
@@ -48,8 +51,6 @@ public class WebConfig implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-		//registry.addResourceHandler("/css/**").addResourceLocations("/css/**");
-		
 	}
 
 	@Bean 
@@ -57,23 +58,6 @@ public class WebConfig implements WebMvcConfigurer {
 		return new StandardServletMultipartResolver();
 	}
 
-//	@Bean
-//	UrlBasedViewResolver tilesViewResolver() {
-//		UrlBasedViewResolver tilesViewResolver = new UrlBasedViewResolver();
-//		tilesViewResolver.setViewClass(TilesView.class);
-//		return tilesViewResolver;
-//	}
-//
-//	@Bean
-//	TilesConfigurer tilesConfigurer() {
-//		TilesConfigurer tilesConfigurer = new TilesConfigurer();
-//		tilesConfigurer.setDefinitions(
-//				"/WEB-INF/layouts/layouts.xml",
-//				"/WEB-INF/views/**/views.xml"
-//		);
-//		tilesConfigurer.setCheckRefresh(true);
-//		return tilesConfigurer;
-//	}
 
 //	@Bean
 //	public Validator validator() {
@@ -87,6 +71,7 @@ public class WebConfig implements WebMvcConfigurer {
 //	public Validator getValidator() {
 //		return validator();
 //	}
+	/*
 	@Bean
 	InternalResourceViewResolver viewResolver(){
 	  InternalResourceViewResolver resolver =  new InternalResourceViewResolver();
@@ -95,6 +80,26 @@ public class WebConfig implements WebMvcConfigurer {
 	  resolver.setRequestContextAttribute("requestContext"); 
 	  resolver.setViewClass(JstlView.class);
 	  return resolver;
+	}*/
+	
+	
+	@Bean
+	UrlBasedViewResolver tilesViewResolver() {
+		UrlBasedViewResolver tilesViewResolver = new UrlBasedViewResolver();
+		tilesViewResolver.setViewClass(TilesView.class);
+		return tilesViewResolver;
+	}
+
+	@Bean
+	TilesConfigurer tilesConfigurer() {
+		TilesConfigurer tilesConfigurer = new TilesConfigurer();
+		tilesConfigurer.setDefinitions(
+				"/WEB-INF/layouts/layouts.xml",
+				"/WEB-INF/views/**/views.xml",
+				"/WEB-INF/views/views.xml"
+		);
+		tilesConfigurer.setCheckRefresh(true);
+		return tilesConfigurer;
 	}
 	
 	// <=> replacement for 'typeConversionService'  bean

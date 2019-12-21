@@ -1,0 +1,21 @@
+<?xml  version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache  Software
+   Foundation//DTD Tiles  Configuration 3.0//EN"
+   "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+  <definition extends="default" name="company/curriculum">
+   <put-attribute name="body" value="/WEB-INF/views/company/curriculum.jsp" />
+  </definition>
+  <definition extends="default" name="company/profile">
+  <put-attribute name="body" value="/WEB-INF/views/company/profile.jsp" />
+  </definition>
+  <definition extends="default" name="company/editjoboffer">
+  <put-attribute name="body" value="/WEB-INF/views/company/editjoboffer.jsp" />
+  </definition>
+    <definition extends="default" name="company/interested">
+   <put-attribute name="body" value="/WEB-INF/views/company/interested.jsp" />
+  </definition>
+    <definition extends="default" name="company/listjoboffer">
+   <put-attribute name="body" value="/WEB-INF/views/company/listjoboffer.jsp" />
+  </definition>
+</tiles-definitions>
