@@ -32,6 +32,7 @@ import jobworld.utils.LocalDateAttributeConverter;
 @Entity
 public class Person  {
 	
+
 	private long id;
 	private String firstName;
 	private String secondName;
@@ -130,13 +131,7 @@ public class Person  {
 	 * Definizione della relazione molti a molti tra Person e JobOffer
 	 * 
 	 */
-	@ManyToMany(fetch = FetchType.EAGER, cascade =
-        {
-                CascadeType.DETACH,
-                CascadeType.MERGE,
-                CascadeType.REFRESH,
-                CascadeType.PERSIST
-        }, mappedBy = "candidancies")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "candidancies")
 	public Set<JobOffer> getCandidacies() {
 		return this.candidacies;
 	}
@@ -179,7 +174,18 @@ public class Person  {
 				+ birthDate + ", number=" + number + ", curriculum=" + curriculum + ", interests=" + interests
 				+ ", candidacies=" + candidacies + ", user=" + user + "]";
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Person) {
+			if (this.getId()==((Person) obj).getId())
+				{
+				return true;
+						}
+			else return false;
+				}
+		return super.equals(obj);
+	}
 	
 
 }

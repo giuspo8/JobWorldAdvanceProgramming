@@ -26,15 +26,11 @@ public interface PersonDao {
 
 	Person create(Person person);
 	
-	Person apply(Person person, JobOffer joboffer);
-	
 	Person update(Person person);
 
 	void delete(Person person);
 
 	Person findById(long id);
-	
-	Person unapply(Person person, JobOffer joboffer);
 	
 	List<Person> findAll();
 	

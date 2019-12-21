@@ -69,7 +69,7 @@ public class LoadData {
 			u1.addRole(r1);
 			
 			User u2 = userDao.create("tizioacaso@gmail.com", userDao.encryptPassword("user2"), null,"/resources/img/galleria23.jpg");
-			u2.addRole(r3);
+			u2.addRole(r1);
 			
 			User u3=userDao.create("esselunga@gmail.com", userDao.encryptPassword("user3"), null,"/resources/img/galleria24.jpg");
 			u3.addRole(r3);
@@ -361,15 +361,17 @@ public class LoadData {
 			// phase 2 : navigate data in the database
 			
 	
-			p2=personDao.apply(p2, j1);
-			p1=personDao.apply(p1, j3);
-			p3=personDao.apply(p3, j1);
-			p4=personDao.apply(p4, j1);
-			p5=personDao.apply(p5, j1);
-			p3=personDao.apply(p2, j2);
-			p4=personDao.apply(p4, j2);
-			p5=personDao.apply(p5, j4);
-			p5=personDao.apply(p5, j5); 
+			p2=apply(p2, j1, jobOfferDao, personDao);
+			p1=apply(p1, j3, jobOfferDao, personDao);
+			p3=apply(p3, j1, jobOfferDao, personDao);
+			p4=apply(p4, j1, jobOfferDao, personDao);
+			p5=apply(p5, j1, jobOfferDao, personDao);
+			p3=apply(p2, j2, jobOfferDao, personDao);
+			p4=apply(p4, j2, jobOfferDao, personDao);
+			p5=apply(p5, j4, jobOfferDao, personDao);
+			p5=apply(p5, j5, jobOfferDao, personDao); 
+			
+
 			
 			
 			/*
@@ -406,8 +408,11 @@ public class LoadData {
 			//personDao.apply(p1, j1);; lancia un'eccezione perchè non ci si può candidare due volte per la stessa offerta
 				
 
-			p1=personDao.apply(p1, j1);
 
+
+			session.getTransaction().commit();
+			session.beginTransaction();
+			p5=unapply(p5, j5, jobOfferDao, personDao);
 			session.getTransaction().commit();
 			/*
 			//session.beginTransaction();
@@ -440,6 +445,26 @@ public class LoadData {
 //		logger.info("Esco ...");
 	}
 
+	private static Person unapply(Person person, JobOffer joboffer, JobOfferDao jobOfferDao, PersonDao personDao) {
+		for (Person p:joboffer.getCandidancies()) {
+			if (p.getId()==person.getId())
+				joboffer.getCandidancies().remove(p);
+		}
+		joboffer=jobOfferDao.update(joboffer);
+		for (JobOffer j:person.getCandidacies()) {
+			if (j.getId()==joboffer.getId())
+				person.getCandidacies().remove(j);
+		}
+		return personDao.update(person);
+	}
+
+	private static Person apply(Person p, JobOffer j, JobOfferDao jobOfferDao, PersonDao personDao) {
+		j.getCandidancies().add(p);
+		j=jobOfferDao.update(j);
+		p.getCandidacies().add(j);
+		return personDao.update(p);
+	}
+
 	private static Curriculum createCurriculum(Curriculum curriculum, CurriculumDao curriculumDao,
 			PersonDao personDao) {
 		Person p=curriculum.getPerson();
@@ -456,7 +481,7 @@ public class LoadData {
 				minExperience,expiringDate, company);
 		company.getJobOffers().add(jobOffer);
 		jobOffer=jobOfferDao.create(jobOffer);
-		companyDao.update(company);
+		company=companyDao.update(company);
 		return jobOffer;
 	}
 
@@ -481,7 +506,7 @@ public class LoadData {
 			p.getCandidacies().remove(j);
 		}
 		j.getCandidancies().clear();
-		jobOfferDao.update(j);
+		j=jobOfferDao.update(j);
 		Company company=j.getCompany();
 		company.getJobOffers().remove(j);
 		jobOfferDao.delete(j);

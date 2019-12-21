@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -160,14 +159,7 @@ public class JobOffer {
 
 
 	//campo data candidatura
-	@ManyToMany(fetch = FetchType.EAGER,        
-			cascade =
-        {
-                CascadeType.DETACH,
-                CascadeType.MERGE,
-                CascadeType.REFRESH,
-                CascadeType.PERSIST
-        })
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "candidacies", joinColumns = @JoinColumn(name = "JOB_OFFER_ID"), inverseJoinColumns = @JoinColumn(name = "PERSON_ID"))
 	public Set<Person> getCandidancies() {
 		return this.candidancies;
@@ -227,5 +219,18 @@ public class JobOffer {
 		this.expiringDate = expiringDate;
 	}
 
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof JobOffer) {
+			if (this.getId()==((JobOffer) obj).getId())
+				{
+				return true;
+						}
+			else return false;
+				}
+		return super.equals(obj);
+	}
+	
 
 }

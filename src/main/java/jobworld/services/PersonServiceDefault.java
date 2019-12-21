@@ -14,6 +14,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import jobworld.model.dao.JobOfferDao;
 import jobworld.model.dao.PersonDao;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
@@ -23,6 +25,7 @@ import jobworld.model.entities.User;
 @Service("personService")
 public class PersonServiceDefault implements PersonService{
 private PersonDao personRepository;
+private JobOfferDao jobOfferRepository;
 
 	
 
@@ -69,10 +72,18 @@ private PersonDao personRepository;
 		this.personRepository = personRepository;
 	}
 
+	@Autowired
+	public void setJobOfferRepository(JobOfferDao jobOfferRepository) {
+		this.jobOfferRepository = jobOfferRepository;
+	}
+
 	@Override
 	@Transactional
 	public Person apply(Person person, JobOffer joboffer) {
-		return this.personRepository.apply(person, joboffer);
+		joboffer.getCandidancies().add(person);
+		joboffer=jobOfferRepository.update(joboffer);
+		person.getCandidacies().add(joboffer);
+		return this.personRepository.update(person);
 	}
 
 	@Override
@@ -90,7 +101,10 @@ private PersonDao personRepository;
 	@Override
 	@Transactional
 	public Person unapply(Person person, JobOffer joboffer) {
-		return this.personRepository.unapply(person, joboffer);
+		joboffer.getCandidancies().remove(person);
+		joboffer=jobOfferRepository.update(joboffer);
+		person.getCandidacies().remove(joboffer);
+		return this.personRepository.update(person);
 	}
 
 	@Override

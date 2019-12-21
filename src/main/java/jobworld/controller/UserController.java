@@ -142,7 +142,7 @@ public class UserController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Person person = personService.findbyUserId(auth.getName());
 		JobOffer joboffer = jobOfferService.findbyId(jobId);
-		personService.apply(person, joboffer);
+		person=personService.apply(person, joboffer);
 		return "redirect:/";
 		
 	}
@@ -152,7 +152,7 @@ public class UserController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Person person = personService.findbyUserId(auth.getName());
 		JobOffer joboffer = jobOfferService.findbyId(jobId);
-		personService.unapply(person, joboffer);
+		person=personService.unapply(person, joboffer);
 		return "redirect:/";
 		
 	}

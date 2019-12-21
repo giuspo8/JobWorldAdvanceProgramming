@@ -79,23 +79,6 @@ public class DefaultPersonDao extends DefaultDao implements PersonDao {
 		}		
 	}
 
-	@Override
-	@Transactional
-	public Person apply(Person person, JobOffer joboffer) {
-		joboffer.getCandidancies().add(person);
-		jobOfferDao.update(joboffer);
-		person.getCandidacies().add(joboffer);
-		return update(person);
-	}
-
-	@Override
-	@Transactional
-	public Person unapply(Person person, JobOffer joboffer) {
-		joboffer.getCandidancies().remove(person);
-		jobOfferDao.update(joboffer);
-		person.getCandidacies().remove(joboffer);
-		return update(person);
-	}
 
 	@Override
 	@Transactional
