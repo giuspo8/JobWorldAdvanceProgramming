@@ -155,14 +155,12 @@ public class Person  {
 	}
 	
 	public boolean isInterested(JobOffer jobOffer) {
-		boolean interested = false;
 		for (JobOffer j:candidacies) {
 			if(j.getId() == jobOffer.getId()) {
-				interested = true;
-				break;
+				return true;
 			}
 		};
-		return interested;
+		return false;
 	}
 
 	/**
