@@ -16,6 +16,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page session="false"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authorize access="hasRole('USER')" var="isUser" />
 
 	<div class="body">
 		<div class="container_slide">
@@ -38,13 +39,13 @@
 						<img class="pic" src="<c:url value="${j.getCompany().getUser().getImage()}" />">
 						<div class="description">
 							<span class="more">${j.description}</span>
-							<c:if test='${isUser}'>							
-							<c:if test="${person.isInterested(j)}">
-							<a href="<c:url value="/user/unapply/${j.id}"/>">Togli la candidatura</a>
-							</c:if>
-							<c:if test="${! person.isInterested(j)}">
-							<a href="<c:url value="/user/apply/${j.id}"/>">Candidati</a>
-							</c:if>
+							<c:if test="${isUser}">							
+								<c:if test="${person.isInterested(j)}">
+								<a href="<c:url value="/user/unapply/${j.id}"/>">Togli la candidatura</a>
+								</c:if>
+								<c:if test="${! person.isInterested(j)}">
+								<a href="<c:url value="/user/apply/${j.id}"/>">Candidati</a>
+								</c:if>
 							</c:if>
 						</div>
 					</div>
