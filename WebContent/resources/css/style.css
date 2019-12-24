@@ -176,7 +176,7 @@ footer {
 	float: left;
 }
 
-#logo>span>img {
+#logo>span>a>img {
 	display: inline-block;
 	max-height: 50px;
 	width: auto;

@@ -87,7 +87,7 @@
 									</div>
 								</form:form>
 							</div>
-						</nav> </span> <span><img src="<c:url value="/resources/img/logo.png"/>"></span></li>
+						</nav> </span> <span><a href="<c:url value="/"/>"><img src="<c:url value="/resources/img/logo.png"/>"></a></span></li>
 				<sec:authorize access="hasRole('COMPANY')" var="isCompany" />
 				<sec:authorize access="hasRole('USER')" var="isUser" />
 				<sec:authorize access="isAuthenticated()" var="isAuth" />

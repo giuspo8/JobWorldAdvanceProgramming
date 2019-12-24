@@ -48,7 +48,7 @@ import jobworld.services.UserService;
  * @author Simone di Saverio
  * @author Lorenzo Giuliani
  * @author Savio Feng
- * @version 1.0
+ * @version 6.0
  */
 
 
