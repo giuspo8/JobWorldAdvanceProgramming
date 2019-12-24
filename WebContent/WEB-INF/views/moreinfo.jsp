@@ -15,17 +15,17 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page session="false"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
-	<div class="body">
-		<div class="container_slide">
-			<div class="slide">
-				<img src="<c:url value="resources/img/jobworldhome.jpeg"/>">
-			</div>
-			<hr>
-
+<div class="body">
+	<div class="container_slide">
+		<div class="slide">
+			<img src="<c:url value="resources/img/jobworldhome.jpeg"/>">
 		</div>
-		inserire qui le informazioni dell'offerta di lavoro (da completare)
+		<hr>
 
 	</div>
-	<footer>
+	inserire qui le informazioni dell'offerta di lavoro (da completare)
+
+</div>

@@ -70,18 +70,7 @@ public class WebConfig implements WebMvcConfigurer {
 //	@Override
 //	public Validator getValidator() {
 //		return validator();
-//	}
-	/*
-	@Bean
-	InternalResourceViewResolver viewResolver(){
-	  InternalResourceViewResolver resolver =  new InternalResourceViewResolver();
-	  resolver.setPrefix("/WEB-INF/views/"); 
-	  resolver.setSuffix(".jsp" );
-	  resolver.setRequestContextAttribute("requestContext"); 
-	  resolver.setViewClass(JstlView.class);
-	  return resolver;
-	}*/
-	
+//	}	
 	
 	@Bean
 	UrlBasedViewResolver tilesViewResolver() {

@@ -37,7 +37,25 @@
 				<div class="general_info">
 					<b>Candidature valide fino al</b> ${j.expiringDate }.<br> <b>Azienda:
 					</b>${j.getCompany().getName() }<br>
-					<b>Località: </b>${j.region }, ${j.province }, ${j.town }.
+					<b>Località: </b>
+					<c:if test="${not empty j.region}">
+					${j.region }, 
+					</c:if>
+					<c:if test="${empty j.region }">
+					N.D., 
+					</c:if>
+					<c:if test="${not empty j.province}">
+					${j.province }, 
+					</c:if>
+					<c:if test="${empty j.province }">
+					N.D., 
+					</c:if>
+					<c:if test="${not empty j.town}">
+					${j.town}.
+					</c:if>
+					<c:if test="${empty j.town}">
+					N.D.
+					</c:if>
 				</div>
 				<hr>
 				<div class="general_info_body">
@@ -47,8 +65,8 @@
 						<span class="more">${j.description}</span>
 						<c:if test="${isUser}">
 							<c:if test="${person.isInterested(j)}">
-								<a class="app_btn" href="<c:url value="/user/unapply/${j.id}"/>">Togli la
-									candidatura</a>
+								<a class="app_btn" href="<c:url value="/user/unapply/${j.id}"/>">Togli
+									la candidatura</a>
 							</c:if>
 							<c:if test="${! person.isInterested(j)}">
 								<a class="app_btn" href="<c:url value="/user/apply/${j.id}"/>">Candidati</a>

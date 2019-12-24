@@ -16,38 +16,41 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page session="false"%>
 
-	<div class="body">
-		<div class="container_slide">
-			<div class="slide"></div>
-		</div>
-		<div class="offer" style="width: 50%;">
-			<div style="text-align:center; width:80%; margin:auto;">
-				       
-				<form name='login' action="<c:url value="/login" />" method='POST'>
-					<h2>LOGIN</h2>
-					<c:if test="${not empty errorMessage}"><div style="color:red; font-weight: bold; margin: 30px 0px;">${errorMessage}</div></c:if>
-             						<table style="text-align:center; margin:auto;">
-						<tr>
-							<td><label class="searchsub_lbl" style="text-align:center;">Email</label></td>
-						</tr>
-						<tr>
-							<td style="text-align:center;"><input type='text' placeholder="Inserisci qui la tua e-mail"
-								name="username" class="searchsub_input" ></td>
-						</tr>
-						<tr>
-							<td><label class="searchsub_lbl" style="text-align:center;">Password</label></td>
-						</tr>
-						<tr>
-							<td style="text-align:center;"><input type='password' placeholder="Inserisci qui la tua password"
-								name="password" class="searchsub_input"></td>
-						</tr>
-					</table>
-					<div id="searchsub" style="text-align:center;">
-						<input type="submit" value="Invio">  
-					</div>
-				</form>
-			</div>
+<div class="body">
+	<div class="container_slide">
+		<div class="slide"></div>
+	</div>
+	<div class="offer" style="width: 50%;">
+		<div style="text-align: center; width: 80%; margin: auto;">
+			       
+			<form name='login' action="<c:url value="/login" />" method='POST'>
+				<h2>LOGIN</h2>
+				<c:if test="${not empty errorMessage}">
+					<div style="color: red; font-weight: bold; margin: 30px 0px;">${errorMessage}</div>
+				</c:if>
+				             
+				<table style="text-align: center; margin: auto;">
+					<tr>
+						<td><label class="searchsub_lbl" style="text-align: center;">Email</label></td>
+					</tr>
+					<tr>
+						<td style="text-align: center;"><input type='text'
+							placeholder="Inserisci qui la tua e-mail" name="username"
+							class="searchsub_input"></td>
+					</tr>
+					<tr>
+						<td><label class="searchsub_lbl" style="text-align: center;">Password</label></td>
+					</tr>
+					<tr>
+						<td style="text-align: center;"><input type='password'
+							placeholder="Inserisci qui la tua password" name="password"
+							class="searchsub_input"></td>
+					</tr>
+				</table>
+				<div id="searchsub" style="text-align: center;">
+					<input type="submit" value="Invio">  
+				</div>
+			</form>
 		</div>
 	</div>
-	<footer>
-		
+</div>

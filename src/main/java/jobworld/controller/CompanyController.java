@@ -7,14 +7,9 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,9 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import jobworld.model.entities.Company;
@@ -165,7 +158,7 @@ public class CompanyController {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 		LocalDate date = LocalDate.parse(allParams.get("expiringDate"), formatter);
 		System.out.print(date.toString());
-		JobOffer job = jobOfferService.create(allParams.get("region"), allParams.get("province_"), allParams.get("town"),
+		jobOfferService.create(allParams.get("region"), allParams.get("province_"), allParams.get("town"),
 				allParams.get("position"), allParams.get("description"), allParams.get("contractType")
 				, Education.valueOf(allParams.get("minEducationLevel")), allParams.get("minExperience"),
 				date, company);
@@ -202,10 +195,10 @@ public class CompanyController {
 	}
 	
 	@GetMapping("/curriculum")
-	public String curriculum (@RequestParam(value="email") String email, Model model) {
+	public String curriculum (Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Company company=companyService.findbyUserId(auth.getName());
-		Person person = personService.findbyUserId(email);
+		//Company company=companyService.findbyUserId(auth.getName());
+		Person person = personService.findbyUserId(auth.getName());
 		Curriculum curriculum = person.getCurriculum();
 		model.addAttribute("curriculum", curriculum);
 		model.addAttribute("person", person);

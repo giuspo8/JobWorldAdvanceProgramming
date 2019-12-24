@@ -1,6 +1,7 @@
 package jobworld.model.dao;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -48,57 +49,10 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 	@Override
 	@Transactional(readOnly = true)
 	public List<JobOffer> findAll() {
-		return getSession().createQuery("from JobOffer j order by j.publicationDate desc", JobOffer.class).getResultList();
+		LocalDate actual = LocalDate.now();
+		return getSession().createQuery("from JobOffer j where j.expiringDate >= :date order by j.publicationDate desc", JobOffer.class)
+				.setParameter("date", actual).getResultList();
 	}
-
-	// ci restituisce tutte le offerte di lavoro filtrate per regione.
-	//caso sottoinsieme del filtro generale
-	/*
-	@Override
-	@Transactional(readOnly = true)
-	public List<JobOffer> findbyRegion(String region) {
-		return getSession().createQuery("from JobOffer j where j.region like concat('%',:regione,'%')", JobOffer.class)
-				.setParameter("regione", region)
-				.getResultList();
-	}
-
-	// ci restituisce la lista delle offerte di lavoro filtrate in base alla
-	// posizione (si pu� applicare a tutto)
-	//caso sottoinsieme del filtro generale
-	
-	@Override
-	@Transactional(readOnly = true)
-	public List<JobOffer> filterByPosition(String keywords) {
-		return getSession().createQuery("from JobOffer j where j.position likeconcat('%',:parola,'%')", JobOffer.class)
-				.setParameter("parola", keywords)
-				.getResultList();
-	}
-
-	// ci restituisce la lista delle offerte di lavoro ordinata per data di
-	// pubblicazione (dalla pi� recente)
-	//caso sottoinsieme del filtro generale
-	/*
-	@Override
-	@Transactional(readOnly = true)
-	public List<JobOffer> orderedByPublicationDate() {
-		return getSession().createQuery("from JobOffer j order by j.publicationDate desc", JobOffer.class)
-				.getResultList();
-	}
-
-	// ci restituisce la lista delle offerte di lavoro filtrata per posizione e
-	// provincia
-	//caso sottoinsieme del filtro generale
-	
-	@Override
-	@Transactional(readOnly = true)
-	public List<JobOffer> filterBypositionAndprovince(String position, String province) {
-		return getSession().createQuery(
-				"from JobOffer j where j.position like concat('%',:position,'%') and j.province likeconcat('%',:province,'%') ",
-				JobOffer.class)
-				.setParameter("position",position).setParameter("province",province).getResultList();
-	}
-	*/
-
 	// filtro generale per jobOffer in base a posizione, dati geografici, tipo di
 	// contratto
 	// minimo titolo di studio richiesto e minima esperienza richiesta. quando i
@@ -108,6 +62,7 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 	@Transactional
 	public List<JobOffer> filter(String region, String province, String town, String position, String contractType,
 			String minEducationLevel, String minExperience) {
+		LocalDate actual = LocalDate.now();
 		if (region == null)
 			region = "";
 		if (province == null)
@@ -127,11 +82,12 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 						+ "and j.province like concat('%',:province,'%') and j.town like concat('%',:town,'%') "
 						+ "and j.contractType like concat('%',:contractType,'%') and j.minEducationLevel like "
 						+ "concat('%',:minEducationLevel,'%') and j.minExperience like concat('%',:minExperience,'%')"
-								+ "order by j.publicationDate desc",
+								+ " where j.expiringDate >= :date order by j.publicationDate desc",
 				JobOffer.class)
 				.setParameter("position", position).setParameter("region", region).setParameter("province", province)
 				.setParameter("town", town).setParameter("contractType", contractType)
 				.setParameter("minEducationLevel", minEducationLevel).setParameter("minExperience", minExperience)
+				.setParameter("date", actual)
 				.getResultList();
 	}
 

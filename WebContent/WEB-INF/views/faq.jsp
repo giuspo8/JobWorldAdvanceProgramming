@@ -16,22 +16,21 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page session="false"%>
 
-	<div class="body">
-		<div class="container_slide">
-			<div class="slide">
-				<img src="<c:url value="resources/img/jobworldhome.jpeg"/>">
-			</div>
+<div class="body">
+	<div class="container_slide">
+		<div class="slide">
+			<img src="<c:url value="resources/img/jobworldhome.jpeg"/>">
+		</div>
+		<hr>
+		<div class="offer">
+			<h3>Chi Siamo?</h3>
 			<hr>
-			<div class="offer">
-					<h3>Chi Siamo?</h3>
-					<hr>
-					<div class="general_info_body">
-						<img class="pic" src="<c:url value="" />">
-						<div class="description">
-							<span></span>
-						</div>
-					</div>
+			<div class="general_info_body">
+				<img class="pic" src="<c:url value="" />">
+				<div class="description">
+					<span></span>
 				</div>
+			</div>
 		</div>
 	</div>
-	<footer>
+</div>

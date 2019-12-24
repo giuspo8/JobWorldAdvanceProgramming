@@ -53,7 +53,6 @@
 				<a href="<c:url value="/user/deleteCurriculum"/>">Elimina
 					Curriculum</a>
 			</c:if>
-			${email }
 		</div>
 	</div>
 </div>

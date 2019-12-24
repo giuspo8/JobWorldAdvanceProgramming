@@ -50,16 +50,9 @@ public class LoadData {
 				roleDao.setSession(session);
 				
 				
-				session.beginTransaction();
-				
+				session.beginTransaction();				
 			
-			// Popolamento dei dati nel database 
-			
-			
-			
-			
-			
-			
+			// Popolamento dei dati nel database 		
 			//parte cifratura, va messo in ordine
 			Role r1 = roleDao.create(TypeRole.USER);
 			Role r2 = roleDao.create(TypeRole.ADMIN);

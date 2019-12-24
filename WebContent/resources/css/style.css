@@ -352,6 +352,7 @@ footer {
 	color: black;
 }
 .app_btn {
+	margin-top: 10px;
 	appearance: button;
 	display: block;
 	padding-top: 3px;
