@@ -62,6 +62,9 @@ public class UserController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Person person = personService.findbyUserId(auth.getName());
 		User user= userService.findByEmail(auth.getName());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String date = person.getBirthDate().format(formatter);
+		model.addAttribute("date", date);
 		model.addAttribute("person",person);
 		model.addAttribute("user",user);
 		return "user/profile";

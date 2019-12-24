@@ -7,7 +7,6 @@
 
 	<div class="body">
 		<div class="container_slide">
-			<div class="slide"></div>
 		</div>
 		<div class="offer">
 			<div style="text-align:center; margin:auto;">

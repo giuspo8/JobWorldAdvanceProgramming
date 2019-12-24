@@ -345,9 +345,26 @@ footer {
 	margin-right: 1%;
 	display: inline-block;
 }
-
-.description {
-	
+.general_info {
+	margin-left: 4%;
+}
+.title_a {
+	color: black;
+}
+.app_btn {
+	appearance: button;
+	display: block;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 4px;
+	color: black;
+	padding-right: 4px;
+	background-color: #FFAC15;
+	border: 1px solid black;
+	border-radius: 4px;
+	max-width: 120px !important;
+	text-align: center;
+	text-decoration: none;
 }
 
 footer>.container {

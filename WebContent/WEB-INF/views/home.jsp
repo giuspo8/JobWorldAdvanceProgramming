@@ -15,52 +15,49 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page session="false"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <sec:authorize access="hasRole('USER')" var="isUser" />
-
-	<div class="body">
-		<div class="container_slide">
-			<div class="slide">
-				<img src="<c:url value="resources/img/jobworldhome.jpeg"/>">
-			</div>
-			<hr>
-			
-
+<div class="body">
+	<div class="container_slide">
+		<div class="slide">
+			<img src="<c:url value="resources/img/jobworldhome.jpeg"/>">
 		</div>
-		<c:if test="${fn:length(jobOffers) == 0}">Non ci sono offerte da mostrare.</c:if>
-		<c:if test="${fn:length(jobOffers) gt 0}">
-			<c:forEach items="${jobOffers}" var="j">
-				<div class="offer">
-					<h3><a href="<c:url value="/moreinfo/${j.getCompany().getId()}/${j.id}"/>">${j.position}</a></h3>
-					<hr>
-					<div class="general_info"></div>
-					<hr>
-					<div class="general_info_body">
-						<img class="pic" src="<c:url value="${j.getCompany().getUser().getImage()}" />">
-						<div class="description">
-							<span class="more">${j.description}</span>
-							<c:if test="${isUser}">							
-								<c:if test="${person.isInterested(j)}">
-								<a href="<c:url value="/user/unapply/${j.id}"/>">Togli la candidatura</a>
-								</c:if>
-								<c:if test="${! person.isInterested(j)}">
-								<a href="<c:url value="/user/apply/${j.id}"/>">Candidati</a>
-								</c:if>
+		<hr>
+	</div>
+	<c:if test="${fn:length(jobOffers) == 0}">Non ci sono offerte da mostrare.</c:if>
+	<c:if test="${fn:length(jobOffers) gt 0}">
+		<c:forEach items="${jobOffers}" var="j">
+			<div class="offer">
+				<h3>
+					<a class="title_a"
+						href="<c:url value="/moreinfo/${j.getCompany().getId()}/${j.id}"/>">${j.position}</a>
+				</h3>
+				<hr>
+				<div class="general_info">
+					<b>Candidature valide fino al</b> ${j.expiringDate }.<br> <b>Azienda:
+					</b>${j.getCompany().getName() }<br>
+					<b>Località: </b>${j.region }, ${j.province }, ${j.town }.
+				</div>
+				<hr>
+				<div class="general_info_body">
+					<img class="pic"
+						src="<c:url value="${j.getCompany().getUser().getImage()}" />">
+					<div class="description">
+						<span class="more">${j.description}</span>
+						<c:if test="${isUser}">
+							<c:if test="${person.isInterested(j)}">
+								<a class="app_btn" href="<c:url value="/user/unapply/${j.id}"/>">Togli la
+									candidatura</a>
 							</c:if>
-						</div>
+							<c:if test="${! person.isInterested(j)}">
+								<a class="app_btn" href="<c:url value="/user/apply/${j.id}"/>">Candidati</a>
+							</c:if>
+						</c:if>
 					</div>
 				</div>
-			</c:forEach>
-		</c:if>
-
-	</div>
-	<footer>
-		<div class="container">
-			<h2>Le principali aziende</h2>
-			<h3>che collaborano con noi</h3>
-			<div>
-				<c:forEach items="${best_three}" var="j">
-				<img src="<c:url value="${j.getCompany().getUser().getImage()}"/>">
-				</c:forEach>
 			</div>
-		</div>
+		</c:forEach>
+	</c:if>
+
+</div>
