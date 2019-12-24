@@ -130,8 +130,6 @@ public class HomeController {
 	public String moreinfo(@PathVariable(value = "jobid") Long jobId, @PathVariable(value = "companyid") Long companyId,
 			Model model) {
 		JobOffer joboffer = jobOfferService.findbyId(jobId);
-		Company company = companyService.findbyId(companyId);
-		model.addAttribute("company", company);
 		model.addAttribute("joboffer", joboffer);
 		return "moreinfo";
 	}
