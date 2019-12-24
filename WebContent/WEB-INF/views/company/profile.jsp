@@ -22,7 +22,7 @@
 						</tr>
 						<tr>
 							
-							<td><img src="../..<c:url value="${user.getImage()}"/>"></td>
+							<td><img src="<c:url value="${user.getImage()}"/>"></td>
 						</tr>
 						<tr>
 							<td style="text-align:center;"><input type="file" value="${user.getImage()}"
@@ -40,7 +40,7 @@
 						</tr>
 						<tr>
 							<td style="text-align:center;"><textarea placeholder="Inserisci qui una descrizione della tua azienda"
-								name="description" class="searchsub_input" style="height:500px;;">${user.getDescription()}</textarea></td>
+								name="description" class="searchsub_input" style="height:500px;">${user.getDescription()}</textarea></td>
 						</tr>
 					</table>
 					<div id="searchsub" style="text-align:center;">

@@ -62,8 +62,8 @@ public class CompanyController {
 	private UserService userService;
 	private PersonService personService;
 	//TODO:MODIFICATE L'UPLOAD PATH ALTRIMENTI VI DA ERRORE!!!!!
-	private static String UPLOADED_FOLDER = "/Users/giulianilorenzo/Documents/eclipse-workspace/JobWorldAdvanceProgramming/WebContent/resources/img/companies/";
-	//private static String UPLOADED_FOLDER ="C:/Users/giusp/git/JobWorldAdvanceProgramming/WebContent/resources/img/companies/";
+	//private static String UPLOADED_FOLDER = "/Users/giulianilorenzo/Documents/eclipse-workspace/JobWorldAdvanceProgramming/WebContent/resources/img/companies/";
+	private static String UPLOADED_FOLDER ="C:/Users/giusp/git/JobWorldAdvanceProgramming/WebContent/resources/img/companies/";
 	
 	
 	@GetMapping(value="/profile")
@@ -81,6 +81,7 @@ public class CompanyController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.update(userService.findByEmail(auth.getName()));
 		boolean trovato=true;
+		String path_image;
 		int i=image.getOriginalFilename().length()-1;
 		while(trovato & i>=0) {
 			char temp=image.getOriginalFilename().charAt(i);
@@ -94,14 +95,16 @@ public class CompanyController {
 			String name_image= image.getOriginalFilename().substring(i+1);
 			System.out.print(name_image);
 	        Path path_disk = Paths.get(UPLOADED_FOLDER + name_image);
-	        String path_image = "resources/img/companies/"+ name_image;
-	        Files.write(path_disk, bytes);
-	        user.setImage(path_image);
-	        user.setDescription(allParams.get("description"));
-	        user= userService.update(user);
+	        path_image = "/resources/img/companies/"+ name_image;
+	        if (path_image != user.getImage()) {
+		        Files.write(path_disk, bytes);
+		        user.setImage(path_image);
+	        } 
 		} catch(IOException e) {
 			 e.printStackTrace();
 		}
+		user.setDescription(allParams.get("description"));
+        user= userService.update(user);
 		Company company = companyService.update(user.getCompany());
         company.setName(allParams.get("nome_azienda"));
         company= companyService.update(company);
