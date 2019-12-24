@@ -4,7 +4,6 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <body>
-
 	<header>
 		<div class="navigation_bar">
 

@@ -6,7 +6,7 @@
 <%@ page session="false"%>
 
 <div class="body">
-	<div class="container_slide"></div>
+	<div class="container_slide"></div><hr>
 	<div class="offer">
 		<div style="text-align: center; margin: auto;">
 			<c:url value="/company/update" var="action_url" />

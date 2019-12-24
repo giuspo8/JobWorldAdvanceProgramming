@@ -18,17 +18,19 @@
 
 <div class="body">
 	<div class="container_slide">
-		<div class="slide">
+		<div class="offer">
 			<c:url value="/add" var="action_url" />
 			        
 			<form:form id="regform" method="POST" action="${action_url}">
-				<h2>Registrati</h2>
-				<h4>Che tipo di utente sei?</h4>
+				<h3 style="text-align:center">Registrati</h3>
+				<h4 style="text-align:center">Che tipo di utente sei?</h4>
+				<div style="text-align:center">
 				<input type="radio" name="type" checked value="person">Persona<br>
 				<input type="radio" name="type" value="company">Azienda<br>
-				<div id="regform_div">
-					             
-					<table>
+				</div>
+				<h4 style="text-align:center">Inserisci le tue informazioni:</h4>
+				<div id="regform_div">					             
+					<table style="text-align: center; width: 500px; margin: auto;">
 						<tr>
 							<td><label class='searchsub_lbl'>E-mail</label></td>
 						</tr>
@@ -37,7 +39,7 @@
 								class='searchsub_input'></td>
 						</tr>
 					</table>
-					<table>
+					<table style="text-align: center; width: 500px; margin: auto;">
 						<tr>
 							<td><label class='searchsub_lbl'>Password</label></td>
 							<td><label class='searchsub_lbl'>Ripeti Password</label></td>
@@ -68,7 +70,7 @@
 								class='searchsub_input'></td>
 						</tr>
 					</table>
-					<table>
+					<table style="text-align: center; width: 500px; margin: auto;">
 						<tr>
 							<td><label class='searchsub_lbl'>Interessi</label><select
 								multiple name='interests' class='searchsub_input'>
@@ -78,7 +80,7 @@
 							</select></td>
 						</tr>
 					</table>
-					<div id='searchsub'>
+					<div style="text-align:center" id='searchsub'>
 						<input disabled id='submit' type='submit' value='Invio'>  
 					</div>
 				</div>
