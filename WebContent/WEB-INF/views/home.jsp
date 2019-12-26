@@ -28,7 +28,7 @@
 	<c:if test="${fn:length(jobOffers) == 0}">Non ci sono offerte da mostrare.</c:if>
 	<c:if test="${fn:length(jobOffers) gt 0}">
 		<c:forEach items="${jobOffers}" var="j">
-			<div class="offer">
+			<div id="${j.id }" class="offer">
 				<h3>
 					<a class="title_a"
 						href="<c:url value="/moreinfo/${j.getCompany().getId()}/${j.id}"/>">${j.position}</a>

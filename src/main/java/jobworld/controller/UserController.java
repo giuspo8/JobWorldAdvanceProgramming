@@ -147,7 +147,7 @@ public class UserController {
 		Person person = personService.findbyUserId(auth.getName());
 		JobOffer joboffer = jobOfferService.findbyId(jobId);
 		person=personService.apply(person, joboffer);
-		return "redirect:/";
+		return "redirect:/#"+joboffer.getId();
 		
 	}
 	
@@ -157,7 +157,7 @@ public class UserController {
 		Person person = personService.findbyUserId(auth.getName());
 		JobOffer joboffer = jobOfferService.findbyId(jobId);
 		person=personService.unapply(person, joboffer);
-		return "redirect:/";
+		return "redirect:/#"+joboffer.getId();
 		
 	}
 	
