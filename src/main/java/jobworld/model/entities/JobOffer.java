@@ -231,6 +231,7 @@ public class JobOffer {
 				}
 		return super.equals(obj);
 	}
-	
+
+
 
 }
