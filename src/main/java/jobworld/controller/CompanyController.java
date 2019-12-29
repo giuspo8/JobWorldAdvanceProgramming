@@ -86,7 +86,6 @@ public class CompanyController {
 		try {
 			byte[] bytes = image.getBytes();
 			String name_image= image.getOriginalFilename().substring(i+1);
-			System.out.print(name_image);
 	        Path path_disk = Paths.get(UPLOADED_FOLDER + name_image);
 	        path_image = "/resources/img/companies/"+ name_image;
 	        if (path_image != user.getImage()) {
@@ -157,7 +156,6 @@ public class CompanyController {
 		Company company=companyService.update(companyService.findbyUserId(auth.getName()));
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 		LocalDate date = LocalDate.parse(allParams.get("expiringDate"), formatter);
-		System.out.print(date.toString());
 		jobOfferService.create(allParams.get("region"), allParams.get("province_"), allParams.get("town"),
 				allParams.get("position"), allParams.get("description"), allParams.get("contractType")
 				, Education.valueOf(allParams.get("minEducationLevel")), allParams.get("minExperience"),

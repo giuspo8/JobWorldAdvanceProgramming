@@ -82,7 +82,7 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 						+ "and j.province like concat('%',:province,'%') and j.town like concat('%',:town,'%') "
 						+ "and j.contractType like concat('%',:contractType,'%') and j.minEducationLevel like "
 						+ "concat('%',:minEducationLevel,'%') and j.minExperience like concat('%',:minExperience,'%')"
-								+ " where j.expiringDate >= :date order by j.publicationDate desc",
+								+ " and j.expiringDate >= :date order by j.publicationDate desc",
 				JobOffer.class)
 				.setParameter("position", position).setParameter("region", region).setParameter("province", province)
 				.setParameter("town", town).setParameter("contractType", contractType)

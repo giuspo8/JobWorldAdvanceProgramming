@@ -86,7 +86,7 @@ public class HomeController {
 		 * request.getHeader("X-FORWARDED-FOR"); // Nel caso di collegamento attraverso
 		 * proxy serve comunque a trovare un ip }
 		 */
-
+		/*
 		ArrayList<Long> interested = new ArrayList<Long>();
 		List<JobOffer> best_three = new ArrayList<JobOffer>();
 		for (JobOffer job : allJobOffers) {
@@ -97,7 +97,7 @@ public class HomeController {
 			best_three.add(allJobOffers.get(id_job));
 			interested.remove(id_job);
 		}
-		model.addAttribute("best_three", best_three);
+		model.addAttribute("best_three", best_three);*/
 		return "home";
 	}
 

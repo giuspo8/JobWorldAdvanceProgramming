@@ -101,7 +101,7 @@ private JobOfferDao jobOfferRepository;
 	@Override
 	@Transactional
 	public Person unapply(Person person, JobOffer joboffer) {
-		Person p1=null;//creiamo un oggetto in cui mettere l'oggetto da eliminare in quanto non è possibile rimuovere un oggetto dal set durante l'iterazione
+		Person p1=null;//creiamo un oggetto in cui mettere l'oggetto da eliminare in quanto non Ã¨ possibile rimuovere un oggetto dal set durante l'iterazione
 		for (Person p:joboffer.getCandidancies()) {
 			if (p.equals(person))
 				p1=p;//ci salviamo l'oggetto da eliminare

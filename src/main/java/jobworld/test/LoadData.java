@@ -266,7 +266,7 @@ public class LoadData {
 					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
 					"· Precisione e serietà\r\n" + 
 					"· Preferibile esperienza pregressa nel ruolo, seppur di breve durata, maturata preferibilmente in contesti GDO.", 
-					"determinato", Education.LICENZA_MEDIA, "1 anno",LocalDate.of(2019, 12, 25), c1,jobOfferDao,companyDao);
+					"determinato", Education.LICENZA_MEDIA, "1 anno",LocalDate.of(2020, 12, 25), c1,jobOfferDao,companyDao);
 			
 			
 			JobOffer j2=createJobOffer("Lazio", "Roma", "Roma", "Commesso GameStop",
@@ -279,7 +279,7 @@ public class LoadData {
 					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
 					"· Seriet�\r\n" + 
 					"· Capacit� di utilizzo del computer.", 
-					"determinato", Education.DIPLOMA_DI_MATURITA, "6 mesi",LocalDate.of(2019, 12, 25), c2,jobOfferDao,companyDao);
+					"determinato", Education.DIPLOMA_DI_MATURITA, "6 mesi",LocalDate.of(2020, 12, 25), c2,jobOfferDao,companyDao);
 			
 
 			
@@ -293,7 +293,7 @@ public class LoadData {
 					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
 					"· Esperienza di almeno 3 anni\r\n" + 
 					"· Preferibilmente lavoratore remoto", 
-					"determinato", Education.LAUREA_TRIENNALE, "3 anni",LocalDate.of(2019, 12, 25), c1,jobOfferDao,companyDao);
+					"determinato", Education.LAUREA_TRIENNALE, "3 anni",LocalDate.of(2020, 12, 25), c1,jobOfferDao,companyDao);
 			
 			
 			
@@ -307,7 +307,7 @@ public class LoadData {
 					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
 					"· Disposto a voli internazionali�\r\n" + 
 					"· Capacit� di comunicazione", 
-					"determinato", Education.LAUREA_SPECIALISTICA, "1 anno",LocalDate.of(2019, 12, 25), c3,jobOfferDao,companyDao);
+					"determinato", Education.LAUREA_SPECIALISTICA, "1 anno",LocalDate.of(2020, 12, 25), c3,jobOfferDao,companyDao);
 			
 			
 			JobOffer j5=createJobOffer("Marche", "Ancona", "Jesi", "Programmatore Cad",
@@ -320,7 +320,7 @@ public class LoadData {
 					"· Ambizione e predisposizione al miglioramento continuo\r\n" + 
 					"· Precisione e serietà\r\n" + 
 					"· Disposto a trasferirsi nella sede centrale a Roma", 
-					"Indeterminato", Education.LAUREA_SPECIALISTICA, "indeterminato",LocalDate.of(2019, 12, 25),c4,jobOfferDao,companyDao);
+					"Indeterminato", Education.LAUREA_SPECIALISTICA, "indeterminato",LocalDate.of(2020, 12, 25),c4,jobOfferDao,companyDao);
 			
 			
 			
@@ -439,15 +439,19 @@ public class LoadData {
 	}
 
 	private static Person unapply(Person person, JobOffer joboffer, JobOfferDao jobOfferDao, PersonDao personDao) {
+		Person p1=null;
 		for (Person p:joboffer.getCandidancies()) {
-			if (p.getId()==person.getId())
-				joboffer.getCandidancies().remove(p);
+			if (p.equals(person))
+				p1=p;
 		}
+		joboffer.getCandidancies().remove(p1);
 		joboffer=jobOfferDao.update(joboffer);
+		JobOffer j1=null;
 		for (JobOffer j:person.getCandidacies()) {
-			if (j.getId()==joboffer.getId())
-				person.getCandidacies().remove(j);
+			if (j.equals(joboffer))
+				j1=j;
 		}
+		person.getCandidacies().remove(j1);
 		return personDao.update(person);
 	}
 
