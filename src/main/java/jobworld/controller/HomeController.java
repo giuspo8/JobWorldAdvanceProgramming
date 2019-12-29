@@ -4,10 +4,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
-
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,7 @@ public class HomeController {
 	private PersonService personService;
 	private CompanyService companyService;
 	private RoleService roleService;
+	
 
 	@GetMapping
 	public String home(Locale locale, Model model) {
@@ -86,19 +88,12 @@ public class HomeController {
 		 * request.getHeader("X-FORWARDED-FOR"); // Nel caso di collegamento attraverso
 		 * proxy serve comunque a trovare un ip }
 		 */
-	
-		ArrayList<Long> interested = new ArrayList<Long>();
-		List<JobOffer> best_three = new ArrayList<JobOffer>();
-		for (JobOffer job : allJobOffers) {
-			interested.add(this.jobOfferService.getInterested(job));
-		}
-		interested.sort(null);
-		for (int i = 0; i < 3; i++) {
-			int id_job = interested.indexOf(Collections.max(interested));
-			best_three.add(allJobOffers.get(id_job));
-			interested.remove(id_job);
-		}
-		model.addAttribute("best_three", best_three);
+		
+		/*
+		List<Company> companys = companyService.findAll();
+		Collections.sort(companys, (a,b)->  a.getJobOffers().size() < b.getJobOffers().size() ? -1 : a.getJobOffers().size() == b.getJobOffers().size() ? 0 : 1);
+		model.addAttribute("companys", companys);
+		*/
 		return "home";
 	}
 

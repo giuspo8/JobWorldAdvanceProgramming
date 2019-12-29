@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page session="false"%>
+
+<sec:authorize access="hasRole('COMPANY')" var="isCompany" />
+<sec:authorize access="hasRole('ADMIN')" var="isAdmin" />
 
 <div class="body">
 	<div class="container_slide">
@@ -11,14 +15,14 @@
 	</div>
 	<div class="offer">
 		<div style="text-align: center; margin: auto;">
-			<c:if test="${empty job }">Curriculum non individuato, inizia inserendone uno nuovo:
-			<c:url value="/company/joboffer/create" var="action_url" />
-			</c:if>
-			<c:if test="${not empty job }">
-				<c:url value="/company/joboffer/${job.getId()}/update"
-					var="action_url" />
-			</c:if>
-			       
+		<c:choose>
+						<c:when test="${isAdmin}">
+							<c:url value="/admin/joboffer/${job.getId()}/update" var="action_url" />
+						</c:when>
+						<c:otherwise>
+							<c:url value="/company/joboffer/${job.getId()}/update" var="action_url" />
+						</c:otherwise>
+		</c:choose>
 			<form:form method="POST" action="${action_url}"
 				enctype="multipart/form-data">
 				<h3>Informazoni dell'offerta di lavoro:</h3>

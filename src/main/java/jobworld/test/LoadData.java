@@ -61,6 +61,9 @@ public class LoadData {
 			User u1 = userDao.create("saviofeng@gmail.it", userDao.encryptPassword("user1"), null,"/resources/img/galleria5.jpg");				
 			u1.addRole(r1);
 			
+			User u15 = userDao.create("admin@mail.it", userDao.encryptPassword("admin"), null,null);				
+			u15.addRole(r2);
+			
 			User u2 = userDao.create("tizioacaso@gmail.com", userDao.encryptPassword("user2"), null,"/resources/img/galleria23.jpg");
 			u2.addRole(r1);
 			

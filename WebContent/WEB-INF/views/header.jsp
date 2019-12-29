@@ -96,7 +96,7 @@
 							src="<c:url value="/resources/img/logo.png"/>"></a></span></li>
 				<sec:authorize access="hasRole('COMPANY')" var="isCompany" />
 				<sec:authorize access="hasRole('USER')" var="isUser" />
-				<sec:authorize access="isAuthenticated()" var="isAuth" />
+				<sec:authorize access="hasRole('ADMIN')" var="isAdmin" />
 
 				<c:choose>
 					<c:when test="${isCompany}">
@@ -115,6 +115,15 @@
 						<li><a href="<c:url value="/user/curriculum"/>">Curriculum</a></li>
 						<li>-</li>
 						<li><a href="<c:url value="/user/profile"/>"
+							class="login_btn"><sec:authentication
+									property="principal.username" /></a></li>
+					</c:when>
+					<c:when test="${isAdmin}">
+						<li><a href="<c:url value="/logout" />">Logout</a></li>
+						<li>-</li>
+						<li><a href="<c:url value="/admin/listcompany"/>">Aziende</a></li>
+						<li>-</li>
+						<li><a href="<c:url value="/admin/profile"/>"
 							class="login_btn"><sec:authentication
 									property="principal.username" /></a></li>
 					</c:when>
