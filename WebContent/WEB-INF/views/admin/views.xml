@@ -12,4 +12,7 @@
   <definition extends="default" name="admin/listjoboffercompany">
    <put-attribute name="body" value="/WEB-INF/views/admin/listjoboffercompany.jsp" />
   </definition>
+  <definition extends="default" name="admin/profile">
+   <put-attribute name="body" value="/WEB-INF/views/admin/profile.jsp" />
+  </definition>
 </tiles-definitions>

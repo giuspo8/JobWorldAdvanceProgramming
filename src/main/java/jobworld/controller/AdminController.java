@@ -173,6 +173,29 @@ public class AdminController {
 		return "company/curriculum";
 	}
 	
+	@GetMapping("/profile")
+	public String profile (Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.update(userService.findByEmail(auth.getName()));
+		model.addAttribute("user", user);
+		return "admin/profile";
+	}
+	
+	
+	@PostMapping("/update")
+	public String profileupdate (@RequestParam Map<String,String> allParams, Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.update(userService.findByEmail(auth.getName()));
+		user.setEmail(allParams.get("mail"));
+		if (allParams.get("password")!="") {
+			user.setPassword(allParams.get("password"));
+		}
+		user = userService.update(user);
+		return "redirect:/admin/profile";
+	}
+	
+	
+	
 	@Autowired
 	public void setJobOfferService(JobOfferService jobOfferService) {
 		this.jobOfferService = jobOfferService;
