@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
+import javax.validation.constraints.NotBlank;
+
 
 /**
  * Classe Curriculum rappresentante il curriculum collegato ad una persona.
@@ -23,9 +25,13 @@ import javax.persistence.Version;
 public class Curriculum {
 	private long id;
 	private Person person;
+	@NotBlank
 	private String workExperience;
+	@NotBlank
 	private String education;
+	@NotBlank
 	private String personalSkills;
+	@NotBlank
 	private String additionalInfo;
 	private int version;
 

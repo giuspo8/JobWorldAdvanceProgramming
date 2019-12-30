@@ -10,6 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 
 import jobworld.model.entities.Role;
 
@@ -31,8 +35,10 @@ import jobworld.model.entities.Role;
 @Entity
 public class User {
 	private long id;
+	@Email(message="Email not well formed")
 	private String email;
-	private String password;//fare cifratura, nel database no password in chiaro
+	@NotBlank(message="La password non può essere nulla!")
+	private String password;
 	private String description;
 	private String image;
 	private Company company;

@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+
 
 
 /**
@@ -27,6 +29,8 @@ public class Company {
 
 	private long id;
 	private Set<JobOffer> jobOffers = new HashSet<JobOffer>();
+	
+	@NotBlank
 	private String name;
 	private User user;
 
