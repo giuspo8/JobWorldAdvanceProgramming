@@ -37,7 +37,6 @@ public class User {
 	private long id;
 	@Email(message="Email not well formed")
 	private String email;
-	@NotBlank(message="La password non può essere nulla!")
 	private String password;
 	private String description;
 	private String image;

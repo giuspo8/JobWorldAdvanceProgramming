@@ -16,7 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -37,9 +37,9 @@ public class Person  {
 	
 
 	private long id;
-	@NotNull
+	@NotBlank
 	private String firstName;
-	@NotNull
+	@NotBlank
 	private String secondName;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Past(message="la data di nascita deve essere antecedente a quella attuale!")
