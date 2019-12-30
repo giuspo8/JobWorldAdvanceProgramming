@@ -16,7 +16,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jobworld.utils.LocalDateAttributeConverter;
 
@@ -34,8 +37,12 @@ public class Person  {
 	
 
 	private long id;
+	@NotNull
 	private String firstName;
+	@NotNull
 	private String secondName;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Past(message="la data di nascita deve essere antecedente a quella attuale!")
 	private LocalDate birthDate;
 	private String number;
 	private Curriculum curriculum;

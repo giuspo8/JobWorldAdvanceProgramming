@@ -17,6 +17,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
+import javax.validation.constraints.NotBlank;
+
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jobworld.utils.LocalDateAttributeConverter;
 import jobworld.utils.TimestampAttributeConverter;
@@ -38,9 +42,13 @@ import jobworld.utils.TimestampAttributeConverter;
 public class JobOffer {
 	public enum Education{LAUREA_SPECIALISTICA,LAUREA_TRIENNALE,DIPLOMA_DI_MATURITA,LICENZA_MEDIA,SENZA_STUDI};
 	private long id;
+	@NotBlank
 	private String region;
+	@NotBlank
 	private String province;
+	@NotBlank
 	private String town;
+	@NotBlank
 	private String position;
 	private String description;
 	private String contractType;
@@ -49,6 +57,7 @@ public class JobOffer {
 	private Set<Person> candidancies = new HashSet<Person>();
 	private Company company;
 	private long publicationDate;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate expiringDate;
 	private int version;
 
