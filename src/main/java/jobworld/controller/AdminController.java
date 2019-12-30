@@ -13,6 +13,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +42,7 @@ public class AdminController {
 	private CompanyService companyService;
 	private UserService userService;
 	private PersonService personService;
+	private PasswordEncoder passwordEncoder;
 	//private static String UPLOADED_FOLDER ="C:/Users/giusp/git/JobWorldAdvanceProgramming/WebContent/resources/img/companies/";
 	private static String UPLOADED_FOLDER ="C:\\Users\\cicci\\git\\JobWorldAdvanceProgramming_tiles\\WebContent\\resources\\img\\companies\\";
 	
@@ -174,10 +176,20 @@ public class AdminController {
 	}
 	
 	@GetMapping("/profile")
-	public String profile (Model model) {
+	public String profile (@RequestParam(value="error", defaultValue = "", required = false) String error, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.update(userService.findByEmail(auth.getName()));
 		model.addAttribute("user", user);
+		String errorMassage = null;
+		System.out.print(error);
+		if (error.equals("password")) {
+			errorMassage = "La vecchia password che hai inserito non esiste";
+		} else if (error.equals("newpassword")) {
+			errorMassage = "Non hai inserito una nuova password";
+		} else if (error.equals("ok")) {
+			errorMassage = "Il cambio password è andato a buon fine";
+		}
+		model.addAttribute("errorMassage", errorMassage);
 		return "admin/profile";
 	}
 	
@@ -186,12 +198,17 @@ public class AdminController {
 	public String profileupdate (@RequestParam Map<String,String> allParams, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.update(userService.findByEmail(auth.getName()));
-		user.setEmail(allParams.get("mail"));
-		if (allParams.get("password")!="") {
-			user.setPassword(allParams.get("password"));
+		if (allParams.get("new_password") != "") {
+			if (passwordEncoder.matches(user.getPassword(),userService.encryptPassword(allParams.get("password")) ) ) {
+				user.setPassword(userService.encryptPassword(allParams.get("new_password")));
+				user = userService.update(user);
+				return "redirect:/admin/profile?error=ok";
+			} else {
+				return "redirect:/admin/profile?error=password";
+			}
+		} else {
+			return "redirect:/admin/profile?error=newpassword";
 		}
-		user = userService.update(user);
-		return "redirect:/admin/profile";
 	}
 	
 	
@@ -211,6 +228,10 @@ public class AdminController {
 	@Autowired
 	public void setPersonService(PersonService personService) {
 		this.personService = personService;
+	}
+	@Autowired
+	public void setPassEncoder(PasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
 	}
 
 }
