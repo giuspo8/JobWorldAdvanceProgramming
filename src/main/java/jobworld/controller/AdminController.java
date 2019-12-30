@@ -211,6 +211,24 @@ public class AdminController {
 		}
 	}
 	
+	@GetMapping("/listuser")
+	public String listuser (Model model) {
+		List<Person> people = personService.findAll();
+		LocalDateTime now = LocalDateTime.now();
+		int now_year= now.getYear(); 
+		model.addAttribute("now_year", now_year);
+		model.addAttribute("people",people);
+		return "admin/listuser";
+	}
+	
+	@GetMapping("/listuser/{personId}/delete")
+	public String userdelete (@PathVariable("personId") Long personId, Model model) {
+		Person person= personService.findById(personId);
+		User user = person.getUser();
+		personService.delete(person);
+		userService.delete(user);
+		return "redirect:/admin/listuser";
+	}
 	
 	
 	@Autowired

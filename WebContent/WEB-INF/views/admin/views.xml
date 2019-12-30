@@ -15,4 +15,7 @@
   <definition extends="default" name="admin/profile">
    <put-attribute name="body" value="/WEB-INF/views/admin/profile.jsp" />
   </definition>
+  <definition extends="default" name="admin/listuser">
+   <put-attribute name="body" value="/WEB-INF/views/admin/listuser.jsp" />
+  </definition>
 </tiles-definitions>

@@ -121,6 +121,8 @@
 					<c:when test="${isAdmin}">
 						<li><a href="<c:url value="/logout" />">Logout</a></li>
 						<li>-</li>
+						<li><a href="<c:url value="/admin/listuser"/>">Utenti</a></li>
+						<li>-</li>
 						<li><a href="<c:url value="/admin/listcompany"/>">Aziende</a></li>
 						<li>-</li>
 						<li><a href="<c:url value="/admin/profile"/>"
