@@ -200,7 +200,7 @@ public class AdminController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.update(userService.findByEmail(auth.getName()));
 		if (allParams.get("new_password") != "") {
-			if (passwordEncoder.matches(user.getPassword(),userService.encryptPassword(allParams.get("password")) ) ) {
+			if (passwordEncoder.matches(allParams.get("password"), user.getPassword()) ) {
 				user.setPassword(userService.encryptPassword(allParams.get("new_password")));
 				user = userService.update(user);
 				return "redirect:/admin/profile?error=ok";
