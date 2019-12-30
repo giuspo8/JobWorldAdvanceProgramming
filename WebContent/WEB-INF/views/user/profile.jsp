@@ -12,22 +12,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page session="false"%>
 
+<sec:authorize access="hasRole('USER')" var="isUser" />
+<sec:authorize access="hasRole('ADMIN')" var="isAdmin" />
 
 <div class="body">
 	<div class="container_slide">
 		<hr>
-		<h3>Informazioni generali</h3>
 		<div class="offer">
 			<div style="text-align: center; margin: auto;">
-				<c:url value="/user/update" var="action_url" />
+			<c:choose>
+				<c:when test="${isUser}">
+					<c:url value="/user/update" var="action_url" />
+				</c:when>
+				<c:when test="${isAdmin}">
+					<c:url value="/admin/listuser/${person.getId()}/update" var="action_url" />
+				</c:when>
+			</c:choose>
 				       
 				<form:form method="POST" action="${action_url}"
 					enctype="multipart/form-data">
-					<h3>Visualizza le tue informazioni</h3>
+			<c:choose>
+				<c:when test="${isUser}">
+					<h3>Stai visualizzando le tue informazioni generali</h3>
+				</c:when>
+				<c:when test="${isAdmin}">
+					<h3>Stai visualizzando le informazioni generali di:</h3>
+					<h3> ${person.getFirstName()} ${person.getSecondName()}</h3>
+				</c:when>
+			</c:choose>
              						<table
 						style="text-align: center; width: 500px; margin: auto;">
 						<tr>
@@ -37,7 +54,7 @@
 						</tr>
 						<tr>
 
-							<td><img src="../../<c:url value="${user.getImage()}"/>"></td>
+							<td><img src="<c:url value="${user.getImage()}"/>"></td>
 						</tr>
 						<tr>
 							<td style="text-align: center;"><input type="file"
@@ -81,7 +98,7 @@
 									di telefono</label></td>
 						</tr>
 						<tr>
-							<td style="text-align: center;"><input value="${date}"
+							<td style="text-align: center;"><input value="${person.getBirthDate()}"
 								name="birthDate" class="searchsub_input"></td>
 							<td style="text-align: center;"><input
 								value="${person.getNumber()}" name="number"

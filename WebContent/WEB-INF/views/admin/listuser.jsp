@@ -16,6 +16,7 @@
 					<th>Età</th>
 					<th>Curriculum</th>
 					<th></th>
+					<th></th>
 				</tr>
 				<c:forEach items="${people }" var="person">
 					<tr>
@@ -25,6 +26,7 @@
 						<td>${now_year - person.getBirthDate().getYear()}</td>
 						<td><a href="<c:url value="/admin/curriculum/${person.getId()}"/>"> Visualizza curriculum</a></td>
 						<td><a href="<c:url value="/admin/listuser/${person.getId()}/delete"/>">Elimina</a></td>
+						<td><a href="<c:url value="/admin/listuser/${person.getId()}/edit" />">Modifica</a></td>
 					</tr>
 				</c:forEach>
 			</table>

@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -44,7 +45,7 @@ public class AdminController {
 	private PersonService personService;
 	private PasswordEncoder passwordEncoder;
 	//private static String UPLOADED_FOLDER ="C:/Users/giusp/git/JobWorldAdvanceProgramming/WebContent/resources/img/companies/";
-	private static String UPLOADED_FOLDER ="C:\\Users\\cicci\\git\\JobWorldAdvanceProgramming_tiles\\WebContent\\resources\\img\\companies\\";
+	private static String UPLOADED_FOLDER ="C:\\Users\\cicci\\git\\JobWorldAdvanceProgramming_tiles\\WebContent\\resources\\img\\";
 	
 	@GetMapping("/listcompany")
 	public String listcompany (Model model) {
@@ -90,7 +91,7 @@ public class AdminController {
 		try {
 			byte[] bytes = image.getBytes();
 			String name_image= image.getOriginalFilename().substring(i+1);
-	        Path path_disk = Paths.get(UPLOADED_FOLDER + name_image);
+	        Path path_disk = Paths.get(UPLOADED_FOLDER + "/companies/" + name_image);
 	        path_image = "/resources/img/companies/"+ name_image;
 	        if (path_image != user.getImage()) {
 		        Files.write(path_disk, bytes);
@@ -229,6 +230,57 @@ public class AdminController {
 		userService.delete(user);
 		return "redirect:/admin/listuser";
 	}
+	
+	@GetMapping("/listuser/{personId}/edit")
+	public String edituser (@PathVariable("personId") Long personId, Model model) {
+		Person person= personService.findById(personId);
+		User user = person.getUser();
+		model.addAttribute("user",user);
+		model.addAttribute("person",person);
+		return "user/profile";
+	}
+	
+	@PostMapping("/listuser/{personId}/update")
+	public String updateuser (@PathVariable("personId") Long personId, @RequestParam Map<String,String> allParams, @RequestParam("image") MultipartFile image,  Model model) {
+		Person person= personService.update(personService.findById(personId));
+		User user = userService.update(person.getUser());
+		boolean trovato=true;
+		String path_image;
+		int i=image.getOriginalFilename().length()-1;
+		while(trovato & i>=0) {
+			char temp=image.getOriginalFilename().charAt(i);
+			if (temp=='\\' || i==0) {
+				trovato=false;
+			}
+			i--;
+		}
+		try {
+			byte[] bytes = image.getBytes();
+			String name_image= image.getOriginalFilename().substring(i+1);
+	        Path path_disk = Paths.get(UPLOADED_FOLDER + "/users/" + name_image);
+	        path_image = "/resources/img/users/"+ name_image;
+	        System.out.print(path_image);
+	        if (path_image != user.getImage()) {
+		        Files.write(path_disk, bytes);
+		        user.setImage(path_image);
+	        } 
+		} catch(IOException e) {
+			 e.printStackTrace();
+		}
+        user.setDescription(allParams.get("description"));			
+        user = userService.update(user);
+        person.setFirstName(allParams.get("firstName"));
+        person.setSecondName(allParams.get("secondName"));
+        person.setNumber(allParams.get("number"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+		LocalDate birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
+		person.setBirthDate(birthDate);
+        person = personService.update(person);
+        model.addAttribute("user",user);
+		model.addAttribute("person", person);
+		return "redirect:/admin/listuser/" + person.getId() + "/edit";
+	}
+	
 	
 	
 	@Autowired
