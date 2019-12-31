@@ -19,8 +19,11 @@
 						<c:when test="${isAdmin}">
 							<c:url value="/admin/joboffer/${job.getId()}/update" var="action_url" />
 						</c:when>
+						<c:when test="${not empty job.getId()}">
+							<c:url value="/admin/joboffer/${job.getId()}/update" var="action_url" />
+						</c:when>
 						<c:otherwise>
-							<c:url value="/company/joboffer/${job.getId()}/update" var="action_url" />
+							<c:url value="/company/joboffer/create" var="action_url" />
 						</c:otherwise>
 		</c:choose>
 			<form:form method="POST" action="${action_url}"
