@@ -12,6 +12,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="jobworld.utils.UtilityForController" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page session="false"%>
@@ -35,7 +36,7 @@
 				</h3>
 				<hr>
 				<div class="general_info">
-					<b>Candidature valide fino al</b> ${j.expiringDate }.<br> <b>Azienda:
+					<b>Candidature valide fino al</b> ${UtilityForController.localdatetostringdate(j.expiringDate) }.<br> <b>Azienda:
 					</b>${j.getCompany().getName() }<br>
 					<b>Località: </b>
 					<c:if test="${not empty j.region}">
