@@ -37,7 +37,7 @@
 							<a href="<c:url value="/admin/curriculum/${candidate.getId()}"/>">Visualizza Curriculum</a>
 						</c:when>
 						<c:otherwise>
-							<a href="<c:url value="/company/curriculum"/>">Visualizza Curriculum</a>
+							<a href="<c:url value="/company/curriculum/${candidate.getId() }"/>">Visualizza Curriculum</a>
 						</c:otherwise>
 						</c:choose>
 						</td>

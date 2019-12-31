@@ -20,6 +20,8 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <div class="offer">
+	<c:choose>
+	<c:when test="${not empty curriculum.workExperience and  not empty curriculum.education and not empty curriculum.personalSkills}">
 	<form:form id="curriculum_form" method="POST" action="${action_url}"
 		style="text-align:center; width:1000px; margin:auto;">
 		<h3>Ecco il curriculum di: ${person.getFirstName()}
@@ -61,4 +63,10 @@
 		</table>
 		<input type='hidden' name='email' value='${email }'>
 	</form:form>
+	</c:when>
+	<c:otherwise>
+	<h3>${person.getFirstName()}
+			${person.getSecondName()} non ha ancora creato nessun curriculum</h3> 
+	</c:otherwise>
+	</c:choose>
 </div>

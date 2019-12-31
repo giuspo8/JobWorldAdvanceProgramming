@@ -193,10 +193,9 @@ public class CompanyController {
 		return "company/interested";
 	}
 	
-	@GetMapping("/curriculum")
-	public String curriculum (Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Person person = personService.findbyUserId(auth.getName());
+	@GetMapping("/curriculum/{personId}")
+	public String curriculum (@PathVariable("personId") Long personId, Model model) {
+		Person person = personService.findById(personId);
 		Curriculum curriculum = person.getCurriculum();
 		model.addAttribute("curriculum", curriculum);
 		model.addAttribute("person", person);
