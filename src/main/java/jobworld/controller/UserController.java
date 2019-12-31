@@ -36,6 +36,7 @@ import jobworld.services.CurriculumService;
 import jobworld.services.JobOfferService;
 import jobworld.services.PersonService;
 import jobworld.services.UserService;
+import jobworld.utils.UtilityForController;
 
 
 @Controller
@@ -58,12 +59,12 @@ public class UserController {
 	
 	
 	@GetMapping("/profile")
-	public String profile(Model model) {
+	public String profile(@RequestParam(value="date", defaultValue = "" , required = false) String date_error,Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Person person = personService.findbyUserId(auth.getName());
 		User user= userService.findByEmail(auth.getName());
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		String date = person.getBirthDate().format(formatter);
+		String date = UtilityForController.localdatetostringdate(person.getBirthDate());
+		model.addAttribute("date_error",date_error);
 		model.addAttribute("date", date);
 		model.addAttribute("person",person);
 		model.addAttribute("user",user);
@@ -99,9 +100,14 @@ public class UserController {
         person.setFirstName(allParams.get("firstName"));
         person.setSecondName(allParams.get("secondName"));
         person.setNumber(allParams.get("number"));
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-		LocalDate birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
-		person.setBirthDate(birthDate);
+        try {
+        	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        	LocalDate birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
+        	person.setBirthDate(birthDate);
+		}
+		catch (Exception e){
+			return "redirect:/user/profile?date=true";
+		}
         person = personService.update(person);
         model.addAttribute("user",user);
 		model.addAttribute("person", person);

@@ -34,6 +34,7 @@ import jobworld.services.CompanyService;
 import jobworld.services.JobOfferService;
 import jobworld.services.PersonService;
 import jobworld.services.UserService;
+import jobworld.utils.UtilityForController;
 
 @Controller
 @RequestMapping("/admin")
@@ -116,19 +117,27 @@ public class AdminController {
 	}
 	
 	@GetMapping("/joboffer/{jobId}")
-	public String joboffercompany (@PathVariable("jobId") Long jobId, Model model) {
+	public String joboffercompany (@RequestParam(value="date", defaultValue = "" , required = false) String date_error,@PathVariable("jobId") Long jobId, Model model) {
 		JobOffer job = jobOfferService.findbyId(jobId);
+		String date = UtilityForController.localdatetostringdate(job.getExpiringDate());
+		model.addAttribute("date_error",date_error);
+		model.addAttribute("date", date);
 		model.addAttribute("job",job);
 		return "company/editjoboffer";
 	}
 	
 	@PostMapping("/joboffer/{jobId}/update")
 	public String joboffercompanyupdate (@PathVariable("jobId") Long jobId, @RequestParam Map<String,String> allParams, Model model) {
-		Company company=jobOfferService.findbyId(jobId).getCompany();
 		JobOffer job = jobOfferService.update(jobOfferService.findbyId(jobId));
 		job.setPosition(allParams.get("position"));
-		LocalDate date = LocalDate.parse(allParams.get("expiringDate"));
-		job.setExpiringDate(date);
+		try {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			LocalDate date = LocalDate.parse(allParams.get("expiringDate"),formatter);
+			job.setExpiringDate(date);
+		}
+		catch (Exception e){
+			return "redirect:/admin/joboffer/"+ job.getId() + "?date=true";
+		}
 		job.setContractType(allParams.get("contractType"));
 		job.setDescription(allParams.get("description"));
 		job.setMinEducationLevel(Education.valueOf(allParams.get("minEducationLevel")));
@@ -137,9 +146,7 @@ public class AdminController {
 		job.setRegion(allParams.get("region"));
 		job.setTown(allParams.get("town"));
 		job = jobOfferService.update(job);
-		model.addAttribute("company",company);
-		model.addAttribute("job",job);
-		return "company/editjoboffer";
+		return "redirect:/admin/joboffer/" + job.getId();
 	}
 	
 	@GetMapping("/joboffer/{jobId}/delete")
@@ -232,9 +239,12 @@ public class AdminController {
 	}
 	
 	@GetMapping("/listuser/{personId}/edit")
-	public String edituser (@PathVariable("personId") Long personId, Model model) {
+	public String edituser (@RequestParam(value="date", defaultValue = "" , required = false) String date_error,@PathVariable("personId") Long personId, Model model) {
 		Person person= personService.findById(personId);
 		User user = person.getUser();
+		String date = UtilityForController.localdatetostringdate(person.getBirthDate());
+		model.addAttribute("date_error",date_error);
+		model.addAttribute("date",date);
 		model.addAttribute("user",user);
 		model.addAttribute("person",person);
 		return "user/profile";
@@ -272,9 +282,14 @@ public class AdminController {
         person.setFirstName(allParams.get("firstName"));
         person.setSecondName(allParams.get("secondName"));
         person.setNumber(allParams.get("number"));
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-		LocalDate birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
-		person.setBirthDate(birthDate);
+        try {
+        	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        	LocalDate birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
+        	person.setBirthDate(birthDate);
+		}
+		catch (Exception e){
+			return "redirect:/admin/listuser/" + person.getId() + "/edit?date=true";
+		}
         person = personService.update(person);
         model.addAttribute("user",user);
 		model.addAttribute("person", person);

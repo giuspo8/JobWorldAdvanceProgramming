@@ -45,6 +45,9 @@
 					<h3> ${person.getFirstName()} ${person.getSecondName()}</h3>
 				</c:when>
 			</c:choose>
+			<c:if test="${not empty date_error }">
+							<div style="color: red; font-weight: bold; margin: 30px 0px;">La data inserita non è formattata come giorno/mese/anno in numero</div>
+						</c:if>
              						<table
 						style="text-align: center; width: 500px; margin: auto;">
 						<tr>
@@ -98,7 +101,7 @@
 									di telefono</label></td>
 						</tr>
 						<tr>
-							<td style="text-align: center;"><input value="${person.getBirthDate()}"
+							<td style="text-align: center;"><input value="${date}" placeholder="Giorno/Mese/Anno in numeri"
 								name="birthDate" class="searchsub_input"></td>
 							<td style="text-align: center;"><input
 								value="${person.getNumber()}" name="number"

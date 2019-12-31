@@ -20,7 +20,7 @@
 							<c:url value="/admin/joboffer/${job.getId()}/update" var="action_url" />
 						</c:when>
 						<c:when test="${not empty job.getId()}">
-							<c:url value="/admin/joboffer/${job.getId()}/update" var="action_url" />
+							<c:url value="/company/joboffer/${job.getId()}/update" var="action_url" />
 						</c:when>
 						<c:otherwise>
 							<c:url value="/company/joboffer/create" var="action_url" />
@@ -29,6 +29,9 @@
 			<form:form method="POST" action="${action_url}"
 				enctype="multipart/form-data">
 				<h3>Informazoni dell'offerta di lavoro:</h3>
+				<c:if test="${not empty date_error }">
+							<div style="color: red; font-weight: bold; margin: 30px 0px;">La data inserita non è formattata come giorno/mese/anno in numero</div>
+						</c:if>
              						<table
 					style="text-align: center; width: 500px; margin: auto;">
 					<tr>
@@ -116,7 +119,7 @@
 							value="${job.minExperience}" name="minExperience"
 							class="searchsub_input"></td>
 						<td style="text-align: center;"><input
-							value="${job.expiringDate}" name="expiringDate"
+							value="${date}" name="expiringDate" placeholder="Giorno/Mese/Anno in numeri"
 							class="searchsub_input"></td>
 					</tr>
 					<tr>

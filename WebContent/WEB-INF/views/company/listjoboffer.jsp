@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="jobworld.utils.UtilityForController" %>
 <%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -31,7 +32,7 @@
 					<tr>
 						<td>${job.position}</td>
 						<td>${job.contractType}</td>
-						<td>${job.expiringDate }</td>
+						<td>${UtilityForController.localdatetostringdate(job.expiringDate)}</td>
 						<td>${job.region }</td>
 						<td>${job.province }</td>
 						<td>${job.town }</td>

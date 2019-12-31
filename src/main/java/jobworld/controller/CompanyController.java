@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,12 +16,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import jobworld.model.entities.Company;
 import jobworld.model.entities.Curriculum;
@@ -32,6 +35,7 @@ import jobworld.services.CompanyService;
 import jobworld.services.JobOfferService;
 import jobworld.services.PersonService;
 import jobworld.services.UserService;
+import jobworld.utils.UtilityForController;
 
 
 /**
@@ -58,7 +62,6 @@ public class CompanyController {
 	//private static String UPLOADED_FOLDER = "/Users/giulianilorenzo/Documents/eclipse-workspace/JobWorldAdvanceProgramming/WebContent/resources/img/companies/";
 	//private static String UPLOADED_FOLDER ="C:/Users/giusp/git/JobWorldAdvanceProgramming/WebContent/resources/img/companies/";
 	private static String UPLOADED_FOLDER ="C:\\Users\\cicci\\git\\JobWorldAdvanceProgramming_tiles\\WebContent\\resources\\img\\companies\\";
-	
 	
 	@GetMapping(value="/profile")
 	public String profile(Model model) {
@@ -124,8 +127,12 @@ public class CompanyController {
 	}
 	
 	@GetMapping("/joboffer/{jobId}")
-	public String joboffercompany (@PathVariable("jobId") Long jobId, Model model) {
+	public String joboffercompany ( @RequestParam(value="date", defaultValue = "" , required = false) String date_error, @PathVariable("jobId") Long jobId, Model model) {
 		JobOffer job = jobOfferService.findbyId(jobId);
+		LocalDate expringDate= job.getExpiringDate();
+		String date = UtilityForController.localdatetostringdate(expringDate);
+		model.addAttribute("date_error",date_error);
+		model.addAttribute("date",date);
 		model.addAttribute("job",job);
 		return "company/editjoboffer";
 	}
@@ -136,8 +143,14 @@ public class CompanyController {
 		Company company=companyService.findbyUserId(auth.getName());
 		JobOffer job = jobOfferService.update(jobOfferService.findbyId(jobId));
 		job.setPosition(allParams.get("position"));
-		LocalDate date = LocalDate.parse(allParams.get("expiringDate"));
-		job.setExpiringDate(date);
+		try {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			LocalDate date = LocalDate.parse(allParams.get("expiringDate"),formatter);
+			job.setExpiringDate(date);
+		}
+		catch (Exception e){
+			return "redirect:/company/joboffer/"+ job.getId() + "?date=true";
+		}
 		job.setContractType(allParams.get("contractType"));
 		job.setDescription(allParams.get("description"));
 		job.setMinEducationLevel(Education.valueOf(allParams.get("minEducationLevel")));
@@ -146,9 +159,7 @@ public class CompanyController {
 		job.setRegion(allParams.get("region"));
 		job.setTown(allParams.get("town"));
 		job = jobOfferService.update(job);
-		model.addAttribute("company",company);
-		model.addAttribute("job",job);
-		return "company/editjoboffer";
+		return "redirect:/company/joboffer/" + job.getId();
 	}
 	
 	@PostMapping("/joboffer/create")
