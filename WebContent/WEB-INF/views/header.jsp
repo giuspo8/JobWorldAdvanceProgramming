@@ -20,7 +20,7 @@
 								<c:url value="/filter" var="action_url" />
 								        
 								<form:form method="POST" action="${action_url}">
-									<h2>Cerca lavoro:</h2>
+									<h3>Cerca lavoro:</h3>
              						<table>
 										<tr>
 											<td><label class="searchsub_lbl">Posizione
