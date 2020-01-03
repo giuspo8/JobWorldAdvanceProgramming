@@ -8,7 +8,7 @@ public class UtilityForController {
 		int month=date.getMonthValue();
 		int year=date.getYear();
 		int day=date.getDayOfMonth();
-		String date_c = day + "/" + month + "/" + year;
+		String date_c = String.format("%02d", day) + "/" + String.format("%02d", month) + "/" + year;
 		return date_c;
 	}
 }
