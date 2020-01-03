@@ -18,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,9 +54,14 @@ public class HomeController {
 	private RoleService roleService;
 	public static final Pattern valid_email = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
 			Pattern.CASE_INSENSITIVE);
+	
+	@ExceptionHandler(org.springframework.web.client.ResourceAccessException.class)
+	public String handleException(org.springframework.web.client.ResourceAccessException ex){
+	    return "/JobWorld?error=true";
+	}
 
 	@GetMapping
-	public String home(Locale locale, Model model) {
+	public String home(@RequestParam(value="error", defaultValue = "", required = false) String error, Locale locale, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth.getName() != "anonymousUser" && auth.getAuthorities().toString().equals("[ROLE_USER]")) {
 			Person person = personService.findbyUserId(auth.getName());
@@ -69,7 +75,6 @@ public class HomeController {
 		model.addAttribute("jobOffers", allJobOffers);
 		model.addAttribute("image", company_image);
 
-		// Warning: Non ci sono le province dobbiamo risolverlo sulla vista
 		// Implementazione delle api rest per ip address in base alla zona di
 		// appartenenza;
 		// TODO: cambiate l'ip per vedere come la form filter cambia automaticamente i
@@ -78,11 +83,15 @@ public class HomeController {
 		String ip = "37.160.70.194"; // Lazio Roma
 		// String ip ="2.235.168.0"; // Nichelino Piemonte
 		String uri = "https://ipapi.co/" + ip + "/json/";
-		RestTemplate restTemplate = new RestTemplate();
-		String result = restTemplate.getForObject(uri, String.class);
-		JSONObject obj = new JSONObject(result);
-		model.addAttribute("region", obj.getString("region"));
-		model.addAttribute("city", obj.getString("city"));
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+			String result = restTemplate.getForObject(uri, String.class);
+			JSONObject obj = new JSONObject(result);
+			model.addAttribute("region", obj.getString("region"));
+			model.addAttribute("city", obj.getString("city"));
+		} catch (org.springframework.web.client.ResourceAccessException ex) {
+			return "home";
+		}
 
 		// Per estrarre ip dal client che effettua la richiesta
 		/*
