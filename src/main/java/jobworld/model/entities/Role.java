@@ -5,41 +5,38 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
-
 @Entity
 public class Role {
-	
-	    public enum TypeRole{ADMIN,USER,COMPANY};
-	    
-	    private TypeRole name;
-	 
-	    @Id
-	    @GeneratedValue(strategy = GenerationType.AUTO)
-	    private Long id;
 
-		public Long getId() {
-			return id;
-		}
+	public enum TypeRole {
+		ADMIN, USER, COMPANY
+	};
 
-		public void setId(Long id) {
-			this.id = id;
-		}
+	private TypeRole name;
 
-		public void setName(TypeRole name) {
-			this.name=name;
-		}
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-		public TypeRole getName() {
-			return name;
-		}
-		
-		
-		
+	public Long getId() {
+		return id;
+	}
 
-	   /**
-	    * Metodo get/set di name e id
-	    * 
-	    */
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setName(TypeRole name) {
+		this.name = name;
+	}
+
+	public TypeRole getName() {
+		return name;
+	}
+
+	/**
+	 * Metodo get/set di name e id
+	 * 
+	 */
 
 }

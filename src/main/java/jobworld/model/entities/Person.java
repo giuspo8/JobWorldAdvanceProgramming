@@ -1,6 +1,5 @@
 package jobworld.model.entities;
 
-
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -33,8 +32,7 @@ import jobworld.utils.LocalDateAttributeConverter;
  * @version 1.0
  */
 @Entity
-public class Person  {
-	
+public class Person {
 
 	private long id;
 	@NotBlank
@@ -42,7 +40,7 @@ public class Person  {
 	@NotBlank
 	private String secondName;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Past(message="la data di nascita deve essere antecedente a quella attuale!")
+	@Past(message = "la data di nascita deve essere antecedente a quella attuale!")
 	private LocalDate birthDate;
 	private String number;
 	private Curriculum curriculum;
@@ -53,20 +51,20 @@ public class Person  {
 	public Person() {
 		super();
 	}
-	
-	public Person(String firstName, String secondName, LocalDate birthDate, String number,
-			String interests, User user) {
+
+	public Person(String firstName, String secondName, LocalDate birthDate, String number, String interests,
+			User user) {
 		this.firstName = firstName;
 		this.secondName = secondName;
 		this.birthDate = birthDate;
 		this.number = number;
 		this.interests = interests;
-		this.user=user;
+		this.user = user;
 	}
 
 	/**
-	* Metodi set/get più la definizione delle colonne 
-	 */	
+	 * Metodi set/get più la definizione delle colonne
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PERSON_ID")
@@ -76,12 +74,11 @@ public class Person  {
 
 	public void setId(long id) {
 		this.id = id;
-	}	
-	
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
-
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -112,12 +109,13 @@ public class Person  {
 	public void setNumber(String number) {
 		this.number = number;
 	}
-	
+
 	/**
 	 * Definizione della relazione uno a uno tra Person e Curriculum
+	 * 
 	 * @return curriculum
 	 */
-	@OneToOne(mappedBy = "person", cascade=CascadeType.ALL)
+	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
 	public Curriculum getCurriculum() {
 		return curriculum;
 	}
@@ -133,7 +131,7 @@ public class Person  {
 	public void setInterests(String interests) {
 		this.interests = interests;
 	}
-	
+
 	/**
 	 * Definizione della relazione molti a molti tra Person e JobOffer
 	 * 
@@ -146,12 +144,12 @@ public class Person  {
 	public void setCandidacies(Set<JobOffer> candidacies) {
 		this.candidacies = candidacies;
 	}
-	
+
 	/**
 	 * Definizione della relazione uno a uno tra User e Person
 	 * 
 	 */
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "USER_ID")
 	public User getUser() {
 		return user;
@@ -160,13 +158,14 @@ public class Person  {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	public boolean isInterested(JobOffer jobOffer) {
-		for (JobOffer j:candidacies) {
-			if(j.getId() == jobOffer.getId()) {
+		for (JobOffer j : candidacies) {
+			if (j.getId() == jobOffer.getId()) {
 				return true;
 			}
-		};
+		}
+		;
 		return false;
 	}
 
@@ -183,14 +182,12 @@ public class Person  {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Person) {
-			if (this.getId()==((Person) obj).getId())
-				{
+			if (this.getId() == ((Person) obj).getId()) {
 				return true;
-						}
-			else return false;
-				}
+			} else
+				return false;
+		}
 		return super.equals(obj);
 	}
-	
 
 }

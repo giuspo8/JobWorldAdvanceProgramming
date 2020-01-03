@@ -1,6 +1,5 @@
 package jobworld.model.entities;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
-
 
 /**
  * Classe Curriculum rappresentante il curriculum collegato ad una persona.
@@ -49,9 +47,9 @@ public class Curriculum {
 	}
 
 	/**
-	*Metodi setters/getters e definizione delle tabelle con le relative relazioni
-	 */	
-	
+	 * Metodi setters/getters e definizione delle tabelle con le relative relazioni
+	 */
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long getId() {
@@ -107,13 +105,12 @@ public class Curriculum {
 	public void setAdditionalInfo(String additionalInfo) {
 		this.additionalInfo = additionalInfo;
 	}
-	
+
 	@Version
 	@Column(name = "VERSION")
 	public int getVersion() {
 		return version;
 	}
-	
 
 	public void setVersion(int version) {
 		this.version = version;

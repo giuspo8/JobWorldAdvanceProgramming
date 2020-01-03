@@ -1,6 +1,5 @@
 package jobworld.model.entities;
 
-
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 import javax.validation.constraints.NotBlank;
 
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jobworld.utils.LocalDateAttributeConverter;
@@ -36,11 +34,12 @@ import jobworld.utils.TimestampAttributeConverter;
  * @version 1.0
  */
 
-
-
 @Entity
 public class JobOffer {
-	public enum Education{LAUREA_SPECIALISTICA,LAUREA_TRIENNALE,DIPLOMA_DI_MATURITA,LICENZA_MEDIA,SENZA_STUDI};
+	public enum Education {
+		LAUREA_SPECIALISTICA, LAUREA_TRIENNALE, DIPLOMA_DI_MATURITA, LICENZA_MEDIA, SENZA_STUDI
+	};
+
 	private long id;
 	@NotBlank
 	private String region;
@@ -65,9 +64,8 @@ public class JobOffer {
 		super();
 	}
 
-	
 	public JobOffer(String region, String province, String town, String position, String description,
-			String contractType, Education minEducationLevel, String minExperience,LocalDate expiringDate,
+			String contractType, Education minEducationLevel, String minExperience, LocalDate expiringDate,
 			Company company) {
 		this.region = region;
 		this.province = province;
@@ -79,15 +77,12 @@ public class JobOffer {
 		this.minExperience = minExperience;
 		this.company = company;
 		this.publicationDate = System.currentTimeMillis();
-		this.expiringDate=expiringDate;
+		this.expiringDate = expiringDate;
 	}
 
-
-
-
 	/**
-	* Metodi setters/getters e definizione delle tabelle con le relative relazioni
-	 */	
+	 * Metodi setters/getters e definizione delle tabelle con le relative relazioni
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "JOB_OFFER_ID")
@@ -98,10 +93,11 @@ public class JobOffer {
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public String getRegion() {
 		return region;
 	}
-	
+
 	public void setRegion(String region) {
 		this.region = region;
 	}
@@ -147,16 +143,13 @@ public class JobOffer {
 		this.contractType = contractType;
 	}
 
-
 	public Education getMinEducationLevel() {
 		return minEducationLevel;
 	}
 
-
 	public void setMinEducationLevel(Education minEducationLevel) {
 		this.minEducationLevel = minEducationLevel;
 	}
-
 
 	public String getMinExperience() {
 		return minExperience;
@@ -166,8 +159,7 @@ public class JobOffer {
 		this.minExperience = minExperience;
 	}
 
-
-	//campo data candidatura
+	// campo data candidatura
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "candidacies", joinColumns = @JoinColumn(name = "JOB_OFFER_ID"), inverseJoinColumns = @JoinColumn(name = "PERSON_ID"))
 	public Set<Person> getCandidancies() {
@@ -187,26 +179,23 @@ public class JobOffer {
 	public void setCompany(Company company) {
 		this.company = company;
 	}
-	
+
 	@Version
 	@Column(name = "VERSION")
 	public int getVersion() {
 		return version;
 	}
-	
 
 	public void setVersion(int version) {
 		this.version = version;
 	}
 
-
 	@Override
 	public String toString() {
 		return "JobOffer [id=" + id + ", region=" + region + ", province=" + province + ", town=" + town + ", position="
 				+ position + ", description=" + description + ", contractType=" + contractType + ", minEducationLevel="
-				+ minEducationLevel + ", minExperience=" + minExperience 
-				+ ", number of candidancies=" + candidancies.size() + ", company=" + company.getId()
-				+ ", publicationDate=" + publicationDate + "]";
+				+ minEducationLevel + ", minExperience=" + minExperience + ", number of candidancies="
+				+ candidancies.size() + ", company=" + company.getId() + ", publicationDate=" + publicationDate + "]";
 	}
 
 	@Convert(converter = TimestampAttributeConverter.class)
@@ -223,24 +212,19 @@ public class JobOffer {
 		return expiringDate;
 	}
 
-
 	public void setExpiringDate(LocalDate expiringDate) {
 		this.expiringDate = expiringDate;
 	}
 
-
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof JobOffer) {
-			if (this.getId()==((JobOffer) obj).getId())
-				{
+			if (this.getId() == ((JobOffer) obj).getId()) {
 				return true;
-						}
-			else return false;
-				}
+			} else
+				return false;
+		}
 		return super.equals(obj);
 	}
-
-
 
 }

@@ -1,7 +1,7 @@
 package jobworld.model.entities;
+
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,15 +11,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
 
 import jobworld.model.entities.Role;
-
-
-
-
 
 /**
  * Classe User rappresentante un Utente ed i suoi attributi/metodi.
@@ -31,11 +24,10 @@ import jobworld.model.entities.Role;
  * @version 1.0
  */
 
-
 @Entity
 public class User {
 	private long id;
-	@Email(message="Email not well formed")
+	@Email(message = "Email not well formed")
 	private String email;
 	private String password;
 	private String description;
@@ -46,30 +38,31 @@ public class User {
 
 	public User() {
 	}
-	
-	
+
 	/**
 	 * Metodo che crea un nuovo utente
 	 * 
 	 * @param email       email dell'utente
 	 * @param password    password dell'account dell'utente
-	 * @param description descrizione dell'utente che può essere sia un utente che un azienda
-	 * @param image       path dell'immagine utente: logo per aziende e foto per utenti
+	 * @param description descrizione dell'utente che puï¿½ essere sia un utente che
+	 *                    un azienda
+	 * @param image       path dell'immagine utente: logo per aziende e foto per
+	 *                    utenti
 	 */
-	
+
 	public User(String email, String password, String description, String image) {
 		super();
 		this.email = email;
 		this.password = password;
 		this.description = description;
 		this.image = image;
-		
+
 	}
 
 	/**
-	 	Metodi get/set dell'email-password-description-image
-	 */	
-	
+	 * Metodi get/set dell'email-password-description-image
+	 */
+
 	@Id
 	@Column(unique = true)
 	public String getEmail() {
@@ -96,12 +89,12 @@ public class User {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	@Column(unique=true)
+
+	@Column(unique = true)
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
+
 	@Column(length = 1000)
 	public String getImage() {
 		return image;
@@ -111,13 +104,10 @@ public class User {
 	 * Definizione della relazione uno a uno tra User e Company
 	 * 
 	 */
-
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
 	public Company getCompany() {
 		return company;
 	}
-
-
 
 	public void setCompany(Company company) {
 		this.company = company;
@@ -132,46 +122,39 @@ public class User {
 		return person;
 	}
 
-	
 	public void setPerson(Person person) {
 		this.person = person;
 	}
 
-
 	public void addRole(Role role) {
-		  if (this.roles == null) {
-			  this.roles = new HashSet<Role>();
-		  }		  
-		  this.roles.add(role);
+		if (this.roles == null) {
+			this.roles = new HashSet<Role>();
+		}
+		this.roles.add(role);
 	}
-	  
+
 	public void setRoles(Set<Role> roles) {
-		  this.roles = roles;
+		this.roles = roles;
 	}
-	  /**
-	   * Definizione della relazione molti a molti tra User e Role
-	   * 
-	   */
+
+	/**
+	 * Definizione della relazione molti a molti tra User e Role
+	 * 
+	 */
 	@ManyToMany
-	@JoinTable( name = "users", joinColumns = @JoinColumn(name = "email", referencedColumnName = "email"), 
-		        inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")) 
+	@JoinTable(name = "users", joinColumns = @JoinColumn(name = "email", referencedColumnName = "email"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	public Set<Role> getRoles() {
-		  return this.roles;
-    }
-		 
-	  //da valutare se serve
-	public Set<Role> roles () {
-		  return this.roles;
+		return this.roles;
 	}
-	 
-	 
-	 
-	 
+
+	// da valutare se serve
+	public Set<Role> roles() {
+		return this.roles;
+	}
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + ","
-				+ " description=" + description+ ", image=" + image + ", company=" + 
-				company + ", person=" + person + "]";
-	}	
-	
+		return "User [id=" + id + ", email=" + email + ", password=" + password + "," + " description=" + description
+				+ ", image=" + image + ", company=" + company + ", person=" + person + "]";
+	}
 }

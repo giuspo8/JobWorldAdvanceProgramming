@@ -151,11 +151,11 @@ public class CompanyController {
 			job.setProvince(allParams.get("province_"));
 			job.setRegion(allParams.get("region"));
 			job.setTown(allParams.get("town"));
-			job = jobOfferService.update(job);
 		}
 		catch (DateTimeParseException e){
 			return "redirect:/company/joboffer/"+ job.getId() + "?date=true";
 		}
+		job = jobOfferService.update(job);
 		return "redirect:/company/joboffer/" + job.getId();
 	}
 	

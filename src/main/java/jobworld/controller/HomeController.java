@@ -156,23 +156,24 @@ public class HomeController {
 			return "redirect:/register?error=true";
 		}
 		try {
-			User user = userService.create(allParams.get("email"),
-					userService.encryptPassword(allParams.get("password")), null, null);
-
-			if (allParams.get("type").equals("person")) {
-				user.addRole(roleService.getRoleByTypeRole(TypeRole.USER));
+			LocalDate birthDate = null;
+			if (!allParams.get("birthDate").equals(null)) {
 				try {
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-					LocalDate birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
-					personService.create(allParams.get("firstName"), allParams.get("secondName"), birthDate,
-							allParams.get("number"), null, user);
+					birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
 				} catch (DateTimeParseException e) {
 					return "redirect:/register?date=true";
 				}
-
-			} else if (allParams.get("type").equals("company")) {
-				user.addRole(roleService.getRoleByTypeRole(TypeRole.COMPANY));
-				companyService.create(allParams.get("name"), user);
+				User user = userService.create(allParams.get("email"),
+						userService.encryptPassword(allParams.get("password")), null, null);
+				if (allParams.get("type").equals("person")) {
+					user.addRole(roleService.getRoleByTypeRole(TypeRole.USER));
+					personService.create(allParams.get("firstName"), allParams.get("secondName"), birthDate,
+							allParams.get("number"), null, user);
+				} else if (allParams.get("type").equals("company")) {
+					user.addRole(roleService.getRoleByTypeRole(TypeRole.COMPANY));
+					companyService.create(allParams.get("name"), user);
+				}
 			}
 		} catch (DataIntegrityViolationException e) {
 			return "redirect:/register?existing=true";
