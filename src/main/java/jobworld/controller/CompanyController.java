@@ -16,14 +16,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import jobworld.model.entities.Company;
 import jobworld.model.entities.Curriculum;
@@ -109,7 +107,6 @@ public class CompanyController {
 		return "redirect:/company/profile";
 	}
 	
-	
 	@GetMapping("/listjoboffer")
 	public String listjobofferscompany (Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -129,8 +126,8 @@ public class CompanyController {
 	@GetMapping("/joboffer/{jobId}")
 	public String joboffercompany ( @RequestParam(value="date", defaultValue = "" , required = false) String date_error, @PathVariable("jobId") Long jobId, Model model) {
 		JobOffer job = jobOfferService.findbyId(jobId);
-		LocalDate expringDate= job.getExpiringDate();
-		String date = UtilityForController.localdatetostringdate(expringDate);
+		LocalDate expiringDate= job.getExpiringDate();
+		String date = UtilityForController.localdatetostringdate(expiringDate);
 		model.addAttribute("date_error",date_error);
 		model.addAttribute("date",date);
 		model.addAttribute("job",job);
@@ -139,26 +136,26 @@ public class CompanyController {
 	
 	@PostMapping("/joboffer/{jobId}/update")
 	public String joboffercompanyupdate (@PathVariable("jobId") Long jobId, @RequestParam Map<String,String> allParams, Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Company company=companyService.findbyUserId(auth.getName());
-		JobOffer job = jobOfferService.update(jobOfferService.findbyId(jobId));
-		job.setPosition(allParams.get("position"));
+		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		//Company company=companyService.findbyUserId(auth.getName());
+		JobOffer job = jobOfferService.update(jobOfferService.findbyId(jobId));		
 		try {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			LocalDate date = LocalDate.parse(allParams.get("expiringDate"),formatter);
 			job.setExpiringDate(date);
+			job.setPosition(allParams.get("position"));
+			job.setContractType(allParams.get("contractType"));
+			job.setDescription(allParams.get("description"));
+			job.setMinEducationLevel(Education.valueOf(allParams.get("minEducationLevel")));
+			job.setMinExperience(allParams.get("minExperience"));
+			job.setProvince(allParams.get("province_"));
+			job.setRegion(allParams.get("region"));
+			job.setTown(allParams.get("town"));
+			job = jobOfferService.update(job);
 		}
-		catch (Exception e){
+		catch (DateTimeParseException e){
 			return "redirect:/company/joboffer/"+ job.getId() + "?date=true";
 		}
-		job.setContractType(allParams.get("contractType"));
-		job.setDescription(allParams.get("description"));
-		job.setMinEducationLevel(Education.valueOf(allParams.get("minEducationLevel")));
-		job.setMinExperience(allParams.get("minExperience"));
-		job.setProvince(allParams.get("province_"));
-		job.setRegion(allParams.get("region"));
-		job.setTown(allParams.get("town"));
-		job = jobOfferService.update(job);
 		return "redirect:/company/joboffer/" + job.getId();
 	}
 	
@@ -166,12 +163,17 @@ public class CompanyController {
 	public String joboffercompanycrate(@RequestParam Map<String,String> allParams, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Company company=companyService.update(companyService.findbyUserId(auth.getName()));
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-		LocalDate date = LocalDate.parse(allParams.get("expiringDate"), formatter);
-		jobOfferService.create(allParams.get("region"), allParams.get("province_"), allParams.get("town"),
-				allParams.get("position"), allParams.get("description"), allParams.get("contractType")
-				, Education.valueOf(allParams.get("minEducationLevel")), allParams.get("minExperience"),
-				date, company);
+		try {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			LocalDate date = LocalDate.parse(allParams.get("expiringDate"),formatter);
+			jobOfferService.create(allParams.get("region"), allParams.get("province_"), allParams.get("town"),
+					allParams.get("position"), allParams.get("description"), allParams.get("contractType")
+					, Education.valueOf(allParams.get("minEducationLevel")), allParams.get("minExperience"),
+					date, company);
+		}
+		catch (DateTimeParseException e){
+			return "redirect:/company/listjoboffer";
+		}
 		List<JobOffer> jobs = jobOfferService.findbyCompanyId(company.getId());
 		model.addAttribute("jobs",jobs);
 		model.addAttribute("company",company);

@@ -2,16 +2,16 @@ package jobworld.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
-import jobworld.model.entities.Company;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
 import jobworld.model.entities.User;
@@ -50,7 +49,8 @@ public class HomeController {
 	private PersonService personService;
 	private CompanyService companyService;
 	private RoleService roleService;
-	
+	public static final Pattern valid_email = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
+			Pattern.CASE_INSENSITIVE);
 
 	@GetMapping
 	public String home(Locale locale, Model model) {
@@ -88,12 +88,13 @@ public class HomeController {
 		 * request.getHeader("X-FORWARDED-FOR"); // Nel caso di collegamento attraverso
 		 * proxy serve comunque a trovare un ip }
 		 */
-		
+
 		/*
-		List<Company> companys = companyService.findAll();
-		Collections.sort(companys, (a,b)->  a.getJobOffers().size() < b.getJobOffers().size() ? -1 : a.getJobOffers().size() == b.getJobOffers().size() ? 0 : 1);
-		model.addAttribute("companys", companys);
-		*/
+		 * List<Company> companys = companyService.findAll(); Collections.sort(companys,
+		 * (a,b)-> a.getJobOffers().size() < b.getJobOffers().size() ? -1 :
+		 * a.getJobOffers().size() == b.getJobOffers().size() ? 0 : 1);
+		 * model.addAttribute("companys", companys);
+		 */
 		return "home";
 	}
 
@@ -140,22 +141,41 @@ public class HomeController {
 	}
 
 	@GetMapping("/register")
-	public String register() {
+	public String register(@RequestParam(value = "date", defaultValue = "", required = false) String date_error,
+			@RequestParam(value = "error", defaultValue = "", required = false) String error,
+			@RequestParam(value = "existing", defaultValue = "", required = false) String existing, Model model) {
+		model.addAttribute("date_error", date_error);
+		model.addAttribute("existing", existing);
+		model.addAttribute("error", error);
 		return "register";
 	}
 
 	@PostMapping("/add")
 	public String add(@RequestParam Map<String, String> allParams) {
-		User user = userService.create(allParams.get("email"), userService.encryptPassword(allParams.get("password")), null, null);
-		if (allParams.get("type").equals("person")) {
-			user.addRole(roleService.getRoleByTypeRole(TypeRole.USER));
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-			LocalDate birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
-			personService.create(allParams.get("firstName"), allParams.get("secondName"), birthDate,
-					allParams.get("number"), null, user);
-		} else if (allParams.get("type").equals("company")) {
-			user.addRole(roleService.getRoleByTypeRole(TypeRole.COMPANY));
-			companyService.create(allParams.get("name"), user);
+		if (!valid_email.matcher(allParams.get("email")).find()) {
+			return "redirect:/register?error=true";
+		}
+		try {
+			User user = userService.create(allParams.get("email"),
+					userService.encryptPassword(allParams.get("password")), null, null);
+
+			if (allParams.get("type").equals("person")) {
+				user.addRole(roleService.getRoleByTypeRole(TypeRole.USER));
+				try {
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+					LocalDate birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
+					personService.create(allParams.get("firstName"), allParams.get("secondName"), birthDate,
+							allParams.get("number"), null, user);
+				} catch (DateTimeParseException e) {
+					return "redirect:/register?date=true";
+				}
+
+			} else if (allParams.get("type").equals("company")) {
+				user.addRole(roleService.getRoleByTypeRole(TypeRole.COMPANY));
+				companyService.create(allParams.get("name"), user);
+			}
+		} catch (DataIntegrityViolationException e) {
+			return "redirect:/register?existing=true";
 		}
 		return "redirect:/login";
 

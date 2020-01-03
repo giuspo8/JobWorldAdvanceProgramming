@@ -22,14 +22,27 @@
 			<c:url value="/add" var="action_url" />
 			        
 			<form:form id="regform" method="POST" action="${action_url}">
-				<h3 style="text-align:center">Registrati</h3>
-				<h4 style="text-align:center">Che tipo di utente sei?</h4>
-				<div style="text-align:center">
-				<input type="radio" name="type" checked value="person">Persona<br>
-				<input type="radio" name="type" value="company">Azienda<br>
+				<h3 style="text-align: center">Registrati</h3>
+				<c:if test="${not empty existing}">
+					<div style="color: red; font-weight: bold; margin: 30px 0px; text-align:center">L'E-Mail inserita
+					è già stata utilizzata</div>
+				</c:if>
+				<c:if test="${not empty error}">
+					<div style="color: red; font-weight: bold; margin: 30px 0px; text-align:center">L'E-Mail inserita
+					non è una E-Mail ben formata</div>
+				</c:if>
+				<c:if test="${not empty date_error}">
+					<div style="color: red; font-weight: bold; margin: 30px 0px; text-align:center">La
+						data inserita non è formattata come giorno/mese/anno in numero</div>
+				</c:if>
+				<h4 style="text-align: center">Che tipo di utente sei?</h4>
+				<div style="text-align: center">
+					<input type="radio" name="type" checked value="person">Persona<br>
+					<input type="radio" name="type" value="company">Azienda<br>
 				</div>
-				<h4 style="text-align:center">Inserisci le tue informazioni:</h4>
-				<div id="regform_div">					             
+				<h4 style="text-align: center">Inserisci le tue informazioni:</h4>
+				<div id="regform_div">
+					             
 					<table style="text-align: center; width: 500px; margin: auto;">
 						<tr>
 							<td><label class='searchsub_lbl'>E-mail</label></td>
@@ -80,7 +93,7 @@
 							</select></td>
 						</tr>
 					</table>
-					<div style="text-align:center" id='searchsub'>
+					<div style="text-align: center" id='searchsub'>
 						<input disabled id='submit' type='submit' value='Invio'>  
 					</div>
 				</div>

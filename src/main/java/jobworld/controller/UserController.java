@@ -6,13 +6,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
+import java.time.format.DateTimeParseException;
 import java.util.Map;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,12 +18,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import jobworld.model.entities.Company;
 import jobworld.model.entities.Curriculum;
 import jobworld.model.entities.JobOffer;
 import jobworld.model.entities.Person;
@@ -105,7 +98,7 @@ public class UserController {
         	LocalDate birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
         	person.setBirthDate(birthDate);
 		}
-		catch (Exception e){
+		catch (DateTimeParseException e){
 			return "redirect:/user/profile?date=true";
 		}
         person = personService.update(person);
