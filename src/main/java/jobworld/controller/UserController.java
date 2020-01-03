@@ -129,8 +129,9 @@ public class UserController {
 	
 	@PostMapping("/updateCurriculum")
 	public String updateCurriculum(@RequestParam Map<String,String> allParams, Model model) {
-		Person person = personService.findbyUserId(allParams.get("email"));
-		Curriculum curriculum = curriculumService.update(person.getCurriculum());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Person person = personService.findbyUserId(auth.getName());
+		Curriculum curriculum = person.getCurriculum();
 		curriculum.setWorkExperience(allParams.get("workExperience"));
 		curriculum.setEducation(allParams.get("education"));
 		curriculum.setPersonalSkills(allParams.get("personalSkills"));
