@@ -61,7 +61,7 @@ public class UserServiceDefault implements UserService,UserDetailsService {
 	@Override
 	public void delete(User user) {
 		user.getRoles().clear();
-		this.userRepository.update(user);
+		user=this.userRepository.update(user);
 		this.userRepository.delete(user);
 	}
 

@@ -177,6 +177,9 @@ public class HomeController {
 					personService.create(allParams.get("firstName"), allParams.get("secondName"), birthDate,
 							allParams.get("number"), null, user);
 				} catch (ConstraintViolationException e) {
+					user.setPerson(null);
+					user=userService.update(user);
+					userService.delete(user);
 					return "redirect:/register?con=true";
 				}
 			} else if (allParams.get("type").equals("company")) {
@@ -184,6 +187,9 @@ public class HomeController {
 				try {
 					companyService.create(allParams.get("name"), user);
 				} catch (ConstraintViolationException e) {
+					user.setCompany(null);
+					user=userService.update(user);
+					userService.delete(user);
 					return "redirect:/register?con=true";
 				}
 			}
