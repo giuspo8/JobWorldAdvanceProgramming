@@ -61,8 +61,10 @@ private JobOfferDao jobOfferRepository;
 	public void delete(Person person) {
 		for (JobOffer j:person.getCandidacies()) {
 			j.getCandidancies().remove(person);
+			j=jobOfferRepository.update(j);
 		};
 		person.getCandidacies().clear();
+		person=personRepository.update(person);
 		personRepository.delete(person);
 	}
 

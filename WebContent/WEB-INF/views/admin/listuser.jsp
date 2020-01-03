@@ -8,6 +8,11 @@
 	</div>
 	<div class="offer">
 		<div style="text-align: center; margin: auto;">
+		<c:if test="${not empty con}">
+						<div
+							style="color: red; font-weight: bold; margin: 30px 0px; text-align: center">Uno
+							o più dati obbligatori non sono stati inseriti</div>
+					</c:if>
 			<table class="tabelle_lista">
 				<tr>
 					<th>E-mail</th>

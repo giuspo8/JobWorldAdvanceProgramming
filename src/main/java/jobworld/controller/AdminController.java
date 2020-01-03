@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -45,8 +47,8 @@ public class AdminController {
 	private UserService userService;
 	private PersonService personService;
 	private PasswordEncoder passwordEncoder;
-	//private static String UPLOADED_FOLDER ="C:/Users/giusp/git/JobWorldAdvanceProgramming/WebContent/resources/img/companies/";
-	private static String UPLOADED_FOLDER ="C:\\Users\\cicci\\git\\JobWorldAdvanceProgramming_tiles\\WebContent\\resources\\img\\";
+	private static String UPLOADED_FOLDER ="C:\\Users\\giusp\\git\\JobWorldAdvanceProgramming\\WebContent\\resources\\img\\";
+	//private static String UPLOADED_FOLDER ="C:\\Users\\cicci\\git\\JobWorldAdvanceProgramming_tiles\\WebContent\\resources\\img\\";
 	
 	@GetMapping("/listcompany")
 	public String listcompany (Model model) {
@@ -77,7 +79,11 @@ public class AdminController {
 	public String editcompanyupdate (@PathVariable("companyId") Long companyId, @RequestParam("image") MultipartFile image, @RequestParam Map<String,String> allParams, Model model) {
 		Company company=companyService.update(companyService.findbyId(companyId));
         company.setName(allParams.get("nome_azienda"));
+        try {
         company= companyService.update(company);
+        } catch(ConstraintViolationException e) {
+        	return "redirect:/admin/editcompany/" + company.getId()+ "?con=true";
+        }
 		User user =userService.update(company.getUser());
 		boolean trovato=true;
 		String path_image;
@@ -145,7 +151,11 @@ public class AdminController {
 		job.setProvince(allParams.get("province_"));
 		job.setRegion(allParams.get("region"));
 		job.setTown(allParams.get("town"));
+		try {
 		job = jobOfferService.update(job);
+		} catch(ConstraintViolationException e) {
+			return "redirect:/admin/joboffer/"+ job.getId() + "?con=true";
+		}
 		return "redirect:/admin/joboffer/" + job.getId();
 	}
 	
@@ -232,9 +242,7 @@ public class AdminController {
 	@GetMapping("/listuser/{personId}/delete")
 	public String userdelete (@PathVariable("personId") Long personId, Model model) {
 		Person person= personService.findById(personId);
-		User user = person.getUser();
 		personService.delete(person);
-		userService.delete(user);
 		return "redirect:/admin/listuser";
 	}
 	
@@ -290,7 +298,11 @@ public class AdminController {
 		catch (Exception e){
 			return "redirect:/admin/listuser/" + person.getId() + "/edit?date=true";
 		}
+        try {
         person = personService.update(person);
+        } catch(ConstraintViolationException e) {
+        	return "redirect:/admin/listuser/" + person.getId() + "/edit?con=true";
+        }
         model.addAttribute("user",user);
 		model.addAttribute("person", person);
 		return "redirect:/admin/listuser/" + person.getId() + "/edit";

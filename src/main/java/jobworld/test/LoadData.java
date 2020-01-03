@@ -58,23 +58,23 @@ public class LoadData {
 			Role r2 = roleDao.create(TypeRole.ADMIN);
 			Role r3 = roleDao.create(TypeRole.COMPANY);
 			
-			User u1 = userDao.create("saviofeng@gmail.it", userDao.encryptPassword("user1"), null,"/resources/img/galleria5.jpg");				
+			User u1 = userDao.create("saviofeng@gmail.it", userDao.encryptPassword("user1"), null,"galleria2.jpg");				
 			u1.addRole(r1);
 			
 			User u15 = userDao.create("admin@mail.it", userDao.encryptPassword("admin"), null,null);				
 			u15.addRole(r2);
 			
-			User u2 = userDao.create("tizioacaso@gmail.com", userDao.encryptPassword("user2"), null,"/resources/img/galleria23.jpg");
+			User u2 = userDao.create("tizioacaso@gmail.com", userDao.encryptPassword("user2"), null,"galleria3.jpg");
 			u2.addRole(r1);
 			
-			User u3=userDao.create("esselunga@gmail.com", userDao.encryptPassword("user3"), null,"/resources/img/galleria24.jpg");
+			User u3=userDao.create("esselunga@gmail.com", userDao.encryptPassword("user3"), null,"galleria4.jpg");
 			u3.addRole(r3);
 			
 			Person p2=createPerson("Loris", "de luigi",LocalDate.of(1992, 4, 14),"3388775899", "informatica, ingegneria",u2,personDao);
 			Person p1=createPerson("Savio", "Feng", LocalDate.of(1995, 8, 25), "3588975899", "informatica, ingegneria",u1,personDao);
 			Company c1=createCompany("Esselunga",u3,companyDao);
 			
-			User u4=userDao.create("dark@gmail.it",userDao.encryptPassword("pass2word1"), null, "/resources/img/galleria7.jpg");
+			User u4=userDao.create("dark@gmail.it",userDao.encryptPassword("pass2word1"), null, "/resources/img/galleria4.jpg");
 			u4.addRole(r1);
 			Person p3= createPerson("Marco", "vitale", LocalDate.of(1997, 2, 6), 
 					"3387675899", "informatica, ingegneria", u4, personDao);
@@ -410,6 +410,8 @@ public class LoadData {
 			session.beginTransaction();
 			p5=unapply(p5, j5, jobOfferDao, personDao);
 			session.getTransaction().commit();
+			
+			
 			/*
 			//session.beginTransaction();
 			//p1=personDao.unapply(p1, j1);
