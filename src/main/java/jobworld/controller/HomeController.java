@@ -161,32 +161,33 @@ public class HomeController {
 		}
 		try {
 			LocalDate birthDate = null;
-			if (!allParams.get("birthDate").equals(null)) {
+			if (allParams.containsKey("birthDate")) {
 				try {
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 					birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
 				} catch (DateTimeParseException e) {
 					return "redirect:/register?date=true";
 				}
-				User user = userService.create(allParams.get("email"),
-						userService.encryptPassword(allParams.get("password")), null, null);
-				if (allParams.get("type").equals("person")) {
-					user.addRole(roleService.getRoleByTypeRole(TypeRole.USER));
-					try {
-						personService.create(allParams.get("firstName"), allParams.get("secondName"), birthDate,
-								allParams.get("number"), null, user);
-					} catch (ConstraintViolationException e) {
-						return "redirect:/register?con=true";
-					}
-				} else if (allParams.get("type").equals("company")) {
-					user.addRole(roleService.getRoleByTypeRole(TypeRole.COMPANY));
-					try {
-						companyService.create(allParams.get("name"), user);
-					} catch (ConstraintViolationException e) {
-						return "redirect:/register?con=true";
-					}
+			}
+			User user = userService.create(allParams.get("email"),
+					userService.encryptPassword(allParams.get("password")), null, null);
+			if (allParams.get("type").equals("person")) {
+				user.addRole(roleService.getRoleByTypeRole(TypeRole.USER));
+				try {
+					personService.create(allParams.get("firstName"), allParams.get("secondName"), birthDate,
+							allParams.get("number"), null, user);
+				} catch (ConstraintViolationException e) {
+					return "redirect:/register?con=true";
+				}
+			} else if (allParams.get("type").equals("company")) {
+				user.addRole(roleService.getRoleByTypeRole(TypeRole.COMPANY));
+				try {
+					companyService.create(allParams.get("name"), user);
+				} catch (ConstraintViolationException e) {
+					return "redirect:/register?con=true";
 				}
 			}
+
 		} catch (DataIntegrityViolationException e) {
 			return "redirect:/register?existing=true";
 		}
