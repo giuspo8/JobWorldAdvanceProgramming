@@ -23,6 +23,9 @@
 			        
 			<form:form id="regform" method="POST" action="${action_url}">
 				<h3 style="text-align: center">Registrati</h3>
+				<c:if test="${not empty con}">
+					<div style="color: red; font-weight: bold; margin: 30px 0px; text-align:center">Uno o più dati obbligatori non sono stati inseriti</div>
+				</c:if>
 				<c:if test="${not empty existing}">
 					<div style="color: red; font-weight: bold; margin: 30px 0px; text-align:center">L'E-Mail inserita
 					è già stata utilizzata</div>

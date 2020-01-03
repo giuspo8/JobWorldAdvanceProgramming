@@ -9,6 +9,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
 
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -52,7 +54,8 @@ public class UserController {
 	
 	
 	@GetMapping("/profile")
-	public String profile(@RequestParam(value="date", defaultValue = "" , required = false) String date_error,Model model) {
+	public String profile(@RequestParam(value="date", defaultValue = "" , required = false) String date_error,
+			@RequestParam(value="con", defaultValue = "" , required = false) String con, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Person person = personService.findbyUserId(auth.getName());
 		User user= userService.findByEmail(auth.getName());
@@ -60,6 +63,7 @@ public class UserController {
 		model.addAttribute("date_error",date_error);
 		model.addAttribute("date", date);
 		model.addAttribute("person",person);
+		model.addAttribute("con", con);
 		model.addAttribute("user",user);
 		return "user/profile";
 	}
@@ -101,7 +105,11 @@ public class UserController {
 		catch (DateTimeParseException e){
 			return "redirect:/user/profile?date=true";
 		}
+        try {
         person = personService.update(person);
+        } catch(ConstraintViolationException e) {
+        	return "redirect:/user/profile?con=true";
+        }
         model.addAttribute("user",user);
 		model.addAttribute("person", person);
 		return "redirect:/user/profile";

@@ -11,6 +11,9 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -62,11 +65,12 @@ public class CompanyController {
 	private static String UPLOADED_FOLDER ="C:\\Users\\cicci\\git\\JobWorldAdvanceProgramming_tiles\\WebContent\\resources\\img\\companies\\";
 	
 	@GetMapping(value="/profile")
-	public String profile(Model model) {
+	public String profile(@RequestParam(value="con", defaultValue = "" , required = false) String con, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Company company = companyService.findbyUserId(auth.getName());
 		User user=userService.findByEmail(auth.getName());
 		model.addAttribute("company", company);
+		model.addAttribute("con", con);
 		model.addAttribute("user",user);
 		return "company/profile";
 	}
@@ -101,7 +105,11 @@ public class CompanyController {
         user= userService.update(user);
 		Company company = companyService.update(user.getCompany());
         company.setName(allParams.get("nome_azienda"));
+        try {
         company= companyService.update(company);
+        } catch(ConstraintViolationException e) {
+        	return "redirect:/company/profile?con=true";
+        }
         model.addAttribute("user",user);
 		model.addAttribute("company", company);
 		return "redirect:/company/profile";
@@ -124,13 +132,15 @@ public class CompanyController {
 	}
 	
 	@GetMapping("/joboffer/{jobId}")
-	public String joboffercompany ( @RequestParam(value="date", defaultValue = "" , required = false) String date_error, @PathVariable("jobId") Long jobId, Model model) {
+	public String joboffercompany ( @RequestParam(value="date", defaultValue = "" , required = false) String date_error,
+			@RequestParam(value="con", defaultValue = "" , required = false) String con, @PathVariable("jobId") Long jobId, Model model) {
 		JobOffer job = jobOfferService.findbyId(jobId);
 		LocalDate expiringDate= job.getExpiringDate();
 		String date = UtilityForController.localdatetostringdate(expiringDate);
 		model.addAttribute("date_error",date_error);
 		model.addAttribute("date",date);
 		model.addAttribute("job",job);
+		model.addAttribute("con",con);
 		return "company/editjoboffer";
 	}
 	
@@ -155,7 +165,11 @@ public class CompanyController {
 		catch (DateTimeParseException e){
 			return "redirect:/company/joboffer/"+ job.getId() + "?date=true";
 		}
+		try {
 		job = jobOfferService.update(job);
+		} catch(ConstraintViolationException e) {
+			return "redirect:/company/joboffer/"+ job.getId() + "?con=true";
+		}
 		return "redirect:/company/joboffer/" + job.getId();
 	}
 	
@@ -171,7 +185,7 @@ public class CompanyController {
 					, Education.valueOf(allParams.get("minEducationLevel")), allParams.get("minExperience"),
 					date, company);
 		}
-		catch (DateTimeParseException e){
+		catch (Exception e){
 			return "redirect:/company/listjoboffer";
 		}
 		List<JobOffer> jobs = jobOfferService.findbyCompanyId(company.getId());

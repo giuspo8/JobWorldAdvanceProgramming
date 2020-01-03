@@ -195,7 +195,7 @@ public class AdminController {
 		} else if (error.equals("newpassword")) {
 			errorMassage = "Non hai inserito una nuova password";
 		} else if (error.equals("ok")) {
-			errorMassage = "Il cambio password è andato a buon fine";
+			errorMassage = "Il cambio password Ã¨ andato a buon fine";
 		}
 		model.addAttribute("errorMassage", errorMassage);
 		return "admin/profile";

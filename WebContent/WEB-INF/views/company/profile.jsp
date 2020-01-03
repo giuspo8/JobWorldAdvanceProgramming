@@ -6,7 +6,8 @@
 <%@ page session="false"%>
 
 <div class="body">
-	<div class="container_slide"></div><hr>
+	<div class="container_slide"></div>
+	<hr>
 	<div class="offer">
 		<div style="text-align: center; margin: auto;">
 			<c:url value="/company/update" var="action_url" />
@@ -14,6 +15,11 @@
 			<form:form method="POST" action="${action_url}"
 				enctype="multipart/form-data">
 				<h3>Cambia le informazioni della tua azienda:</h3>
+				<c:if test="${not empty con}">
+					<div
+						style="color: red; font-weight: bold; margin: 30px 0px; text-align: center">Uno
+						o più dati obbligatori non sono stati inseriti</div>
+				</c:if>
              						<table
 					style="text-align: center; width: 500px; margin: auto;">
 					<tr>

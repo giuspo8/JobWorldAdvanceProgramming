@@ -9,6 +9,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import javax.validation.ConstraintViolationException;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -143,10 +145,12 @@ public class HomeController {
 	@GetMapping("/register")
 	public String register(@RequestParam(value = "date", defaultValue = "", required = false) String date_error,
 			@RequestParam(value = "error", defaultValue = "", required = false) String error,
-			@RequestParam(value = "existing", defaultValue = "", required = false) String existing, Model model) {
+			@RequestParam(value = "existing", defaultValue = "", required = false) String existing,
+			@RequestParam(value = "con", defaultValue = "", required = false) String con, Model model) {
 		model.addAttribute("date_error", date_error);
 		model.addAttribute("existing", existing);
 		model.addAttribute("error", error);
+		model.addAttribute("con", con);
 		return "register";
 	}
 
@@ -168,11 +172,19 @@ public class HomeController {
 						userService.encryptPassword(allParams.get("password")), null, null);
 				if (allParams.get("type").equals("person")) {
 					user.addRole(roleService.getRoleByTypeRole(TypeRole.USER));
-					personService.create(allParams.get("firstName"), allParams.get("secondName"), birthDate,
-							allParams.get("number"), null, user);
+					try {
+						personService.create(allParams.get("firstName"), allParams.get("secondName"), birthDate,
+								allParams.get("number"), null, user);
+					} catch (ConstraintViolationException e) {
+						return "redirect:/register?con=true";
+					}
 				} else if (allParams.get("type").equals("company")) {
 					user.addRole(roleService.getRoleByTypeRole(TypeRole.COMPANY));
-					companyService.create(allParams.get("name"), user);
+					try {
+						companyService.create(allParams.get("name"), user);
+					} catch (ConstraintViolationException e) {
+						return "redirect:/register?con=true";
+					}
 				}
 			}
 		} catch (DataIntegrityViolationException e) {
