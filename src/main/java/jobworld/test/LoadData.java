@@ -53,11 +53,13 @@ public class LoadData {
 				session.beginTransaction();				
 			
 			// Popolamento dei dati nel database 		
-			//parte cifratura, va messo in ordine
+			//parte cifratura, va messo in questo ordine per far si che si popoli senza errori
 			Role r1 = roleDao.create(TypeRole.USER);
 			Role r2 = roleDao.create(TypeRole.ADMIN);
 			Role r3 = roleDao.create(TypeRole.COMPANY);
 			
+			
+			//creazione dgli user con criptazione delle pasword e l'aggiunta del loro ruolo
 			User u1 = userDao.create("saviofeng@gmail.it", userDao.encryptPassword("user1"), null,"galleria2.jpg");				
 			u1.addRole(r1);
 			
@@ -70,288 +72,554 @@ public class LoadData {
 			User u3=userDao.create("esselunga@gmail.com", userDao.encryptPassword("user3"), null,"galleria4.jpg");
 			u3.addRole(r3);
 			
-			Person p2=createPerson("Loris", "de luigi",LocalDate.of(1992, 4, 14),"3388775899", "informatica, ingegneria",u2,personDao);
-			Person p1=createPerson("Savio", "Feng", LocalDate.of(1995, 8, 25), "3588975899", "informatica, ingegneria",u1,personDao);
-			Company c1=createCompany("Esselunga",u3,companyDao);
-			
 			User u4=userDao.create("dark@gmail.it",userDao.encryptPassword("pass2word1"), null, "/resources/img/galleria4.jpg");
 			u4.addRole(r1);
-			Person p3= createPerson("Marco", "vitale", LocalDate.of(1997, 2, 6), 
-					"3387675899", "informatica, ingegneria", u4, personDao);
 			
-			User u5=userDao.create("luca@gmail.it", userDao.encryptPassword("passwo42rd1"), null, 
-					"/resources/img/galleria9.jpg");
+			User u5=userDao.create("luca@gmail.it", userDao.encryptPassword("passwo42rd1"), null, "/resources/img/galleria9.jpg");
 			u5.addRole(r1);
-			Person p4=createPerson("Luca", "Nervi", LocalDate.of(1987, 8, 11), "3333475899", "informatica, ingegneria", u5, personDao);
 			
 			User u6=userDao.create("pippo@outlook.it", userDao.encryptPassword("pa41ssword1"), null, "/resources/img/galleria8.jpg");
 			u6.addRole(r1);
-			Person p5=createPerson("Pippo", "Baudo", LocalDate.of(1985, 8, 9), 
-					"3388775899", "informatica, ingegneria",u6, personDao);
-			
-			
-			User u7=userDao.create("gamestop@email.it", userDao.encryptPassword("gamestop1"), 
-					"GameStop Corporation, noto semplicemente come GameStop, ï¿½ un'azienda statunitense con sede nella cittï¿½ di Grapevine. ï¿½ il piï¿½ grande rivenditore di videogiochi nuovi e usati nel mondo, ma si occupa anche della vendita di accessori per videogiochi, console ed altri apparecchi elettronic", 
-					"/resources/img/companies/gamestop.jpg");
+						
+			User u7=userDao.create("gamestop@email.it", userDao.encryptPassword("gamestop1"), "GameStop Corporation, noto semplicemente come GameStop, ï¿½ un'azienda statunitense con sede nella cittï¿½ di Grapevine. ï¿½ il piï¿½ grande rivenditore di videogiochi nuovi e usati nel mondo, ma si occupa anche della vendita di accessori per videogiochi, console ed altri apparecchi elettronic", 
+			"/resources/img/companies/gamestop.jpg");
 			u7.addRole(r3);
+			
+			User u8=userDao.create("sony@gmail.it",  userDao.encryptPassword("sony22"), "La Sony Corporation, ï¿½ una multinazionale conglomerata giapponese fondata nel 1946 con sede a Minato, quartiere di Tokyo. Sony si concentra principalmente sull'elettronica di consumo, sui videogiochi, intrattenimento e servizi finanziari.", "/resources/img/companies/sony.jpg");
+			u8.addRole(r3);
+			
+			User u9=userDao.create("samsung@email.it", userDao.encryptPassword("samsun1sg"), "Samsung ï¿½ un'azienda multinazionale fondata il 1ï¿½ marzo 1938 da Lee Byung-chul nella cittï¿½ di Taegu, nell'attuale Corea del Sud. Comprende filiali in 58 paesi nonchï¿½ numerose aziende affiliate, la maggior parte con il nome madre Samsung, ed ï¿½ il maggior conglomerato sudcoreano", "/resources/img/companies/samsung.jpg");
+			u9.addRole(r3);
+			
+			User u10=userDao.create("GiGroup@email.it", userDao.encryptPassword("sdadsa"), "GiGroup è un agenzia per il lavoro che offre varie possibilità lavorative", "/resources/img/companies/gigroup.jpg");
+			u10.addRole(r3);
+			
+			User u11=userDao.create("BeElite@email.it", userDao.encryptPassword("sda312dasa"), "BeElite è una società di marketing che offre diverse possibilità di crescita", "/resources/img/companies/beelite.jpg");
+			u11.addRole(r3);
+			
+			User u12=userDao.create("Workhere@email.it", userDao.encryptPassword("ukyera"), "Workhere è un azienda di searching work", "/resources/img/companies/work.jpg");
+			u12.addRole(r3);
+			
+		//creazione delle persone	
+			Person p2=createPerson("Loris", "de luigi",LocalDate.of(1992, 4, 14),"3388775899", "informatica, ingegneria",u2,personDao);
+			
+			Person p1=createPerson("Savio", "Feng", LocalDate.of(1995, 8, 25), "3588975899", "informatica, ingegneria",u1,personDao);
+									
+			Person p3= createPerson("Marco", "vitale", LocalDate.of(1997, 2, 6), "3387675899", "informatica, ingegneria", u4, personDao);
+						
+			Person p4=createPerson("Luca", "Nervi", LocalDate.of(1987, 8, 11), "3333475899", "sala, alberghiero", u5, personDao);					
+			
+			Person p5=createPerson("Pippo", "Baudo", LocalDate.of(1985, 8, 9), "3388775899", "meccanica, professionale",u6, personDao);
+			
+		//creazione delle company	
+			Company c1=createCompany("Esselunga",u3,companyDao);
+			
 			Company c2=createCompany("Gamestop",u7,companyDao);
-
-			User u8=userDao.create("sony@gmail.it",  userDao.encryptPassword("sony22"), "La Sony Corporation, ï¿½ una multinazionale conglomerata giapponese fondata nel 1946 con sede a Minato, quartiere di Tokyo. Sony si concentra principalmente sull'elettronica di consumo, sui videogiochi, intrattenimento e servizi finanziari.", 
-					"/resources/img/companies/sony.jpg");
-			u8.addRole(r1);
+		
 			Company c3=createCompany("Sony", u8,companyDao);
 			
-			User u9=userDao.create("samsung@email.it", userDao.encryptPassword("samsun1sg"), "Samsung ï¿½ un'azienda multinazionale fondata il 1ï¿½ marzo 1938 da Lee Byung-chul nella cittï¿½ di Taegu, nell'attuale Corea del Sud. Comprende filiali in 58 paesi nonchï¿½ numerose aziende affiliate, la maggior parte con il nome madre Samsung, ed ï¿½ il maggior conglomerato sudcoreano", 
-					"/resources/img/companies/samsung.jpg");
-			u9.addRole(r1);
 			Company c4=createCompany("Samsung",u9, companyDao);
-/*
-	
-			
-			Person p5= personDao.create("luca@gmail.it", "passwo42rd1", null, 
-					"/resources/img/galleria9.jpg", "Luca", "Nervi", LocalDate.of(1987, 8, 11), 
-					"3333475899", "informatica, ingegneria", false);
-			
-			Person p6= personDao.create("infojob@gmail.it", "pa3ssw4ord1", null, 
-					"/resources/img/galleria10.jpg", "Sergio", "Ferrari", LocalDate.of(1998, 7, 23), 
-					"3388775899", "informatica, ingegneria", false);
-			
-			Person p7= personDao.create("paperino@outlook.it", "pas65sword1", null, 
-					"/resources/img/galleria11.jpg", "Paperino", "Pippa", LocalDate.of(1991, 12, 25), 
-					"3389675899", "informatica, ingegneria", false);
-			
-			Person p8= personDao.create("paolo43@outlook.it", "p4assw6ord1", null, 
-					"/resources/img/galleria12.jpg", "Paolo", "Bonolis", LocalDate.of(1992, 4, 2), 
-					"3388475899", "informatica, ingegneria", false);
-			
-			Person p9= personDao.create("marco11@outlook.it", "pa4ssw5ord1", null, 
-					"/resources/img/galleria13.jpg", "Marco", "Volo", LocalDate.of(1993, 9, 24), 
-					"3382775899", "Informatica, Ingegneria", false);
-			
-			Person p10= personDao.create("deluigi@yahoo.it", "pas5sw6ord1", null, 
-					"/resources/img/galleria14.jpg", "Luigi", "Di luigi", LocalDate.of(1995, 6, 15), 
-					"3388675899", "Biomedica, Ingegneria", false);
-			
-			Person p11= personDao.create("sara@yahoo.it", "p4ss6word1", null, 
-					"/resources/img/galleria15.jpg", "Sara", "Smith", LocalDate.of(1976, 11, 17), 
-					"3389275899", "Meccanica, Ingegneria", false);
-			
-			Person p12= personDao.create("luca@yahoo.it", "2passw4ord1", null, 
-					"/resources/img/galleria16.jpg", "Luca", "Kessisoglu", LocalDate.of(1988, 8, 19), 
-					"3387375899", "Matematica, Ingegneria", false);
-			
-			Person p13= personDao.create("peppino@yahoo.it", "pas3sw4ord1", null, 
-					"/resources/img/galleria17.jpg", "Peppino", "Peppina", LocalDate.of(1989, 8, 5), 
-					"3384575899", "Fisica", false);
-			
-			Person p14= personDao.create("Marcus23@gmail.it", "pas7swo6rd1", null, 
-					"/resources/img/galleria18.jpg", "Marco", "Leo", LocalDate.of(1995, 12, 18), 
-					"3387575899", "Chimica", false);
-			
-			Person p15= personDao.create("simonedisaverio@gmail.com", "pass8word1", null, 
-					"/resources/img/galleria19.jpg", "Simone", "Di saverio", LocalDate.of(1977, 5, 11), 
-					"3388375899", "informatica, ingegneria", false);
-			
-			Person p16= personDao.create("giuseppecosta@yahoo.it", "pa7ssword1", null, 
-					"/resources/img/galleria20.jpg", "Giuseppe", "Costantini", LocalDate.of(1969, 8, 17), 
-					"3588575899", "informatica, ingegneria", false);
-			
-			Person p17= personDao.create("fede5@yahoo.it", "pass9word1", null, 
-					"/resources/img/galleria21.jpg", "Federico", "Di luca", LocalDate.of(1995, 8, 13), 
-					"3589475899", "Lingue,Inglese,Russo", false);
-			
-			Person p18= personDao.create("demeio@yahoo.it", "pa6ss4word1", null, 
-					"/resources/img/galleria22.jpg", "Paolo", "De meio", LocalDate.of(1995, 5, 12), 
-					"3583775899", "Matematica", false);
-			
-			Person p19= personDao.create("papacastoro@yahoo.it", "pass3wo4rd1", null, 
-					"/resources/img/galleria23.jpg", "Papa", "Castoro", LocalDate.of(1993, 8, 26), 
-					"3583575899", "informatica", false);
-			
-			Person p20= personDao.create("santo@yahoo.it", "p3ass5word1", null, 
-					"/resources/img/galleria24.jpg", "Santo", "Diavolo", LocalDate.of(1995, 9, 23), 
-					"3586475899", "informatica", false);
-			
-			Person p21= personDao.create("lorenzogiuliani@gmail.it", "pas1sw4ord1", null, 
-					"/resources/img/galleria25.jpg", "Lorenzo", "Giuliani", LocalDate.of(1994, 8, 3), 
-					"3587675899", "Informatica, Ingegneria", false);
-			
-			Person p22= personDao.create("white@gmail.it", "pa2ssw5ord1", null, 
-					"/resources/img/galleria26.jpg", "Bianco", "Rossi", LocalDate.of(1995, 5, 6), 
-					"3588835899", "Informatica, Ingegneria", false);
-			
-			Person p23= personDao.create("coccodemamma@gmail.it", "pa3ssw4ord1", null, 
-					"/resources/img/galleria27.jpg", "Cocco", "Bello", LocalDate.of(1993, 2, 11), 
-					"3458975899", "Meccanica, Ingegneria", false);
-			
-			Person p24= personDao.create("engineer@gmail.it", "p2assw4ord1", null, 
-					"/resources/img/galleria28.jpg", "Marco", "Sante", LocalDate.of(1985, 8, 21), 
-					"3658975899", "Informatica, Ingegneria", false);
-			
-			Person p25= personDao.create("sera98@gmail.it", "p4assw4ord1", null, 
-					"/resources/img/galleria29.jpg", "Serafina", "Lucia", LocalDate.of(1995, 2, 13), 
-					"3858975899", "Informatica, Ingegneria", false);
-			
-			Person p26= personDao.create("francy@gmail.it", "pas2sw4rd1", null, 
-					"/resources/img/galleria30.jpg", "Francesca", "Montecchiari", LocalDate.of(1992, 8, 15), 
-					"3138975899", "Informatica", false);
-			
-			Person p27= personDao.create("topolino@gmail.it", "pa8ss9word1", null, 
-					"/resources/img/galleria31.jpg", "Topo", "Lino", LocalDate.of(1995, 5, 4), 
-					"3648975899", "Elettronica, Ingegneria", false);
-			
-			Person p28= personDao.create("marianne@gmail.it", "pa4ssw0ord1", null, 
-					"/resources/img/galleria32.jpg", "Marianne", "Killer", LocalDate.of(1991, 8, 14), 
-					"3748975899", "Elettronica, Ingegneria", false);
-			
-			Person p29= personDao.create("thunder@gmail.it", "pa2ssw6ord1", null, 
-					"/resources/img/galleria33.jpg", "Tuono", "Di luce", LocalDate.of(1991, 6, 7), 
-					"3168975899", "Meccanica, Ingegneria", false);
-			
-			Person p30= personDao.create("luce@hotmail.it", "pas3swo5rd1", null, 
-					"/resources/img/galleria34.jpg", "Luce", "Bianca", LocalDate.of(1997, 1, 9), 
-					"3748975899", "Informatica, Ingegneria", false);
-			
-			Person p31= personDao.create("nana@gmail.it", "pa3ss6word1", null, 
-					"/resources/img/galleria35.jpg", "Nana", "Di antonio", LocalDate.of(1985, 1, 19), 
-					"3868975899", "Informatica", false);
-			
-			Person p32= personDao.create("maria@gmail.it", "pa2ssw5ord1", null, 
-					"/resources/img/galleria36.jpg", "Maria", "Feng", LocalDate.of(1984, 4, 28), 
-					"3658975899", "Biologia", false);
-			
-			Person p33= personDao.create("marta@gmail.it", "pa8ssw6ord1", null, 
-					"/resources/img/galleria37.jpg", "Marta", "Feng", LocalDate.of(1985, 8, 21), 
-					"3788975899", "Biomedica, Ingegneria", false);
-			
-			Person p34= personDao.create("deloitte@gmail.it", "pa5sswo7rd1", null, 
-					"/resources/img/galleria38.jpg", "Marco", "Feng", LocalDate.of(1995, 12, 31), 
-					"3638975899", "Informatica, Ingegneria", false);
-			
-			Person p35= personDao.create("tech@gmail.it", "pa3ssw6ord1", null, 
-					"/resources/img/galleria39.jpg", "Luigi", "Feng", LocalDate.of(1988, 9, 11), 
-					"3158975899", "Informatica, Ingegneria", false);
-			
-			Person p36= personDao.create("bimbo@gmail.it", "pa4ssw5ord1", null, 
-					"/resources/img/galleria40.jpg", "Loris", "Feng", LocalDate.of(1981, 12, 5), 
-					"3238975899", "Fisica", false);
-					*/
-			
-//Company			
- 
-			/*
 
+			Company c5=createCompany ("Gigroup",u10, companyDao);
 			
-			Company c5=companyDao.create("HP", "hp@gmail.it", "hpack", 
-					"La Hewlett-Packard ï¿½ una multinazionale statunitense dell'informatica attiva sia nel mercato dell'hardware che in quello del software e dei servizi collegati all'informatica. Ad inizio 2011 era il primo produttore mondiale di computer portatili per unitï¿½ vendute.", 
-					"/resources/img/companies/hp.jpg", false);
+			Company c6=createCompany ("BeElite",u11, companyDao);
 			
-			Company c6=companyDao.create("Alitalia", "alitalia@gmail.it", "alit2", 
-					"Alitalia - Societï¿½ Aerea Italiana S.p.A. in a.s, o semplicemente Alitalia, ï¿½ la maggiore compagnia aerea, nonchï¿½ compagnia aerea di bandiera, dell'Italia, attualmente in amministrazione straordinaria.", 
-					"/resources/img/companies/hp.jpg", false);
-*/
-			
-			
-			
-	
+			Company c7=createCompany ("Workhere",u12, companyDao);
 			
 			
 			
 			
-//joboffer
+
+//creazione dei curriculum da associare alla persona per fare i vari test		
+			Curriculum c11=createCurriculum(new Curriculum(p1, "Assistente amministrativo\r\n" + 
+			
+							"Alma Mater Studiorum\r\n", 
+							
+							"Istituto Magistrale Maria Montessori, Via Mazzini 5 - 40123 Bologna" + 
+							
+							"lingua straniera (inglese, francese, tedesco)", 
+							
+							"Capacità  di lavorare in gruppo maturata in molteplici situazioni in cui era indispensabile la", 
+							
+							"scrittura creativa: corso presso l'Informagiovani del Comune di Bologna"),curriculumDao,personDao);
+					
+			Curriculum c12=createCurriculum(new Curriculum(p2, "Programmatore java" + 
+					
+							"Alma Mater Studiorum\r\n", 
+			
+							"Scuola scientifica maria curie, Via Roma 5 - 40123 Bologna" + 
+			
+							"lingua straniera (inglese)", 
+			
+							"Capacità  di lavorare in gruppo maturata in molteplici situazioni in cui era indispensabile la", 
+			
+							"Sono una persona molto motivata"),curriculumDao,personDao);
+					
+					
+					
+			Curriculum c13=createCurriculum(new Curriculum(p3, "Programmatore Java" + 
+					
+							"Alma Mater Studiorum\r\n", 
+			
+							"Istituto Magistrale Maria Montessori, Via Mazzini 5 - 40123 Bologna" + 
+			
+							"lingua straniera (inglese, francese)", 
+			
+							"Capacità  di apprendere nuovi linguaggi in poco tempo, e di lavorare in team", 
+			
+							"Amante dell'informatica"),curriculumDao,personDao);
+					
+					
+			Curriculum c14=createCurriculum(new Curriculum(p4, "Cameriere" + 
+					
+							"Alma Mater Studiorum\r\n", 
+			
+							"Istituto Professionale via michele rosa 43 - 40123 Bologna" + 
+			
+							"lingua straniera (inglese, francese, tedesco,spagnolo)", 
+			
+							"Carisma e educazione", 
+			
+							"sto seguendo un corso di formazione per diventare cuoco"),curriculumDao,personDao);
+					
+			Curriculum c15=createCurriculum(new Curriculum(p5, "Programmatore Autocad" + 
+					
+							"Alma Mater Studiorum\r\n", 
+			
+							"Istituto Magistrale Maria Montessori, Via Mazzini 5 - 40123 Bologna" + 
+			
+							"lingua straniera (inglese)", 
+			
+							"Capacità di lavoro intensivo", 
+			
+							"Studio autonomo di altri linguaggi oltre autocad"),curriculumDao,personDao);
+			
+//joboffer Le prime offerte di lavoro sono state create da noi per essere testate, quelle successive sono prese da siti come Infojobs e simili.
+			
 			JobOffer j1=createJobOffer("Lombardia", "Mantova", "Mantova", "ADDETTO AL REPARTO GASTRONOMIA",
-					"Si richiedono le seguenti caratteristiche:\r\n" + 
-					"Â· Passione per la lavorazione/trasformazione delle materie prime\r\n" + 
-					"Â· Propensione all'utilizzo delle attrezzature da taglio e lavorazione\r\n" + 
-					"Â· Predisposizione al Servizio al Cliente\r\n" + 
-					"Â· Attitudini alle relazioni interpersonali\r\n" + 
-					"Â· CapacitÃ  di lavorare in team\r\n" + 
-					"Â· Ambizione e predisposizione al miglioramento continuo\r\n" + 
-					"Â· Precisione e serietÃ \r\n" + 
-					"Â· Preferibile esperienza pregressa nel ruolo, seppur di breve durata, maturata preferibilmente in contesti GDO.", 
+					
+					"Si richiedono le seguenti caratteristiche:" + 
+					
+					"Passione per la lavorazione/trasformazione delle materie prime" + 
+					
+					"Propensione all'utilizzo delle attrezzature da taglio e lavorazione" + 
+					
+					"Predisposizione al Servizio al Cliente" + 
+					
+					"Attitudini alle relazioni interpersonali" + 
+					
+					"Capacità  di lavorare in team" + 
+					
+					"Ambizione e predisposizione al miglioramento continuo" + 
+					
+					"Precisione e serietà " + 
+					
+					"Preferibile esperienza pregressa nel ruolo, seppur di breve durata, maturata preferibilmente in contesti GDO.", 
+					
 					"determinato", Education.LICENZA_MEDIA, "1 anno",LocalDate.of(2020, 12, 25), c1,jobOfferDao,companyDao);
 			
 			
 			JobOffer j2=createJobOffer("Lazio", "Roma", "Roma", "Commesso GameStop",
-					"Si richiedono le seguenti caratteristiche:\r\n" + 
-					"Â· Passione per i giochi e esperienza videoludica\r\n" + 
-					"Â· Gentilezza e cordialitï¿½\r\n" + 
-					"Â· Predisposizione al Servizio al Cliente\r\n" + 
-					"Â· Attitudini alle relazioni interpersonali\r\n" + 
-					"Â· CapacitÃ  di sopportare lo stress\r\n" + 
-					"Â· Ambizione e predisposizione al miglioramento continuo\r\n" + 
-					"Â· Serietï¿½\r\n" + 
-					"Â· Capacitï¿½ di utilizzo del computer.", 
+					
+					"Si richiedono le seguenti caratteristiche:" + 
+					
+					"Passione per i giochi e esperienza videoludica" + 
+							
+					"Gentilezza e cordialità" + 
+					
+					"Predisposizione al Servizio al Cliente" + 
+					
+					"Attitudini alle relazioni interpersonali" + 
+					
+					"Capacità  di sopportare lo stress" + 
+					
+					"Ambizione e predisposizione al miglioramento continuo" + 
+					
+					"Serietà" + 
+					
+					"Capacità di utilizzo del computer.", 
+					
 					"determinato", Education.DIPLOMA_DI_MATURITA, "6 mesi",LocalDate.of(2020, 12, 25), c2,jobOfferDao,companyDao);
 			
 
 			
 			JobOffer j3=createJobOffer("Campania", "Napoli", "Napoli" , "Programmatore Java",
-					"Si richiedono le seguenti caratteristiche:\r\n" + 
-					"Â· Conoscenza del linguaggio di programmazione Java\r\n" + 
-					"Â· Capacitï¿½ di adattamento \r\n" + 
-					"Â· Conoscensza della lingua inglese\r\n" + 
-					"Â· Voglia di crescere e imparare\r\n" + 
-					"Â· CapacitÃ  di lavorare in team\r\n" + 
-					"Â· Ambizione e predisposizione al miglioramento continuo\r\n" + 
-					"Â· Esperienza di almeno 3 anni\r\n" + 
-					"Â· Preferibilmente lavoratore remoto", 
+					
+					"Si richiedono le seguenti caratteristiche:" + 
+					
+					"Conoscenza del linguaggio di programmazione Java" + 
+					
+					"Capacità di adattamento " + 
+					
+					"Conoscensza della lingua inglese" + 
+					
+					"Voglia di crescere e imparare" + 
+					
+					"Capacità  di lavorare in team" + 
+					
+					"Ambizione e predisposizione al miglioramento continuo" + 
+					
+					"Esperienza di almeno 3 anni" + 
+					
+					"Preferibilmente lavoratore remoto", 
+					
 					"determinato", Education.LAUREA_TRIENNALE, "3 anni",LocalDate.of(2020, 12, 25), c1,jobOfferDao,companyDao);
 			
 			
 			
 			JobOffer j4=createJobOffer("Puglia", "Bari", "Bari", "Assisente di volo",
-					"Si richiedono le seguenti caratteristiche:\r\n" + 
-					"Â· Esperienza di 3 anni\r\n" + 
-					"Â· Conoscenza dell'inglese\r\n" + 
-					"Â· Predisposizione al Servizio al Cliente\r\n" + 
-					"Â· Gentilezza e empatia\r\n" + 
-					"Â· CapacitÃ  di lavorare in team\r\n" + 
-					"Â· Ambizione e predisposizione al miglioramento continuo\r\n" + 
-					"Â· Disposto a voli internazionaliï¿½\r\n" + 
-					"Â· Capacitï¿½ di comunicazione", 
+					
+					"Si richiedono le seguenti caratteristiche:" + 
+					
+					"Esperienza di 3 anni" + 
+					
+					"Conoscenza dell'inglese" + 
+					
+					"Predisposizione al Servizio al Cliente" + 
+					
+					"Gentilezza e empatia" + 
+					
+					"Capacità  di lavorare in team" + 
+					
+					"Ambizione e predisposizione al miglioramento continuo" + 
+					
+					"Disposto a voli internazionali" + 
+					
+					"Capacità di comunicazione", 
+					
 					"determinato", Education.LAUREA_SPECIALISTICA, "1 anno",LocalDate.of(2020, 12, 25), c3,jobOfferDao,companyDao);
 			
 			
 			JobOffer j5=createJobOffer("Marche", "Ancona", "Jesi", "Programmatore Cad",
-					"Si richiedono le seguenti caratteristiche:\r\n" + 
-					"Â· Esperienza di almeno 5 anni con AutoCAD\r\n" + 
-					"Â· Autonomia\r\n" + 
-					"Â· Conoscenza dell'inglese\r\n" + 
-					"Â· Sopportazione allo stress\r\n" + 
-					"Â· CapacitÃ  di lavorare in team\r\n" + 
-					"Â· Ambizione e predisposizione al miglioramento continuo\r\n" + 
-					"Â· Precisione e serietÃ \r\n" + 
-					"Â· Disposto a trasferirsi nella sede centrale a Roma", 
+					
+					"Si richiedono le seguenti caratteristiche:" + 
+					
+					"Esperienza di almeno 5 anni con AutoCAD" + 
+					
+					"Autonomia" + 
+					
+					"Conoscenza dell'inglese" + 
+					
+					"Sopportazione allo stress" + 
+					
+					"Capacità  di lavorare in team" + 
+					
+					"Ambizione e predisposizione al miglioramento continuo" + 
+					
+					"Precisione e serietà " + 
+					
+					"Disposto a trasferirsi nella sede centrale a Roma", 
+					
 					"Indeterminato", Education.LAUREA_SPECIALISTICA, "indeterminato",LocalDate.of(2020, 12, 25),c4,jobOfferDao,companyDao);
 			
 			
+			JobOffer j6=createJobOffer("Lombardia", "Milano", "Milano", "FIERA MILANO: PRIMA ESPERIENZA NEL MARKETING",
+					
+					"La piu grande società di comunicazione e Marketing del Mondo con origini australiane"+
 			
-			Curriculum c11=createCurriculum(new Curriculum(p1, "01/2005â€“alla data attuale Assistente amministrativo\r\n" + 
-					"Alma Mater Studiorum\r\n" + 
-					"Via Zamboni 37, 40126 Bologna\r\n" + 
-					"Gestione della documentazione contabile generale, fiscale e tributaria, relazione con la clientela", 
-					"Istituto Magistrale Maria Montessori, Via Mazzini 5 - 40123 Bologna\r\n" + 
-					"â–ª espressione italiana\r\n" + 
-					"â–ª matematica\r\n" + 
-					"â–ª scienze\r\n" + 
-					"â–ª lingua straniera (inglese, francese, tedesco)", 
-					"CapacitÃ  di lavorare in gruppo maturata in molteplici situazioni in cui era indispensabile la\r\n" + 
-					"collaborazione tra figure diverse e con modalitÃ  orarie varie (turni, fine settimana)", 
-					"scrittura creativa: corso presso l'Informagiovani del Comune di Bologna"),curriculumDao,personDao);
+					"Seleziona per la sede di Milano, Giovani alla prima esperienza."+
+					
+					"Si richiede:"+
+					
+					"- Forte Propensione al Contatto con il Pubblico"+
+					
+					"- Capacità di Lavorare in Team"+
+					
+					"- Carattere Solare e Dinamico"+
+					
+					"L' Azienda offre"+
+					
+					"- Formazione gratuita in marketing"+
+					
+					"- Ambiente giovane e dinamico"+
+					
+					"- Possibilità di Viaggi Nazionali e Internazionali"+
+					
+					"Luogo di lavoro nei principali Eventi e fiere di Milano e Provincia",
+					
+					"Determinato",Education.SENZA_STUDI,"1 mese", LocalDate.of(2020,2,2),c4,jobOfferDao,companyDao);
 			
-			Curriculum c12=createCurriculum(new Curriculum(p2, "01/2005â€“alla data attuale Assistente amministrativo\r\n" + 
-					"Alma Mater Studiorum\r\n" + 
-					"Via Zamboni 37, 40126 Bologna\r\n" + 
-					"Gestione della documentazione contabile generale, fiscale e tributaria, relazione con la clientela", 
-					"Istituto Magistrale Maria Montessori, Via Mazzini 5 - 40123 Bologna\r\n" + 
-					"â–ª espressione italiana\r\n" + 
-					"â–ª matematica\r\n" + 
-					"â–ª scienze\r\n" + 
-					"â–ª lingua straniera (inglese, francese, tedesco)", 
-					"CapacitÃ  di lavorare in gruppo maturata in molteplici situazioni in cui era indispensabile la\r\n" + 
-					"collaborazione tra figure diverse e con modalitÃ  orarie varie (turni, fine settimana)", 
-					"scrittura creativa: corso presso l'Informagiovani del Comune di Bologna"),curriculumDao,personDao);
+					
+			JobOffer j7=createJobOffer("Lombardia", "Milano", "Milano", "VIAGGI, FORMAZIONE E MARKETING: PRIMA ESPERIENZA MILANO",
+					
+					"La piu grande società di comunicazione e Marketing del Mondo con origini australiane"+
+			
+					"Seleziona per la sede di Milano, Giovani alla prima esperienza."+
+
+					"Si richiede:"+
+
+					"- Forte Propensione al Contatto con il Pubblico"+
+
+					"- Capacità di Lavorare in Team"+
+
+					"- Carattere Solare e Dinamico"+
+
+					"L' Azienda offre"+
+
+					"- Formazione gratuita in marketing"+
+
+					"- Ambiente giovane e dinamico"+
+
+					"- Possibilità di Viaggi Nazionali e Internazionali"+
+
+					"Luogo di lavoro nei principali Eventi e fiere di Milano e Provincia",
+					
+					"Determinato",Education.SENZA_STUDI,"1 mese", LocalDate.of(2020,2,2),c7,jobOfferDao,companyDao);
+					
+				
+			JobOffer j8=createJobOffer("Piemonte", "Torino", "Brandizzo", "ASSISTENTE AMMINISTRAZIONE E GESTIONE IMMOBILI",
+					
+					"Nata nel 1999 e oggi fra i primi 10 player del mercato, ETJCA Agenzia per il lavoro e' una societa' consolidata, affidabile e competente che, attraverso la sua rete di filiali presenti in tutta Italia, offre alle persone in cerca di lavoro la possibilita' di trovare un'occupazione in linea con il proprio profilo professionale, favorendo il contatto con diverse realta' imprenditoriali."+
+
+					"Per importante realtà con sede a Brandizzo (TO), Etjca Spa Filiale di Asti ricerca"+
+
+					"UN ASSISTENTE ADDETTO ALL'AMMINISTRAZIONE E ALLA GESTIONE DEGLI IMMOBILI"+
+
+					"La risorsa sarà alle dirette dipendenze della Direzione."+
+
+					"I candidati ideali hanno le seguenti caratteristiche:"+
+							 
+					"- laurea (preferibilmente) in ambito economico;"+
+					 
+					"- buona conoscenza della lingua inglese e della lingua francese (le proprietà sono in Italia e all'estero);"+
+					
+					"- disponibilità ad eventuali trasferte;"+
+					
+					"- esperienza nella gestione amministrativa degli immobili (contratti, documentazione, adempimenti, ...);"+
+					
+					"- esperienza nella gestione operativa degli immobili (gestione delle maestranze per la risoluzione problematiche pratiche, sopralluoghi, gestione pagamento bollette o allacciamenti, ...);"+
+					
+					"- ottima conoscenza dei sistemi informativi (Word, Excel, Access, PowerPoint, Outlook);"+
+					
+					"- ampia disponibilità oraria;"+
+					
+					"- dinamismo, professionalità e serietà;"+
+					
+					"- eccellenti doti di comunicazione, sia orale e scritta, forte determinazione al raggiungimento degli obiettivi;"+
+					
+					"- resistenza allo stress e rispetto delle scadenze."+
+
+					"Offriamo un iniziale contratto a tempo determinato in somministrazione con livello e RAL da definire in base all'effettiva esperienza."+
+
+					"Si invitano i candidati di entrambi i sessi (L.903/77) a leggere l'informativa sulla privacy (art.13, Reg EU 679/2016)."+
+
+					"Etjca S.p.A. (Aut. Min. Prot. N. 1309-SG del 23/02/2005),",
+					
+					"Determinato",Education.LAUREA_TRIENNALE,"3 anni", LocalDate.of(2020,2,2),c7,jobOfferDao,companyDao);
+					
+			
+			
+			
+			JobOffer j9=createJobOffer("Lombardia", "Lecco", "Lomagna", "OPERATORE ELETTRONICO",
+					
+					"Ricerchiamo per prestigiosa azienda operante nel settore elettronico"+
+
+					"OPERATORE/OPERATRICE ELETTRONICO/A"+
+
+					"La risorsa si occupera' di assemblaggio componentistica elettronica, collaudo, riparazione schede, kitting."+
+
+					"E' richiesto Diploma di Perito Elettronico, gradita precedente esperienza in societa' analoghe;"+
+		
+					"si richiede disponibilita' al lavoro su giornata e 2/3 turni."+
+
+					"Durata contratto: una settimana piu' proroghe e possibilita' di inserimento presso azienda cliente."+
+
+					"Zona: Lomagna (LC)"+
+
+					"Gi Group SpA e' autorizzata ad operare dal Ministero del Lavoro (Aut. Min. 26/11/2004 PROT. 1101 - SG)."+
+		
+					"I candidati ambosessi (D.lgs n. 198/2006) sono invitati a leggere l'informativa privacy ai sensi degli artt. 13 e 14 del"+
+		
+					"Reg. EU 679/2016 al seguente indirizzo www.gigroup.it/privacy-candidati",
+					
+					"A giornata",Education.DIPLOMA_DI_MATURITA,"1 anno", LocalDate.of(2020,2,2),c7,jobOfferDao,companyDao);
+			
+		
+			JobOffer j10=createJobOffer("Lombardia", "Monza", "Vimercate", "ADDETTO/A AMMINISTRAZIONE SERVICE",
+					
+					"Ricerchiamo per nota multinazionale operante nel settore metalmeccanico"+
+
+					"ADDETTA BACK OFFICE AMMINISTRATIVO PER STAGE"+
+
+					"La risorsa si occupera' di bollettazione, fatturazione, inserimento bollettini interventi tecnici, verifica condizioni di fornitura, contatto fornitori e clienti Italia."+
+		
+					"Si richiedono titolo di studio in ambito amministrativo o affini, buona conoscenza della lingua inglese, buona capacita' di problem solving, predisposizione all'apprendimento; gradita precedente esperienza di stage in attivita' analoga, disponibilita' a tirocinio full-time iniziale di sei mesi."+
+
+					"Si offre stage full-time iniziale di sei mesi prorogabile di ulteriori sei mesi con successiva possibilita' di assunzione in apprendistato"+
+		
+					"Zona: Vimercate (MB)",
+					
+					"determinato",Education.DIPLOMA_DI_MATURITA,"1 anno", LocalDate.of(2020,2,2),c7,jobOfferDao,companyDao);					
+		
+
+
+
+
+			JobOffer j11=createJobOffer("Lombardia", "Milano", "Milano", "LAVORO IN EVENTI - gennaio 2020",
+		
+					"Be Elite srl , importante società di marketing e comunicazione, seleziona per ampliamento organico aziendale , 5 nuove risorse."+
+
+					"Le figure selezionate svolgeranno attività di promoting gestiranno le campagne pubblicitarie per clienti di fama mondiale all'interno di eventi organizzati."+
+
+					"I profili in linea con la ricerca dovranno possedere i seguenti requisiti :"+
+		
+					"-domicilio o residenza a milano città o provincia"+
+				
+					"-disponibilità immediata"+
+		
+					"-attitudine al lavoro di squadra"+
+		
+					"-buone doti comunicative e relazionali"+
+		
+
+					"L'azienda offre ai candidati selezionati:"+
+		
+					"-contratto a norma di legge"+
+		
+					"-Pagamento mensile"+
+		
+					"-Formazione gratuita in azienda"+
+						
+					"-Concrete possibilità di crescita"+
+		
+					"-Ambiente di lavoro dinamico, stimolante e giovanile"+
+
+					"Per accedere alle selezioni , inviare la propria candidatura , seguirà un primo contatto telefonico.",
+					
+					"a giornata",Education.DIPLOMA_DI_MATURITA,"3 mesi", LocalDate.of(2020,2,2),c6,jobOfferDao,companyDao);	
+
+
+
+
+
+			JobOffer j12=createJobOffer("Campania", "Salerno", "Baronissi", "Disegnatore meccanico",
+		
+					"Gi Group SpA, Agenzia per il Lavoro (Aut. Min. 26/11/04 Prot. n. 1101-SG) ricerca per importante azienda cliente del settore metalmeccanico:"+
+
+					"Disegnatore Meccanico"+
+
+					"Requisiti richiesti:Pregressa esperienza nella mansioneDiploma tecnicoOttima conoscenza degli strumenti meccaniciFlessibilita' e capacita' di problem solvingSede di lavoro: Baronissi (SA)"+
+
+					"Tipologia contratto: Diretto con l'azienda"+
+
+					"Durata contratto: Tempo indeterminato"+
+
+					"I candidati ambosessi (D.lgs n. 198/2006) sono invitati a leggere l'informativa privacy ai sensi degli artt. 13 e 14 del Reg. EU 679/2016 al seguente indirizzo: https://www.gigroup.it/privacy-candidati/",
+					
+					"indeterminato",Education.DIPLOMA_DI_MATURITA,"indeterminato", LocalDate.of(2020,2,2),c5,jobOfferDao,companyDao);	
+
+
+
+
+
+			JobOffer j13=createJobOffer("Lombardia", "Milano", "Milano", "CHEF DE PARTIE - SECONDI PIATTI",
+		
+					"Gi Group SpA, Agenzia per il Lavoro (Aut. Min. 26/11/04 Prot. n. 1101-SG) ricerca:"+
+
+					"Per prestigioso ristorante di Milano, una figura in qualita' di CHEF DE PARTIE ? Primi Piatti."+
+
+					"La risorsa, inserita inizialmente in somministrazione e riportando direttamente al Primo Chef ed alla Proprieta',"+
+			
+					"si occupera' delle seguenti mansioni:"+
+
+					"Preparazione delle portate (circa 60 coperti)Realizzazione di piatti a base di carne, pesce e vegetariani,Collaborazione "+
+			
+					"con il Primo Chef per la redazione di nuovi menu',Impiattamento e presentazione delle pietanze."+
+
+					"Il profilo ideale e' in possesso dei seguenti requisiti:"+
+
+					"Consistente e comprovata esperienza nella mansione in qualita' di Chef De Partie, dedicato alla preparazione di secondi piatti,"+
+			
+					"Comprovata conoscenza delle carni, del pesce e della cucina vegetariana,Autonomia nella gestione "+
+			
+					"del lavoro,Forti spinte collaborative all'interno del team (la brigata e' composta da cinque persone),Flessibilita' e gestione "+
+			
+					"dei cambiamenti del menu',Disponibilita' a lavorare su turni spezzati (pranzo e cena),Costituira' titolo preferenziale essere in possesso di "+
+			
+					"Attestato HACCP in corso di validita' e Attestato Sicurezza Generica.",
+				
+					"determinato",Education.DIPLOMA_DI_MATURITA,"1 anno", LocalDate.of(2020,2,2),c5,jobOfferDao,companyDao);	
+
+			JobOffer j14=createJobOffer("Lombardia", "Milano", "Milano", "RUNNER - LUXURY RESTAURANT",
+		
+					"Gi Group SpA, Agenzia per il Lavoro (Aut. Min. 26/11/04 Prot. n. 1101-SG) ricerca"+
+
+					"per importante azienda cliente del settore Ristorazione di Lusso:"+
+
+					"1 RUNNER"+
+
+					"La risorsa si occupera' di gestire la sala con accoglienza ai clienti, servizio colazioni, pranzo, cena e servizio banqueting."+
+
+					"Requisiti:"+
+
+					"diploma alberghiero"+
+		
+					"forte motivazione per l'ambito ristorazione"+
+		
+					"gradita pregressa esperienza nel banqueting e/o servizi di ristorazione collettiva su grandi numeri"+
+
+					"Completano il profilo:"+
+
+					"una spiccata capacita' di lavorare sotto stress"+
+		
+					"cura dei dettagli"+
+		
+					"predisposizione al team working e flessibilita' nella gestione degli orari di lavoro"+
+		
+		 			"standing curato e ottime doti relazionali."+
+
+					"Si offre:"+
+
+					"Contratto part time 40h con possibilita' di proroghe con possibilita' di inserimento diretto c/o azienda cliente"+
+
+					"Sede di lavoro: Milano centro (MI)"+
+
+					"I candidati ambosessi (D.lgs n. 198/2006) sono invitati a leggere l'informativa privacy ai sensi degli artt. 13 e 14 del Reg."+
+					
+					"EU 679/2016 al seguente indirizzo:"+
+
+					"https://www.gigroup.it/privacy-candidati/"+
+
+					"I candidati ambosessi (D.lgs n. 198/2006) sono invitati a leggere l'informativa privacy ai sensi degli artt. 13 e 14 del Reg."+ 
+		
+					"EU 679/2016 al seguente indirizzo: https://www.gigroup.it/privacy-candidati/",
+					
+					"determinato",Education.DIPLOMA_DI_MATURITA,"1 anno", LocalDate.of(2020,2,2),c5,jobOfferDao,companyDao);	
+
+
+
+			JobOffer j15=createJobOffer("Lombardia", "Monza", "Vimercate", "ADDETTI MENSA",
+		
+					"Gi Group SpA, Agenzia per il Lavoro (Aut. Min. 26/11/04 Prot. n. 1101-SG) ricerca"+
+
+					"ADDETTI MENSA"+
+
+					"Le principali mansioni della figura ricercata sono:eseguire operazioni tecnico?manuali di pulizia, igiene e sanificazione degli ambienti "+
+		
+					"e delle attrezzature/utensili;eseguire attivita' di supporto al ricevimento merci, alla produzione, al confezionamento"+
+
+					"Il/La candidato/a ideale deve possedere esperienza, anche minima, nella mansione di Addetto/a mensa, buona manualita' e capacita' "+
+		
+					"di organizzazione del proprio lavoro, resistenza fisica agli sforzi e ad attivita' in piedi."+
+
+					"Viene inoltre richiesta flessibilita' oraria per lo svolgimento di turni."+
+
+					"Luogo di lavoro: strutture operative dell'Azienda nella citta' di Milano."+
+
+					"Contratto: un mese piu' eventuali proroghe"+
+
+					"I candidati ambosessi (D.lgs n. 198/2006) sono invitati a leggere l'informativa privacy ai sensi degli artt. 13 e 14 del Reg. "+
+		
+					"EU 679/2016 al seguente indirizzo: https://www.gigroup.it/privacy-candidati/",
+					
+					"a giornata",Education.DIPLOMA_DI_MATURITA,"3 mesi", LocalDate.of(2020,2,2),c5,jobOfferDao,companyDao);	
+
+
+
+
+
+
+
 			
 			
 			// phase 2 : navigate data in the database
@@ -366,45 +634,12 @@ public class LoadData {
 			p4=apply(p4, j2, jobOfferDao, personDao);
 			p5=apply(p5, j4, jobOfferDao, personDao);
 			p5=apply(p5, j5, jobOfferDao, personDao); 
-			
-
-			
+						
 			
 			/*
 			personDao.apply(p6, j1);
-			personDao.apply(p7, j1);
-			personDao.apply(p8, j1);
-			personDao.apply(p9, j1);
-			personDao.apply(p10, j1);
-			personDao.apply(p11, j1);
-			personDao.apply(p12, j1);
-			personDao.apply(p13, j1);
-			personDao.apply(p14, j1);
-			personDao.apply(p15, j1);
-			personDao.apply(p16, j1);
-			personDao.apply(p17, j1);
-			personDao.apply(p18, j1);
-			personDao.apply(p19, j1);
-			personDao.apply(p20, j1);
-			personDao.apply(p21, j1);
-			personDao.apply(p22, j1);
-			personDao.apply(p23, j1);
-			personDao.apply(p24, j2);
-			personDao.apply(p25, j2);
-			personDao.apply(p26, j2);
-			personDao.apply(p27, j2);
-			personDao.apply(p28, j2);
-			personDao.apply(p29, j2);
-			personDao.apply(p30, j2);
-			personDao.apply(p31, j2);
-			personDao.apply(p32, j2);
-			personDao.apply(p33, j2);
-			personDao.apply(p34, j2);
-			personDao.apply(p35, j2);*/
+			 */
 			//personDao.apply(p1, j1);; lancia un'eccezione perchÃ¨ non ci si puÃ² candidare due volte per la stessa offerta
-				
-
-
 
 			session.getTransaction().commit();
 			session.beginTransaction();
