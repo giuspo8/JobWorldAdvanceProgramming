@@ -216,7 +216,7 @@ public class LoadData {
 					
 					"Preferibile esperienza pregressa nel ruolo, seppur di breve durata, maturata preferibilmente in contesti GDO.", 
 					
-					"determinato", Education.LICENZA_MEDIA, "1 anno",LocalDate.of(2020, 12, 25), c1,jobOfferDao,companyDao);
+					"determinato", Education.LICENZA_MEDIA, "1 anno",LocalDate.of(2020, 1, 13), c1,jobOfferDao,companyDao);
 			
 			
 			JobOffer j2=createJobOffer("Lazio", "Roma", "Roma", "Commesso GameStop",
@@ -239,7 +239,7 @@ public class LoadData {
 					
 					"Capacità di utilizzo del computer.", 
 					
-					"determinato", Education.DIPLOMA_DI_MATURITA, "6 mesi",LocalDate.of(2020, 12, 25), c2,jobOfferDao,companyDao);
+					"determinato", Education.DIPLOMA_DI_MATURITA, "6 mesi",LocalDate.of(2020, 2, 29), c2,jobOfferDao,companyDao);
 			
 
 			
@@ -263,7 +263,7 @@ public class LoadData {
 					
 					"Preferibilmente lavoratore remoto", 
 					
-					"determinato", Education.LAUREA_TRIENNALE, "3 anni",LocalDate.of(2020, 12, 25), c1,jobOfferDao,companyDao);
+					"determinato", Education.LAUREA_TRIENNALE, "3 anni",LocalDate.of(2020, 12, 1), c1,jobOfferDao,companyDao);
 			
 			
 			
@@ -287,7 +287,7 @@ public class LoadData {
 					
 					"Capacità di comunicazione", 
 					
-					"determinato", Education.LAUREA_SPECIALISTICA, "1 anno",LocalDate.of(2020, 12, 25), c3,jobOfferDao,companyDao);
+					"determinato", Education.LAUREA_SPECIALISTICA, "1 anno",LocalDate.of(2020, 6, 15), c3,jobOfferDao,companyDao);
 			
 			
 			JobOffer j5=createJobOffer("Marche", "Ancona", "Jesi", "Programmatore Cad",
@@ -337,7 +337,7 @@ public class LoadData {
 					
 					"Luogo di lavoro nei principali Eventi e fiere di Milano e Provincia",
 					
-					"Determinato",Education.SENZA_STUDI,"1 mese", LocalDate.of(2020,2,2),c4,jobOfferDao,companyDao);
+					"Determinato",Education.SENZA_STUDI,"1 mese", LocalDate.of(2020,2,14),c4,jobOfferDao,companyDao);
 			
 					
 			JobOffer j7=createJobOffer("Lombardia", "Milano", "Milano", "VIAGGI, FORMAZIONE E MARKETING: PRIMA ESPERIENZA MILANO",
@@ -364,7 +364,7 @@ public class LoadData {
 
 					"Luogo di lavoro nei principali Eventi e fiere di Milano e Provincia",
 					
-					"Determinato",Education.SENZA_STUDI,"1 mese", LocalDate.of(2020,2,2),c7,jobOfferDao,companyDao);
+					"Determinato",Education.SENZA_STUDI,"1 mese", LocalDate.of(2020,1,5),c7,jobOfferDao,companyDao);
 					
 				
 			JobOffer j8=createJobOffer("Piemonte", "Torino", "Brandizzo", "ASSISTENTE AMMINISTRAZIONE E GESTIONE IMMOBILI",
@@ -405,7 +405,7 @@ public class LoadData {
 
 					"Etjca S.p.A. (Aut. Min. Prot. N. 1309-SG del 23/02/2005),",
 					
-					"Determinato",Education.LAUREA_TRIENNALE,"3 anni", LocalDate.of(2020,2,2),c7,jobOfferDao,companyDao);
+					"Determinato",Education.LAUREA_TRIENNALE,"3 anni", LocalDate.of(2020,1,28),c7,jobOfferDao,companyDao);
 					
 			
 			
@@ -432,7 +432,7 @@ public class LoadData {
 		
 					"Reg. EU 679/2016 al seguente indirizzo www.gigroup.it/privacy-candidati",
 					
-					"A giornata",Education.DIPLOMA_DI_MATURITA,"1 anno", LocalDate.of(2020,2,2),c7,jobOfferDao,companyDao);
+					"A giornata",Education.DIPLOMA_DI_MATURITA,"1 anno", LocalDate.of(2020,5,9),c7,jobOfferDao,companyDao);
 			
 		
 			JobOffer j10=createJobOffer("Lombardia", "Monza", "Vimercate", "ADDETTO/A AMMINISTRAZIONE SERVICE",
@@ -449,7 +449,7 @@ public class LoadData {
 		
 					"Zona: Vimercate (MB)",
 					
-					"determinato",Education.DIPLOMA_DI_MATURITA,"1 anno", LocalDate.of(2020,2,2),c7,jobOfferDao,companyDao);					
+					"determinato",Education.DIPLOMA_DI_MATURITA,"1 anno", LocalDate.of(2020,1,15),c7,jobOfferDao,companyDao);					
 		
 
 
@@ -486,7 +486,7 @@ public class LoadData {
 
 					"Per accedere alle selezioni , inviare la propria candidatura , seguirà un primo contatto telefonico.",
 					
-					"a giornata",Education.DIPLOMA_DI_MATURITA,"3 mesi", LocalDate.of(2020,2,2),c6,jobOfferDao,companyDao);	
+					"a giornata",Education.DIPLOMA_DI_MATURITA,"3 mesi", LocalDate.of(2020,3,11),c6,jobOfferDao,companyDao);	
 
 
 
@@ -506,7 +506,7 @@ public class LoadData {
 
 					"I candidati ambosessi (D.lgs n. 198/2006) sono invitati a leggere l'informativa privacy ai sensi degli artt. 13 e 14 del Reg. EU 679/2016 al seguente indirizzo: https://www.gigroup.it/privacy-candidati/",
 					
-					"indeterminato",Education.DIPLOMA_DI_MATURITA,"indeterminato", LocalDate.of(2020,2,2),c5,jobOfferDao,companyDao);	
+					"indeterminato",Education.DIPLOMA_DI_MATURITA,"indeterminato", LocalDate.of(2020,6,12),c5,jobOfferDao,companyDao);	
 
 
 
@@ -538,7 +538,7 @@ public class LoadData {
 			
 					"Attestato HACCP in corso di validita' e Attestato Sicurezza Generica.",
 				
-					"determinato",Education.DIPLOMA_DI_MATURITA,"1 anno", LocalDate.of(2020,2,2),c5,jobOfferDao,companyDao);	
+					"determinato",Education.DIPLOMA_DI_MATURITA,"1 anno", LocalDate.of(2020,10,2),c5,jobOfferDao,companyDao);	
 
 			JobOffer j14=createJobOffer("Lombardia", "Milano", "Milano", "RUNNER - LUXURY RESTAURANT",
 		
@@ -584,7 +584,7 @@ public class LoadData {
 		
 					"EU 679/2016 al seguente indirizzo: https://www.gigroup.it/privacy-candidati/",
 					
-					"determinato",Education.DIPLOMA_DI_MATURITA,"1 anno", LocalDate.of(2020,2,2),c5,jobOfferDao,companyDao);	
+					"determinato",Education.DIPLOMA_DI_MATURITA,"1 anno", LocalDate.of(2020,3,7),c5,jobOfferDao,companyDao);	
 
 
 
@@ -612,7 +612,7 @@ public class LoadData {
 		
 					"EU 679/2016 al seguente indirizzo: https://www.gigroup.it/privacy-candidati/",
 					
-					"a giornata",Education.DIPLOMA_DI_MATURITA,"3 mesi", LocalDate.of(2020,2,2),c5,jobOfferDao,companyDao);	
+					"a giornata",Education.DIPLOMA_DI_MATURITA,"3 mesi", LocalDate.of(2020,4,4),c5,jobOfferDao,companyDao);	
 
 
 
