@@ -78,7 +78,7 @@ public class HomeController {
 		// Implementazione delle api rest per ip address in base alla zona di
 		// appartenenza;
 		// TODO: cambiate l'ip per vedere come la form filter cambia automaticamente i
-		// nomi di regione, citt√†, provincia.
+		// nomi di regione, citt‡, provincia.
 		// String ip ="79.18.192.39"; //Abruzzo Atri
 		String ip = "37.160.70.194"; // Lazio Roma
 		// String ip ="2.235.168.0"; // Nichelino Piemonte
@@ -234,7 +234,7 @@ public class HomeController {
 		} else {
 			return null;
 			// return "redirect:/user/"+user.getId();//TODO l'user non ha piu l'id. adesso
-			// l'id √® la email
+			// l'id Ë la email
 		}
 	}
 
