@@ -8,7 +8,7 @@
 	<div>
 		<div class="faq">
 			<a href="<c:url value="/chisiamo"/>">Tutto su JobWorld</a> - <a
-				href="">FAQ - Aiuto</a>
+				href="<c:url value="/faq"/>">FAQ - Aiuto</a>
 		</div>
 	</div>
 	<p>JobWorld.it ottempera alla normativa vigente sulla Privacy.
