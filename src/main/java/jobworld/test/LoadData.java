@@ -60,44 +60,44 @@ public class LoadData {
 			
 			
 			//creazione dgli user con criptazione delle pasword e l'aggiunta del loro ruolo
-			User u1 = userDao.create("saviofeng@gmail.it", userDao.encryptPassword("user1"), null,"galleria1.jpg");				
+			User u1 = userDao.create("saviofeng@gmail.it", userDao.encryptPassword("user1"), null,"/resources/img/users/galleria1.jpg");				
 			u1.addRole(r1);
 			
 			User u15 = userDao.create("admin@mail.it", userDao.encryptPassword("admin"), null,null);				
 			u15.addRole(r2);
 			
-			User u2 = userDao.create("tizioacaso@gmail.com", userDao.encryptPassword("user2"), null,"galleria2.jpg");
+			User u2 = userDao.create("tizioacaso@gmail.com", userDao.encryptPassword("user2"), null,"/resources/img/users/galleria2.jpg");
 			u2.addRole(r1);
 			
-			User u3=userDao.create("esselunga@gmail.com", userDao.encryptPassword("user3"), null,"esselunga.jpg");
+			User u3=userDao.create("esselunga@gmail.com", userDao.encryptPassword("user3"), null,"/resources/img/companies/esselunga.jpg");
 			u3.addRole(r3);
 			
-			User u4=userDao.create("dark@gmail.it",userDao.encryptPassword("pass2word1"), null, "/resources/img/galleria4.jpg");
+			User u4=userDao.create("dark@gmail.it",userDao.encryptPassword("pass2word1"), null, "/resources/img/users/galleria3.jpg");
 			u4.addRole(r1);
 			
-			User u5=userDao.create("luca@gmail.it", userDao.encryptPassword("passwo42rd1"), null, "/resources/img/galleria5.jpg");
+			User u5=userDao.create("luca@gmail.it", userDao.encryptPassword("passwo42rd1"), null, "/resources/img/users/galleria4.jpg");
 			u5.addRole(r1);
 			
-			User u6=userDao.create("pippo@outlook.it", userDao.encryptPassword("pa41ssword1"), null, "/resources/img/galleria6.jpg");
+			User u6=userDao.create("pippo@outlook.it", userDao.encryptPassword("pa41ssword1"), null, "/resources/img/users/galleria5.jpg");
 			u6.addRole(r1);
 						
 			User u7=userDao.create("gamestop@email.it", userDao.encryptPassword("gamestop1"), "GameStop Corporation, noto semplicemente come GameStop, ï¿½ un'azienda statunitense con sede nella cittï¿½ di Grapevine. ï¿½ il piï¿½ grande rivenditore di videogiochi nuovi e usati nel mondo, ma si occupa anche della vendita di accessori per videogiochi, console ed altri apparecchi elettronic", 
-			"/resources/img/companies/gamestop.jpg");
+			"/resources/img/companies/gamestop.png");
 			u7.addRole(r3);
 			
-			User u8=userDao.create("sony@gmail.it",  userDao.encryptPassword("sony22"), "La Sony Corporation, ï¿½ una multinazionale conglomerata giapponese fondata nel 1946 con sede a Minato, quartiere di Tokyo. Sony si concentra principalmente sull'elettronica di consumo, sui videogiochi, intrattenimento e servizi finanziari.", "/resources/img/companies/sony.jpg");
+			User u8=userDao.create("sony@gmail.it",  userDao.encryptPassword("sony22"), "La Sony Corporation, ï¿½ una multinazionale conglomerata giapponese fondata nel 1946 con sede a Minato, quartiere di Tokyo. Sony si concentra principalmente sull'elettronica di consumo, sui videogiochi, intrattenimento e servizi finanziari.", "/resources/img/companies/sony.png");
 			u8.addRole(r3);
 			
 			User u9=userDao.create("samsung@email.it", userDao.encryptPassword("samsun1sg"), "Samsung ï¿½ un'azienda multinazionale fondata il 1ï¿½ marzo 1938 da Lee Byung-chul nella cittï¿½ di Taegu, nell'attuale Corea del Sud. Comprende filiali in 58 paesi nonchï¿½ numerose aziende affiliate, la maggior parte con il nome madre Samsung, ed ï¿½ il maggior conglomerato sudcoreano", "/resources/img/companies/samsung.jpg");
 			u9.addRole(r3);
 			
-			User u10=userDao.create("GiGroup@email.it", userDao.encryptPassword("sdadsa"), "GiGroup è un agenzia per il lavoro che offre varie possibilità lavorative", "/resources/img/companies/gigroup.jpg");
+			User u10=userDao.create("GiGroup@email.it", userDao.encryptPassword("sdadsa"), "GiGroup ï¿½ un agenzia per il lavoro che offre varie possibilitï¿½ lavorative", "/resources/img/companies/gigroup.jpg");
 			u10.addRole(r3);
 			
-			User u11=userDao.create("BeElite@email.it", userDao.encryptPassword("sda312dasa"), "BeElite è una società di marketing che offre diverse possibilità di crescita", "/resources/img/companies/beelite.jpg");
+			User u11=userDao.create("BeElite@email.it", userDao.encryptPassword("sda312dasa"), "BeElite ï¿½ una societï¿½ di marketing che offre diverse possibilitï¿½ di crescita", "/resources/img/companies/beelite.png");
 			u11.addRole(r3);
 			
-			User u12=userDao.create("Workhere@email.it", userDao.encryptPassword("ukyera"), "Workhere è un azienda di searching work", "/resources/img/companies/work.jpg");
+			User u12=userDao.create("Workhere@email.it", userDao.encryptPassword("ukyera"), "Workhere ï¿½ un azienda di searching work", "/resources/img/companies/workhere.png");
 			u12.addRole(r3);
 			
 		//creazione delle persone	
@@ -139,7 +139,7 @@ public class LoadData {
 							
 							"lingua straniera (inglese, francese, tedesco)", 
 							
-							"Capacità  di lavorare in gruppo maturata in molteplici situazioni in cui era indispensabile la", 
+							"Capacitï¿½ di lavorare in gruppo maturata in molteplici situazioni in cui era indispensabile la", 
 							
 							"scrittura creativa: corso presso l'Informagiovani del Comune di Bologna"),curriculumDao,personDao);
 					
@@ -151,7 +151,7 @@ public class LoadData {
 			
 							"lingua straniera (inglese)", 
 			
-							"Capacità  di lavorare in gruppo maturata in molteplici situazioni in cui era indispensabile la", 
+							"Capacitï¿½ di lavorare in gruppo maturata in molteplici situazioni in cui era indispensabile la", 
 			
 							"Sono una persona molto motivata"),curriculumDao,personDao);
 					
@@ -165,7 +165,7 @@ public class LoadData {
 			
 							"lingua straniera (inglese, francese)", 
 			
-							"Capacità  di apprendere nuovi linguaggi in poco tempo, e di lavorare in team", 
+							"Capacitï¿½ di apprendere nuovi linguaggi in poco tempo, e di lavorare in team", 
 			
 							"Amante dell'informatica"),curriculumDao,personDao);
 					
@@ -190,7 +190,7 @@ public class LoadData {
 			
 							"lingua straniera (inglese)", 
 			
-							"Capacità di lavoro intensivo", 
+							"Capacitï¿½ di lavoro intensivo", 
 			
 							"Studio autonomo di altri linguaggi oltre autocad"),curriculumDao,personDao);
 			
@@ -208,11 +208,11 @@ public class LoadData {
 					
 					"Attitudini alle relazioni interpersonali" + 
 					
-					"Capacità  di lavorare in team" + 
+					"Capacitï¿½ di lavorare in team" + 
 					
 					"Ambizione e predisposizione al miglioramento continuo" + 
 					
-					"Precisione e serietà " + 
+					"Precisione e serietï¿½" + 
 					
 					"Preferibile esperienza pregressa nel ruolo, seppur di breve durata, maturata preferibilmente in contesti GDO.", 
 					
@@ -225,19 +225,19 @@ public class LoadData {
 					
 					"Passione per i giochi e esperienza videoludica" + 
 							
-					"Gentilezza e cordialità" + 
+					"Gentilezza e cordialitï¿½" + 
 					
 					"Predisposizione al Servizio al Cliente" + 
 					
 					"Attitudini alle relazioni interpersonali" + 
 					
-					"Capacità  di sopportare lo stress" + 
+					"Capacitï¿½ di sopportare lo stress" + 
 					
 					"Ambizione e predisposizione al miglioramento continuo" + 
 					
-					"Serietà" + 
+					"Serietï¿½" + 
 					
-					"Capacità di utilizzo del computer.", 
+					"Capacitï¿½ di utilizzo del computer.", 
 					
 					"determinato", Education.DIPLOMA_DI_MATURITA, "6 mesi",LocalDate.of(2020, 2, 29), c2,jobOfferDao,companyDao);
 			
@@ -249,13 +249,13 @@ public class LoadData {
 					
 					"Conoscenza del linguaggio di programmazione Java" + 
 					
-					"Capacità di adattamento " + 
+					"Capacitï¿½ di adattamento " + 
 					
 					"Conoscensza della lingua inglese" + 
 					
 					"Voglia di crescere e imparare" + 
 					
-					"Capacità  di lavorare in team" + 
+					"Capacitï¿½ di lavorare in team" + 
 					
 					"Ambizione e predisposizione al miglioramento continuo" + 
 					
@@ -279,13 +279,13 @@ public class LoadData {
 					
 					"Gentilezza e empatia" + 
 					
-					"Capacità  di lavorare in team" + 
+					"Capacitï¿½ di lavorare in team" + 
 					
 					"Ambizione e predisposizione al miglioramento continuo" + 
 					
 					"Disposto a voli internazionali" + 
 					
-					"Capacità di comunicazione", 
+					"Capacitï¿½ di comunicazione", 
 					
 					"determinato", Education.LAUREA_SPECIALISTICA, "1 anno",LocalDate.of(2020, 6, 15), c3,jobOfferDao,companyDao);
 			
@@ -302,11 +302,11 @@ public class LoadData {
 					
 					"Sopportazione allo stress" + 
 					
-					"Capacità  di lavorare in team" + 
+					"Capacitï¿½ di lavorare in team" + 
 					
 					"Ambizione e predisposizione al miglioramento continuo" + 
 					
-					"Precisione e serietà " + 
+					"Precisione e serietï¿½" + 
 					
 					"Disposto a trasferirsi nella sede centrale a Roma", 
 					
@@ -315,7 +315,7 @@ public class LoadData {
 			
 			JobOffer j6=createJobOffer("Lombardia", "Milano", "Milano", "FIERA MILANO: PRIMA ESPERIENZA NEL MARKETING",
 					
-					"La piu grande società di comunicazione e Marketing del Mondo con origini australiane"+
+					"La piu grande societï¿½ di comunicazione e Marketing del Mondo con origini australiane"+
 			
 					"Seleziona per la sede di Milano, Giovani alla prima esperienza."+
 					
@@ -323,7 +323,7 @@ public class LoadData {
 					
 					"- Forte Propensione al Contatto con il Pubblico"+
 					
-					"- Capacità di Lavorare in Team"+
+					"- Capacitï¿½ di Lavorare in Team"+
 					
 					"- Carattere Solare e Dinamico"+
 					
@@ -333,7 +333,7 @@ public class LoadData {
 					
 					"- Ambiente giovane e dinamico"+
 					
-					"- Possibilità di Viaggi Nazionali e Internazionali"+
+					"- Possibilitï¿½ di Viaggi Nazionali e Internazionali"+
 					
 					"Luogo di lavoro nei principali Eventi e fiere di Milano e Provincia",
 					
@@ -342,7 +342,7 @@ public class LoadData {
 					
 			JobOffer j7=createJobOffer("Lombardia", "Milano", "Milano", "VIAGGI, FORMAZIONE E MARKETING: PRIMA ESPERIENZA MILANO",
 					
-					"La piu grande società di comunicazione e Marketing del Mondo con origini australiane"+
+					"La piu grande societï¿½ di comunicazione e Marketing del Mondo con origini australiane"+
 			
 					"Seleziona per la sede di Milano, Giovani alla prima esperienza."+
 
@@ -350,7 +350,7 @@ public class LoadData {
 
 					"- Forte Propensione al Contatto con il Pubblico"+
 
-					"- Capacità di Lavorare in Team"+
+					"- Capacitï¿½ di Lavorare in Team"+
 
 					"- Carattere Solare e Dinamico"+
 
@@ -360,7 +360,7 @@ public class LoadData {
 
 					"- Ambiente giovane e dinamico"+
 
-					"- Possibilità di Viaggi Nazionali e Internazionali"+
+					"- Possibilitï¿½ di Viaggi Nazionali e Internazionali"+
 
 					"Luogo di lavoro nei principali Eventi e fiere di Milano e Provincia",
 					
@@ -371,19 +371,19 @@ public class LoadData {
 					
 					"Nata nel 1999 e oggi fra i primi 10 player del mercato, ETJCA Agenzia per il lavoro e' una societa' consolidata, affidabile e competente che, attraverso la sua rete di filiali presenti in tutta Italia, offre alle persone in cerca di lavoro la possibilita' di trovare un'occupazione in linea con il proprio profilo professionale, favorendo il contatto con diverse realta' imprenditoriali."+
 
-					"Per importante realtà con sede a Brandizzo (TO), Etjca Spa Filiale di Asti ricerca"+
+					"Per importante realtï¿½ con sede a Brandizzo (TO), Etjca Spa Filiale di Asti ricerca"+
 
 					"UN ASSISTENTE ADDETTO ALL'AMMINISTRAZIONE E ALLA GESTIONE DEGLI IMMOBILI"+
 
-					"La risorsa sarà alle dirette dipendenze della Direzione."+
+					"La risorsa sarï¿½ alle dirette dipendenze della Direzione."+
 
 					"I candidati ideali hanno le seguenti caratteristiche:"+
 							 
 					"- laurea (preferibilmente) in ambito economico;"+
 					 
-					"- buona conoscenza della lingua inglese e della lingua francese (le proprietà sono in Italia e all'estero);"+
+					"- buona conoscenza della lingua inglese e della lingua francese (le proprietï¿½ sono in Italia e all'estero);"+
 					
-					"- disponibilità ad eventuali trasferte;"+
+					"- disponibilitï¿½ ad eventuali trasferte;"+
 					
 					"- esperienza nella gestione amministrativa degli immobili (contratti, documentazione, adempimenti, ...);"+
 					
@@ -391,9 +391,9 @@ public class LoadData {
 					
 					"- ottima conoscenza dei sistemi informativi (Word, Excel, Access, PowerPoint, Outlook);"+
 					
-					"- ampia disponibilità oraria;"+
+					"- ampia disponibilitï¿½ oraria;"+
 					
-					"- dinamismo, professionalità e serietà;"+
+					"- dinamismo, professionalitï¿½ e serietï¿½;"+
 					
 					"- eccellenti doti di comunicazione, sia orale e scritta, forte determinazione al raggiungimento degli obiettivi;"+
 					
@@ -457,15 +457,15 @@ public class LoadData {
 
 			JobOffer j11=createJobOffer("Lombardia", "Milano", "Milano", "LAVORO IN EVENTI - gennaio 2020",
 		
-					"Be Elite srl , importante società di marketing e comunicazione, seleziona per ampliamento organico aziendale , 5 nuove risorse."+
+					"Be Elite srl , importante societï¿½ di marketing e comunicazione, seleziona per ampliamento organico aziendale , 5 nuove risorse."+
 
-					"Le figure selezionate svolgeranno attività di promoting gestiranno le campagne pubblicitarie per clienti di fama mondiale all'interno di eventi organizzati."+
+					"Le figure selezionate svolgeranno attivitï¿½ di promoting gestiranno le campagne pubblicitarie per clienti di fama mondiale all'interno di eventi organizzati."+
 
 					"I profili in linea con la ricerca dovranno possedere i seguenti requisiti :"+
 		
-					"-domicilio o residenza a milano città o provincia"+
+					"-domicilio o residenza a milano cittï¿½ o provincia"+
 				
-					"-disponibilità immediata"+
+					"-disponibilitï¿½ immediata"+
 		
 					"-attitudine al lavoro di squadra"+
 		
@@ -480,11 +480,11 @@ public class LoadData {
 		
 					"-Formazione gratuita in azienda"+
 						
-					"-Concrete possibilità di crescita"+
+					"-Concrete possibilitï¿½ di crescita"+
 		
 					"-Ambiente di lavoro dinamico, stimolante e giovanile"+
 
-					"Per accedere alle selezioni , inviare la propria candidatura , seguirà un primo contatto telefonico.",
+					"Per accedere alle selezioni , inviare la propria candidatura , seguirï¿½ un primo contatto telefonico.",
 					
 					"a giornata",Education.DIPLOMA_DI_MATURITA,"3 mesi", LocalDate.of(2020,3,11),c6,jobOfferDao,companyDao);	
 
@@ -752,7 +752,7 @@ public class LoadData {
 	 * 
 	 * @param region      la regione
 	 * @param province    la provincia
-	 * @param town  	  la città
+	 * @param town  	  la cittï¿½
 	 * @param position    la posizione
 	 *               
 	 * 

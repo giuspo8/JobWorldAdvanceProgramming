@@ -51,7 +51,8 @@ public class UserController {
 	private PersonService personService;
 	private CurriculumService curriculumService;
 	//private static String UPLOADED_FOLDER = "/Users/giulianilorenzo/Documents/eclipse-workspace/JobWorldAdvanceProgramming/WebContent/resources/img/users/";
-	private static String UPLOADED_FOLDER ="C:\\Users\\HP\\git\\JobWorldAdvanceProgramming\\WebContent\\resources\\img\\users\\";
+	//private static String UPLOADED_FOLDER ="C:\\Users\\HP\\git\\JobWorldAdvanceProgramming\\WebContent\\resources\\img\\users\\";
+	private static String UPLOADED_FOLDER ="C:\\Users\\giusp\\git\\JobWorldAdvanceProgramming\\WebContent\\resources\\img\\users\\";
 	
 	@GetMapping("/profile")
 	public String profile(@RequestParam(value="date", defaultValue = "" , required = false) String date_error,
@@ -85,7 +86,7 @@ public class UserController {
 			byte[] bytes = image.getBytes();
 			String name_image= image.getOriginalFilename().substring(i+1);
 	        Path path_disk = Paths.get(UPLOADED_FOLDER + name_image);
-	        String path_image = "resources/img/users/"+ name_image;
+	        String path_image = "/resources/img/users/"+ name_image;
 	        Files.write(path_disk, bytes);
 	        user.setImage(path_image);
 		} catch(IOException e) {
