@@ -1,1 +1,9 @@
 jobworld.app
+jobworld.controller
+jobworld.model.dao
+jobworld.model.entities
+jobworld.security
+jobworld.services
+jobworld.test
+jobworld.utils
+test.JobWorld
