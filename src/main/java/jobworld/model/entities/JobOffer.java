@@ -24,7 +24,7 @@ import jobworld.utils.LocalDateAttributeConverter;
 import jobworld.utils.TimestampAttributeConverter;
 
 /**
- * Classe JobOffer rappresentante una Offerta di Lavoro ed i suoi
+ * La classe jobOffer rappresenta l'offerta di lavoro
  * attributi/metodi.
  * 
  * @author Giuseppe Costantini
@@ -189,7 +189,9 @@ public class JobOffer {
 	public void setVersion(int version) {
 		this.version = version;
 	}
-
+	/**
+	 * Override di toString per visualizzazione personalizzata
+	 */
 	@Override
 	public String toString() {
 		return "JobOffer [id=" + id + ", region=" + region + ", province=" + province + ", town=" + town + ", position="
@@ -215,7 +217,12 @@ public class JobOffer {
 	public void setExpiringDate(LocalDate expiringDate) {
 		this.expiringDate = expiringDate;
 	}
-
+	/**
+	 * Metodo che controlla se è gia presente l'offerta di lavoro
+	 * @param obj l'oggetto
+	 * 
+	 * return vero o falso 
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof JobOffer) {

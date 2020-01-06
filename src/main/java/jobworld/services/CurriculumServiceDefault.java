@@ -26,17 +26,32 @@ public class CurriculumServiceDefault implements CurriculumService {
 private CurriculumDao curriculumRepository;
 private PersonDao personRepository;
 	
+/**
+ * Metodo che sovrascrive il findByPersonId
+ * @param person è la persona
+ * 
+ * @return ritorna il curriculum in base alla persona 
+ */
 	@Transactional(readOnly=true)
 	@Override
 	public Curriculum findByPersonId(Person person) {
 		return this.curriculumRepository.findByPersonId(person);
 	}
-
+	/**
+	 * Metodo findAll
+	 * 
+	 * @return ritorna tutti i curriculum
+	 */
 	@Transactional(readOnly=true)
 	public List<Curriculum> findAll() {
 		return this.curriculumRepository.findAll();
 	}
-
+	/**
+	 * Metodo che sovrascrive il create
+	 * @param curriculum è il curriculum
+	 * 
+	 * @return ritorna il curriculum aggiornato
+	 */
 	@Transactional
 	@Override
 	public Curriculum create(Curriculum curriculum) {
@@ -47,13 +62,23 @@ private PersonDao personRepository;
 		return curriculum;
 	}
 
-	
+	/**
+	 * Metodo che sovrascrive l'update
+	 * @param curriculum curriculum
+	 * 
+	 * @return il curriculum aggiornato
+	 */
 	@Transactional
 	@Override
 	public Curriculum update(Curriculum curriculum) {
 		return this.curriculumRepository.update(curriculum);
 	}
-
+	/**
+	 * Metodo che sovrascrive la delete
+	 * @param curriculum curriculum
+	 * 
+	 * @return il curriculum aggiornato dopo la delete
+	 */
 	@Transactional
 	@Override
 	public void delete(Curriculum curriculum) {
@@ -65,7 +90,9 @@ private PersonDao personRepository;
 		curriculumRepository.delete(curriculum);
 	}
 
-
+	/**
+	 * Metodi getters e setters
+	 */
 	@Autowired
 	public void setCurriculumRepository(CurriculumDao curriculumRepository) {
 		this.curriculumRepository = curriculumRepository;

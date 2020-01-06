@@ -20,6 +20,12 @@ import jobworld.app.DataServiceConfig;
 @ComponentScan(basePackages = {"jobworld.model","jobworld.services"})
 @EnableTransactionManagement
 public class TestConfig extends DataServiceConfig {
+	/**
+	 * Metodo ovverride di hibernateProperties
+	 * 
+	 * 
+	 * @return hibernateProp fa la drop e create 
+	 */
 	@Override
 	protected Properties hibernateProperties() {
 		Properties hibernateProp = super.hibernateProperties();

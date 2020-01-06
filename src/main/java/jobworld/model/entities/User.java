@@ -15,7 +15,7 @@ import javax.validation.constraints.Email;
 import jobworld.model.entities.Role;
 
 /**
- * Classe User rappresentante un Utente ed i suoi attributi/metodi.
+ * La classe User rappresenta l'utente
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio
@@ -151,7 +151,9 @@ public class User {
 	public Set<Role> roles() {
 		return this.roles;
 	}
-
+	/**
+	 * Override di toString per visualizzazione personalizzata
+	 */
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", password=" + password + "," + " description=" + description

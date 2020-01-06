@@ -29,9 +29,11 @@
 			<div class="general_info_body">
 				<img class="pic" src="<c:url value="" />">
 				<div class="description">
-					<span>Informazioni su Indeed Indeed è il sito web #1 al
+					<span>
+					<h1>Informazioni su Indeed </h1>
+					Indeed è il sito web #1 al
 						mondo per la ricerca di lavoro1 con più di 250 milioni di singole
-						visite2 ogni mese. Indeed mette al primo posto gli utenti in cerca
+						visite al mese. Indeed mette al primo posto gli utenti in cerca
 						di lavoro, consentendo loro di accedere a offerte di lavoro,
 						pubblicare curriculum ed eseguire ricerche sulle aziende,
 						gratuitamente. Ogni giorno mettiamo in contatto milioni di persone
@@ -45,7 +47,10 @@
 						selezione del personale attraverso storie e dati reali.
 						Promuoviamo un ambiente di lavoro collaborativo, al fine di creare
 						la migliore esperienza possibile per le persone in cerca di
-						lavoro.</span>
+						lavoro.
+						
+						
+						</span>
 				</div>
 			</div>
 		</div>

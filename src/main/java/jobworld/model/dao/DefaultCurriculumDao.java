@@ -21,28 +21,49 @@ import jobworld.model.entities.Person;
 @Repository("curriculumDao")
 public class DefaultCurriculumDao extends DefaultDao implements CurriculumDao {
 	
-
+	/**
+	 * Metodo che sovrascrive il create del curriculum
+	 * @param curriculum  è il curriculum
+	 * 
+	 * @return curriculum
+	 */
 	@Override
 	@Transactional
 	public Curriculum create(Curriculum curriculum) {
 		this.getSession().save(curriculum);
 		return curriculum;
 	}
-
+	
+	/**
+	 * Metodo che sovrascrive l'update del curriculum
+	 * @param curriculum  è il curriculum
+	 * 
+	 * @return merged
+	 */
 	@Override
 	@Transactional
 	public Curriculum update(Curriculum curriculum) {
 		Curriculum merged = (Curriculum) this.getSession().merge(curriculum);
 		return merged;
 	}
-
+	/**
+	 * Metodo che sovrascrive la delete del curriculum
+	 * @param curriculum  è il curriculum
+	 * 
+	 * @return curriculum
+	 */
 	@Override
 	@Transactional
 	public void delete(Curriculum curriculum) {
 		this.getSession().delete(curriculum);
 	}
 
-	// data una persona ci restituisce il curriculum di quella persona
+	/**
+	 * Metodo che sovrascrive findByPersonId del curriculum, data una persona restituisce il suo curriculum
+	 * @param person  la persona
+	 * 
+	 * @return curriculum
+	 */
 	@Override
 	@Transactional
 	public Curriculum findByPersonId(Person person) {
@@ -50,7 +71,12 @@ public class DefaultCurriculumDao extends DefaultDao implements CurriculumDao {
 				.setParameter("persona", person)
 				.getSingleResult();
 	}
-
+	/**
+	 * Metodo che sovrascrive il findAll del curriculum, restituisce tutti i curriculum
+	 * 
+	 * 
+	 * @return tutti i curriculum
+	 */
 	@Override
 	public List<Curriculum> findAll() {
 		return getSession().createQuery("from Curriculum c", Curriculum.class)

@@ -47,7 +47,7 @@ public class AdminController {
 	private UserService userService;
 	private PersonService personService;
 	private PasswordEncoder passwordEncoder;
-	private static String UPLOADED_FOLDER ="C:\\Users\\giusp\\git\\JobWorldAdvanceProgramming\\WebContent\\resources\\img\\";
+	private static String UPLOADED_FOLDER ="C:\\Users\\HP\\git\\JobWorldAdvanceProgramming\\WebContent\\resources\\img\\";
 	//private static String UPLOADED_FOLDER ="C:\\Users\\cicci\\git\\JobWorldAdvanceProgramming_tiles\\WebContent\\resources\\img\\";
 	
 	@GetMapping("/listcompany")

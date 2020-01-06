@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
 /**
- * Classe Curriculum rappresentante il curriculum collegato ad una persona.
+ * La classe Curriculum rappresenta il curriculum
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio
@@ -115,7 +115,10 @@ public class Curriculum {
 	public void setVersion(int version) {
 		this.version = version;
 	}
-
+	
+	/**
+	 * Override di toString per visualizzazione personalizzata
+	 */
 	@Override
 	public String toString() {
 		return "Curriculum [id=" + id + ", personName=" + person.getFirstName() + " " + person.getSecondName()

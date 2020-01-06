@@ -29,18 +29,39 @@ private JobOfferDao jobOfferRepository;
 
 	
 
-
+/**
+ * Metodo ovverride di findByid
+ * @param id l'id
+ * 
+ * @return restituisce la person in base all'id
+ */
 	@Transactional(readOnly=true)
 	@Override
 	public Person findById(Long id) {
 		return this.personRepository.findById(id);
 	}
-
+	/**
+	 * Metodo findAll
+	 * 
+	 * 
+	 * @return restituisce tutte le persone
+	 */
 	@Transactional(readOnly=true)
 	public List<Person> findAll() {
 		return this.personRepository.findAll();
 	}
-
+	
+	/**
+	 * Metodo ovverride di create
+	 * @param firstName nome 
+	 * @param secondName cognome
+	 * @param birthDate compleanno
+	 * @param number numero di telefono
+	 * @param interests interessi
+	 * @param user utente
+	 * 
+	 * @return restituisce personRepository aggiornata dopo la create
+	 */
 	@Transactional
 	@Override
 	public Person create(String firstName, String secondName,LocalDate birthDate, String number, String interests,User user) {
@@ -49,13 +70,24 @@ private JobOfferDao jobOfferRepository;
 		return this.personRepository.create(person);
 
 	}
-	
+	/**
+	 * Metodo ovverride di update
+	 * @param person persona
+	 * 
+	 * @return restituisce person repository aggiornata
+	 */
 	@Transactional
 	@Override
 	public Person update(Person person) {
 		return this.personRepository.update(person);
 	}
 
+	/**
+	 * Metodo ovverride di delete
+	 * @param person persona
+	 * 
+	 * @return restituisce la personRepository aggiornata dopo la rimozione
+	 */
 	@Transactional
 	@Override
 	public void delete(Person person) {
@@ -68,7 +100,9 @@ private JobOfferDao jobOfferRepository;
 		personRepository.delete(person);
 	}
 
-
+	/**
+	 * Metodi setters e getters
+	 */
 	@Autowired
 	public void setPersonRepository(PersonDao personRepository) {
 		this.personRepository = personRepository;
@@ -79,6 +113,14 @@ private JobOfferDao jobOfferRepository;
 		this.jobOfferRepository = jobOfferRepository;
 	}
 
+	
+	/**
+	 * Metodo ovverride di Apply, che associa la persona all'offerta di lavoro
+	 * @param person persona
+	 * @param joboffer offerta di lavoro
+	 * 
+	 * @return Associa la persona all'offerta di lavoro e restituisce i repository aggiornati
+	 */
 	@Override
 	@Transactional
 	public Person apply(Person person, JobOffer joboffer) {
@@ -87,19 +129,37 @@ private JobOfferDao jobOfferRepository;
 		person.getCandidacies().add(joboffer);
 		return this.personRepository.update(person);
 	}
-
+	/**
+	 * Metodo ovverride di unapplyAll
+	 * @param joboffer offerta di lavoro
+	 * 
+	 * @return restituisce la repository dopo aver dissociato tutte le offerte di lavoro con le persone
+	 */
 	@Override
 	@Transactional
 	public void unapplyAll(JobOffer joboffer) {
 		this.personRepository.unApplyAll(joboffer);
 	}
-
+	
+	/**
+	 * Metodo ovverride di findbyUserId
+	 * @param id l'id
+	 * 
+	 * @return restituisce gli utenti tramite l'id
+	 */
 	@Transactional(readOnly=true)
 	@Override
 	public Person findbyUserId(String id) {
 		return this.personRepository.findbyUserId(id);
 	}
-
+	
+	/**
+	 * Metodo ovverride di unapply
+	 * @param person persona
+	 * @param joboffer offerta di lavoro
+	 * 
+	 * @return restituisce il repository dopo aver dissociato la persona dall'offerta di lavoro
+	 */
 	@Override
 	@Transactional
 	public Person unapply(Person person, JobOffer joboffer) {

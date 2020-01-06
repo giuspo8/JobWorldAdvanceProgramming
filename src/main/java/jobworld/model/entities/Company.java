@@ -15,7 +15,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 /**
- * Classe Company rappresentante una Azienda ed i suoi attributi/metodi.
+ * La classe Company rappresenta un Azienda 
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio

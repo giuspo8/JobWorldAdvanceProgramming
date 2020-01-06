@@ -23,7 +23,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import jobworld.utils.LocalDateAttributeConverter;
 
 /**
- * Classe Person rappresentante una Persona ed i suoi attributi/metodi.
+ * La classe Person rappresenta la persona
  * 
  * @author Giuseppe Costantini
  * @author Simone di Saverio
@@ -178,7 +178,13 @@ public class Person {
 				+ birthDate + ", number=" + number + ", curriculum=" + curriculum + ", interests=" + interests
 				+ ", candidacies=" + candidacies + ", user=" + user + "]";
 	}
-
+	
+	/**
+	 * Metodo che controlla se è gia presente la persona
+	 * @param obj l'oggetto
+	 * 
+	 * return vero o falso
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Person) {

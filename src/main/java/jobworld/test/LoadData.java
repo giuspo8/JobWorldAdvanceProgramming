@@ -60,25 +60,25 @@ public class LoadData {
 			
 			
 			//creazione dgli user con criptazione delle pasword e l'aggiunta del loro ruolo
-			User u1 = userDao.create("saviofeng@gmail.it", userDao.encryptPassword("user1"), null,"galleria2.jpg");				
+			User u1 = userDao.create("saviofeng@gmail.it", userDao.encryptPassword("user1"), null,"galleria1.jpg");				
 			u1.addRole(r1);
 			
 			User u15 = userDao.create("admin@mail.it", userDao.encryptPassword("admin"), null,null);				
 			u15.addRole(r2);
 			
-			User u2 = userDao.create("tizioacaso@gmail.com", userDao.encryptPassword("user2"), null,"galleria3.jpg");
+			User u2 = userDao.create("tizioacaso@gmail.com", userDao.encryptPassword("user2"), null,"galleria2.jpg");
 			u2.addRole(r1);
 			
-			User u3=userDao.create("esselunga@gmail.com", userDao.encryptPassword("user3"), null,"galleria4.jpg");
+			User u3=userDao.create("esselunga@gmail.com", userDao.encryptPassword("user3"), null,"esselunga.jpg");
 			u3.addRole(r3);
 			
 			User u4=userDao.create("dark@gmail.it",userDao.encryptPassword("pass2word1"), null, "/resources/img/galleria4.jpg");
 			u4.addRole(r1);
 			
-			User u5=userDao.create("luca@gmail.it", userDao.encryptPassword("passwo42rd1"), null, "/resources/img/galleria9.jpg");
+			User u5=userDao.create("luca@gmail.it", userDao.encryptPassword("passwo42rd1"), null, "/resources/img/galleria5.jpg");
 			u5.addRole(r1);
 			
-			User u6=userDao.create("pippo@outlook.it", userDao.encryptPassword("pa41ssword1"), null, "/resources/img/galleria8.jpg");
+			User u6=userDao.create("pippo@outlook.it", userDao.encryptPassword("pa41ssword1"), null, "/resources/img/galleria6.jpg");
 			u6.addRole(r1);
 						
 			User u7=userDao.create("gamestop@email.it", userDao.encryptPassword("gamestop1"), "GameStop Corporation, noto semplicemente come GameStop, ï¿½ un'azienda statunitense con sede nella cittï¿½ di Grapevine. ï¿½ il piï¿½ grande rivenditore di videogiochi nuovi e usati nel mondo, ma si occupa anche della vendita di accessori per videogiochi, console ed altri apparecchi elettronic", 
@@ -112,7 +112,7 @@ public class LoadData {
 			Person p5=createPerson("Pippo", "Baudo", LocalDate.of(1985, 8, 9), "3388775899", "meccanica, professionale",u6, personDao);
 			
 		//creazione delle company	
-			Company c1=createCompany("Esselunga",u3,companyDao);
+			Company c1=createCompany("esselunga",u3,companyDao);
 			
 			Company c2=createCompany("Gamestop",u7,companyDao);
 		
@@ -678,6 +678,17 @@ public class LoadData {
 //		logger.info("Esco ...");
 	}
 
+	/**
+	 * Metodo che dissocia la persona dall'offerta di lavora
+	 * 
+	 * @param person      persona 
+	 * @param joboffer    l'offerta
+	 * @param jobOfferDao jobOfferDao
+	 * @param personDao   personDao
+	 *               
+	 * 
+	 * @return  person             
+	 */
 	private static Person unapply(Person person, JobOffer joboffer, JobOfferDao jobOfferDao, PersonDao personDao) {
 		Person p1=null;
 		for (Person p:joboffer.getCandidancies()) {
@@ -695,13 +706,37 @@ public class LoadData {
 		return personDao.update(person);
 	}
 
+	
+	
+
+	/**
+	 * Metodo che associa la persona dall'offerta di lavora
+	 * 
+	 * @param person      persona 
+	 * @param joboffer    l'offerta
+	 * @param jobOfferDao jobOfferDao
+	 * @param personDao   personDao
+	 *               
+	 * 
+	 * @return  person             
+	 */
 	private static Person apply(Person p, JobOffer j, JobOfferDao jobOfferDao, PersonDao personDao) {
 		j.getCandidancies().add(p);
 		j=jobOfferDao.update(j);
 		p.getCandidacies().add(j);
 		return personDao.update(p);
 	}
+	
 
+	/**
+	 * Metodo che permette di reare un curriculum
+	 * 
+	 * @param curriculum     il curriculum
+	 * @param curriculumDao  curriculumDao
+	 *               
+	 * 
+	 * @return  curriculum             
+	 */
 	private static Curriculum createCurriculum(Curriculum curriculum, CurriculumDao curriculumDao,
 			PersonDao personDao) {
 		Person p=curriculum.getPerson();
@@ -710,7 +745,19 @@ public class LoadData {
 		personDao.update(p);
 		return curriculum;
 	}
+	
 
+	/**
+	 * Metodo che crea l'offerta di lavoro
+	 * 
+	 * @param region      la regione
+	 * @param province    la provincia
+	 * @param town  	  la città
+	 * @param position    la posizione
+	 *               
+	 * 
+	 * @return  jobOffer             
+	 */
 	private static JobOffer createJobOffer(String region, String province, String town, String position,
 			String description, String contractType, Education minEducationLevel, String minExperience, LocalDate expiringDate, Company company,
 			JobOfferDao jobOfferDao,CompanyDao companyDao) {
@@ -721,7 +768,19 @@ public class LoadData {
 		company=companyDao.update(company);
 		return jobOffer;
 	}
+	
 
+	/**
+	 * Metodo per creare una persona
+	 * 
+	 * @param firstName      nome
+	 * @param secondName     cognome
+	 * @param birthdate      compleanno
+	 * @param number         numero di telefono
+	 * @param interests      interessi        
+	 * 
+	 * @return  person             
+	 */
 	private static Person createPerson(String firstName, String secondName, LocalDate birthdate, String number, String interests,
 			User user,PersonDao personDao) {
 		Person person = new Person(firstName, secondName, birthdate, number, interests, user);
@@ -730,6 +789,17 @@ public class LoadData {
 		return person;
 	}
 
+	
+
+	/**
+	 * Metodo che crea la compagnia
+	 * 
+	 * @param name      il nome 
+	 * @param user      l'utente
+	 * @param companyDao companyDao              
+	 * 
+	 * @return  company             
+	 */
 	private static Company createCompany(String name, User user, CompanyDao companyDao) {
 		Company company = new Company(name,user);
 		user.setCompany(company);
@@ -737,6 +807,15 @@ public class LoadData {
 		
 	}
 
+	
+	/**
+	 * Metodo che cancella l'offerta di lavoro
+	 * 
+	 * @param j      	  l'offerta di lavoro
+	 * @param session      sessione
+	 * @param jobOfferDao jobOfferDao              
+	 *             
+	 */
 	private static void deleteJobOffer(JobOffer j, Session session, JobOfferDao jobOfferDao) {
 		session.beginTransaction();
 		for (Person p:j.getCandidancies()) {
@@ -750,7 +829,15 @@ public class LoadData {
 		session.getTransaction().commit();
 		
 	}
-
+	
+	/**
+	 * Metodo che cancella il curriculum
+	 * 
+	 * @param c      		il curriculum
+	 * @param session       la sessione
+	 * @param personDao     personDao              
+	 *           
+	 */
 	private static void deleteCurriculum(Curriculum c, Session session, PersonDao personDao,
 			CurriculumDao curriculumDao) {
 		session.beginTransaction();
@@ -763,7 +850,15 @@ public class LoadData {
 		session.getTransaction().commit();
 		
 	}
-
+	
+	/**
+	 * Metodo che cancella la persona
+	 * 
+	 * @param p      		la persona
+	 * @param session       la sessione
+	 * @param personDao     personDao              
+	 *           
+	 */
 	private static void deletePerson(Person p, Session session, PersonDao personDao) {
 		session.beginTransaction();
 		for (JobOffer j:p.getCandidacies()) {
@@ -774,7 +869,15 @@ public class LoadData {
 		session.getTransaction().commit();
 		
 	}
-
+	
+	/**
+	 * Metodo che cancella l'utente
+	 * 
+	 * @param u      		l'utente
+	 * @param session       la sessione
+	 * @param userDao       userDao              
+	 *           
+	 */
 	private static void deleteUser(User u, Session session, UserDao userDao) {
 		
 		session.beginTransaction();
@@ -784,7 +887,16 @@ public class LoadData {
 		session.getTransaction().commit();
 		
 	}
-
+	
+	/**
+	 * Metodo che cancella la company
+	 * 
+	 * @param c      		il curriculum
+	 * @param session       la sessione
+	 * @param companyDao    companyDao   
+	 * @param jobOfferDao   jobOfferDao            
+	 *           
+	 */
 	private static void deleteCompany(Company c, Session session, CompanyDao companyDao, JobOfferDao jobOfferDao) {
 		
 		session.beginTransaction();
