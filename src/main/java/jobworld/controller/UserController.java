@@ -12,6 +12,10 @@ import java.util.Map;
 import javax.validation.ConstraintViolationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -36,6 +40,7 @@ import jobworld.utils.UtilityForController;
 
 @Controller
 @RequestMapping("/user")
+@PropertySource("classpath:path.properties")
 public class UserController {
 	/**
 	 * Classe Controllore User
@@ -50,9 +55,13 @@ public class UserController {
 	private UserService userService;
 	private PersonService personService;
 	private CurriculumService curriculumService;
-	//private static String UPLOADED_FOLDER = "/Users/giulianilorenzo/Documents/eclipse-workspace/JobWorldAdvanceProgramming/WebContent/resources/img/users/";
-	//private static String UPLOADED_FOLDER ="C:\\Users\\HP\\git\\JobWorldAdvanceProgramming\\WebContent\\resources\\img\\users\\";
-	private static String UPLOADED_FOLDER ="C:\\Users\\giusp\\git\\JobWorldAdvanceProgramming\\WebContent\\resources\\img\\users\\";
+	@Value("${path.path}")
+	private String UPLOADED_FOLDER;
+	
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
 	
 	@GetMapping("/profile")
 	public String profile(@RequestParam(value="date", defaultValue = "" , required = false) String date_error,
@@ -85,7 +94,7 @@ public class UserController {
 		try {
 			byte[] bytes = image.getBytes();
 			String name_image= image.getOriginalFilename().substring(i+1);
-	        Path path_disk = Paths.get(UPLOADED_FOLDER + name_image);
+	        Path path_disk = Paths.get(UPLOADED_FOLDER + "/users/" + name_image);
 	        String path_image = "/resources/img/users/"+ name_image;
 	        Files.write(path_disk, bytes);
 	        user.setImage(path_image);

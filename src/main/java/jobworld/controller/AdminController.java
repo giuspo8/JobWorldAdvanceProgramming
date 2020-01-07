@@ -14,6 +14,10 @@ import java.util.Set;
 import javax.validation.ConstraintViolationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,6 +44,7 @@ import jobworld.utils.UtilityForController;
 
 @Controller
 @RequestMapping("/admin")
+@PropertySource("classpath:path.properties")
 public class AdminController {
 	
 	private JobOfferService jobOfferService;
@@ -47,8 +52,13 @@ public class AdminController {
 	private UserService userService;
 	private PersonService personService;
 	private PasswordEncoder passwordEncoder;
-	private static String UPLOADED_FOLDER ="C:\\Users\\HP\\git\\JobWorldAdvanceProgramming\\WebContent\\resources\\img\\";
-	//private static String UPLOADED_FOLDER ="C:\\Users\\cicci\\git\\JobWorldAdvanceProgramming_tiles\\WebContent\\resources\\img\\";
+	@Value("${path.path}")
+	private String UPLOADED_FOLDER;
+	
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}	
 	
 	@GetMapping("/listcompany")
 	public String listcompany (Model model) {

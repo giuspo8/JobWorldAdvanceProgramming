@@ -15,6 +15,10 @@ import java.util.Set;
 import javax.validation.ConstraintViolationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -53,17 +57,20 @@ import jobworld.utils.UtilityForController;
 
 @Controller
 @RequestMapping("/company")
+@PropertySource("classpath:path.properties")
 public class CompanyController {
 
 	private JobOfferService jobOfferService;
 	private CompanyService companyService;
 	private UserService userService;
 	private PersonService personService;
-	//TODO:MODIFICATE L'UPLOAD PATH ALTRIMENTI VI DA ERRORE!!!!!
-	//private static String UPLOADED_FOLDER = "/Users/giulianilorenzo/Documents/eclipse-workspace/JobWorldAdvanceProgramming/WebContent/resources/img/companies/";
-	//private static String UPLOADED_FOLDER ="C:\\Users\\HP\\git\\JobWorldAdvanceProgramming\\WebContent\\resources\\img\\companies";
-	//private static String UPLOADED_FOLDER ="C:\\Users\\cicci\\git\\JobWorldAdvanceProgramming_tiles\\WebContent\\resources\\img\\companies\\";
-	private static String UPLOADED_FOLDER ="C:\\Users\\giusp\\git\\JobWorldAdvanceProgramming\\WebContent\\resources\\img\\companies\\";
+	@Value("${path.path}")
+	private String UPLOADED_FOLDER;
+	
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
 	
 	@GetMapping(value="/profile")
 	public String profile(@RequestParam(value="con", defaultValue = "" , required = false) String con, Model model) {
@@ -93,7 +100,7 @@ public class CompanyController {
 		try {
 			byte[] bytes = image.getBytes();
 			String name_image= image.getOriginalFilename().substring(i+1);
-	        Path path_disk = Paths.get(UPLOADED_FOLDER + name_image);
+	        Path path_disk = Paths.get(UPLOADED_FOLDER + "/companies/" + name_image);
 	        path_image = "/resources/img/companies/"+ name_image;
 	        if (path_image != user.getImage()) {
 		        Files.write(path_disk, bytes);
