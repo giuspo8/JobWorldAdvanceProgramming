@@ -97,7 +97,7 @@ public class DefaultPersonDao extends DefaultDao implements PersonDao {
 				.setParameter("id", id_user).getSingleResult();
 	}
 	/**
-	 * Metodo che sovrascrive l'unApplyAll cioè rimuove l'offerta di lavoro associata alla persona
+	 * Metodo che definisce l'unApplyAll cioè rimuove l'offerta di lavoro associata alla persona
 	 * @param jobOffer l'offerta di lavoro
 	 * 
 	 * 
@@ -113,16 +113,5 @@ public class DefaultPersonDao extends DefaultDao implements PersonDao {
 			update(p);
 		}		
 	}
-
-	/**
-	 * Metodo che sovrascrive isInterested, restituisce gli interessati all'offerta di lavoro
-	 * @param jobOffer  l'offerta di lavoro
-	 * 
-	 * @return gli interessati all'offerta di lavoro
-	 */
-	@Override
-	@Transactional
-	public boolean isInterested(JobOffer jobOffer) {
-		return isInterested(jobOffer);
-	}	
+	
 }

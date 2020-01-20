@@ -125,7 +125,7 @@ private JobOfferDao jobOfferRepository;
 	@Transactional
 	public Person apply(Person person, JobOffer joboffer) {
 		joboffer.getCandidancies().add(person);
-		joboffer=jobOfferRepository.update(joboffer);
+		joboffer=jobOfferRepository.update(joboffer);//prima joboffer perchè è il lato responsabile di mappare la relazione
 		person.getCandidacies().add(joboffer);
 		return this.personRepository.update(person);
 	}
@@ -179,9 +179,5 @@ private JobOfferDao jobOfferRepository;
 		return this.personRepository.update(person);
 	}
 
-	@Override
-	@Transactional
-	public boolean isInterested(JobOffer jobOffer) {
-		return this.personRepository.isInterested(jobOffer);
-	}
+
 }

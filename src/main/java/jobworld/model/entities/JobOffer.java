@@ -159,7 +159,6 @@ public class JobOffer {
 		this.minExperience = minExperience;
 	}
 
-	// campo data candidatura
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "candidacies", joinColumns = @JoinColumn(name = "JOB_OFFER_ID"), inverseJoinColumns = @JoinColumn(name = "PERSON_ID"))
 	public Set<Person> getCandidancies() {
@@ -217,12 +216,7 @@ public class JobOffer {
 	public void setExpiringDate(LocalDate expiringDate) {
 		this.expiringDate = expiringDate;
 	}
-	/**
-	 * Metodo che controlla se è gia presente l'offerta di lavoro
-	 * @param obj l'oggetto
-	 * 
-	 * return vero o falso 
-	 */
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof JobOffer) {

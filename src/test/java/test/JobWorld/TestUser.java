@@ -44,6 +44,6 @@ class TestUser {
 		Set<ConstraintViolation<User>> constraintViolations = validator.validate(u1);
 		assertEquals(1, constraintViolations.size());
 		assertEquals("La password non può essere nulla!", constraintViolations.iterator().next().getMessage());
-	}
+	} //non serve. da cancellare
 
 }

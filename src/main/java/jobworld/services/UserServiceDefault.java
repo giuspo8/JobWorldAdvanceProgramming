@@ -35,8 +35,8 @@ public class UserServiceDefault implements UserService,UserDetailsService {
 	    if (user != null) {
 	      
 	      // qui "mappiamo" uno User della nostra app in uno User di spring
-	      builder = org.springframework.security.core.userdetails.User.withUsername(email);
-	      builder.password(user.getPassword());
+	      builder = org.springframework.security.core.userdetails.User.withUsername(email); //popola attributo username dello userbuilder
+	      builder.password(user.getPassword()); //popola attributo password dello userbuilder
 	            
 	      String [] roles = new String[user.getRoles().size()];
 
@@ -45,15 +45,15 @@ public class UserServiceDefault implements UserService,UserDetailsService {
 	    	  roles[j++] = r.getName().toString();
 	      }
 	      System.out.print(roles);
-	      builder.roles(roles);
+	      builder.roles(roles); //popola i ruoli delo userbuilder
 	    } else {
 	      throw new UsernameNotFoundException("User not found.");
 	    }
-	    return builder.build();
+	    return builder.build(); //restituisce l'user di Spring
 	  }
 	
 	/**
-	 * Metodo ovverride di create
+	 * Metodo che implementa la create
 	 * @param email  email
 	 * @param password  password
 	 * @param description descrizione
@@ -67,7 +67,7 @@ public class UserServiceDefault implements UserService,UserDetailsService {
 		return this.userRepository.create(email, password, description, image);
 	}
 	/**
-	 * Metodo ovverride di update
+	 * Metodo che implementa l'update
 	 * @param user è l'utente
 	 * 
 	 * @return restituisce il repository aggiornato
@@ -77,7 +77,7 @@ public class UserServiceDefault implements UserService,UserDetailsService {
 		return this.userRepository.update(user);
 	}
 	/**
-	 * Metodo ovverride di delete
+	 * Metodo che implementa la delete
 	 * @param user è l'utente
 	 * 
 	 * @return restituisce il repository aggiornato dopo la delete
@@ -85,11 +85,11 @@ public class UserServiceDefault implements UserService,UserDetailsService {
 	@Override
 	public void delete(User user) {
 		user.getRoles().clear();
-		user=this.userRepository.update(user);
+		user=this.userRepository.update(user); //non serve fare update di Role in quanto relazione asimmetrica e monodirezionale
 		this.userRepository.delete(user);
 	}
 	/**
-	 * Metodo ovverride di findByEmail
+	 * Metodo che implementa findByEmail
 	 * @param email email
 	 * 
 	 * @return restituisce l'utente tramite l'email
@@ -99,7 +99,7 @@ public class UserServiceDefault implements UserService,UserDetailsService {
 		return this.userRepository.findByEmail(email);
 	}
 	/**
-	 * Metodo ovverride di findAll
+	 * Metodo che implementa findAll
 	 * 
 	 * 
 	 * @return restituisce tutti gli utenti
@@ -120,19 +120,18 @@ public class UserServiceDefault implements UserService,UserDetailsService {
 		this.userRepository = userRepository;
 	}
 	/**
-	 * Metodo ovverride di findByMailandPassword
+	 * Metodo che implementa findByMailandPassword
 	 * @param email email
 	 * @param password password
 	 * 
 	 * @return restituisce l'utente tramite email e password
 	 */
-	@Override
-	public User findByMailandPassword(String email, String password) {
-		return this.userRepository.findByMailandPassword(email, password);
-	}
+	 @Override public User findByMailandPassword(String email, String password) {
+	 return this.userRepository.findByMailandPassword(email, password); }
+	 
 
 	/**
-	 * Metodo ovverride di encryptPassword
+	 * Metodo che implementa encryptPassword
 	 * @param password password
 	 * 
 	 * @return restituisce la cifratura delle password

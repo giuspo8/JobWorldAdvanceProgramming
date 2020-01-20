@@ -147,7 +147,6 @@ public class User {
 		return this.roles;
 	}
 
-	// da valutare se serve
 	public Set<Role> roles() {
 		return this.roles;
 	}

@@ -33,7 +33,7 @@ public class DefaultUserDao extends DefaultDao implements UserDao {
 		return user;
 	}
 	/**
-	 * Metodo che sovrascrivel'update dell'user
+	 * Metodo che implementa l'update dell'user
 	 * @param user l'utente
 	 * 
 	 * @return merged
@@ -45,7 +45,7 @@ public class DefaultUserDao extends DefaultDao implements UserDao {
 		return merged;
 	}
 	/**
-	 * Metodo che sovrascrive il delete dell'user
+	 * Metodo che implementa il delete dell'user
 	 * @param user l'utente
 	 * 
 	 * 
@@ -56,7 +56,7 @@ public class DefaultUserDao extends DefaultDao implements UserDao {
 		this.getSession().delete(user);
 	}
 	/**
-	 * Metodo che sovrascrive il findByEmail dell'user, dall'email restituisce l'utente
+	 * Metodo che implementa il findByEmail dell'user, dall'email restituisce l'utente
 	 * @param email  l'email
 	 * 
 	 * @return user
@@ -67,7 +67,7 @@ public class DefaultUserDao extends DefaultDao implements UserDao {
 		return getSession().find(User.class, email);
 	}
 	/**
-	 * Metodo che sovrascrive il findAll dell'user
+	 * Metodo che implementa il findAll dell'user
 	 * 
 	 * @return tutti gli utenti
 	 */
@@ -78,7 +78,7 @@ public class DefaultUserDao extends DefaultDao implements UserDao {
 	}
 
 	/**
-	 * Metodo che sovrascrive l'encryptPassword dell'user
+	 * Metodo che implementa l'encryptPassword dell'user
 	 * @param password la password
 	 * 
 	 * @return la password cifrata
@@ -90,7 +90,7 @@ public class DefaultUserDao extends DefaultDao implements UserDao {
 	
 	
 	/**
-	 * Metodo che sovrascrive il finByMailandPassword dell'user
+	 * Metodo che implementa il finByMailandPassword dell'user
 	 * @param email  l'email
 	 * @param password la password
 	 * 

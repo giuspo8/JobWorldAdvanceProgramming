@@ -34,6 +34,5 @@ void delete(Person contact);
 
 void unapplyAll(JobOffer joboffer);
 
-public boolean isInterested(JobOffer jobOffer);
 
 }

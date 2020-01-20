@@ -113,7 +113,8 @@ private CompanyDao companyRepository;
 		joboffer.getCandidancies().clear();
 		joboffer=jobofferRepository.update(joboffer);
 		Company company=joboffer.getCompany();
-		company.getJobOffers().remove(joboffer);
+		company.getJobOffers().remove(joboffer); //non serve fare update di company in quanto la relazione è mappata sul
+		//lato joboffer (many) e quindi decade automaticamente con il delete
 		jobofferRepository.delete(joboffer);
 	}
 

@@ -37,6 +37,4 @@ public interface PersonDao {
 	void unApplyAll(JobOffer jobOffer);
 	
 	Person findbyUserId(String id_user);
-	
-	public boolean isInterested(JobOffer jobOffer);
 }

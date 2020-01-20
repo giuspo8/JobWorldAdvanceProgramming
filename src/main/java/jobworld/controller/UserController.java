@@ -142,7 +142,7 @@ public class UserController {
 		Curriculum curriculum = curriculumService.create(
 				new Curriculum(person, allParams.get("workExperience"), allParams.get("education"), allParams.get("personalSkills"), allParams.get("additionalInfo")));
 		model.addAttribute("curriculum", curriculum);
-		return "redirect:/user/curriculum?email=" + allParams.get("email");
+		return "redirect:/user/curriculum";
 	}
 	
 	@PostMapping("/updateCurriculum")
@@ -165,7 +165,7 @@ public class UserController {
 		Person person = personService.findbyUserId(auth.getName());
 		JobOffer joboffer = jobOfferService.findbyId(jobId);
 		person=personService.apply(person, joboffer);
-		return "redirect:/#"+joboffer.getId();
+		return "redirect:/#"+joboffer.getId(); //va a jobworld/#jobid
 		
 	}
 	
@@ -175,7 +175,7 @@ public class UserController {
 		Person person = personService.findbyUserId(auth.getName());
 		JobOffer joboffer = jobOfferService.findbyId(jobId);
 		person=personService.unapply(person, joboffer);
-		return "redirect:/#"+joboffer.getId();
+		return "redirect:/#"+joboffer.getId(); //va a jobworld/#jobid
 		
 	}
 	

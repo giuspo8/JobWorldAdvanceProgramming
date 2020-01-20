@@ -64,7 +64,7 @@ public class HomeController {
 	public String home(@RequestParam(value="error", defaultValue = "", required = false) String error, Locale locale, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth.getName() != "anonymousUser" && auth.getAuthorities().toString().equals("[ROLE_USER]")) {
-			Person person = personService.findbyUserId(auth.getName());
+			Person person = personService.findbyUserId(auth.getName()); //ci prendiamo la persona attuale
 			model.addAttribute("person", person);
 		}
 		List<JobOffer> allJobOffers = this.jobOfferService.findAll();
@@ -137,7 +137,7 @@ public class HomeController {
 	@GetMapping("/moreinfo/{companyid}/{jobid}")
 	public String moreinfo(@PathVariable(value = "jobid") Long jobId, @PathVariable(value = "companyid") Long companyId,
 			Model model) {
-		JobOffer joboffer = jobOfferService.findbyId(jobId);
+		JobOffer joboffer = jobOfferService.findbyId(jobId); // ci prendiamo la joboffer tramite l'id
 		model.addAttribute("joboffer", joboffer);
 		return "moreinfo";
 	}
@@ -146,8 +146,8 @@ public class HomeController {
 	public String filter(@RequestParam Map<String, String> allParams, Model model) {
 		List<JobOffer> jobOffers = this.jobOfferService.filter(allParams.get("region"), allParams.get("province"),
 				allParams.get("town"), allParams.get("position"), allParams.get("contractType"),
-				allParams.get("minEducationLevel"), allParams.get("minExperience"));
-		model.addAttribute("jobOffers", jobOffers);
+				allParams.get("minEducationLevel"), allParams.get("minExperience")); 
+		model.addAttribute("jobOffers", jobOffers); //restituisco al model la lista delle offerte filtrate
 		return "home";
 	}
 
@@ -175,7 +175,7 @@ public class HomeController {
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 					birthDate = LocalDate.parse(allParams.get("birthDate"), formatter);
 				} catch (DateTimeParseException e) {
-					return "redirect:/register?date=true";
+					return "redirect:/register?date=true"; //errore formattazione data
 				}
 			}
 			User user = userService.create(allParams.get("email"),
@@ -186,25 +186,26 @@ public class HomeController {
 					personService.create(allParams.get("firstName"), allParams.get("secondName"), birthDate,
 							allParams.get("number"), null, user);
 				} catch (ConstraintViolationException e) {
-					user.setPerson(null);
+					user.setPerson(null); //devo settare person null e canc user dal db perchè altrimenti
+					//resta inserito l'user non valido
 					user=userService.update(user);
 					userService.delete(user);
-					return "redirect:/register?con=true";
+					return "redirect:/register?con=true"; // violata costraint di qualche dato obbligatorio non inserito
 				}
 			} else if (allParams.get("type").equals("company")) {
 				user.addRole(roleService.getRoleByTypeRole(TypeRole.COMPANY));
 				try {
 					companyService.create(allParams.get("name"), user);
 				} catch (ConstraintViolationException e) {
-					user.setCompany(null);
+					user.setCompany(null); //idem a person
 					user=userService.update(user);
 					userService.delete(user);
-					return "redirect:/register?con=true";
+					return "redirect:/register?con=true"; // violata costraint di qualche dato obbligatorio non inserito
 				}
 			}
 
 		} catch (DataIntegrityViolationException e) {
-			return "redirect:/register?existing=true";
+			return "redirect:/register?existing=true"; //l'email già esiste
 		}
 		return "redirect:/login";
 
@@ -224,18 +225,6 @@ public class HomeController {
 		}
 		model.addAttribute("errorMessage", errorMessage);
 		return "login";
-	}
-
-	@PostMapping("/autentication")
-	public String autentication(@RequestParam Map<String, String> allParams) {
-		User user = this.userService.findByMailandPassword(allParams.get("email"), allParams.get("password"));
-		if (user == null) {
-			return "redirect:/";
-		} else {
-			return null;
-			// return "redirect:/user/"+user.getId();//TODO l'user non ha piu l'id. adesso
-			// l'id è la email
-		}
 	}
 
 	@GetMapping("/chisiamo")

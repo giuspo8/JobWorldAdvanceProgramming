@@ -21,9 +21,9 @@ public class TimestampAttributeConverter implements AttributeConverter<Long, Tim
 
 	/**
 	 * Metodo che ritorna un oggetto di tipo null se il parametro passatogli è nullo,
-	 * altrimenti lo converte nel tipo @Date e lo ritorna
+	 * altrimenti lo converte nel tipo @Timestamp e lo ritorna
 	 * 
-	 * @param oggetto di tipo @LocalDate da convertire
+	 * @param oggetto di tipo @Long da convertire
 	 */
 	@Override
 	public Timestamp convertToDatabaseColumn(Long time) {
@@ -33,9 +33,9 @@ public class TimestampAttributeConverter implements AttributeConverter<Long, Tim
 
 	/**
 	 * Metodo che ritorna un oggetto di tipo null se il parametro passatogli è nullo,
-	 * altrimenti lo converte nel tipo @LocalDate e lo ritorna
+	 * altrimenti lo converte nel tipo @Long e lo ritorna
 	 * 
-	 * @param oggetto di tipo @Date da convertire
+	 * @param oggetto di tipo @Timestamp da convertire
 	 */
 	@Override
 	public Long convertToEntityAttribute(Timestamp dbData) {

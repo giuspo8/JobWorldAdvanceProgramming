@@ -18,7 +18,7 @@ import jobworld.model.entities.Role.TypeRole;
 @Repository("roleDao")
 public class DefaultRoleDao extends DefaultDao implements RoleDao {
 	/**
-	 * Metodo che sovrascrive il create del ruolo
+	 * Metodo che definisce il create del ruolo
 	 * @param name il nome del ruolo
 	 * 
 	 * @return r
@@ -31,7 +31,7 @@ public class DefaultRoleDao extends DefaultDao implements RoleDao {
 		return r;
 	}
 	/**
-	 * Metodo che sovrascrive l'update del ruolo
+	 * Metodo che definisce l'update del ruolo
 	 * @param role è il ruolo
 	 * 
 	 * @return il merge del ruolo
@@ -41,7 +41,7 @@ public class DefaultRoleDao extends DefaultDao implements RoleDao {
 		return (Role)this.getSession().merge(role);
 	}
 	/**
-	 * Metodo che sovrascrive l'update del ruolo
+	 * Metodo che definisce l'update del ruolo
 	 * @param role è il ruolo
 	 * 
 	 */
@@ -50,7 +50,7 @@ public class DefaultRoleDao extends DefaultDao implements RoleDao {
 		this.getSession().delete(role);
 	}
 	/**
-	 * Metodo che sovrascrive getRoleByTypeRole, restituisce il nome dal ruolo
+	 * Metodo che definisce getRoleByTypeRole, restituisce il nome dal ruolo
 	 * @param name 
 	 * 
 	 * @return ritorna l'id

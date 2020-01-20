@@ -209,7 +209,7 @@ public class CompanyController {
 		jobOfferService.delete(job);
 		Company company=companyService.findbyUserId(auth.getName());
 		List<JobOffer> jobs = jobOfferService.findbyCompanyId(company.getId());
-		model.addAttribute("jobs",jobs);
+		model.addAttribute("jobs",jobs); //una volta eliminato il job ripassiamo al contesto la company e i jobs aggiornati
 		model.addAttribute("company",company);
 		return "redirect:/company/listjoboffer";
 	}

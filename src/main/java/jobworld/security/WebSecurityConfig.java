@@ -32,9 +32,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			antMatchers("/company/**").hasAnyRole("COMPANY").
 			antMatchers("/user/**").hasAnyRole("USER").
 			antMatchers("/admin/**").hasAnyRole("ADMIN").
-			and().formLogin().loginPage("/login").defaultSuccessUrl("/").
-			failureUrl("/login?error=true").permitAll().
-			and().logout().logoutSuccessUrl("/")
+			and().formLogin().loginPage("/login").defaultSuccessUrl("/"). //pagina dove va quando la login ha successo
+			failureUrl("/login?error=true").permitAll(). //pagina dove va se la login non ha successo
+			and().logout().logoutSuccessUrl("/") //va a / dopo il logout. default path per logout è /logout
 			.invalidateHttpSession(true).permitAll().
 			and().csrf().disable();
 	}

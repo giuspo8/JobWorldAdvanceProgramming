@@ -24,7 +24,7 @@ import jobworld.model.entities.JobOffer;
 public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 	
 	/**
-	 * Metodo che sovrascrive il create dell'offerta di lavoro
+	 * Metodo che implementa il create dell'offerta di lavoro
 	 * @param jobOffer  è l'offerta di lavoro
 	 * 
 	 * @return jobOffer
@@ -37,7 +37,7 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 	}
 	
 	/**
-	 * Metodo che sovrascrive l'update dell'offerta di lavoro
+	 * Metodo che implementa l'update dell'offerta di lavoro
 	 * @param jobOffer  è l'offerta di lavoro
 	 * 
 	 * @return merged
@@ -50,7 +50,7 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 	}
 	
 	/**
-	 * Metodo che sovrascrive la delete dell'offerta di lavoro
+	 * Metodo che implementa la delete dell'offerta di lavoro
 	 * @param jobOffer  è l'offerta di lavoro
 	 * 
 	 * 
@@ -62,7 +62,7 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 	}
 	
 	/**
-	 * Metodo che sovrascrive il findbyAll di tutte le offerte di lavoro
+	 * Metodo che implementa il findbyAll di tutte le offerte di lavoro
 	 * 
 	 * 
 	 * @return jobOffer
@@ -78,7 +78,7 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 	//quando i  campi vengono lasciati vuoti
 	// viene valutato come AND TRUE
 	/**
-	 * Metodo che sovrascrive filter dell'offerta di lavoro, filtra in base alla posizione, dati geografici e tipo di contratto, minimo titolo di studio richiesto e esperienza
+	 * Metodo che implementa filter dell'offerta di lavoro, filtra in base alla posizione, dati geografici e tipo di contratto, minimo titolo di studio richiesto e esperienza
 	 * @param region   		regione
 	 * @param province 		provincia
 	 * @param town    		città
@@ -120,7 +120,7 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 				.getResultList();
 	}
 	/**
-	 * Metodo che sovrascrive il findbyId di tutte le offerte di lavoro, trova l'offerta in base all'id
+	 * Metodo che implementa il findbyId di tutte le offerte di lavoro, trova l'offerta in base all'id
 	 * 
 	 * 
 	 * @return jobOffer
@@ -131,7 +131,7 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 		return getSession().find(JobOffer.class, id);
 	}
 	/**
-	 * Metodo che sovrascrive il findbyCompanyId di tutte le offerte di lavoro, trova l'offerta in base la compagnia
+	 * Metodo che implementa il findbyCompanyId di tutte le offerte di lavoro, trova l'offerta in base la compagnia
 	 * 
 	 * 
 	 * @return jobOffer
@@ -143,7 +143,7 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 				.setParameter("id_company", id).getResultList();
 	}
 	/**
-	 * Metodo che sovrascrive il get interested, restituisce le persone interessate ad un offerta di lavoro
+	 * Metodo che implementa il get interested, restituisce le persone interessate ad un offerta di lavoro
 	 * 
 	 * 
 	 * @return gli interessati all'offerta di lavoro
@@ -152,6 +152,7 @@ public class DefaultJobOfferDao extends DefaultDao implements JobOfferDao {
 	public Long getInterested(JobOffer jobOffer) {
 		return getSession().createQuery("select count(*) from Person p join p.candidacies c where c.id=:jid", Long.class)
 				.setParameter("jid",jobOffer.getId()).getSingleResult();
+		//c.id è il joboffer id perchè joboffer è addetto alla creazione della relazione (vedi entities)
 	}
 
 }
